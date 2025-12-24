@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Text Engine 使用说明</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: #34495e;
+            margin-top: 40px;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+        }
+        
+        h3 {
+            color: #2c3e50;
+            margin-top: 30px;
+        }
+        
+        pre {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+        }
+        
+        code {
+            background: #f1f3f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 13px;
+        }
+        
+        ul, ol {
+            margin-left: 20px;
+        }
+        
+        li {
+            margin: 5px 0;
+        }
+        
+        strong {
+            color: #2c3e50;
+        }
+        
+        .toc {
+            background: #e8f4fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .toc ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .back-link:hover {
+            background: #2980b9;
+        }
+        
+        .command-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .tip-box {
+            background: #d1f2eb;
+            border: 1px solid #74b9ff;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Text Engine 使用说明</h1>
+
+        <div class="toc">
+            <h3>📋 目录</h3>
+            <ul>
+                <li><a href="#快速开始">快速开始</a></li>
+                <li><a href="#基础操作">基础操作</a></li>
+                <li><a href="#高级功能">高级功能</a></li>
+                <li><a href="#json导入导出">JSON导入导出</a></li>
+                <li><a href="#游戏创作">游戏创作</a></li>
+                <li><a href="#常见问题">常见问题</a></li>
+            </ul>
+        </div>
+
+        <h2 id="快速开始">🚀 快速开始</h2>
+
+        <h3>第一次游戏</h3>
+        <ol>
+            <li><strong>打开游戏页面</strong>
+                <ul>
+                    <li>访问游戏网址</li>
+                    <li>你将看到欢迎界面</li>
+                </ul>
+            </li>
+            <li><strong>开始游戏</strong>
+                <ul>
+                    <li>点击"开始游戏"按钮</li>
+                    <li>游戏会自动加载示例故事</li>
+                    <li>显示起始房间信息</li>
+                </ul>
+            </li>
+            <li><strong>开始探索</strong>
+                <ul>
+                    <li>阅读房间描述</li>
+                    <li>使用指令或点击按钮进行互动</li>
+                    <li>享受你的文字冒险之旅！</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h2 id="基础操作">📖 基础操作</h2>
+
+        <h3>输入指令</h3>
+        <p>你可以通过两种方式与游戏互动：</p>
+        
+        <div class="command-box">
+            <h4>🎮 快捷按钮</h4>
+            <p>点击界面上的快捷按钮，这是最简单的方式：</p>
+            <ul>
+                <li><strong>👁️ 观察</strong> - 查看当前房间</li>
+                <li><strong>📦 物品</strong> - 查看房间内物品</li>
+                <li><strong>🎒 背包</strong> - 查看背包物品</li>
+                <li><strong>❓ 帮助</strong> - 显示帮助信息</li>
+            </ul>
+        </div>
+
+        <div class="command-box">
+            <h4>⌨️ 文本指令</h4>
+            <p>在输入框中输入指令，按回车执行：</p>
+            <ul>
+                <li><strong>LOOK</strong> 或 <strong>观察</strong> - 查看当前房间</li>
+                <li><strong>GO 北</strong> 或 <strong>去北方</strong> - 向北移动</li>
+                <li><strong>TAKE 钥匙</strong> 或 <strong>拿取钥匙</strong> - 拾取钥匙</li>
+                <li><strong>USE 钥匙</strong> 或 <strong>使用钥匙</strong> - 使用钥匙</li>
+            </ul>
+        </div>
+
+        <h3>移动指令</h3>
+        <p>在不同房间之间移动：</p>
+        <pre><code>GO [方向]      # 英文
+去 [方向]        # 中文
+
+# 支持的方向：
+北/南/东/西/上/下
+north/south/east/west/up/down</code></pre>
+
+        <h3>物品操作</h3>
+        <pre><code>TAKE [物品名]   # 拾取物品
+USE [物品名]     # 使用物品
+DROP [物品名]    # 丢弃物品</code></pre>
+
+        <h3>角色互动</h3>
+        <pre><code>TALK TO [角色名]    # 与角色对话
+与 [角色名] 对话     # 中文版本</code></pre>
+
+        <h2 id="高级功能">🔧 高级功能</h2>
+
+        <h3>快捷操作按钮</h3>
+        <p>游戏界面提供了多个快捷按钮：</p>
+        <ul>
+            <li><strong>👁️ 观察</strong> - 重新查看当前房间</li>
+            <li><strong>📦 物品</strong> - 查看当前房间内的所有物品</li>
+            <li><strong>🎒 背包</strong> - 查看你携带的所有物品</li>
+            <li><strong>💾 保存</strong> - 保存当前游戏进度</li>
+            <li><strong>📂 读取</strong> - 读取之前保存的游戏</li>
+            <li><strong>🗑️ 清除</strong> - 清除对话历史</li>
+            <li><strong>❓ 帮助</strong> - 显示帮助信息</li>
+        </ul>
+
+        <h3>动态选择按钮</h3>
+        <p>游戏会根据当前情境自动生成相关操作按钮：</p>
+        <ul>
+            <li><strong>移动选项</strong> - 显示可用的出口方向</li>
+            <li><strong>拾取选项</strong> - 显示可拾取的物品</li>
+            <li><strong>使用选项</strong> - 显示背包中可使用的物品</li>
+            <li><strong>对话选项</strong> - 显示可与角色对话的主题</li>
+        </ul>
+
+        <div class="tip-box">
+            <h4>💡 专业提示</h4>
+            <p>动态按钮会根据游戏状态实时更新，始终显示最相关的操作选项。这让你可以专注于故事体验，而不需要记住复杂的指令。</p>
+        </div>
+
+        <h2 id="json导入导出">📁 JSON导入导出</h2>
+
+        <h3>导出游戏故事</h3>
+        <ol>
+            <li>点击"导出JSON"按钮</li>
+            <li>浏览器会自动下载当前故事的JSON文件</li>
+            <li>文件名格式：<code>text-engine-story-YYYY-MM-DD.json</code></li>
+        </ol>
+
+        <h3>导入自定义故事</h3>
+        <ol>
+            <li>准备JSON格式的故事文件</li>
+            <li>点击"导入JSON"按钮</li>
+            <li>选择你的JSON文件</li>
+            <li>系统会验证并自动加载你的故事</li>
+        </ol>
+
+        <div class="tip-box">
+            <h4>📚 故事格式参考</h4>
+            <p>如果你需要创建自己的故事，可以：
+            <ul>
+                <li>下载示例JSON文件作为模板</li>
+                <li>查看<a href="JSON-GUIDE.html" target="_blank">JSON格式说明</a></li>
+                <li>阅读<a href="JSON-STORY-GUIDE.html" target="_blank">故事创作指南</a></li>
+            </ul>
+        </p>
+        </div>
+
+        <h2 id="游戏创作">✍️ 游戏创作</h2>
+
+        <h3>创作流程</h3>
+        <ol>
+            <li><strong>学习JSON格式</strong>
+                <ul>
+                    <li>阅读JSON格式说明文档</li>
+                    <li>下载示例文件作为参考</li>
+                </ul>
+            </li>
+            <li><strong>设计故事</strong>
+                <ul>
+                    <li>构思故事背景和剧情</li>
+                    <li>设计房间布局和连接关系</li>
+                    <li>创建角色和对话内容</li>
+                </ul>
+            </li>
+            <li><strong>编写JSON</strong>
+                <ul>
+                    <li>按照格式要求编写JSON文件</li>
+                    <li>测试游戏逻辑和流程</li>
+                    <li>导入到游戏中进行测试</li>
+                </ul>
+            </li>
+            <li><strong>分享作品</strong>
+                <ul>
+                    <li>导出最终的JSON文件</li>
+                    <li>与他人分享你的故事</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h3>创作工具</h3>
+        <ul>
+            <li><a href="json-validator.html" target="_blank">JSON验证器</a> - 验证你的JSON格式是否正确</li>
+            <li><a href="JSON-GUIDE.html" target="_blank">JSON格式说明</a> - 详细的格式文档</li>
+            <li><a href="JSON-STORY-GUIDE.html" target="_blank">故事创作指南</a> - 创作技巧和最佳实践</li>
+        </ul>
+
+        <h2 id="常见问题">❓ 常见问题</h2>
+
+        <h3>Q: 如何开始游戏？</h3>
+        <p>A: 打开游戏页面，点击"开始游戏"按钮即可开始冒险。</p>
+
+        <h3>Q: 指令不区分大小写吗？</h3>
+        <p>A: 是的，所有指令都不区分大小写。你可以输入 "LOOK"、"look" 或 "Look"。</p>
+
+        <h3>Q: 如何保存游戏进度？</h3>
+        <p>A: 点击"保存"按钮，游戏会自动保存当前进度到浏览器本地存储。</p>
+
+        <h3>Q: 可以创建自己的故事吗？</h3>
+        <p>A: 当然可以！使用"导出JSON"功能下载示例文件，修改后用"导入JSON"加载你的故事。</p>
+
+        <h3>Q: 支持中文指令吗？</h3>
+        <p>A: 支持大部分常用中文指令，如"观察"、"去北方"、"拿取钥匙"等。</p>
+
+        <h3>Q: 游戏无法加载怎么办？</h3>
+        <p>A: 尝试刷新页面，或检查网络连接。如果问题持续，请联系技术支持。</p>
+
+        <h3>Q: 如何报告bug或提出建议？</h3>
+        <p>A: 点击页面右上角的"反馈"按钮，可以提交问题和建议。</p>
+
+        <h3>Q: 支持哪些浏览器？</h3>
+        <p>A: 支持所有现代浏览器，包括Chrome、Firefox、Safari、Edge等。</p>
+
+        <div class="tip-box">
+            <h4>🎮 享受你的冒险之旅！</h4>
+            <p>Text Engine为你提供了一个简单易用的文字冒险游戏平台。无论你是想体验精彩的冒险故事，还是想创作自己的游戏，都可以轻松实现。</p>
+        </div>
+
+        <a href="index.html" class="back-link">← 返回游戏</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Engine Debug</title>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #f5f5f5; }
+        .debug { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        .error { color: red; }
+        .success { color: green; }
+        .info { color: blue; }
+    </style>
+</head>
+<body>
+    <div class="debug">
+        <h2>Text Engine Debug Information</h2>
+        <div id="debug-info"></div>
+    </div>
+
+    <!-- Load the engine -->
+    <script src="index.js"></script>
+    <script src="game-disks/demo-disk.js"></script>
+    
+    <script>
+        const debugInfo = document.getElementById('debug-info');
+        
+        function log(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = type;
+            div.textContent = new Date().toLocaleTimeString() + ' - ' + message;
+            debugInfo.appendChild(div);
+        }
+
+        // Check if required functions exist
+        setTimeout(() => {
+            log('Starting debug check...');
+            
+            if (typeof loadDisk === 'function') {
+                log('✓ loadDisk function exists', 'success');
+            } else {
+                log('✗ loadDisk function NOT found', 'error');
+            }
+            
+            if (typeof demoDisk === 'function') {
+                log('✓ demoDisk function exists', 'success');
+            } else {
+                log('✗ demoDisk function NOT found', 'error');
+            }
+            
+            if (typeof println === 'function') {
+                log('✓ println function exists', 'success');
+            } else {
+                log('✗ println function NOT found', 'error');
+            }
+            
+            if (typeof getInput === 'function') {
+                log('✓ getInput function exists', 'success');
+            } else {
+                log('✗ getInput function NOT found', 'error');
+            }
+
+            // Try to load the game
+            try {
+                if (typeof loadDisk === 'function' && typeof demoDisk === 'function') {
+                    log('Attempting to load demo disk...', 'info');
+                    loadDisk(demoDisk);
+                    log('✓ Demo disk loaded successfully', 'success');
+                }
+            } catch (error) {
+                log('✗ Error loading demo disk: ' + error.message, 'error');
+            }
+
+            // Check DOM elements
+            const output = document.getElementById('output');
+            const input = document.getElementById('input');
+            
+            if (output) {
+                log('✓ #output element found', 'success');
+            } else {
+                log('✗ #output element NOT found', 'error');
+            }
+            
+            if (input) {
+                log('✓ #input element found', 'success');
+            } else {
+                log('✗ #input element NOT found', 'error');
+            }
+
+            log('Debug check complete');
+        }, 1000);
+    </script>
+</body>
+</html>
