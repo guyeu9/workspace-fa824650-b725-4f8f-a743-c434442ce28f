@@ -54,7 +54,7 @@ const renderMarkdown = (text: string) => {
 export default function Home() {
   const [showWelcome, setShowWelcome] = useState(true)
   const [outputHistory, setOutputHistory] = useState<Array<{ 
-    type: 'user' | 'system' | 'room-name' | 'room-desc' | 'choices-data', 
+    type: 'user' | 'user-choice' | 'system' | 'room-name' | 'room-desc' | 'choices-data', 
     content: string; 
     className?: string;
     fullContent?: string;
@@ -64,12 +64,8 @@ export default function Home() {
   const [isProcessing, setIsProcessing] = useState(false)
   const [currentScene, setCurrentScene] = useState<any>(null)
   const [isClient, setIsClient] = useState(false)
+  const [hasImportedData, setHasImportedData] = useState(false)
   const outputRef = useRef<HTMLDivElement>(null)
-
-  // 修复 Hydration 错误：确保组件只在客户端渲染
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
 
   // 故事数据
   const [storyData, setStoryData] = useState<any>({
@@ -77,40 +73,98 @@ export default function Home() {
     scenes: {
       foyer: {
         id: 'foyer',
-        name: 'The Foyer',
-        desc: '**欢迎使用 TEXT ENGINE 演示光盘！**\n\n这张光盘是一个文本冒险游戏，旨在介绍 text engine 中可用的功能。\n\n输入 **LOOK** 查看四周。',
+        name: '大厅',
+        desc: '**欢迎来到文本冒险游戏！**\n\n这是一个演示场景，展示了文本引擎的核心功能。\n\n你可以使用以下命令：\n- **观察** 或 **LOOK** - 查看当前场景\n- **北** 或 **GO 北** - 向北移动\n- **物品** 或 **ITEMS** - 查看场景中的物品\n- **背包** 或 **INV** - 查看你的物品栏\n- **帮助** 或 **HELP** - 查看所有可用命令',
         img: '',
         exits: [
           { dir: 'north', id: 'reception' }
         ],
         items: [
-          { name: 'tall window', desc: '你只能看到蓬松的白云在蓝天上。' }
+          { name: '高大的窗户', desc: '透过窗户，你可以看到外面美丽的风景。' },
+          { name: '古老的挂钟', desc: '挂钟滴答作响，显示着当前时间。' }
         ]
       },
       reception: {
         id: 'reception',
-        name: 'Reception Desk',
-        desc: '**BENJI** 在这里。我确信他很高兴告诉你关于 text engine 中可用的功能。\n\n*你可以使用 **TALK** 命令与角色交谈。\n\n向 **EAST** 是一扇关闭的 **DOOR**。\n\n向 **SOUTH** 是你开始冒险的大厅。\n\n在 **DESK** 旁边是通往 **UP** 的 **STAIRS**。',
+        name: '接待处',
+        desc: '**接待员** 站在柜台后面，微笑着向你打招呼。\n\n你可以使用 **TALK** 命令与角色交谈。\n\n向 **东** 是一扇关闭的 **门**，门上写着"实验室"。\n\n向 **南** 是你开始冒险的大厅。\n\n在 **柜台** 旁边是通往 **上** 的 **楼梯**。',
         exits: [
           { dir: 'east', id: 'lab' },
-          { dir: 'south', id: 'foyer' }
+          { dir: 'south', id: 'foyer' },
+          { dir: 'up', id: 'rooftop' }
         ],
         items: [
-          { name: 'desk' },
-          { name: 'door', desc: '门上有 4 英寸的金属字母钉着。它们拼写为："RESEARCH LAB".' }
+          { name: '柜台', desc: '一个木质柜台，上面放着一些文件。' },
+          { name: '门', desc: '门上有金属字母钉着，拼写为："RESEARCH LAB".' },
+          { name: '楼梯', desc: '通往楼上的木质楼梯。' }
         ]
       },
       lab: {
         id: 'lab',
-        name: 'Research Lab',
-        desc: '有一个 **蓝色机器人** 静静悬浮在白色虚空的中央。它们似乎在等待指示。（输入 **TALK** 与机器人交谈。）',
+        name: '实验室',
+        desc: '实验室里有一个 **蓝色机器人** 静静地悬浮在中央。它似乎在等待指示。\n\n（输入 **TALK** 与机器人交谈。）\n\n实验室的墙上挂着一面 **镜子**，反射着你的身影。',
         exits: [
           { dir: 'west', id: 'reception' }
         ],
-        items: []
+        items: [
+          { name: '蓝色机器人', desc: '一个高科技机器人，闪烁着蓝色的灯光。' },
+          { name: '镜子', desc: '一面普通的镜子，反射着实验室的景象。' }
+        ]
+      },
+      rooftop: {
+        id: 'rooftop',
+        name: '屋顶',
+        desc: '**你来到了屋顶！**\n\n从这里可以看到整个城市的景色。\n\n微风吹过，让你感到心旷神怡。\n\n这是演示的最后一个场景，你可以 **向下** 返回接待处。',
+        exits: [
+          { dir: 'down', id: 'reception' }
+        ],
+        items: [
+          { name: '望远镜', desc: '一个天文望远镜，可以观察星空。' },
+          { name: '花园', desc: '屋顶上的小花园，种着各种花草。' }
+        ]
       }
     }
   })
+
+  // 修复 Hydration 错误：确保组件只在客户端渲染
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  // 检查localStorage中是否有导入的游戏数据
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const importedData = localStorage.getItem('importedGameData')
+      if (importedData) {
+        try {
+          const data = JSON.parse(importedData)
+          if (data.scenes && data.start) {
+            setStoryData(data)
+            setHasImportedData(true)
+            localStorage.removeItem('importedGameData')
+          }
+        } catch (error) {
+          console.error('Failed to load imported game data:', error)
+        }
+      }
+    }
+  }, [])
+
+  // 当storyData更新时，自动开始游戏（如果有导入的数据）
+  useEffect(() => {
+    if (isClient && hasImportedData && storyData && storyData.scenes && storyData.start) {
+      setShowWelcome(false)
+      const initialScene = storyData.scenes[storyData.start]
+      if (initialScene) {
+        setCurrentScene(initialScene)
+        setChoices(initialScene.exits || [])
+        setOutputHistory([
+          { type: 'room-name', content: initialScene.name, className: 'room-name', fullContent: initialScene.name },
+          { type: 'room-desc', content: initialScene.desc, fullContent: initialScene.desc }
+        ])
+      }
+    }
+  }, [isClient, hasImportedData, storyData])
 
   // 缓慢优雅下滑的效果
   const scrollToBottom = () => {
@@ -121,6 +175,22 @@ export default function Home() {
         behavior: 'smooth'
       })
     }, 100)
+  }
+
+  // 英文方向到中文的映射
+  const directionToChinese: Record<string, string> = {
+    'north': '北',
+    'south': '南',
+    'east': '东',
+    'west': '西',
+    'up': '上',
+    'down': '下',
+    'n': '北',
+    's': '南',
+    'e': '东',
+    'w': '西',
+    'u': '上',
+    'd': '下'
   }
 
   const executeCommand = (cmd: string) => {
@@ -373,7 +443,42 @@ export default function Home() {
         const data = JSON.parse(e.target?.result as string)
         
         // 识别JSON的格式
-        if (data.playerId && data.rooms) {
+        if (data.scenes && data.start) {
+          // 标准格式：{ start, scenes }
+          console.log('检测到标准JSON格式')
+          
+          // 更新故事数据
+          setStoryData(data)
+          
+          // 清空输出历史
+          setOutputHistory([])
+          setInventory([])
+          setChoices([])
+          
+          // 找到起始场景
+          const startScene = data.scenes[data.start]
+          if (startScene) {
+            setCurrentScene(startScene)
+            setChoices(startScene.exits || [])
+            
+            // 添加房间信息到输出历史
+            setOutputHistory([
+              { type: 'room-name', content: startScene.name, className: 'room-name', fullContent: startScene.name },
+              { type: 'room-desc', content: startScene.desc, fullContent: startScene.desc }
+            ])
+            
+            // 显示导入成功消息
+            setTimeout(() => {
+              setOutputHistory(prev => [...prev, { type: 'system', content: '游戏导入成功！', fullContent: '游戏导入成功！' }])
+              scrollToBottom()
+            }, 500)
+          } else {
+            setOutputHistory([
+              { type: 'system', content: '无法找到起始场景：' + data.start, fullContent: '无法找到起始场景：' + data.start }
+            ])
+            scrollToBottom()
+          }
+        } else if (data.playerId && data.rooms) {
           // 用户提供的JSON格式：{ playerId, playerName, rooms }
           console.log('检测到用户提供的JSON格式')
           
@@ -497,10 +602,13 @@ export default function Home() {
           
           {/* 欢迎界面描述 */}
           <p className="max-w-[600px] text-gray-900 mx-4 my-3 text-xl" suppressHydrationWarning>
-            使用这个引擎，<br />你可以制作自己的文字游戏。
+            使用这个引擎，<br />你可以制作自己的文字冒险游戏。
           </p>
-          <p className="mt-8 text-base text-gray-500" suppressHydrationWarning>
-            输入 <strong className="text-indigo-600">LOOK</strong> 查看四周。
+          <p className="mt-4 text-base text-gray-500" suppressHydrationWarning>
+            支持<strong className="text-indigo-600">中文</strong>和<strong className="text-indigo-600">英文</strong>命令！
+          </p>
+          <p className="mt-2 text-base text-gray-500" suppressHydrationWarning>
+            输入 <strong className="text-indigo-600">观察</strong> 或 <strong className="text-indigo-600">LOOK</strong> 查看四周
           </p>
 
           {/* 主要按钮 - 渐变背景 */}
@@ -559,8 +667,8 @@ export default function Home() {
             <h3 className="mb-4 text-indigo-600 text-xl font-semibold">🚀 快速开始指南</h3>
             <div className="space-y-2 text-base leading-relaxed">
               <p><strong>1. 开始游戏：</strong>点击主按钮，立即开始冒险</p>
-              <p><strong>2. 探索世界：</strong>使用 <code className="bg-gray-100 px-2 py-1 rounded text-sm">LOOK</code> 查看，<code className="bg-gray-100 px-2 py-1 rounded text-sm">GO 北</code> 移动</p>
-              <p><strong>3. 互动操作：</strong><code className="bg-gray-100 px-2 py-1 rounded text-sm">TAKE 饥匙</code> 拾取，<code className="bg-gray-100 px-2 py-1 rounded text-sm">USE 物品</code> 使用</p>
+              <p><strong>2. 探索世界：</strong>使用 <code className="bg-gray-100 px-2 py-1 rounded text-sm">观察</code> 或 <code className="bg-gray-100 px-2 py-1 rounded text-sm">LOOK</code> 查看，<code className="bg-gray-100 px-2 py-1 rounded text-sm">北</code> 或 <code className="bg-gray-100 px-2 py-1 rounded text-sm">GO 北</code> 移动</p>
+              <p><strong>3. 互动操作：</strong><code className="bg-gray-100 px-2 py-1 rounded text-sm">物品</code> 或 <code className="bg-gray-100 px-2 py-1 rounded text-sm">ITEMS</code> 查看物品，<code className="bg-gray-100 px-2 py-1 rounded text-sm">背包</code> 或 <code className="bg-gray-100 px-2 py-1 rounded text-sm">INV</code> 查看背包</p>
               <p><strong>4. 对话系统：</strong><code className="bg-gray-100 px-2 py-1 rounded text-sm">TALK TO 角色名</code> 与NPC交流</p>
               <p><strong>5. 自定义故事：</strong>下载示例JSON → 修改 → 导入 → 开始冒险！</p>
             </div>
@@ -725,29 +833,28 @@ export default function Home() {
           {/* 动态选择按钮区域 */}
           <div className="p-5 bg-gray-50/50 border-t border-gray-200" suppressHydrationWarning>
             {/* 移动端：每行 4 个，允许多行；电脑端：每行 8 个 */}
-            <div className="grid grid-cols-4 md:grid-cols-8 gap-2 justify-items-center" suppressHydrationWarning>
+            <div className="flex flex-wrap justify-center gap-2" suppressHydrationWarning>
               {choices.length > 0 ? (
                 choices.map((choice: any, idx) => {
                   const directionName = Array.isArray(choice.dir) ? choice.dir[0] : choice.dir
-                  const choiceId = choice.id
+                  const directionChinese = directionToChinese[directionName.toLowerCase()] || directionName
                     return (
                       <button
                         key={idx}
                         onClick={() => {
                           setIsProcessing(true)
-                          const choiceText = `> ${directionName.toUpperCase()} -> ${choiceId}`
+                          const choiceText = `> ${directionName.toUpperCase()} -> ${choice.id}`
                           setOutputHistory(prev => [...prev, { type: 'user-choice', content: choiceText }])
                           
                           setTimeout(() => {
                             setIsProcessing(false)
-                            moveToScene(choiceId, `${directionName.toUpperCase()} -> ${choiceId}`)
+                            moveToScene(choice.id, `${directionName.toUpperCase()} -> ${choice.id}`)
                           }, 500)
                         }}
                         disabled={isProcessing}
-                        className="bg-indigo-600 text-white border-2 border-indigo-500/80 rounded-lg text-base font-medium cursor-pointer transition-all w-full text-center hover:shadow-md hover:-translate-y-0.5 disabled:cursor-not-allowed flex flex-col items-center justify-center"
+                        className="bg-indigo-600 text-white border-2 border-indigo-500/80 rounded-lg text-base font-medium cursor-pointer transition-all text-center hover:shadow-md hover:-translate-y-0.5 disabled:cursor-not-allowed flex flex-col items-center justify-center px-4 py-3"
                       >
-                        {directionName}
-                        {choiceId && <span className="text-sm opacity-90 block">{choiceId}</span>}
+                        {directionChinese}
                       </button>
                     )
                 })
@@ -757,30 +864,30 @@ export default function Home() {
 
           {/* 快捷操作按钮 */}
           <div className="p-3 bg-white border-t border-b border-gray-200" suppressHydrationWarning>
-            {/* 移动端：每行 4 个，允许多行；电脑端：每行 8 个 */}
-            <div className="grid grid-cols-4 md:grid-cols-8 gap-2" suppressHydrationWarning>
-              <button onClick={() => executeCommand('look')} className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-indigo-600 transition-all text-sm px-4 py-2 rounded-lg font-medium flex items-center justify-center gap-2">
+            {/* 移动端：每行 4 个；电脑端：每行 8 个，自动调整大小 */}
+            <div className="grid grid-cols-4 md:grid-cols-8 gap-1" suppressHydrationWarning>
+              <button onClick={() => executeCommand('look')} className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-indigo-600 transition-all text-sm px-2 py-2 rounded-lg font-medium flex items-center justify-center gap-1 min-w-0">
                 👁️ 观察
               </button>
-              <button onClick={() => executeCommand('items')} className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-indigo-600 transition-all text-sm px-4 py-2 rounded-lg font-medium flex items-center justify-center gap-2">
+              <button onClick={() => executeCommand('items')} className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-indigo-600 transition-all text-sm px-2 py-2 rounded-lg font-medium flex items-center justify-center gap-1 min-w-0">
                 📦 物品
               </button>
-              <button onClick={() => executeCommand('inv')} className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-indigo-600 transition-all text-sm px-4 py-2 rounded-lg font-medium flex items-center justify-center gap-2">
+              <button onClick={() => executeCommand('inv')} className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-indigo-600 transition-all text-sm px-2 py-2 rounded-lg font-medium flex items-center justify-center gap-1 min-w-0">
                 🎒 背包
               </button>
-              <button onClick={() => executeCommand('help')} className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-indigo-600 transition-all text-sm px-4 py-2 rounded-lg font-medium flex items-center justify-center gap-2">
+              <button onClick={() => executeCommand('help')} className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-indigo-600 transition-all text-sm px-2 py-2 rounded-lg font-medium flex items-center justify-center gap-1 min-w-0">
                 ❓ 帮助
               </button>
-              <button onClick={() => executeCommand('save')} className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-indigo-600 transition-all text-sm px-4 py-2 rounded-lg font-medium flex items-center justify-center gap-2">
+              <button onClick={() => executeCommand('save')} className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-indigo-600 transition-all text-sm px-2 py-2 rounded-lg font-medium flex items-center justify-center gap-1 min-w-0">
                 💾 保存
               </button>
-              <button onClick={() => executeCommand('load')} className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-indigo-600 transition-all text-sm px-4 py-2 rounded-lg font-medium flex items-center justify-center gap-2">
+              <button onClick={() => executeCommand('load')} className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-indigo-600 transition-all text-sm px-2 py-2 rounded-lg font-medium flex items-center justify-center gap-1 min-w-0">
                 📂 读取
               </button>
-              <button onClick={() => executeCommand('clear')} className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-indigo-600 transition-all text-sm px-4 py-2 rounded-lg font-medium flex items-center justify-center gap-2">
+              <button onClick={() => executeCommand('clear')} className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-indigo-600 transition-all text-sm px-2 py-2 rounded-lg font-medium flex items-center justify-center gap-1 min-w-0">
                 🗑️ 清除
               </button>
-              <button onClick={() => window.open('USER-GUIDE.html', '_blank')} className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-indigo-600 transition-all text-sm px-4 py-2 rounded-lg font-medium flex items-center justify-center gap-2">
+              <button onClick={() => window.open('USER-GUIDE.html', '_blank')} className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-indigo-600 transition-all text-sm px-2 py-2 rounded-lg font-medium flex items-center justify-center gap-1 min-w-0">
                 📚 指南
               </button>
             </div>

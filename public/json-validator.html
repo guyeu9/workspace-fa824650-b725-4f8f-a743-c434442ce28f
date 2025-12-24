@@ -173,6 +173,7 @@
                 <button class="btn" onclick="validateText()">✅ 验证文本</button>
                 <button class="btn secondary" onclick="formatJson()">🎨 格式化</button>
                 <button class="btn secondary" onclick="loadExample()">📥 加载示例</button>
+                <button class="btn" onclick="convertToStandard()" style="background: #10b981;">🔄 转换成标准版JSON</button>
             </div>
         </div>
     </div>
@@ -430,7 +431,118 @@
         }
 
         function testInGame() {
+            if (!currentData) {
+                showResult('error', '没有可加载的游戏数据');
+                return;
+            }
+            
+            try {
+                localStorage.setItem('importedGameData', JSON.stringify(currentData));
+                window.open('index.html', '_blank');
+                showResult('success', '游戏数据已保存，将在新窗口中加载游戏');
+            } catch (error) {
+                showResult('error', '保存游戏数据失败：' + error.message);
+            }
+        }
+
+        function convertToStandard() {
+            const content = jsonContent.value.trim();
+            
+            if (!content) {
+                showResult('error', '请先输入JSON内容');
+                return;
+            }
+
+            try {
+                const data = JSON.parse(content);
+                
+                // 检查是否已经是标准格式
+                if (data.scenes && data.start) {
+                    showResult('info', 'JSON已经是标准格式，无需转换');
+                    return;
+                }
+
+                // 转换为标准格式
+                const standardData = {
+                    start: data.playerId || (data.rooms && data.rooms[0] ? data.rooms[0].id : 'start'),
+                    scenes: {}
+                };
+
+                // 转换rooms到scenes
+                if (data.rooms && Array.isArray(data.rooms)) {
+                    data.rooms.forEach(room => {
+                        standardData.scenes[room.id] = {
+                            id: room.id,
+                            name: room.name || '未命名场景',
+                            desc: Array.isArray(room.desc) ? room.desc.join('\n\n') : (room.desc || ''),
+                            img: room.img || '',
+                            exits: room.exits || [],
+                            items: room.items || []
+                        };
+                    });
+                }
+
+                // 更新文本框
+                jsonContent.value = JSON.stringify(standardData, null, 2);
+                currentData = standardData;
+
+                // 显示转换结果
+                let html = '<h3>✅ 转换成功</h3>';
+                html += '<ul class="checklist">';
+                html += '<li class="pass">已将rooms转换为scenes</li>';
+                html += '<li class="pass">已将playerId转换为start</li>';
+                html += '<li class="pass">已将desc数组转换为字符串</li>';
+                html += '</ul>';
+                html += `
+                    <div style="margin-top: 20px;">
+                        <h4>📊 转换统计</h4>
+                        <p>场景数量: ${Object.keys(standardData.scenes).length}</p>
+                        <p>起始场景: ${standardData.start}</p>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <button class="btn" onclick="downloadStandardJson()">📥 下载标准版JSON</button>
+                        <button class="btn" onclick="startGame()" style="background: #f59e0b;">🎮 一键开始游戏</button>
+                    </div>
+                `;
+
+                showResult('success', html);
+            } catch (error) {
+                showResult('error', `转换失败: ${error.message}`);
+            }
+        }
+
+        function downloadStandardJson() {
+            if (!currentData) {
+                showResult('error', '没有可下载的数据');
+                return;
+            }
+            
+            const json = JSON.stringify(currentData, null, 2);
+            const blob = new Blob([json], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'standard-game.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function startGame() {
+            if (!currentData) {
+                showResult('error', '没有可加载的游戏数据');
+                return;
+            }
+
+            // 将游戏数据保存到localStorage
+            localStorage.setItem('importedGameData', JSON.stringify(currentData));
+            
+            // 打开游戏页面
             window.open('index.html', '_blank');
+            
+            showResult('success', '游戏数据已保存，将在新窗口中加载游戏');
         }
     </script>
 </body>
