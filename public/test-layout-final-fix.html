@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+    <title>布局修复测试 - 快捷区域和输入框位置验证</title>
+    <style>
+        :root {
+            --bg: #f5f7fa;
+            --panel-bg: white;
+            --text: #1e293b;
+            --muted: #64748b;
+            --accent: #6366f1;
+            --accent-hover: #5558e3;
+            --accent-light: #e0e7ff;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --radius-sm: 8px;
+            --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            --font-mono: 'SF Mono', Monaco, Inconsolata, 'Roboto Mono', 'Source Code Pro', monospace;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            padding-top: env(safe-area-inset-top, 0);
+            padding-bottom: env(safe-area-inset-bottom, 0);
+            padding-left: env(safe-area-inset-left, 0);
+            padding-right: env(safe-area-inset-right, 0);
+        }
+
+        /* 测试信息面板 */
+        .test-info {
+            background: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+        }
+
+        .test-info h1 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .test-info .status {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.2);
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            margin: 5px;
+        }
+
+        /* Main Container - 从主页面复制的强化版本 */
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            flex-wrap: nowrap;
+            isolation: isolate;
+            overflow: hidden;
+            flex-shrink: 1;
+            flex-grow: 1;
+            align-items: stretch;
+            justify-content: flex-start;
+        }
+
+        /* 确保所有主要区域都有正确的order - 强化版本 */
+        .container > #game-title { 
+            order: 0; 
+            position: relative;
+            width: 100%;
+            flex-shrink: 0;
+        }
+        .container > #output { 
+            order: 1; 
+            position: relative;
+            width: 100%;
+            flex-shrink: 1;
+            z-index: 1;
+            max-height: none;
+            min-height: 300px;
+            flex-grow: 1;
+            flex-shrink: 1;
+            height: auto;
+        }
+        .container > #choices { 
+            order: 2; 
+            position: relative;
+            width: 100%;
+            flex-shrink: 0;
+            z-index: 2;
+        }
+        .container > .quick-actions { 
+            order: 3; 
+            position: relative;
+            width: 100%;
+            flex-shrink: 0;
+            z-index: 3;
+        }
+        .container > #input-area { 
+            order: 4; 
+            position: relative;
+            width: 100%;
+            flex-shrink: 0;
+            z-index: 4;
+        }
+
+        /* 测试用文字输出区域 */
+        #output {
+            padding: 20px 24px;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            line-height: 1.6;
+            background: var(--panel-bg);
+            scroll-behavior: smooth;
+            border: 2px solid var(--accent-light);
+            margin: 10px 0;
+            border-radius: var(--radius);
+        }
+
+        #output p { 
+            margin: 12px 0; 
+            padding: 8px;
+            background: var(--bg);
+            border-radius: var(--radius-sm);
+            border-left: 4px solid var(--accent);
+        }
+
+        /* 动态选择按钮 */
+        #choices {
+            padding: 8px 20px;
+            background: var(--panel-bg);
+            border-top: 1px solid var(--border);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
+            min-height: 50px;
+            align-items: center;
+            flex-shrink: 0;
+            position: relative;
+            clear: both;
+            z-index: 2;
+            border: 2px solid var(--accent-light);
+            margin: 10px 0;
+            border-radius: var(--radius);
+        }
+
+        #choices button {
+            padding: 6px 12px;
+            background: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 100%);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: var(--shadow-sm);
+            white-space: nowrap;
+            min-width: 60px;
+            max-width: 180px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            flex: 1 1 auto;
+        }
+
+        #choices button:hover { 
+            background: linear-gradient(135deg, var(--accent-hover) 0%, #7c3aed 100%); 
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* 快捷按钮区域 - 强化版本 */
+        .quick-actions {
+            display: flex;
+            gap: 4px;
+            padding: 10px 20px;
+            background: var(--panel-bg);
+            border-top: 2px solid var(--accent);
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+            box-shadow: var(--shadow-sm);
+            align-items: center;
+            min-height: 50px;
+            flex-shrink: 0;
+            order: 3;
+            width: 100%;
+            box-sizing: border-box;
+            position: relative;
+            clear: both;
+            z-index: 3;
+            isolation: isolate;
+            margin-top: 0 !important;
+            float: none;
+            margin-bottom: 0;
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+
+        .quick-btn {
+            padding: 4px 8px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: var(--panel-bg);
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            flex: 0 0 calc(25% - 3px);
+            min-width: 45px;
+            max-width: calc(25% - 3px);
+            text-align: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+
+        .quick-btn:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        /* 输入区域 - 强化版本 */
+        #input-area {
+            padding: 12px 20px;
+            background: var(--panel-bg);
+            border-top: 2px solid var(--accent);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-wrap: wrap;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.06);
+            min-height: 120px;
+            flex-shrink: 0;
+            order: 4;
+            position: relative;
+            clear: both;
+            z-index: 4;
+            isolation: isolate;
+            margin-top: 0 !important;
+            float: none;
+            margin-bottom: 0;
+            flex-basis: auto;
+            align-self: flex-end;
+            border-radius: 0 0 var(--radius) var(--radius);
+        }
+
+        #input {
+            flex: 1;
+            min-width: 150px;
+            padding: 10px 14px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-family: var(--font-mono);
+            background: var(--panel-bg);
+            color: var(--text);
+            transition: border-color 0.2s;
+        }
+
+        #input:focus { 
+            outline: none; 
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        button {
+            padding: 8px 16px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            min-width: 70px;
+            flex: 1;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button:hover { 
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        /* 移动端强化约束 */
+        @media (max-width: 900px) {
+            .quick-actions {
+                gap: 3px;
+                padding: 8px 12px;
+                display: grid !important;
+                grid-template-columns: repeat(4, 1fr) !important;
+                grid-template-rows: repeat(2, auto) !important;
+                justify-items: stretch !important;
+                align-items: stretch !important;
+                min-height: auto;
+                max-height: none !important;
+                width: 100%;
+                box-sizing: border-box;
+                position: relative !important;
+                clear: both !important;
+                z-index: 3 !important;
+                order: 3 !important;
+                float: none !important;
+                isolation: isolate !important;
+                margin-top: 0 !important;
+                margin-bottom: 0 !important;
+                grid-row: auto !important;
+                grid-column: 1 / -1 !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .quick-actions {
+                gap: 2px;
+                padding: 6px 10px;
+                display: grid !important;
+                grid-template-columns: repeat(4, 1fr) !important;
+                grid-template-rows: repeat(2, auto) !important;
+                justify-items: stretch !important;
+                align-items: stretch !important;
+                min-height: auto;
+                max-height: none !important;
+                width: 100%;
+                box-sizing: border-box;
+                position: relative !important;
+                clear: both !important;
+                z-index: 3 !important;
+                order: 3 !important;
+                float: none !important;
+                isolation: isolate !important;
+                margin-top: 0 !important;
+                margin-bottom: 0 !important;
+                grid-row: auto !important;
+                grid-column: 1 / -1 !important;
+            }
+            
+            #input-area {
+                padding: 8px 12px;
+                gap: 6px;
+                flex-direction: column;
+                flex-shrink: 0;
+                position: relative !important;
+                clear: both !important;
+                z-index: 4 !important;
+                order: 4 !important;
+                float: none !important;
+                isolation: isolate !important;
+                margin-top: 0 !important;
+                margin-bottom: 0 !important;
+                align-self: flex-end !important;
+                flex-basis: auto !important;
+                max-height: none !important;
+                box-shadow: 0 -2px 8px rgba(0,0,0,0.1) !important;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .quick-actions {
+                gap: 1.5px;
+                padding: 5px 8px;
+                display: grid !important;
+                grid-template-columns: repeat(4, 1fr) !important;
+                grid-template-rows: repeat(2, auto) !important;
+                justify-items: stretch !important;
+                align-items: stretch !important;
+                min-height: auto;
+                max-height: none !important;
+                width: 100%;
+                box-sizing: border-box;
+                position: relative !important;
+                clear: both !important;
+                z-index: 3 !important;
+                order: 3 !important;
+                float: none !important;
+                isolation: isolate !important;
+                margin-top: 0 !important;
+                margin-bottom: 0 !important;
+                grid-row: auto !important;
+                grid-column: 1 / -1 !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .quick-actions {
+                gap: 1px;
+                padding: 4px 6px;
+                display: grid !important;
+                grid-template-columns: repeat(4, 1fr) !important;
+                grid-template-rows: repeat(2, auto) !important;
+                justify-items: stretch !important;
+                align-items: stretch !important;
+                min-height: auto;
+                max-height: none !important;
+                width: 100%;
+                box-sizing: border-box;
+                position: relative !important;
+                clear: both !important;
+                z-index: 3 !important;
+                order: 3 !important;
+                float: none !important;
+                isolation: isolate !important;
+                margin-top: 0 !important;
+                margin-bottom: 0 !important;
+                grid-row: auto !important;
+                grid-column: 1 / -1 !important;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .quick-actions {
+                gap: 0.5px;
+                padding: 3px 4px;
+                display: grid !important;
+                grid-template-columns: repeat(4, 1fr) !important;
+                grid-template-rows: repeat(2, auto) !important;
+                justify-items: stretch !important;
+                align-items: stretch !important;
+                min-height: auto;
+                max-height: none !important;
+                width: 100%;
+                box-sizing: border-box;
+                position: relative !important;
+                clear: both !important;
+                z-index: 3 !important;
+                order: 3 !important;
+                float: none !important;
+                isolation: isolate !important;
+                margin-top: 0 !important;
+                margin-bottom: 0 !important;
+                grid-row: auto !important;
+                grid-column: 1 / -1 !important;
+            }
+        }
+
+        /* 测试控制面板 */
+        .test-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            z-index: 1000;
+            max-width: 300px;
+        }
+
+        .test-controls h3 {
+            margin: 0 0 10px 0;
+            color: var(--accent);
+            font-size: 1rem;
+        }
+
+        .test-controls button {
+            margin: 5px;
+            font-size: 11px;
+            padding: 6px 12px;
+        }
+
+        .layout-status {
+            background: var(--bg);
+            padding: 10px;
+            border-radius: var(--radius-sm);
+            margin-top: 10px;
+            font-size: 12px;
+            font-family: var(--font-mono);
+        }
+
+        .status-ok { color: #22c55e; }
+        .status-error { color: #ef4444; }
+        .status-warning { color: #f59e0b; }
+    </style>
+</head>
+<body>
+    <!-- 测试信息面板 -->
+    <div class="test-info">
+        <h1>🧪 布局修复测试</h1>
+        <div>
+            <span class="status">屏幕宽度: <span id="screen-width">-</span>px</span>
+            <span class="status">布局状态: <span id="layout-status" class="status-ok">检查中...</span></span>
+        </div>
+        <div style="margin-top: 10px; font-size: 0.9rem;">
+            测试目标：确保快捷区域和输入框始终置于文字区下方
+        </div>
+    </div>
+
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 文字输出区域 -->
+        <div id="output">
+            <p><strong>📝 测试内容</strong></p>
+            <p>这是文字输出区域的测试内容。用于验证布局是否正确。</p>
+            <p>快捷区域和输入框应该始终显示在这个文字区域的下方。</p>
+            <p>无论屏幕大小如何变化，布局顺序都应该保持不变：</p>
+            <p>1. 文字输出区域 (order: 1)</p>
+            <p>2. 动态选择按钮 (order: 2)</p>
+            <p>3. 快捷按钮区域 (order: 3)</p>
+            <p>4. 输入区域 (order: 4)</p>
+            <p>当前时间: <span id="current-time">-</span></p>
+        </div>
+        
+        <!-- 动态选择按钮 -->
+        <div id="choices">
+            <button>📍 去北方</button>
+            <button>📍 去南方</button>
+            <button>🤲 拿取钥匙</button>
+            <button>💬 对话</button>
+        </div>
+
+        <!-- 快捷按钮区域 -->
+        <div class="quick-actions">
+            <button class="quick-btn">👁️ 观察</button>
+            <button class="quick-btn">📦 物品</button>
+            <button class="quick-btn">🎒 背包</button>
+            <button class="quick-btn">❓ 帮助</button>
+            <button class="quick-btn">💾 保存</button>
+            <button class="quick-btn">📂 读取</button>
+            <button class="quick-btn">🗑️ 清除</button>
+            <button class="quick-btn">📚 指南</button>
+        </div>
+
+        <!-- 输入区域 -->
+        <div id="input-area">
+            <input id="input" type="text" placeholder="输入命令进行测试..." autocomplete="off">
+            
+            <div style="display: flex; gap: 8px;">
+                <button id="send">发送</button>
+                <button id="test-layout">测试布局</button>
+                <button id="add-content">添加内容</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 测试控制面板 -->
+    <div class="test-controls">
+        <h3>🎮 测试控制</h3>
+        <button id="check-layout">检查布局</button>
+        <button id="stress-test">压力测试</button>
+        <button id="mobile-test">模拟移动端</button>
+        
+        <div class="layout-status" id="layout-details">
+            正在检查布局...
+        </div>
+    </div>
+
+    <script>
+        // 更新屏幕信息
+        function updateScreenInfo() {
+            document.getElementById('screen-width').textContent = window.innerWidth;
+            document.getElementById('current-time').textContent = new Date().toLocaleTimeString();
+        }
+
+        // 布局检查函数
+        function checkLayout() {
+            const container = document.querySelector('.container');
+            if (!container) return;
+
+            const elements = [
+                { selector: '#output', expectedOrder: 1, name: '文字输出区域' },
+                { selector: '#choices', expectedOrder: 2, name: '动态选择按钮' },
+                { selector: '.quick-actions', expectedOrder: 3, name: '快捷按钮区域' },
+                { selector: '#input-area', expectedOrder: 4, name: '输入区域' }
+            ];
+
+            let status = '✅ 布局正确';
+            let statusClass = 'status-ok';
+            let details = [];
+
+            elements.forEach(({ selector, expectedOrder, name }) => {
+                const element = container.querySelector(selector);
+                if (element) {
+                    const currentOrder = parseInt(window.getComputedStyle(element).order) || 0;
+                    const computedStyle = window.getComputedStyle(element);
+                    
+                    let elementStatus = '✅';
+                    if (currentOrder !== expectedOrder) {
+                        elementStatus = '❌';
+                        status = '❌ 布局错误';
+                        statusClass = 'status-error';
+                    }
+                    
+                    details.push(`${elementStatus} ${name}: order=${currentOrder} (期望:${expectedOrder})`);
+                    
+                    // 检查关键CSS属性
+                    if (selector === '.quick-actions' || selector === '#input-area') {
+                        const position = computedStyle.position;
+                        const clear = computedStyle.clear;
+                        const zIndex = computedStyle.zIndex;
+                        
+                        if (position !== 'relative') {
+                            elementStatus = '⚠️';
+                            status = '⚠️ 布局警告';
+                            statusClass = 'status-warning';
+                        }
+                        
+                        details.push(`   CSS: position=${position}, clear=${clear}, z-index=${zIndex}`);
+                    }
+                }
+            });
+
+            document.getElementById('layout-status').textContent = status;
+            document.getElementById('layout-status').className = statusClass;
+            document.getElementById('layout-details').innerHTML = details.join('<br>');
+
+            return { status, statusClass, details };
+        }
+
+        // 强化布局修正函数
+        function enforceLayoutOrder() {
+            const container = document.querySelector('.container');
+            if (!container) return;
+
+            const elements = [
+                { selector: '#output', expectedOrder: 1, name: '文字输出区域' },
+                { selector: '#choices', expectedOrder: 2, name: '动态选择按钮' },
+                { selector: '.quick-actions', expectedOrder: 3, name: '快捷按钮区域' },
+                { selector: '#input-area', expectedOrder: 4, name: '输入区域' }
+            ];
+
+            let layoutFixed = false;
+
+            elements.forEach(({ selector, expectedOrder, name }) => {
+                const element = container.querySelector(selector);
+                if (element) {
+                    const currentOrder = parseInt(window.getComputedStyle(element).order) || 0;
+                    
+                    if (currentOrder !== expectedOrder) {
+                        console.warn(`布局修正：${name} 的 order 从 ${currentOrder} 修正为 ${expectedOrder}`);
+                        element.style.order = expectedOrder;
+                        element.style.position = 'relative';
+                        element.style.width = '100%';
+                        element.style.zIndex = expectedOrder;
+                        layoutFixed = true;
+                    }
+
+                    // 额外保护：确保快捷区域和输入框有正确的CSS属性
+                    if (selector === '.quick-actions' || selector === '#input-area') {
+                        element.style.clear = 'both';
+                        element.style.display = 'block';
+                        element.style.boxSizing = 'border-box';
+                        element.style.float = 'none';
+                        element.style.isolation = 'isolate';
+                        element.style.marginTop = '0';
+                        element.style.marginBottom = '0';
+                        
+                        // 移动端额外保护
+                        if (window.innerWidth <= 900) {
+                            element.style.position = 'relative !important';
+                            element.style.clear = 'both !important';
+                            element.style.zIndex = parseInt(element.style.zIndex) + 10;
+                            
+                            // 对于快捷区域，确保grid布局正确
+                            if (selector === '.quick-actions') {
+                                element.style.display = 'grid !important';
+                                element.style.gridTemplateColumns = 'repeat(4, 1fr) !important';
+                                element.style.gridTemplateRows = 'repeat(2, auto) !important';
+                                element.style.gridRow = 'auto !important';
+                                element.style.gridColumn = '1 / -1 !important';
+                                element.style.maxHeight = 'none !important';
+                            }
+                        }
+                    }
+
+                    // 确保文字输出区域能够正确扩展
+                    if (selector === '#output') {
+                        element.style.maxHeight = 'none';
+                        element.style.minHeight = '300px';
+                        element.style.flexGrow = '1';
+                        element.style.flexShrink = '1';
+                        element.style.height = 'auto';
+                    }
+                }
+            });
+
+            if (layoutFixed) {
+                console.log('布局修正完成，确保快捷区域和输入框在文字区域下方');
+                
+                // 触发重新布局
+                setTimeout(() => {
+                    container.style.display = 'flex';
+                    container.style.flexDirection = 'column';
+                    container.style.width = '100%';
+                    container.style.minHeight = '100vh';
+                }, 10);
+            }
+
+            return layoutFixed;
+        }
+
+        // 压力测试
+        function stressTest() {
+            const output = document.getElementById('output');
+            let contentCount = 0;
+            
+            const interval = setInterval(() => {
+                const p = document.createElement('p');
+                p.textContent = `压力测试内容 ${++contentCount} - 时间: ${new Date().toLocaleTimeString()}`;
+                p.style.background = contentCount % 2 === 0 ? '#fef2f2' : '#f0fdf4';
+                p.style.borderLeftColor = contentCount % 2 === 0 ? '#ef4444' : '#22c55e';
+                output.appendChild(p);
+                output.scrollTop = output.scrollHeight;
+                
+                // 每次添加内容后检查布局
+                enforceLayoutOrder();
+                
+                if (contentCount >= 20) {
+                    clearInterval(interval);
+                    setTimeout(checkLayout, 500);
+                }
+            }, 200);
+        }
+
+        // 模拟移动端
+        function simulateMobile() {
+            const originalWidth = window.innerWidth;
+            const viewport = document.querySelector('meta[name="viewport"]');
+            
+            // 临时改变viewport来模拟移动端
+            viewport.setAttribute('content', 'width=480, initial-scale=1.0');
+            
+            setTimeout(() => {
+                enforceLayoutOrder();
+                checkLayout();
+                
+                // 恢复原始viewport
+                setTimeout(() => {
+                    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no');
+                }, 3000);
+            }, 100);
+        }
+
+        // 添加测试内容
+        function addTestContent() {
+            const output = document.getElementById('output');
+            const p = document.createElement('p');
+            p.innerHTML = `<strong>🧪 新增测试内容</strong><br>
+                          时间: ${new Date().toLocaleTimeString()}<br>
+                          屏幕宽度: ${window.innerWidth}px<br>
+                          这个内容用于测试布局是否保持正确。<br>
+                          快捷区域和输入框应该仍然在下方。`;
+            p.style.background = 'linear-gradient(135deg, #e0e7ff 0%, #f0f9ff 100%)';
+            p.style.borderLeftColor = '#6366f1';
+            output.appendChild(p);
+            output.scrollTop = output.scrollHeight;
+            
+            setTimeout(enforceLayoutOrder, 100);
+        }
+
+        // 事件监听器
+        document.getElementById('check-layout').addEventListener('click', () => {
+            enforceLayoutOrder();
+            checkLayout();
+        });
+
+        document.getElementById('stress-test').addEventListener('click', stressTest);
+        document.getElementById('mobile-test').addEventListener('click', simulateMobile);
+        document.getElementById('add-content').addEventListener('click', addTestContent);
+
+        document.getElementById('send').addEventListener('click', () => {
+            const input = document.getElementById('input');
+            if (input.value.trim()) {
+                const output = document.getElementById('output');
+                const p = document.createElement('p');
+                p.innerHTML = `<strong>📤 用户输入:</strong> ${input.value}<br>
+                              时间: ${new Date().toLocaleTimeString()}`;
+                p.style.background = '#fef3c7';
+                p.style.borderLeftColor = '#f59e0b';
+                output.appendChild(p);
+                output.scrollTop = output.scrollHeight;
+                input.value = '';
+                
+                setTimeout(enforceLayoutOrder, 100);
+            }
+        });
+
+        // 定期检查和修正布局
+        function startLayoutMonitoring() {
+            // 初始检查
+            setTimeout(() => {
+                enforceLayoutOrder();
+                checkLayout();
+            }, 100);
+            
+            // 每1秒检查一次
+            setInterval(() => {
+                enforceLayoutOrder();
+                updateScreenInfo();
+            }, 1000);
+            
+            // 窗口大小改变时检查
+            window.addEventListener('resize', () => {
+                setTimeout(() => {
+                    enforceLayoutOrder();
+                    checkLayout();
+                }, 50);
+                setTimeout(() => {
+                    enforceLayoutOrder();
+                    checkLayout();
+                }, 200);
+            });
+            
+            // 滚动时检查
+            let scrollTimer;
+            window.addEventListener('scroll', () => {
+                clearTimeout(scrollTimer);
+                scrollTimer = setTimeout(() => {
+                    enforceLayoutOrder();
+                }, 150);
+            });
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            updateScreenInfo();
+            startLayoutMonitoring();
+            console.log('布局测试页面已加载，开始监控布局状态');
+        });
+    </script>
+</body>
+</html>

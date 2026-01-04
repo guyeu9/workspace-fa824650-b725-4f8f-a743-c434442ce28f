@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Array Description Test</title>
+</head>
+<body>
+    <h1>Testing Array Description Fix</h1>
+    <div id="output"></div>
+    
+    <script src="index.js"></script>
+    <script>
+        // Wait for engine to load
+        setTimeout(() => {
+            console.log('Testing array description handling...');
+            
+            // Test the original println function with array
+            const originalPrintln = window.println;
+            
+            // Test array input
+            const testArray = [
+                "This is line 1.",
+                "This is line 2.", 
+                "This is line 3."
+            ];
+            
+            console.log('Testing with array:', testArray);
+            
+            // Call println with array
+            originalPrintln(testArray);
+            
+            // Check if all lines appear or just one
+            setTimeout(() => {
+                const output = document.getElementById('output').innerHTML;
+                console.log('Output content:', output);
+                
+                if (output.includes('line 1') && output.includes('line 2') && output.includes('line 3')) {
+                    console.log('SUCCESS: All array lines are displayed');
+                } else {
+                    console.log('ISSUE: Not all array lines are displayed');
+                }
+            }, 1000);
+            
+        }, 1000);
+    </script>
+</body>
+</html>

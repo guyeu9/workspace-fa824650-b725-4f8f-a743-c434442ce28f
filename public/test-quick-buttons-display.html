@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>快捷按钮显示问题测试</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f8fafc;
+        }
+        
+        .test-container {
+            max-width: 400px; /* 模拟移动端宽度 */
+            margin: 0 auto;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        /* 快捷区域 - 修复前的问题样式 */
+        .quick-actions-problem {
+            display: flex;
+            gap: 1px;
+            padding: 3px 6px;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            flex-direction: row;
+            /* 问题所在：限制高度和隐藏溢出 */
+            max-height: 55px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .quick-btn-problem {
+            padding: 1px 2px;
+            font-size: 6px;
+            flex: 1 1 calc(25% - 0.75px);
+            min-width: 25px;
+            max-width: calc(25% - 0.75px);
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            color: #64748b;
+            cursor: pointer;
+            text-align: center;
+            justify-content: center;
+            margin-bottom: 1px;
+            border-radius: 2px;
+        }
+        
+        /* 快捷区域 - 修复后的正确样式 */
+        .quick-actions-fixed {
+            display: flex;
+            gap: 2px;
+            padding: 6px 12px;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            flex-direction: row;
+            /* 修复：移除高度限制，允许自然换行 */
+            margin-bottom: 20px;
+            min-height: auto;
+        }
+        
+        .quick-btn-fixed {
+            padding: 3px 6px;
+            font-size: 9px;
+            flex: 0 0 calc(25% - 1.5px);
+            min-width: 40px;
+            max-width: calc(25% - 1.5px);
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            color: #64748b;
+            cursor: pointer;
+            text-align: center;
+            justify-content: center;
+            margin-bottom: 2px;
+            border-radius: 2px;
+            box-sizing: border-box;
+        }
+        
+        .quick-btn-fixed:hover {
+            background: #6366f1;
+            color: white;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #1f2937;
+        }
+        
+        .count-info {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 5px;
+        }
+        
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; color: #1f2937; margin-bottom: 30px;">快捷按钮显示问题测试</h1>
+    
+    <div class="test-container">
+        <div class="comparison">
+            <!-- 问题区域 -->
+            <div>
+                <div class="section-title">❌ 修复前：只显示一行（3个按钮）</div>
+                <div class="quick-actions-problem" id="problem-area">
+                    <!-- 按钮将通过JS生成 -->
+                </div>
+                <div class="count-info" id="problem-count">实际显示：0 个按钮</div>
+            </div>
+            
+            <!-- 修复区域 -->
+            <div>
+                <div class="section-title">✅ 修复后：显示所有按钮（8个按钮）</div>
+                <div class="quick-actions-fixed" id="fixed-area">
+                    <!-- 按钮将通过JS生成 -->
+                </div>
+                <div class="count-info" id="fixed-count">实际显示：0 个按钮</div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 20px; padding: 15px; background: #fef3c7; border-radius: 4px; border: 1px solid #f59e0b;">
+            <div style="font-weight: bold; color: #92400e; margin-bottom: 8px;">🔧 问题分析：</div>
+            <ul style="margin: 0; padding-left: 20px; font-size: 13px; color: #78350f;">
+                <li><strong>max-height: 55px</strong> - 限制容器高度，只够显示一行</li>
+                <li><strong>overflow: hidden</strong> - 隐藏超出部分，导致其他按钮不可见</li>
+                <li><strong>flex: 1 1 calc(25% - 0.75px)</strong> - 按钮试图平分空间但被高度限制</li>
+            </ul>
+        </div>
+        
+        <div style="margin-top: 20px; padding: 15px; background: #dcfce7; border-radius: 4px; border: 1px solid #22c55e;">
+            <div style="font-weight: bold; color: #14532d; margin-bottom: 8px;">✨ 解决方案：</div>
+            <ul style="margin: 0; padding-left: 20px; font-size: 13px; color: #166534;">
+                <li><strong>移除 max-height</strong> - 允许容器根据内容自然扩展</li>
+                <li><strong>移除 overflow: hidden</strong> - 显示所有按钮内容</li>
+                <li><strong>flex: 0 0 calc(25% - 1.5px)</strong> - 固定按钮宽度，每行4个</li>
+                <li><strong>增加 margin-bottom</strong> - 为按钮间距提供空间</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // 生成测试按钮
+        const buttonData = [
+            '📖查看', '🎒背包', '🗺️地图', '📊状态', 
+            '💬对话', '⚔️战斗', '🔍搜索', '🏃移动'
+        ];
+        
+        function createButtons(text, className) {
+            const button = document.createElement('button');
+            button.className = className;
+            button.textContent = text;
+            return button;
+        }
+        
+        function setupTestArea(areaId, countId, buttonClass) {
+            const area = document.getElementById(areaId);
+            const countElement = document.getElementById(countId);
+            
+            // 清空区域
+            area.innerHTML = '';
+            
+            // 添加8个测试按钮
+            buttonData.forEach(text => {
+                area.appendChild(createButtons(text, buttonClass));
+            });
+            
+            // 统计实际可见按钮数量
+            setTimeout(() => {
+                const visibleButtons = area.querySelectorAll('button').length;
+                countElement.textContent = `实际显示：${visibleButtons} 个按钮`;
+            }, 100);
+        }
+        
+        // 初始化测试
+        window.addEventListener('DOMContentLoaded', () => {
+            setupTestArea('problem-area', 'problem-count', 'quick-btn-problem');
+            setupTestArea('fixed-area', 'fixed-count', 'quick-btn-fixed');
+        });
+    </script>
+</body>
+</html>
