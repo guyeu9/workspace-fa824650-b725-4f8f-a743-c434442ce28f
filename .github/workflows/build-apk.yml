@@ -1,4 +1,4 @@
-name: Build Android APK
+﻿name: Build Android APK
 
 on:
   workflow_dispatch:
@@ -32,6 +32,7 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: '21'
+        cache: 'gradle'
         
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
@@ -48,6 +49,12 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x android/gradlew
       
+    - name: Clean Gradle cache
+      run: |
+        cd android
+        ./gradlew clean --no-daemon
+        cd ..
+        
     - name: Build APK
       run: |
         cd android
