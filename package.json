@@ -91,6 +91,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@swc/helpers": "^0.5.18",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
