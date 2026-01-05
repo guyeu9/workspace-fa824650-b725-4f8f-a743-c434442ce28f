@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Engine - Responsive Test</title>
+    <link rel="stylesheet" href="styles/modern-ui.css">
+    <style>
+        .test-info {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            z-index: 1000;
+        }
+        .test-section {
+            border: 2px dashed #6366f1;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-info">
+        <div>Width: <span id="width"></span></div>
+        <div>Breakpoint: <span id="breakpoint"></span></div>
+    </div>
+
+    <div class="app-container">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="app-title">Text Engine - Test</h1>
+                <div class="header-actions">
+                    <button class="quick-btn">🌙</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section class="test-section quick-actions">
+                <button class="quick-btn">👁️ Look</button>
+                <button class="quick-btn">📦 Items</button>
+                <button class="quick-btn">🎒 Inventory</button>
+                <button class="quick-btn">🧭 Go</button>
+                <button class="quick-btn">❓ Help</button>
+                <button class="quick-btn">💾 Save</button>
+                <button class="quick-btn">📂 Load</button>
+                <button class="quick-btn">🗑️ Clear</button>
+            </section>
+
+            <section class="test-section game-output">
+                <div class="output-content">
+                    <div class="output-line room-name">The Foyer</div>
+                    <div class="output-line">Welcome to the TEXT-ENGINE demo disk!</div>
+                    <div class="output-line user">> look</div>
+                    <div class="output-line">You are currently standing in foyer.</div>
+                </div>
+            </section>
+
+            <section class="test-section input-section">
+                <div class="input-wrapper">
+                    <div class="input-container">
+                        <span class="input-prompt">></span>
+                        <input type="text" class="game-input" placeholder="Enter your command..." value="test command">
+                    </div>
+                    <button class="submit-btn">
+                        <span>Execute</span>
+                        <span>→</span>
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <footer class="status-bar">
+            <div class="status-info">
+                <div class="status-item">
+                    <span>📍</span>
+                    <span>The Foyer</span>
+                </div>
+                <div class="status-item">
+                    <span>⏱️</span>
+                    <span id="timestamp">00:00:00</span>
+                </div>
+            </div>
+            <div class="status-item">
+                <span>5 commands</span>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function updateBreakpoint() {
+            const width = window.innerWidth;
+            const widthEl = document.getElementById('width');
+            const breakpointEl = document.getElementById('breakpoint');
+            
+            widthEl.textContent = width + 'px';
+            
+            let breakpoint = 'Desktop';
+            if (width <= 480) {
+                breakpoint = 'Mobile (< 480px)';
+            } else if (width <= 768) {
+                breakpoint = 'Tablet (≤ 768px)';
+            } else {
+                breakpoint = 'Desktop (> 768px)';
+            }
+            
+            breakpointEl.textContent = breakpoint;
+        }
+
+        function updateTime() {
+            const timestampEl = document.getElementById('timestamp');
+            if (timestampEl) {
+                const now = new Date();
+                timestampEl.textContent = now.toLocaleTimeString();
+            }
+        }
+
+        updateBreakpoint();
+        updateTime();
+        
+        window.addEventListener('resize', updateBreakpoint);
+        setInterval(updateTime, 1000);
+
+        // Test button interactions
+        document.querySelectorAll('.quick-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>

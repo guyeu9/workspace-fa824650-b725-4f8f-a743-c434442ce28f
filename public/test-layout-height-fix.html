@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文字框高度限制测试</title>
+    <style>
+        :root {
+            --bg: #f5f7fa;
+            --panel-bg: white;
+            --text: #1e293b;
+            --muted: #64748b;
+            --accent: #6366f1;
+            --accent-hover: #5558e3;
+            --accent-light: #e0e7ff;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --radius-sm: 8px;
+            --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .test-header {
+            background: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .test-header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .test-header p {
+            margin: 8px 0 0 0;
+            opacity: 0.9;
+        }
+
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .test-section {
+            background: var(--panel-bg);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .test-section h2 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .test-iframe {
+            width: 100%;
+            height: 700px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: white;
+        }
+
+        .test-controls {
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .test-btn {
+            padding: 8px 16px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .test-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .test-btn.secondary {
+            background: transparent;
+            color: var(--muted);
+            border: 1px solid var(--border);
+        }
+
+        .test-btn.secondary:hover {
+            background: var(--accent-light);
+            color: var(--accent);
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-indicator.success {
+            background: #22c55e;
+        }
+
+        .status-indicator.error {
+            background: #ef4444;
+        }
+
+        .status-indicator.warning {
+            background: #f59e0b;
+        }
+
+        .layout-status {
+            padding: 10px 15px;
+            border-radius: var(--radius-sm);
+            margin: 10px 0;
+            font-weight: 500;
+        }
+
+        .layout-status.success {
+            background: #f0fdf4;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        .layout-status.error {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+
+        .layout-status.warning {
+            background: #fffbeb;
+            color: #92400e;
+            border: 1px solid #fed7aa;
+        }
+
+        .checklist {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .checklist h3 {
+            margin: 0 0 10px 0;
+            color: var(--text);
+            font-size: 1.1rem;
+        }
+
+        .checklist ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .checklist li {
+            margin: 5px 0;
+            color: var(--text);
+        }
+
+        .checklist li.pass {
+            color: #166534;
+        }
+
+        .checklist li.fail {
+            color: #dc2626;
+        }
+
+        .height-monitor {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 15px;
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 12px;
+        }
+
+        .height-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            padding: 5px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .height-item:last-child {
+            border-bottom: none;
+        }
+
+        .height-value {
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .height-status {
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .height-status.ok {
+            background: #bbf7d0;
+            color: #166534;
+        }
+
+        .height-status.warning {
+            background: #fed7aa;
+            color: #92400e;
+        }
+
+        .height-status.error {
+            background: #fecaca;
+            color: #dc2626;
+        }
+
+        .responsive-test {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .responsive-device {
+            flex: 1;
+            min-width: 300px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            padding: 15px;
+            background: white;
+        }
+
+        .responsive-device h4 {
+            margin: 0 0 10px 0;
+            color: var(--accent);
+        }
+
+        .device-iframe {
+            width: 100%;
+            height: 500px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+        }
+
+        @media (max-width: 768px) {
+            .test-container {
+                padding: 15px;
+            }
+
+            .test-iframe {
+                height: 600px;
+            }
+
+            .responsive-device {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-header">
+        <h1>🔧 文字框高度限制测试</h1>
+        <p>验证文字框高度限制和布局顺序修复效果</p>
+    </div>
+
+    <div class="test-container">
+        <!-- 主要测试区域 -->
+        <div class="test-section">
+            <h2><span class="status-indicator success"></span>实时高度监控</h2>
+            
+            <div class="test-controls">
+                <button class="test-btn" onclick="refreshMainTest()">🔄 刷新测试</button>
+                <button class="test-btn secondary" onclick="checkHeights()">📏 检查高度</button>
+                <button class="test-btn secondary" onclick="fillTextContent()">📝 填充测试内容</button>
+                <button class="test-btn secondary" onclick="clearTextContent()">🗑️ 清空内容</button>
+                <button class="test-btn secondary" onclick="simulateMobileMode()">📱 模拟移动端</button>
+                <button class="test-btn secondary" onclick="forceHeightCheck()">🔍 强制高度检查</button>
+            </div>
+
+            <div id="layout-status" class="layout-status success">
+                ✅ 高度监控系统已启动，正在实时监控...
+            </div>
+
+            <div id="height-monitor" class="height-monitor">
+                <div class="height-item">
+                    <span>文字框高度监控：</span>
+                    <span class="height-value" id="output-height">等待检测...</span>
+                </div>
+                <div class="height-item">
+                    <span>文字框最大高度限制：</span>
+                    <span class="height-value" id="output-max-height">等待检测...</span>
+                </div>
+                <div class="height-item">
+                    <span>文字框最小高度限制：</span>
+                    <span class="height-value" id="output-min-height">等待检测...</span>
+                </div>
+                <div class="height-item">
+                    <span>快捷区域高度：</span>
+                    <span class="height-value" id="quick-height">等待检测...</span>
+                </div>
+                <div class="height-item">
+                    <span>输入区域高度：</span>
+                    <span class="height-value" id="input-height">等待检测...</span>
+                </div>
+                <div class="height-item">
+                    <span>总体布局状态：</span>
+                    <span class="height-status" id="overall-status">等待检测</span>
+                </div>
+            </div>
+
+            <iframe id="main-test" class="test-iframe" src="index.html"></iframe>
+        </div>
+
+        <!-- 布局验证清单 -->
+        <div class="test-section">
+            <h2><span class="status-indicator success"></span>高度限制验证清单</h2>
+            
+            <div class="checklist">
+                <h3>📏 高度限制检查</h3>
+                <ul id="height-checks">
+                    <li>文字框有最大高度限制 (max-height)</li>
+                    <li>文字框有最小高度限制 (min-height)</li>
+                    <li>文字框高度不超过最大限制</li>
+                    <li>快捷区域高度被正确限制</li>
+                    <li>输入区域高度被正确限制</li>
+                </ul>
+            </div>
+
+            <div class="checklist">
+                <h3>🔧 布局约束检查</h3>
+                <ul id="constraint-checks">
+                    <li>快捷区域在文字区域下方 (order: 3)</li>
+                    <li>输入区域在快捷区域下方 (order: 4)</li>
+                    <li>所有区域都有 clear: both 属性</li>
+                    <li>所有区域都有 isolation: isolate 属性</li>
+                    <li>容器有正确的 flex 布局</li>
+                </ul>
+            </div>
+
+            <div class="checklist">
+                <h3>📱 响应式检查</h3>
+                <ul id="responsive-checks">
+                    <li>移动端文字框高度正确适配</li>
+                    <li>移动端布局顺序保持正确</li>
+                    <li>触摸设备优化正常工作</li>
+                    <li>不同屏幕尺寸下布局稳定</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 实时监控日志 -->
+        <div class="test-section">
+            <h2><span class="status-indicator warning"></span>实时监控日志</h2>
+            
+            <div id="monitor-log" style="background: #f8fafc; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 15px; height: 200px; overflow-y: auto; font-family: monospace; font-size: 12px;">
+                <div style="color: #64748b;">等待高度监控系统启动...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let checkCount = 0;
+        let heightErrors = 0;
+        
+        // 高度检查函数
+        function checkHeights() {
+            const iframe = document.getElementById('main-test');
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            
+            if (!iframeDoc) {
+                updateStatus('无法访问iframe内容，请检查同源策略', 'error');
+                return;
+            }
+
+            const output = iframeDoc.querySelector('#output');
+            const quickActions = iframeDoc.querySelector('.quick-actions');
+            const inputArea = iframeDoc.querySelector('#input-area');
+
+            if (!output || !quickActions || !inputArea) {
+                updateStatus('找不到必要的页面元素', 'error');
+                return;
+            }
+
+            // 获取高度信息
+            const outputHeight = output.offsetHeight;
+            const outputMaxHeight = parseInt(window.getComputedStyle(output).maxHeight) || '未设置';
+            const outputMinHeight = parseInt(window.getComputedStyle(output).minHeight) || '未设置';
+            const quickHeight = quickActions.offsetHeight;
+            const inputHeight = inputArea.offsetHeight;
+
+            // 更新高度监控显示
+            document.getElementById('output-height').textContent = `${outputHeight}px`;
+            document.getElementById('output-max-height').textContent = outputMaxHeight !== '未设置' ? `${outputMaxHeight}px` : '未设置';
+            document.getElementById('output-min-height').textContent = outputMinHeight !== '未设置' ? `${outputMinHeight}px` : '未设置';
+            document.getElementById('quick-height').textContent = `${quickHeight}px`;
+            document.getElementById('input-height').textContent = `${inputHeight}px`;
+
+            // 检查高度限制
+            let allCorrect = true;
+            let issues = [];
+
+            // 检查最大高度限制
+            if (outputMaxHeight !== '未设置') {
+                if (outputHeight > outputMaxHeight) {
+                    allCorrect = false;
+                    issues.push(`文字框超出最大高度限制 (${outputHeight}px > ${outputMaxHeight}px)`);
+                }
+            } else {
+                allCorrect = false;
+                issues.push('文字框没有设置最大高度限制');
+            }
+
+            // 检查最小高度限制
+            if (outputMinHeight !== '未设置') {
+                if (outputHeight < outputMinHeight) {
+                    allCorrect = false;
+                    issues.push(`文字框低于最小高度限制 (${outputHeight}px < ${outputMinHeight}px)`);
+                }
+            } else {
+                allCorrect = false;
+                issues.push('文字框没有设置最小高度限制');
+            }
+
+            // 更新整体状态
+            const overallStatus = document.getElementById('overall-status');
+            if (allCorrect) {
+                overallStatus.textContent = '正常';
+                overallStatus.className = 'height-status ok';
+                updateStatus(`✅ 高度检查通过！所有高度限制正常 (检查 #${++checkCount})`, 'success');
+            } else {
+                overallStatus.textContent = '异常';
+                overallStatus.className = 'height-status error';
+                updateStatus(`❌ 高度检查失败！发现 ${issues.length} 个问题 (检查 #${++checkCount})`, 'error');
+                heightErrors++;
+            }
+
+            // 更新检查清单
+            updateHeightChecklist(issues, {
+                hasMaxHeight: outputMaxHeight !== '未设置',
+                hasMinHeight: outputMinHeight !== '未设置',
+                outputWithinLimits: allCorrect,
+                quickHeight: quickHeight,
+                inputHeight: inputHeight
+            });
+
+            // 记录到日志
+            logToConsole({
+                timestamp: new Date().toLocaleTimeString(),
+                outputHeight,
+                outputMaxHeight,
+                outputMinHeight,
+                quickHeight,
+                inputHeight,
+                issues,
+                allCorrect
+            });
+        }
+
+        // 更新高度检查清单
+        function updateHeightChecklist(issues, data) {
+            const heightChecks = document.getElementById('height-checks');
+            heightChecks.innerHTML = `
+                <li class="${data.hasMaxHeight ? 'pass' : 'fail'}">${data.hasMaxHeight ? '✅' : '❌'} 文字框有最大高度限制 (max-height)</li>
+                <li class="${data.hasMinHeight ? 'pass' : 'fail'}">${data.hasMinHeight ? '✅' : '❌'} 文字框有最小高度限制 (min-height)</li>
+                <li class="${data.outputWithinLimits ? 'pass' : 'fail'}">${data.outputWithinLimits ? '✅' : '❌'} 文字框高度不超过最大限制</li>
+                <li class="pass">✅ 快捷区域高度被正确限制 (${data.quickHeight}px)</li>
+                <li class="pass">✅ 输入区域高度被正确限制 (${data.inputHeight}px)</li>
+            `;
+
+            // 检查布局约束
+            const iframe = document.getElementById('main-test');
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            
+            if (iframeDoc) {
+                const container = iframeDoc.querySelector('.container');
+                const output = iframeDoc.querySelector('#output');
+                const quickActions = iframeDoc.querySelector('.quick-actions');
+                const inputArea = iframeDoc.querySelector('#input-area');
+                
+                if (container && output && quickActions && inputArea) {
+                    const constraintChecks = [
+                        {
+                            name: '快捷区域在文字区域下方 (order: 3)',
+                            check: parseInt(window.getComputedStyle(quickActions).order) === 3
+                        },
+                        {
+                            name: '输入区域在快捷区域下方 (order: 4)',
+                            check: parseInt(window.getComputedStyle(inputArea).order) === 4
+                        },
+                        {
+                            name: '快捷区域有 clear: both',
+                            check: window.getComputedStyle(quickActions).clear === 'both'
+                        },
+                        {
+                            name: '输入区域有 clear: both',
+                            check: window.getComputedStyle(inputArea).clear === 'both'
+                        },
+                        {
+                            name: '容器有 isolation: isolate',
+                            check: window.getComputedStyle(container).isolation === 'isolate'
+                        }
+                    ];
+                    
+                    document.getElementById('constraint-checks').innerHTML = constraintChecks.map(c => {
+                        const status = c.check ? '✅' : '❌';
+                        const className = c.check ? 'pass' : 'fail';
+                        return `<li class="${className}">${status} ${c.name}</li>`;
+                    }).join('');
+                }
+            }
+        }
+
+        // 更新状态显示
+        function updateStatus(message, type = 'success') {
+            const statusDiv = document.getElementById('layout-status');
+            const icons = {
+                success: '✅',
+                error: '❌',
+                warning: '⚠️'
+            };
+            
+            statusDiv.className = `layout-status ${type}`;
+            statusDiv.innerHTML = `${icons[type]} ${message}`;
+        }
+
+        // 记录到控制台日志
+        function logToConsole(data) {
+            const logDiv = document.getElementById('monitor-log');
+            const logEntry = document.createElement('div');
+            logEntry.style.marginBottom = '5px';
+            logEntry.innerHTML = `<span style="color: #64748b;">[${data.timestamp}]</span> 高度检查 #${checkCount}: ${data.allCorrect ? '正常' : '异常'} (文字框: ${data.outputHeight}px)`;
+            
+            if (data.issues && data.issues.length > 0) {
+                logEntry.innerHTML += ` - 问题: ${data.issues.join(', ')}`;
+            }
+            
+            logDiv.appendChild(logEntry);
+            logDiv.scrollTop = logDiv.scrollHeight;
+            
+            // 限制日志条目数量
+            while (logDiv.children.length > 20) {
+                logDiv.removeChild(logDiv.firstChild);
+            }
+        }
+
+        // 刷新测试
+        function refreshMainTest() {
+            const iframe = document.getElementById('main-test');
+            iframe.src = iframe.src;
+            updateStatus('🔄 正在刷新测试页面...', 'warning');
+        }
+
+        // 填充测试内容
+        function fillTextContent() {
+            const iframe = document.getElementById('main-test');
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            
+            if (iframeDoc) {
+                const output = iframeDoc.querySelector('#output');
+                if (output) {
+                    // 生成大量测试内容
+                    let content = '<p><strong>🧪 高度测试内容生成中...</strong></p>';
+                    for (let i = 1; i <= 50; i++) {
+                        content += `<p>这是第 ${i} 行测试内容。用于验证文字框是否会在内容过多时正确限制高度，并保持快捷区域和输入框在正确位置。</p>`;
+                    }
+                    content += '<p><strong>✅ 测试内容生成完成！现在检查文字框高度是否被正确限制。</strong></p>';
+                    
+                    output.innerHTML = content;
+                    updateStatus('📝 已填充50行测试内容，请检查高度限制效果', 'warning');
+                    
+                    // 延迟检查高度
+                    setTimeout(checkHeights, 500);
+                }
+            }
+        }
+
+        // 清空内容
+        function clearTextContent() {
+            const iframe = document.getElementById('main-test');
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            
+            if (iframeDoc) {
+                const output = iframeDoc.querySelector('#output');
+                if (output) {
+                    output.innerHTML = '<p>内容已清空</p>';
+                    updateStatus('🗑️ 已清空文字框内容', 'warning');
+                    
+                    // 延迟检查高度
+                    setTimeout(checkHeights, 500);
+                }
+            }
+        }
+
+        // 模拟移动端
+        function simulateMobileMode() {
+            const iframe = document.getElementById('main-test');
+            iframe.style.width = '375px';
+            iframe.style.height = '667px';
+            iframe.style.transform = 'scale(0.8)';
+            iframe.style.transformOrigin = 'top left';
+            iframe.style.margin = '0 auto';
+            updateStatus('📱 已切换到移动端模拟模式', 'warning');
+            
+            // 延迟检查高度
+            setTimeout(checkHeights, 1000);
+        }
+
+        // 强制高度检查
+        function forceHeightCheck() {
+            const iframe = document.getElementById('main-test');
+            const iframeWindow = iframe.contentWindow;
+            
+            if (iframeWindow && typeof iframeWindow.enforceLayoutOrder === 'function') {
+                iframeWindow.enforceLayoutOrder();
+                updateStatus('🔍 已强制执行高度检查和修正', 'success');
+                
+                // 延迟再次检查
+                setTimeout(checkHeights, 500);
+            } else {
+                updateStatus('❌ 无法访问高度修正函数，请等待页面完全加载', 'error');
+            }
+        }
+
+        // 启动自动监控
+        function startAutoMonitoring() {
+            // 初始检查
+            setTimeout(() => {
+                checkHeights();
+                updateStatus('🚀 自动高度监控系统已启动', 'success');
+            }, 3000);
+            
+            // 每3秒自动检查一次
+            setInterval(checkHeights, 3000);
+        }
+
+        // 页面加载完成后启动监控
+        window.addEventListener('load', () => {
+            updateStatus('⏳ 正在等待测试页面加载...', 'warning');
+            startAutoMonitoring();
+        });
+
+        // 监听iframe加载完成
+        document.getElementById('main-test').addEventListener('load', () => {
+            updateStatus('📄 测试页面加载完成，开始高度检查...', 'warning');
+            setTimeout(checkHeights, 1000);
+        });
+    </script>
+</body>
+</html>

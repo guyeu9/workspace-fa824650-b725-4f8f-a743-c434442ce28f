@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移动端布局测试</title>
+    <style>
+        :root {
+            --bg: #f5f7fa;
+            --panel-bg: white;
+            --text: #1e293b;
+            --muted: #64748b;
+            --accent: #6366f1;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--panel-bg);
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        h1 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .screen-size-indicator {
+            background: var(--accent);
+            color: white;
+            padding: 10px;
+            border-radius: var(--radius-sm);
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        /* Quick Actions - 复制主文件的样式 */
+        .quick-actions {
+            display: flex;
+            gap: 4px;
+            padding: 10px 20px;
+            background: var(--panel-bg);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            align-items: center;
+            min-height: 50px;
+            flex-shrink: 0;
+        }
+
+        .quick-btn {
+            padding: 4px 8px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: var(--panel-bg);
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            flex: 1 1 auto;
+            min-width: 45px;
+            max-width: 80px;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .quick-btn:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        /* 移动端响应式样式 - 强制4个按钮一行 */
+        @media (max-width: 900px) {
+            .quick-actions {
+                gap: 2px;
+                padding: 6px 12px;
+                display: flex !important;
+                flex-wrap: wrap !important;
+                justify-content: flex-start !important;
+                flex-direction: row !important;
+            }
+            
+            .quick-btn {
+                padding: 3px 6px;
+                font-size: 9px;
+                flex: 1 1 calc(25% - 1.5px) !important;
+                min-width: 40px !important;
+                max-width: calc(25% - 1.5px) !important;
+                text-align: center;
+                justify-content: center;
+                gap: 1px;
+                line-height: 1.3;
+                box-sizing: border-box;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .quick-actions {
+                padding: 5px 10px;
+                gap: 1.5px;
+                display: flex !important;
+                flex-wrap: wrap !important;
+                justify-content: flex-start !important;
+                flex-direction: row !important;
+            }
+            
+            .quick-btn {
+                padding: 2px 4px;
+                font-size: 8px;
+                flex: 1 1 calc(25% - 1.125px) !important;
+                min-width: 35px !important;
+                max-width: calc(25% - 1.125px) !important;
+                justify-content: center;
+                text-align: center;
+                gap: 0.5px;
+                line-height: 1.2;
+                box-sizing: border-box;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .quick-actions {
+                gap: 1px;
+                padding: 4px 8px;
+                display: flex !important;
+                flex-wrap: wrap !important;
+                justify-content: flex-start !important;
+                flex-direction: row !important;
+            }
+            
+            .quick-btn {
+                padding: 2px 3px;
+                font-size: 7px;
+                flex: 1 1 calc(25% - 0.75px) !important;
+                min-width: 30px !important;
+                max-width: calc(25% - 0.75px) !important;
+                justify-content: center;
+                text-align: center;
+                gap: 0;
+                line-height: 1.1;
+                box-sizing: border-box;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .quick-actions {
+                padding: 3px 6px;
+                gap: 1px;
+                display: flex !important;
+                flex-wrap: wrap !important;
+                justify-content: flex-start !important;
+                flex-direction: row !important;
+            }
+            
+            .quick-btn {
+                padding: 1px 2px;
+                font-size: 6px;
+                flex: 1 1 calc(25% - 0.75px) !important;
+                min-width: 25px !important;
+                max-width: calc(25% - 0.75px) !important;
+                justify-content: center;
+                text-align: center;
+                gap: 0;
+                line-height: 1.0;
+                box-sizing: border-box;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .quick-actions {
+                padding: 2px 4px;
+                gap: 0.5px;
+                display: flex !important;
+                flex-wrap: wrap !important;
+                justify-content: flex-start !important;
+                flex-direction: row !important;
+            }
+            
+            .quick-btn {
+                padding: 1px 1px;
+                font-size: 5px;
+                flex: 1 1 calc(25% - 0.375px) !important;
+                min-width: 22px !important;
+                max-width: calc(25% - 0.375px) !important;
+                justify-content: center;
+                text-align: center;
+                gap: 0;
+                line-height: 0.9;
+                box-sizing: border-box;
+            }
+        }
+
+        .test-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: var(--bg);
+            border-radius: var(--radius-sm);
+            border-left: 4px solid var(--accent);
+        }
+
+        .debug-info {
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--muted);
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: var(--radius-sm);
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>📱 移动端快捷按钮布局测试</h1>
+        
+        <div class="screen-size-indicator" id="screenIndicator">
+            当前屏幕尺寸: <span id="screenSize"></span>
+        </div>
+        
+        <h3>快捷按钮测试区域：</h3>
+        <div class="quick-actions">
+            <button class="quick-btn">👁️ 观察</button>
+            <button class="quick-btn">📦 物品</button>
+            <button class="quick-btn">🎒 背包</button>
+            <button class="quick-btn">❓ 帮助</button>
+            <button class="quick-btn">📚 指南</button>
+            <button class="quick-btn">💾 保存</button>
+            <button class="quick-btn">📂 读取</button>
+            <button class="quick-btn">🗑️ 清除</button>
+        </div>
+        
+        <div class="test-info">
+            <h4>📋 测试说明：</h4>
+            <ul>
+                <li>✅ 预期结果：在任何移动设备上，8个按钮都应该排列成2行，每行4个按钮</li>
+                <li>🔍 测试方法：调整浏览器窗口大小或使用移动设备查看</li>
+                <li>📱 断点测试：
+                    <ul>
+                        <li>>900px：桌面布局（自适应）</li>
+                        <li>900px以下：强制4个按钮一行</li>
+                        <li>768px以下：更紧凑的4个按钮一行</li>
+                        <li>600px以下：极紧凑的4个按钮一行</li>
+                        <li>480px以下：超紧凑的4个按钮一行</li>
+                        <li>360px以下：最小尺寸的4个按钮一行</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="debug-info" id="debugInfo">
+            <strong>🔧 调试信息：</strong><br>
+            窗口宽度: <span id="windowWidth"></span>px<br>
+            窗口高度: <span id="windowHeight"></span>px<br>
+            按钮容器: <span id="containerDisplay"></span><br>
+            按钮方向: <span id="containerDirection"></span>
+        </div>
+    </div>
+
+    <script>
+        function updateDebugInfo() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            const quickActions = document.querySelector('.quick-actions');
+            const computedStyle = window.getComputedStyle(quickActions);
+            
+            document.getElementById('windowWidth').textContent = width;
+            document.getElementById('windowHeight').textContent = height;
+            document.getElementById('containerDisplay').textContent = computedStyle.display;
+            document.getElementById('containerDirection').textContent = computedStyle.flexDirection;
+            
+            // 更新屏幕指示器
+            let screenSize = '';
+            if (width > 900) {
+                screenSize = '桌面端 (>900px)';
+            } else if (width > 768) {
+                screenSize = '平板端 (768px-900px)';
+            } else if (width > 600) {
+                screenSize = '大屏手机 (600px-768px)';
+            } else if (width > 480) {
+                screenSize = '中屏手机 (480px-600px)';
+            } else if (width > 360) {
+                screenSize = '小屏手机 (360px-480px)';
+            } else {
+                screenSize = '超小屏手机 (<360px)';
+            }
+            
+            document.getElementById('screenSize').textContent = `${width}px × ${height}px - ${screenSize}`;
+            
+            // 检查按钮布局
+            const buttons = document.querySelectorAll('.quick-btn');
+            const buttonCount = buttons.length;
+            const expectedRows = Math.ceil(buttonCount / 4);
+            
+            console.log(`按钮布局检查: ${buttonCount}个按钮，应该显示${expectedRows}行`);
+        }
+        
+        // 初始化
+        updateDebugInfo();
+        
+        // 窗口大小改变时更新
+        window.addEventListener('resize', updateDebugInfo);
+        
+        // 定期检查
+        setInterval(updateDebugInfo, 1000);
+        
+        // 按钮点击测试
+        document.querySelectorAll('.quick-btn').forEach((btn, index) => {
+            btn.addEventListener('click', function() {
+                console.log(`按钮 ${index + 1} 被点击: ${this.textContent}`);
+                this.style.background = 'var(--accent)';
+                this.style.color = 'white';
+                setTimeout(() => {
+                    this.style.background = '';
+                    this.style.color = '';
+                }, 300);
+            });
+        });
+        
+        console.log('移动端布局测试页面已加载');
+    </script>
+</body>
+</html>
