@@ -428,7 +428,7 @@ export default function GameEditor() {
                                   onChange={(e) => updateChoice(selectedBranch.branch_id, choice.id, 'next_branch', e.target.value)}
                                   className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"
                                 >
-                                  <option value="">选择目标分支</option>
+                                  <option key="default" value="">选择目标分支</option>
                                   {gameData.branches.map(b => (
                                     <option key={b.branch_id} value={b.branch_id}>
                                       {b.branch_id} - {b.chapter}
