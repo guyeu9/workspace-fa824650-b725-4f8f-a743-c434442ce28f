@@ -868,17 +868,115 @@ export default function Home() {
               </button>
             </div>
 
+            <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg shadow-indigo-500/10 p-4 sm:p-6 lg:p-8 mb-4 sm:mb-5 border border-white/50">
+              <h3 className="text-lg sm:text-xl font-bold text-slate-800 mb-3 sm:mb-4">选择示例故事</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                <button
+                  onClick={async () => {
+                    try {
+                      // 从public目录加载JSON文件
+                      const response = await fetch('/一个帽子_修复版.json');
+                      const data = await response.json();
+                      
+                      // 清空输出历史
+                      setOutputHistory([]);
+                      setInventory([]);
+                      setChoices([]);
+                      
+                      // 找到起始分支（第一个分支）
+                      const startBranch = data.branches[0];
+                      if (startBranch) {
+                        // 设置当前场景
+                        const newScene = {
+                          id: startBranch.branch_id,
+                          name: startBranch.chapter || startBranch.branch_id,
+                          desc: startBranch.scene_detail || '',
+                          exits: startBranch.choices?.map((choice: any) => ({
+                            text: choice.choice,
+                            target: choice.next_branch,
+                            effect: choice.effect,
+                            status_update: choice.status_update,
+                            end_game: choice.end_game
+                          })) || []
+                        };
+                        setCurrentScene(newScene);
+                        setChoices(newScene.exits);
+                        
+                        // 添加场景信息到输出历史
+                        setOutputHistory([
+                          { type: 'room-name', content: data.game_title, className: 'room-name', fullContent: data.game_title },
+                          { type: 'room-desc', content: data.description || '', fullContent: data.description || '' },
+                          { type: 'room-name', content: startBranch.chapter || startBranch.branch_id, className: 'room-name', fullContent: startBranch.chapter || startBranch.branch_id },
+                          { type: 'room-desc', content: startBranch.scene_detail || '', fullContent: startBranch.scene_detail || '' }
+                        ]);
+                        
+                        // 保存游戏数据以便后续使用
+                        setStoryData({
+                          start: startBranch.branch_id,
+                          scenes: data.branches.reduce((acc: any, branch: any) => {
+                            acc[branch.branch_id] = {
+                              id: branch.branch_id,
+                              name: branch.chapter || branch.branch_id,
+                              desc: branch.scene_detail || '',
+                              exits: branch.choices?.map((choice: any) => ({
+                                text: choice.choice,
+                                target: choice.next_branch,
+                                effect: choice.effect,
+                                status_update: choice.status_update,
+                                end_game: choice.end_game
+                              })) || []
+                            };
+                            return acc;
+                          }, {})
+                        });
+                        
+                        // 关闭欢迎界面，开始游戏
+                        setShowWelcome(false);
+                      }
+                    } catch (error) {
+                      console.error('加载示例故事失败:', error);
+                      setOutputHistory([
+                        { type: 'system', content: '加载示例故事失败，请重试。', fullContent: '加载示例故事失败，请重试。' }
+                      ]);
+                      setShowWelcome(false);
+                    }
+                  }}
+                  className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 font-bold px-4 sm:px-5 py-3 sm:py-4 rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 active:scale-95 text-sm sm:text-base"
+                >
+                  示例故事1
+                </button>
+                <button
+                  onClick={() => {
+                    // 示例故事2 - 暂时显示提示
+                    alert('示例故事2即将推出！');
+                  }}
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 transition-all duration-300 font-bold px-4 sm:px-5 py-3 sm:py-4 rounded-xl shadow-lg shadow-purple-500/20 hover:shadow-xl hover:shadow-purple-500/30 active:scale-95 text-sm sm:text-base"
+                >
+                  示例故事2
+                </button>
+                <button
+                  onClick={() => {
+                    // 示例故事3 - 暂时显示提示
+                    alert('示例故事3即将推出！');
+                  }}
+                  className="bg-gradient-to-r from-green-600 to-teal-600 text-white hover:from-green-700 hover:to-teal-700 transition-all duration-300 font-bold px-4 sm:px-5 py-3 sm:py-4 rounded-xl shadow-lg shadow-green-500/20 hover:shadow-xl hover:shadow-green-500/30 active:scale-95 text-sm sm:text-base"
+                >
+                  示例故事3
+                </button>
+              </div>
+            </div>
+
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-4 sm:mb-5">
               <button
                 onClick={() => {
-                  const data = JSON.stringify(storyData, null, 2)
-                  const blob = new Blob([data], { type: 'application/json' })
-                  const url = URL.createObjectURL(blob)
-                  const a = document.createElement('a')
-                  a.href = url
-                  a.download = 'example-story.json'
-                  a.click()
-                  URL.revokeObjectURL(url)
+                  const data = JSON.stringify(storyData, null, 2);
+                  const blob = new Blob([data], { type: 'application/json' });
+                  const url = URL.createObjectURL(blob);
+                  const a = document.createElement('a');
+                  a.href = url;
+                  a.download = 'example-story.json';
+                  a.click();
+                  URL.revokeObjectURL(url);
                 }}
                 className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-3 sm:px-4 py-2.5 sm:py-3 lg:py-4 rounded-xl shadow-sm hover:shadow-md active:scale-95"
               >
