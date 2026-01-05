@@ -36,6 +36,7 @@ export default function GameEditor() {
   const [history, setHistory] = useState<GameData[]>([])
   const [historyIndex, setHistoryIndex] = useState(-1)
   const [showPreview, setShowPreview] = useState(false)
+  const [viewMode, setViewMode] = useState<'list' | 'graph'>('list')
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const saveToHistory = (data: GameData) => {
@@ -186,6 +187,102 @@ export default function GameEditor() {
 
   const selectedBranch = gameData.branches.find(b => b.branch_id === selectedBranchId)
 
+  interface NodePosition {
+    id: string
+    x: number
+    y: number
+  }
+
+  const [nodePositions, setNodePositions] = useState<NodePosition[]>([])
+  const [scale, setScale] = useState(1)
+  const [pan, setPan] = useState({ x: 0, y: 0 })
+  const [isDragging, setIsDragging] = useState(false)
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
+  const graphRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (gameData.branches.length === 0) {
+      setNodePositions([])
+      return
+    }
+
+    const positions: NodePosition[] = []
+    const centerX = 400
+    const centerY = 300
+    const levelHeight = 200
+    const nodeWidth = 200
+    const horizontalSpacing = 250
+
+    const processedNodes = new Set<string>()
+    const nodesByLevel: Map<number, string[]> = new Map()
+
+    const processNode = (branchId: string, level: number) => {
+      if (processedNodes.has(branchId)) return
+      processedNodes.add(branchId)
+
+      if (!nodesByLevel.has(level)) {
+        nodesByLevel.set(level, [])
+      }
+      nodesByLevel.get(level)!.push(branchId)
+
+      const branch = gameData.branches.find(b => b.branch_id === branchId)
+      if (branch) {
+        branch.choices.forEach(choice => {
+          if (choice.next_branch && !processedNodes.has(choice.next_branch)) {
+            processNode(choice.next_branch, level + 1)
+          }
+        })
+      }
+    }
+
+    const startBranch = gameData.branches[0]
+    if (startBranch) {
+      processNode(startBranch.branch_id, 0)
+    }
+
+    nodesByLevel.forEach((nodeIds, level) => {
+      const levelWidth = nodeIds.length * horizontalSpacing
+      const startX = centerX - levelWidth / 2 + horizontalSpacing / 2
+
+      nodeIds.forEach((branchId, index) => {
+        positions.push({
+          id: branchId,
+          x: startX + index * horizontalSpacing,
+          y: centerY + level * levelHeight
+        })
+      })
+    })
+
+    setNodePositions(positions)
+  }, [gameData.branches])
+
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault()
+    const delta = e.deltaY > 0 ? 0.9 : 1.1
+    setScale(prev => Math.max(0.3, Math.min(3, prev * delta)))
+  }
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (e.target === graphRef.current) {
+      setIsDragging(true)
+      setDragStart({ x: e.clientX - pan.x, y: e.clientY - pan.y })
+    }
+  }
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging) {
+      setPan({ x: e.clientX - dragStart.x, y: e.clientY - dragStart.y })
+    }
+  }
+
+  const handleMouseUp = () => {
+    setIsDragging(false)
+  }
+
+  const getNodePosition = (branchId: string) => {
+    return nodePositions.find(pos => pos.id === branchId)
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-orange-50/20 to-red-50/20 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-orange-400/5 via-red-400/5 to-pink-400/5 backdrop-blur-sm"></div>
@@ -301,8 +398,32 @@ export default function GameEditor() {
                   </div>
                 </div>
 
-                <h2 className="text-lg sm:text-xl font-bold text-slate-800 mt-6 mb-3 sm:mb-4 flex items-center gap-2">
-                  <span>🌳</span> 故事分支
+                <h2 className="text-lg sm:text-xl font-bold text-slate-800 mt-6 mb-3 sm:mb-4 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span>🌳</span> 故事分支
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => setViewMode('list')}
+                      className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+                        viewMode === 'list'
+                          ? 'bg-gradient-to-r from-orange-500 to-red-500 text-white'
+                          : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                      }`}
+                    >
+                      📋 列表
+                    </button>
+                    <button
+                      onClick={() => setViewMode('graph')}
+                      className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+                        viewMode === 'graph'
+                          ? 'bg-gradient-to-r from-orange-500 to-red-500 text-white'
+                          : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                      }`}
+                    >
+                      🗺️ 导图
+                    </button>
+                  </div>
                 </h2>
                 <div className="space-y-2 sm:space-y-3 max-h-[400px] overflow-y-auto">
                   {gameData.branches.map((branch, index) => (
@@ -334,7 +455,144 @@ export default function GameEditor() {
             </div>
 
             <div className="lg:col-span-2">
-              {selectedBranch ? (
+              {viewMode === 'graph' ? (
+                <div 
+                  ref={graphRef}
+                  className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg shadow-orange-500/10 p-4 sm:p-5 lg:p-6 border border-white/50 overflow-hidden"
+                  onWheel={handleWheel}
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                  onMouseUp={handleMouseUp}
+                  onMouseLeave={handleMouseUp}
+                >
+                  <div className="flex items-center justify-between mb-4 sm:mb-5">
+                    <h2 className="text-lg sm:text-xl font-bold text-slate-800 flex items-center gap-2">
+                      <span>🗺️</span> 知识导图
+                    </h2>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => setScale(prev => Math.max(0.3, prev - 0.1))}
+                        className="px-3 py-1.5 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-200 transition-all duration-200 text-sm font-medium"
+                      >
+                        ➖
+                      </button>
+                      <span className="px-3 py-1.5 bg-slate-50 text-slate-600 rounded-lg text-sm font-medium">
+                        {Math.round(scale * 100)}%
+                      </span>
+                      <button
+                        onClick={() => setScale(prev => Math.min(3, prev + 0.1))}
+                        className="px-3 py-1.5 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-200 transition-all duration-200 text-sm font-medium"
+                      >
+                        ➕
+                      </button>
+                      <button
+                        onClick={() => { setScale(1); setPan({ x: 0, y: 0 }) }}
+                        className="px-3 py-1.5 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-200 transition-all duration-200 text-sm font-medium"
+                      >
+                        🔄
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <div 
+                    className="relative w-full h-[600px] overflow-hidden bg-gradient-to-br from-slate-50 to-orange-50/30 rounded-xl border border-slate-200 cursor-grab active:cursor-grabbing"
+                    style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+                  >
+                    <svg
+                      width="100%"
+                      height="100%"
+                      style={{ transform: `translate(${pan.x}px, ${pan.y}px) scale(${scale})`, transformOrigin: '0 0' }}
+                    >
+                      {/* Arrowhead marker definition */}
+                      <defs>
+                        <marker
+                          id="arrowhead"
+                          markerWidth="10"
+                          markerHeight="7"
+                          refX="9"
+                          refY="3.5"
+                          orient="auto"
+                        >
+                          <polygon points="0 0, 10 3.5, 0 7" fill="#f97316" />
+                        </marker>
+                      </defs>
+                      
+                      {/* Draw connections between nodes */}
+                      {gameData.branches.map(branch => {
+                        const nodePos = getNodePosition(branch.branch_id)
+                        if (!nodePos) return null
+                        
+                        return (
+                          <g key={branch.branch_id}>
+                            {branch.choices.map(choice => {
+                              if (!choice.next_branch) return null
+                              const targetPos = getNodePosition(choice.next_branch)
+                              if (!targetPos) return null
+                              
+                              return (
+                                <line
+                                  key={`${branch.branch_id}-${choice.id}`}
+                                  x1={nodePos.x}
+                                  y1={nodePos.y}
+                                  x2={targetPos.x}
+                                  y2={targetPos.y}
+                                  stroke="#f97316"
+                                  strokeWidth="2"
+                                  markerEnd="url(#arrowhead)"
+                                />
+                              )
+                            })}
+                          </g>
+                        )
+                      })}
+                      
+                      {/* Draw nodes */}
+                      {nodePositions.map(pos => {
+                        const branch = gameData.branches.find(b => b.branch_id === pos.id)
+                        if (!branch) return null
+                        
+                        return (
+                          <g
+                            key={pos.id}
+                            onClick={() => setSelectedBranchId(pos.id)}
+                            className="cursor-pointer transition-all duration-200 hover:opacity-80"
+                          >
+                            <rect
+                              x={pos.x - 80}
+                              y={pos.y - 30}
+                              width="160"
+                              height="60"
+                              rx="8"
+                              fill={selectedBranchId === pos.id ? '#fef3c7' : '#ffffff'}
+                              stroke={selectedBranchId === pos.id ? '#f97316' : '#e2e8f0'}
+                              strokeWidth={selectedBranchId === pos.id ? '3' : '2'}
+                            />
+                            <text
+                              x={pos.x}
+                              y={pos.y - 5}
+                              textAnchor="middle"
+                              fontSize="12"
+                              fontWeight="bold"
+                              fill="#1e293b"
+                            >
+                              {branch.chapter.substring(0, 15)}{branch.chapter.length > 15 ? '...' : ''}
+                            </text>
+                            <text
+                              x={pos.x}
+                              y={pos.y + 15}
+                              textAnchor="middle"
+                              fontSize="10"
+                              fill="#64748b"
+                            >
+                              {branch.choices.length} 个选项
+                            </text>
+                          </g>
+                        )
+                      })}
+                    </svg>
+                  </div>
+                </div>
+              ) : selectedBranch ? (
                 <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg shadow-orange-500/10 p-4 sm:p-5 lg:p-6 border border-white/50">
                   <div className="flex items-center justify-between mb-4 sm:mb-5">
                     <h2 className="text-lg sm:text-xl font-bold text-slate-800 flex items-center gap-2">
