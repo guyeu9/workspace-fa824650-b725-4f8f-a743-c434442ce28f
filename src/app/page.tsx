@@ -880,7 +880,8 @@ export default function Home() {
               <button
                 className="w-full mt-3 sm:mt-4 bg-gradient-to-r from-orange-500 to-red-500 text-white hover:from-orange-600 hover:to-red-600 transition-all duration-300 font-bold px-6 sm:px-8 py-3.5 sm:py-4 lg:py-5 rounded-xl shadow-lg shadow-orange-500/20 hover:shadow-xl hover:shadow-orange-500/30 active:scale-95 text-base sm:text-lg lg:text-xl"
                 onClick={() => {
-                  setShowEditor(true)
+                  setShowWelcome(false);
+                  setShowEditor(true);
                 }}
               >
                 📝 文本游戏制作
@@ -1045,7 +1046,7 @@ export default function Home() {
         </div>
       )}
 
-      {!showWelcome && (
+      {!showWelcome && !showEditor && (
         <div className="flex flex-col min-h-screen w-full bg-gradient-to-br from-slate-50 via-indigo-50/20 to-purple-50/20 relative overflow-hidden" suppressHydrationWarning>
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-400/5 via-purple-400/5 to-pink-400/5 backdrop-blur-sm"></div>
           <div className="bg-white/90 backdrop-blur-xl border-b border-white/50 sticky top-0 z-10 shadow-lg shadow-indigo-500/5 relative pt-[env(safe-area-inset-top)]" suppressHydrationWarning>
