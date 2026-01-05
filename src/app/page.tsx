@@ -500,33 +500,78 @@ export default function Home() {
   }
 
   const moveToScene = (sceneId: string, command: string) => {
-    if (typeof sceneId !== 'string') return
+    try {
+      if (typeof sceneId !== 'string' || !sceneId.trim()) {
+        throw new Error('无效的场景ID')
+      }
 
-    const newScene = storyData.scenes[sceneId]
-    if (!newScene) {
-      setOutputHistory(prev => [...prev, { type: 'system', content: '那个出口似乎通向任何地方。', fullContent: '那个出口似乎通向任何地方。' }])
+      const newScene = storyData.scenes[sceneId]
+      if (!newScene) {
+        throw new Error(`无法找到目标场景: ${sceneId}`)
+      }
+
+      setCurrentScene(newScene)
+      setChoices(newScene.exits || [])
+
+      // 添加场景名称和描述（一次性添加）
+      setOutputHistory(prev => [...prev, 
+        { type: 'room-name', content: newScene.name, className: 'room-name', fullContent: newScene.name },
+        { type: 'room-desc', content: newScene.desc, fullContent: newScene.desc }
+      ])
+
+      setInventory(prev => [...prev, ...(newScene.items || []).map((i: any) => Array.isArray(i.name) ? i.name[0] : i.name)])
+
+      // 添加到场景历史记录
+      setSceneHistory(prev => [...prev, {
+        id: newScene.id,
+        name: newScene.name,
+        timestamp: new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }),
+        action: command
+      }])
+    } catch (error) {
+      // 输出清晰的错误信息
+      const errorMessage = error instanceof Error ? error.message : '发生未知错误'
+      
+      // 1. 输出清晰的效果说明和结果描述
+      setOutputHistory(prev => [...prev, 
+        { 
+          type: 'system', 
+          content: `⚠️  场景跳转异常：${errorMessage}\n\n系统正在重新加载当前场景的可选分支...`, 
+          fullContent: `⚠️  场景跳转异常：${errorMessage}\n\n系统正在重新加载当前场景的可选分支...` 
+        }
+      ])
+      
+      // 2. 自动触发当前场景下所有可选分支的重新加载机制
+      if (currentScene) {
+        // 重新设置当前场景的选择，确保玩家能够重新选择有效的游戏分支
+        setChoices(currentScene.exits || [])
+        
+        // 添加调试信息，显示当前场景的所有可选分支
+        const availableChoices = currentScene.exits || []
+        if (availableChoices.length > 0) {
+          const choicesText = availableChoices.map((choice: any, index: number) => {
+            const choiceText = choice.text || choice.dir || '未知选项'
+            return `${index + 1}. ${choiceText}`
+          }).join('\n')
+          
+          setTimeout(() => {
+            setOutputHistory(prev => [...prev, 
+              { 
+                type: 'system', 
+                content: `✅ 当前场景可用分支：\n${choicesText}`, 
+                fullContent: `✅ 当前场景可用分支：\n${choicesText}` 
+              }
+            ])
+            scrollToBottom()
+          }, 1000)
+        }
+      }
+      
+      // 3. 确保游戏流程的连续性，不更新当前场景，维持现有状态
+      // 不修改 currentScene，保持当前场景不变
+      
       scrollToBottom()
-      return
     }
-
-    setCurrentScene(newScene)
-    setChoices(newScene.exits || [])
-
-    // 添加场景名称和描述（一次性添加）
-    setOutputHistory(prev => [...prev, 
-      { type: 'room-name', content: newScene.name, className: 'room-name', fullContent: newScene.name },
-      { type: 'room-desc', content: newScene.desc, fullContent: newScene.desc }
-    ])
-
-    setInventory(prev => [...prev, ...(newScene.items || []).map((i: any) => Array.isArray(i.name) ? i.name[0] : i.name)])
-
-    // 添加到场景历史记录
-    setSceneHistory(prev => [...prev, {
-      id: newScene.id,
-      name: newScene.name,
-      timestamp: new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }),
-      action: command
-    }])
   }
 
   // 导出 JSON 功能（仅导出 JSON 数据）
