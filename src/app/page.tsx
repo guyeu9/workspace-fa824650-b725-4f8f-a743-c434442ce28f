@@ -56,6 +56,7 @@ const renderMarkdown = (text: string) => {
 
 export default function Home() {
   const [showWelcome, setShowWelcome] = useState(true)
+  const [showEditor, setShowEditor] = useState(false)
   const [outputHistory, setOutputHistory] = useState<Array<{ 
     type: 'user' | 'user-choice' | 'system' | 'room-name' | 'room-desc' | 'choices-data', 
     content: string; 
@@ -823,6 +824,16 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white text-gray-900 font-sans antialiased" suppressHydrationWarning>
+      {showEditor && (
+        <div className="fixed inset-0 z-50">
+          <iframe
+            src="/game-editor"
+            className="w-full h-full border-0"
+            title="Game Editor"
+          />
+        </div>
+      )}
+      
       {isProcessing && (
         <div className="h-1 bg-indigo-600 w-full fixed top-0 left-0 animate-pulse z-20" />
       )}
@@ -865,6 +876,14 @@ export default function Home() {
                 }}
               >
                 🚀 开始游戏
+              </button>
+              <button
+                className="w-full mt-3 sm:mt-4 bg-gradient-to-r from-orange-500 to-red-500 text-white hover:from-orange-600 hover:to-red-600 transition-all duration-300 font-bold px-6 sm:px-8 py-3.5 sm:py-4 lg:py-5 rounded-xl shadow-lg shadow-orange-500/20 hover:shadow-xl hover:shadow-orange-500/30 active:scale-95 text-base sm:text-lg lg:text-xl"
+                onClick={() => {
+                  setShowEditor(true)
+                }}
+              >
+                📝 文本游戏制作
               </button>
             </div>
 
