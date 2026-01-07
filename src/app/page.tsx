@@ -1131,9 +1131,9 @@ export default function Home() {
                 <div className="w-full lg:w-auto overflow-x-auto lg:overflow-visible scrollbar-hide" suppressHydrationWarning>
                   <div className="flex items-center gap-1.5 sm:gap-2 lg:gap-3 min-w-max lg:min-w-0 justify-center lg:justify-end" suppressHydrationWarning>
                     <div className="relative shrink-0">
-                      <label className="bg-indigo-50 text-indigo-600 hover:bg-indigo-100 border border-indigo-200 hover:border-indigo-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm flex items-center gap-1 cursor-pointer shadow-sm hover:shadow-md active:scale-95 touch-manipulation h-9 sm:h-10" style={{ minHeight: '36px' }}>
-                        <span className="text-sm sm:text-base">📥</span>
-                        <span className="hidden sm:inline">导入</span>
+                      <label className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-4 py-3 rounded-lg text-sm flex items-center gap-2 cursor-pointer shadow-sm hover:shadow-md active:scale-95 justify-center whitespace-nowrap">
+                        <span className="text-base">📤</span>
+                        <span className="inline">导入</span>
                       </label>
                       <input
                         type="file"
@@ -1160,29 +1160,29 @@ export default function Home() {
                         URL.revokeObjectURL(url)
                         addNotification('游戏数据导出成功！', 'success')
                       }}
-                      className="bg-emerald-50 text-emerald-600 hover:bg-emerald-100 border border-emerald-200 hover:border-emerald-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-9 sm:h-10" style={{ minHeight: '36px' }}
+                      className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-4 py-3 rounded-lg text-sm flex items-center gap-2 shadow-sm hover:shadow-md active:scale-95 justify-center whitespace-nowrap"
                     >
-                      <span className="text-sm sm:text-base">📤</span>
-                      <span className="hidden sm:inline">导出</span>
+                      <span className="text-base">📥</span>
+                      <span className="inline">导出JSON</span>
                     </button>
                     
                     <a
                       href="https://simplefeedback.app/feedback/nDf7Lhk7Ohnw"
                       target="_blank"
-                      className="bg-amber-50 text-amber-600 hover:bg-amber-100 border border-amber-200 hover:border-amber-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-9 sm:h-10" style={{ minHeight: '36px' }}
+                      className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-4 py-3 rounded-lg text-sm flex items-center gap-2 shadow-sm hover:shadow-md active:scale-95 justify-center whitespace-nowrap"
                       suppressHydrationWarning
                     >
-                      <span className="text-sm sm:text-base">💬</span>
-                      <span className="hidden sm:inline">反馈</span>
+                      <IconFeedback className="w-5 h-5" />
+                      <span className="inline">反馈</span>
                     </a>
                     
                     <button
                       onClick={navigateToValidator}
-                      className="bg-rose-50 text-rose-600 hover:bg-rose-100 border border-rose-200 hover:border-rose-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-9 sm:h-10" style={{ minHeight: '36px' }}
+                      className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-4 py-3 rounded-lg text-sm flex items-center gap-2 shadow-sm hover:shadow-md active:scale-95 justify-center whitespace-nowrap"
                       suppressHydrationWarning
                     >
-                      <span className="text-sm sm:text-base">✓</span>
-                      <span className="hidden sm:inline">验证</span>
+                      <span className="text-base">✓</span>
+                      <span className="inline">验证JSON</span>
                     </button>
                     
                     <button
@@ -1192,10 +1192,10 @@ export default function Home() {
                         setCurrentScene(null)
                         setChoices([])
                       }}
-                      className="bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200 hover:border-slate-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-9 sm:h-10" style={{ minHeight: '36px' }}
+                      className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-4 py-3 rounded-lg text-sm flex items-center gap-2 shadow-sm hover:shadow-md active:scale-95 justify-center whitespace-nowrap"
                     >
-                      <span className="text-sm sm:text-base">🏠</span>
-                      <span className="hidden sm:inline">主页</span>
+                      <span className="text-base">🏠</span>
+                      <span className="inline">返回主菜单</span>
                     </button>
                   </div>
                 </div>

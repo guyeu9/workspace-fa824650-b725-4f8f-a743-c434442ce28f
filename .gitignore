@@ -57,3 +57,6 @@ server.log
 *.apk
 backup.zip
 core-code.zip
+
+# debug logs
+debug.log
