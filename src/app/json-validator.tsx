@@ -37,6 +37,9 @@ export default function JsonValidator() {
 
   // 使用导航钩子
   const { navigateToHome } = useAppNavigation()
+  
+  // 使用通知钩子
+  const { addNotification, NotificationContainer } = useExportNotifications()
 
   // 只更新状态，不再更新引用，确保完全使用React的状态管理
   const updateEditingBranch = (updatedBranch: any) => {

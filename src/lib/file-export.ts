@@ -34,6 +34,13 @@ export class FileExportManager {
 
   private async initializePlatform(): Promise<void> {
     try {
+      // 检查是否在浏览器环境中
+      if (typeof window === 'undefined') {
+        this.isNativePlatform = false
+        console.log('Running on server, assuming web platform')
+        return
+      }
+      
       const info = await Device.getInfo()
       this.isNativePlatform = info.platform !== 'web'
       console.log('Platform info:', info)
