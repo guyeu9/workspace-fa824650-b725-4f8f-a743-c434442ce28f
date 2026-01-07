@@ -125,24 +125,4 @@
       padding-bottom: calc(1rem + env(safe-area-inset-bottom));
     }
   }
-  
-  /* 隐藏滚动条但保持功能 */
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-  
-  /* 超小屏幕断点 */
-  @media (max-width: 360px) {
-    .xs\:inline {
-      display: none !important;
-    }
-    
-    .xs\:block {
-      display: block !important;
-    }
-  }
+

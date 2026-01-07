@@ -2,9 +2,6 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import { IconSave, IconLoad, IconDelete, IconClose, IconHome, IconBox } from '../icons'
-import { exportJson as exportJsonFile } from '../../lib/file-export'
-import { useAppNavigation } from '../../lib/navigation'
-import { useExportNotifications } from '../../components/export-notifications'
 
 interface Choice {
   id: string
@@ -41,12 +38,6 @@ export default function GameEditor() {
   const [showPreview, setShowPreview] = useState(false)
   const [viewMode, setViewMode] = useState<'list' | 'graph'>('list')
   const fileInputRef = useRef<HTMLInputElement>(null)
-
-  // 使用导航钩子
-  const { navigateToHome } = useAppNavigation()
-
-  // 使用导出通知钩子
-  const { notifications, addNotification, removeNotification, NotificationContainer } = useExportNotifications()
 
   const saveToHistory = (data: GameData) => {
     const newHistory = history.slice(0, historyIndex + 1)
@@ -160,21 +151,14 @@ export default function GameEditor() {
     saveToHistory(newData)
   }
 
-  const exportJson = async () => {
-    try {
-      addNotification('正在导出游戏数据...', 'info')
-      const result = await exportJsonFile(`${gameData.game_title}.json`, gameData)
-      if (result.success) {
-        addNotification(`游戏数据导出成功！`, 'success')
-      } else {
-        addNotification(`导出失败: ${result.error}`, 'error')
-        console.error('导出失败:', result.error)
-      }
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : '导出失败'
-      addNotification(`导出失败: ${errorMessage}`, 'error')
-      console.error('导出JSON失败:', error)
-    }
+  const exportJson = () => {
+    const blob = new Blob([JSON.stringify(gameData, null, 2)], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `${gameData.game_title}.json`
+    a.click()
+    URL.revokeObjectURL(url)
   }
 
   const importJson = (file: File) => {
@@ -301,7 +285,6 @@ export default function GameEditor() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-orange-50/20 to-red-50/20 relative overflow-hidden">
-      <NotificationContainer />
       <div className="absolute inset-0 bg-gradient-to-br from-orange-400/5 via-red-400/5 to-pink-400/5 backdrop-blur-sm"></div>
       
       <div className="relative z-10">
@@ -313,8 +296,7 @@ export default function GameEditor() {
                 <span>文本游戏制作</span>
               </h1>
               
-              <div className="w-full sm:w-auto overflow-x-auto scrollbar-hide">
-                <div className="flex flex-nowrap gap-2 sm:gap-2 lg:gap-3 items-center justify-center min-w-max sm:min-w-0">
+              <div className="flex flex-nowrap gap-2 sm:gap-2 lg:gap-3 items-center justify-center w-full sm:w-auto">
                 <button
                   onClick={undo}
                   disabled={historyIndex <= 0}
@@ -367,13 +349,14 @@ export default function GameEditor() {
                 </button>
                 
                 <button
-                  onClick={navigateToHome}
+                  onClick={() => {
+                    window.location.href = '/'
+                  }}
                   className="bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300 font-bold px-3 sm:px-4 lg:px-4 py-2 sm:py-2.5 lg:py-3 rounded-lg text-xs sm:text-sm lg:text-sm flex items-center gap-1 sm:gap-1.5 lg:gap-1.5 shadow-sm hover:shadow-md active:scale-95 min-w-[90px] h-[44px] sm:h-auto justify-center"
                 >
                   <IconHome className="w-4 h-4 sm:w-5 sm:h-5 lg:w-5 lg:h-5" />
                   <span className="inline">返回</span>
                 </button>
-                </div>
               </div>
             </div>
           </div>

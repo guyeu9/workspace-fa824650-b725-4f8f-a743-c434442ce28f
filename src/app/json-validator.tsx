@@ -2,9 +2,6 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import { IconFile, IconScroll, IconSave, IconLoad, IconDelete, IconClose, IconBox, IconHome } from './icons'
-import { exportJson as exportJsonFile } from '../lib/file-export'
-import { useAppNavigation } from '../lib/navigation'
-import { useExportNotifications } from '../components/export-notifications'
 
 interface ValidationError {
   type: 'error' | 'warning' | 'info'
@@ -34,12 +31,6 @@ export default function JsonValidator() {
   const [parsedData, setParsedData] = useState<any | null>(null)
   const [editingBranch, setEditingBranch] = useState<any | null>(null)
   const [, forceUpdate] = useState({})
-
-  // 使用导航钩子
-  const { navigateToHome } = useAppNavigation()
-  
-  // 使用通知钩子
-  const { addNotification, NotificationContainer } = useExportNotifications()
 
   // 只更新状态，不再更新引用，确保完全使用React的状态管理
   const updateEditingBranch = (updatedBranch: any) => {
@@ -309,18 +300,16 @@ export default function JsonValidator() {
     }
   }
 
-  const exportFixedJson = async () => {
+  const exportFixedJson = () => {
     if (!jsonContent.trim()) return
 
     try {
-      addNotification('正在导出修复后的游戏数据...', 'info')
       let dataToExport = parsedData
 
       if (!dataToExport) {
         try {
           dataToExport = JSON.parse(jsonContent)
         } catch {
-          addNotification('没有可导出的数据', 'error')
           return
         }
       }
@@ -332,16 +321,16 @@ export default function JsonValidator() {
         branches: dataToExport.branches || []
       }
 
-      const result = await exportJsonFile('fixed_game.json', fixedData)
-      if (result.success) {
-        addNotification(`修复后的游戏数据导出成功！`, 'success')
-      } else {
-        addNotification(`导出失败: ${result.error}`, 'error')
-        console.error('导出修复版失败:', result.error)
-      }
+      const blob = new Blob([JSON.stringify(fixedData, null, 2)], { type: 'application/json' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = 'fixed_game.json'
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+      URL.revokeObjectURL(url)
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : '导出失败'
-      addNotification(`导出失败: ${errorMessage}`, 'error')
       console.error('导出失败:', error)
     }
   }
@@ -422,13 +411,12 @@ export default function JsonValidator() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-4 md:p-6 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]">
-      <NotificationContainer />
       <div className="max-w-7xl mx-auto">
         <div className="bg-white rounded-2xl shadow-lg p-4 md:p-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
             <div className="flex items-center gap-3">
               <button
-                onClick={navigateToHome}
+                onClick={() => window.location.href = '/'}
                 className="p-2.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-300 min-w-[44px] min-h-[44px] flex items-center justify-center"
                 title="返回主菜单"
               >
