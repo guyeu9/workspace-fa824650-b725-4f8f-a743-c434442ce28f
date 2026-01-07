@@ -1121,18 +1121,19 @@ export default function Home() {
         <div className="flex flex-col min-h-screen w-full bg-gradient-to-br from-slate-50 via-indigo-50/20 to-purple-50/20 relative overflow-hidden" suppressHydrationWarning>
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-400/5 via-purple-400/5 to-pink-400/5 backdrop-blur-sm"></div>
           <div className="bg-white/90 backdrop-blur-xl border-b border-white/50 sticky top-0 z-10 shadow-lg shadow-indigo-500/5 relative pt-[env(safe-area-inset-top)]" suppressHydrationWarning>
-            <div className="px-3 sm:px-5 lg:px-7 py-3 sm:py-4 lg:py-5">
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-3 lg:gap-4">
-                  <h1 className="text-base sm:text-xl lg:text-3xl font-extrabold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent tracking-tight flex items-center gap-1 sm:gap-1.5 lg:gap-2 whitespace-nowrap" suppressHydrationWarning>
-                    <span className="text-base sm:text-xl lg:text-3xl">🎮</span>
-                    <span>文本引擎</span>
-                  </h1>
-                  
-                  <div className="flex flex-nowrap gap-2 sm:gap-2 lg:gap-3 items-center justify-center w-full sm:w-auto" suppressHydrationWarning>
-                    <div className="relative">
-                      <label className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-3 sm:px-4 lg:px-4 py-2 sm:py-2.5 lg:py-3 rounded-lg text-xs sm:text-sm lg:text-sm flex items-center gap-1 sm:gap-1.5 lg:gap-1.5 cursor-pointer shadow-sm hover:shadow-md active:scale-95 min-w-[90px] h-[44px] sm:h-auto justify-center" style={{ minHeight: '44px' }}>
-                        <span className="text-base sm:text-base lg:text-base">📤</span>
-                        <span className="inline">导入</span>
+            <div className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 lg:py-4">
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-2 lg:gap-4">
+                <h1 className="text-sm sm:text-lg lg:text-2xl font-extrabold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent tracking-tight flex items-center gap-1 sm:gap-1.5 whitespace-nowrap" suppressHydrationWarning>
+                  <span className="text-sm sm:text-xl lg:text-3xl">🎮</span>
+                  <span className="hidden xs:inline">文本引擎</span>
+                </h1>
+                
+                <div className="w-full lg:w-auto overflow-x-auto lg:overflow-visible scrollbar-hide" suppressHydrationWarning>
+                  <div className="flex items-center gap-1.5 sm:gap-2 lg:gap-3 min-w-max lg:min-w-0 justify-center lg:justify-end" suppressHydrationWarning>
+                    <div className="relative shrink-0">
+                      <label className="bg-indigo-50 text-indigo-600 hover:bg-indigo-100 border border-indigo-200 hover:border-indigo-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm flex items-center gap-1 cursor-pointer shadow-sm hover:shadow-md active:scale-95 touch-manipulation h-9 sm:h-10" style={{ minHeight: '36px' }}>
+                        <span className="text-sm sm:text-base">📥</span>
+                        <span className="hidden sm:inline">导入</span>
                       </label>
                       <input
                         type="file"
@@ -1148,6 +1149,7 @@ export default function Home() {
                     
                     <button
                       onClick={() => {
+                        addNotification('正在导出游戏数据...', 'info')
                         const data = storyData
                         const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
                         const url = URL.createObjectURL(blob)
@@ -1156,32 +1158,31 @@ export default function Home() {
                         a.download = 'game-data.json'
                         a.click()
                         URL.revokeObjectURL(url)
+                        addNotification('游戏数据导出成功！', 'success')
                       }}
-                      className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-3 sm:px-4 lg:px-4 py-2 sm:py-2.5 lg:py-3 rounded-lg text-xs sm:text-sm lg:text-sm flex items-center gap-1 sm:gap-1.5 lg:gap-1.5 shadow-sm hover:shadow-md active:scale-95 min-w-[90px] h-[44px] sm:h-auto justify-center" style={{ minHeight: '44px' }}
-                  >
-                      <span className="text-base sm:text-base lg:text-base">📥</span>
-                      <span className="inline">导出JSON</span>
+                      className="bg-emerald-50 text-emerald-600 hover:bg-emerald-100 border border-emerald-200 hover:border-emerald-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-9 sm:h-10" style={{ minHeight: '36px' }}
+                    >
+                      <span className="text-sm sm:text-base">📤</span>
+                      <span className="hidden sm:inline">导出</span>
                     </button>
                     
                     <a
                       href="https://simplefeedback.app/feedback/nDf7Lhk7Ohnw"
                       target="_blank"
-                      className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-3 sm:px-4 lg:px-4 py-2 sm:py-2.5 lg:py-3 rounded-lg text-xs sm:text-sm lg:text-sm flex items-center gap-1 sm:gap-1.5 lg:gap-1.5 shadow-sm hover:shadow-md active:scale-95 min-w-[90px] h-[44px] sm:h-auto justify-center" style={{ minHeight: '44px' }}
+                      className="bg-amber-50 text-amber-600 hover:bg-amber-100 border border-amber-200 hover:border-amber-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-9 sm:h-10" style={{ minHeight: '36px' }}
                       suppressHydrationWarning
                     >
-                      <IconFeedback className="w-4 h-4 sm:w-5 sm:h-5 lg:w-5 lg:h-5" />
-                      <span className="inline">反馈</span>
+                      <span className="text-sm sm:text-base">💬</span>
+                      <span className="hidden sm:inline">反馈</span>
                     </a>
                     
                     <button
-                      onClick={() => {
-                        window.location.href = '/validator.html';
-                      }}
-                      className="bg-transparent text-emerald-600 hover:text-emerald-700 border-2 border-emerald-600 hover:border-emerald-700 transition-all duration-300 font-bold px-3 sm:px-4 lg:px-4 py-2 sm:py-2.5 lg:py-3 rounded-lg text-xs sm:text-sm lg:text-sm flex items-center gap-1 sm:gap-1.5 lg:gap-1.5 shadow-sm hover:shadow-md active:scale-95 min-w-[90px] h-[44px] sm:h-auto justify-center" style={{ minHeight: '44px' }}
+                      onClick={navigateToValidator}
+                      className="bg-rose-50 text-rose-600 hover:bg-rose-100 border border-rose-200 hover:border-rose-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-9 sm:h-10" style={{ minHeight: '36px' }}
                       suppressHydrationWarning
                     >
-                      <IconScroll className="w-4 h-4 sm:w-5 sm:h-5 lg:w-5 lg:h-5" />
-                      <span className="inline">验证JSON</span>
+                      <span className="text-sm sm:text-base">✓</span>
+                      <span className="hidden sm:inline">验证</span>
                     </button>
                     
                     <button
@@ -1191,14 +1192,15 @@ export default function Home() {
                         setCurrentScene(null)
                         setChoices([])
                       }}
-                      className="bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300 font-bold px-3 sm:px-4 lg:px-4 py-2 sm:py-2.5 lg:py-3 rounded-lg text-xs sm:text-sm lg:text-sm flex items-center gap-1 sm:gap-1.5 lg:gap-1.5 shadow-sm hover:shadow-md active:scale-95 min-w-[90px] h-[44px] sm:h-auto justify-center" style={{ minHeight: '44px' }}
+                      className="bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200 hover:border-slate-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-9 sm:h-10" style={{ minHeight: '36px' }}
                     >
-                      <IconHome className="w-4 h-4 sm:w-5 sm:h-5 lg:w-5 lg:h-5" />
-                      <span className="inline">返回主菜单</span>
+                      <span className="text-sm sm:text-base">🏠</span>
+                      <span className="hidden sm:inline">主页</span>
                     </button>
                   </div>
                 </div>
               </div>
+            </div>
           </div>
 
           {/* 输出区域 */}
@@ -1301,39 +1303,39 @@ export default function Home() {
           </div>
 
           {/* 快捷操作按钮 */}
-          <div className="p-3.5 sm:p-4 lg:p-5 bg-gradient-to-br from-white/90 to-indigo-50/50 backdrop-blur-xl border-t border-b border-white/60" suppressHydrationWarning>
-            <div className="grid grid-cols-4 md:grid-cols-8 gap-2 sm:gap-2.5 lg:gap-3 max-w-4xl mx-auto" suppressHydrationWarning>
-              <button onClick={() => executeCommand('look')} className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-2 sm:px-2.5 lg:px-3 py-1.5 sm:py-2 lg:py-2.5 rounded-xl flex items-center justify-center gap-1 sm:gap-1.5 min-w-0 shadow-sm hover:shadow-md active:scale-95">
-                <IconEye className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
-                <span className="text-xs sm:text-sm lg:text-base">观察</span>
+          <div className="p-2.5 sm:p-4 lg:p-5 bg-gradient-to-br from-white/90 to-indigo-50/50 backdrop-blur-xl border-t border-b border-white/60 safe-area-pb" suppressHydrationWarning>
+            <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2.5 lg:gap-3 max-w-4xl mx-auto" suppressHydrationWarning>
+              <button onClick={() => executeCommand('look')} className="bg-indigo-50 text-indigo-600 hover:bg-indigo-100 border border-indigo-200 hover:border-indigo-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-8 sm:h-9" suppressHydrationWarning>
+                <IconEye className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span className="text-xs sm:text-sm">观察</span>
               </button>
-              <button onClick={() => executeCommand('items')} className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-2 sm:px-2.5 lg:px-3 py-1.5 sm:py-2 lg:py-2.5 rounded-xl flex items-center justify-center gap-1 sm:gap-1.5 min-w-0 shadow-sm hover:shadow-md active:scale-95">
-                <IconBox className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
-                <span className="text-xs sm:text-sm lg:text-base">物品</span>
+              <button onClick={() => executeCommand('items')} className="bg-emerald-50 text-emerald-600 hover:bg-emerald-100 border border-emerald-200 hover:border-emerald-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-8 sm:h-9" suppressHydrationWarning>
+                <IconBox className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span className="text-xs sm:text-sm">物品</span>
               </button>
-              <button onClick={() => executeCommand('inv')} className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-2 sm:px-2.5 lg:px-3 py-1.5 sm:py-2 lg:py-2.5 rounded-xl flex items-center justify-center gap-1 sm:gap-1.5 min-w-0 shadow-sm hover:shadow-md active:scale-95">
-                <IconInventory className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
-                <span className="text-xs sm:text-sm lg:text-base">背包</span>
+              <button onClick={() => executeCommand('inv')} className="bg-amber-50 text-amber-600 hover:bg-amber-100 border border-amber-200 hover:border-amber-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-8 sm:h-9" suppressHydrationWarning>
+                <IconInventory className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span className="text-xs sm:text-sm">背包</span>
               </button>
-              <button onClick={() => executeCommand('help')} className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-2 sm:px-2.5 lg:px-3 py-1.5 sm:py-2 lg:py-2.5 rounded-xl flex items-center justify-center gap-1 sm:gap-1.5 min-w-0 shadow-sm hover:shadow-md active:scale-95">
-                <IconHelp className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
-                <span className="text-xs sm:text-sm lg:text-base">帮助</span>
+              <button onClick={() => executeCommand('help')} className="bg-rose-50 text-rose-600 hover:bg-rose-100 border border-rose-200 hover:border-rose-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-8 sm:h-9" suppressHydrationWarning>
+                <IconHelp className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span className="text-xs sm:text-sm">帮助</span>
               </button>
-              <button onClick={() => executeCommand('save')} className="bg-transparent text-green-600 hover:text-green-700 border-2 border-green-600 hover:border-green-700 transition-all duration-300 font-bold px-2 sm:px-2.5 lg:px-3 py-1.5 sm:py-2 lg:py-2.5 rounded-xl flex items-center justify-center gap-1 sm:gap-1.5 min-w-0 shadow-sm hover:shadow-md active:scale-95">
-                <IconSave className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
-                <span className="text-xs sm:text-sm lg:text-base">保存</span>
+              <button onClick={() => executeCommand('save')} className="bg-cyan-50 text-cyan-600 hover:bg-cyan-100 border border-cyan-200 hover:border-cyan-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-8 sm:h-9" suppressHydrationWarning>
+                <IconSave className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span className="text-xs sm:text-sm">保存</span>
               </button>
-              <button onClick={() => executeCommand('load')} className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-2 sm:px-2.5 lg:px-3 py-1.5 sm:py-2 lg:py-2.5 rounded-xl flex items-center justify-center gap-1 sm:gap-1.5 min-w-0 shadow-sm hover:shadow-md active:scale-95">
-                <IconLoad className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
-                <span className="text-xs sm:text-sm lg:text-base">读取</span>
+              <button onClick={() => executeCommand('load')} className="bg-violet-50 text-violet-600 hover:bg-violet-100 border border-violet-200 hover:border-violet-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-8 sm:h-9" suppressHydrationWarning>
+                <IconLoad className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span className="text-xs sm:text-sm">读取</span>
               </button>
-              <button onClick={() => executeCommand('clear')} className="bg-transparent text-red-600 hover:text-red-700 border-2 border-red-600 hover:border-red-700 transition-all duration-300 font-bold px-2 sm:px-2.5 lg:px-3 py-1.5 sm:py-2 lg:py-2.5 rounded-xl flex items-center justify-center gap-1 sm:gap-1.5 min-w-0 shadow-sm hover:shadow-md active:scale-95">
-                <IconDelete className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
-                <span className="text-xs sm:text-sm lg:text-base">清除</span>
+              <button onClick={() => executeCommand('clear')} className="bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 hover:border-red-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-8 sm:h-9" suppressHydrationWarning>
+                <IconDelete className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span className="text-xs sm:text-sm">清除</span>
               </button>
-              <button onClick={() => setShowTimeline(!showTimeline)} className={`bg-transparent border-2 transition-all duration-300 font-bold px-2 sm:px-2.5 lg:px-3 py-1.5 sm:py-2 lg:py-2.5 rounded-xl flex items-center justify-center gap-1 sm:gap-1.5 min-w-0 shadow-sm hover:shadow-md active:scale-95 ${showTimeline ? 'text-indigo-800 border-indigo-800' : 'text-purple-600 hover:text-purple-700 border-purple-600 hover:border-purple-700'}`}>
-                <IconScroll className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
-                <span className="text-xs sm:text-sm lg:text-base">时间线</span>
+              <button onClick={() => setShowTimeline(!showTimeline)} className={`bg-slate-100 hover:bg-slate-200 border border-slate-200 hover:border-slate-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-8 sm:h-9 ${showTimeline ? 'text-indigo-800' : 'text-slate-600'}`} suppressHydrationWarning>
+                <IconScroll className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span className="text-xs sm:text-sm">时间线</span>
               </button>
             </div>
           </div>
