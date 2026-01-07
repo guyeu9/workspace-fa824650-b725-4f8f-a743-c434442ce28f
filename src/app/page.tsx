@@ -9,7 +9,7 @@ import { useExportNotifications } from '../components/export-notifications'
 const { IconTimeline, IconInventory, IconSettings, IconCompass, IconEye, IconSave, IconLoad, IconDelete, IconClose, IconSend, IconMove, IconInteract, IconUse, IconFeedback, IconHome, IconBox, IconHelp, IconScroll, IconFile } = Icons
 
 // 打字机效果组件
-const TypewriterText = ({ text, delay = 30, onComplete }: { text: string; delay?: number; onComplete?: () => void }) => {
+const TypewriterText = ({ text, delay = 15, onComplete }: { text: string; delay?: number; onComplete?: () => void }) => {
   const [displayText, setDisplayText] = useState('')
   const [isComplete, setIsComplete] = useState(false)
 
@@ -461,7 +461,26 @@ export default function Home() {
           const targetSceneId = matchedChoice.target || matchedChoice.id
           const displayText = `> ${directionChinese}`
           setOutputHistory(prev => [...prev, { type: 'user-choice', content: displayText }])
-          moveToScene(targetSceneId, directionChinese)
+          
+          // 先跳转到新场景（显示chapter和scene_detail），然后再显示effect和status_update
+          moveToScene(targetSceneId, directionChinese, async () => {
+            // 按顺序显示effect和status_update，使用CSS过渡动画
+            if (matchedChoice.effect) {
+              setOutputHistory(prev => [...prev, { type: 'system', content: matchedChoice.effect, className: 'transition-opacity duration-300 opacity-0 animate-fade-in', fullContent: matchedChoice.effect }])
+              // 等待打字机效果完成（优化后的延迟，15ms/字符，最小150ms）
+              const effectDelay = Math.max(150, matchedChoice.effect.length * 15)
+              await new Promise(resolve => setTimeout(resolve, effectDelay))
+              scrollToBottom()
+            }
+            
+            if (matchedChoice.status_update) {
+              setOutputHistory(prev => [...prev, { type: 'system', content: matchedChoice.status_update, className: 'transition-opacity duration-300 opacity-0 animate-fade-in', fullContent: matchedChoice.status_update }])
+              // 等待打字机效果完成
+              const statusDelay = Math.max(150, matchedChoice.status_update.length * 15)
+              await new Promise(resolve => setTimeout(resolve, statusDelay))
+              scrollToBottom()
+            }
+          })
           return
         }
 
@@ -495,7 +514,26 @@ export default function Home() {
               const choiceText = `> ${directionChinese}`
               setOutputHistory(prev => [...prev, { type: 'user-choice', content: choiceText }])
               const targetSceneId = exit.target || exit.id
-              moveToScene(targetSceneId, `${directionChinese}`)
+              
+              // 先跳转到新场景（显示chapter和scene_detail），然后再显示effect和status_update
+              moveToScene(targetSceneId, `${directionChinese}`, async () => {
+                // 按顺序显示effect和status_update，使用CSS过渡动画
+                if (exit.effect) {
+                  setOutputHistory(prev => [...prev, { type: 'system', content: exit.effect, className: 'transition-opacity duration-300 opacity-0 animate-fade-in', fullContent: exit.effect }])
+                  // 等待打字机效果完成（优化后的延迟，15ms/字符，最小150ms）
+                  const effectDelay = Math.max(150, exit.effect.length * 15)
+                  await new Promise(resolve => setTimeout(resolve, effectDelay))
+                  scrollToBottom()
+                }
+                
+                if (exit.status_update) {
+                  setOutputHistory(prev => [...prev, { type: 'system', content: exit.status_update, className: 'transition-opacity duration-300 opacity-0 animate-fade-in', fullContent: exit.status_update }])
+                  // 等待打字机效果完成
+                  const statusDelay = Math.max(150, exit.status_update.length * 15)
+                  await new Promise(resolve => setTimeout(resolve, statusDelay))
+                  scrollToBottom()
+                }
+              })
             } else {
               setOutputHistory(prev => [...prev, { type: 'system', content: `向 ${matchedDir} 没有出口。`, fullContent: `向 ${matchedDir} 没有出口。` }])
               scrollToBottom()
@@ -508,7 +546,7 @@ export default function Home() {
     }
   }
 
-  const moveToScene = (sceneId: string, command: string) => {
+  const moveToScene = async (sceneId: string, command: string, onComplete?: (() => void)) => {
     try {
       if (typeof sceneId !== 'string' || !sceneId.trim()) {
         throw new Error('无效的场景ID')
@@ -522,12 +560,29 @@ export default function Home() {
       setCurrentScene(newScene)
       setChoices(newScene.exits || [])
 
-      // 添加场景名称和描述（一次性添加）
+      // 按顺序显示场景名称和描述，使用CSS过渡动画
       setOutputHistory(prev => [...prev, 
-        { type: 'room-name', content: newScene.name, className: 'room-name', fullContent: newScene.name },
-        { type: 'room-desc', content: newScene.desc, fullContent: newScene.desc }
+        { type: 'room-name', content: newScene.name, className: 'room-name transition-opacity duration-300 opacity-0 animate-fade-in', fullContent: newScene.name }
       ])
-
+      
+      // 等待打字机效果完成（优化后的延迟，15ms/字符，最小150ms）
+      const nameDelay = Math.max(150, newScene.name.length * 15)
+      await new Promise(resolve => setTimeout(resolve, nameDelay))
+      
+      setOutputHistory(prev => [...prev, 
+        { type: 'room-desc', content: newScene.desc, className: 'transition-opacity duration-300 opacity-0 animate-fade-in', fullContent: newScene.desc }
+      ])
+      
+      // 等待场景描述打字机效果完成
+      const descDelay = Math.max(200, newScene.desc.length * 15)
+      await new Promise(resolve => setTimeout(resolve, descDelay))
+      scrollToBottom()
+      
+      // 执行回调函数（用于显示effect和status_update）
+      if (onComplete) {
+        onComplete()
+      }
+      
       setInventory(prev => [...prev, ...(newScene.items || []).map((i: any) => Array.isArray(i.name) ? i.name[0] : i.name)])
 
       // 添加到场景历史记录
@@ -1088,7 +1143,7 @@ export default function Home() {
                 📚 用户指南
               </button>
               <button
-                onClick={() => window.open('/validator', '_blank')}
+                onClick={navigateToValidator}
                 className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-3 sm:px-4 py-2.5 sm:py-3 lg:py-4 rounded-xl shadow-sm hover:shadow-md active:scale-95"
               >
                 ✅ JSON验证器
@@ -1128,10 +1183,10 @@ export default function Home() {
                   <span className="hidden xs:inline">文本引擎</span>
                 </h1>
                 
-                <div className="w-full lg:w-auto overflow-x-auto lg:overflow-visible scrollbar-hide" suppressHydrationWarning>
-                  <div className="flex items-center gap-1.5 sm:gap-2 lg:gap-3 min-w-max lg:min-w-0 justify-center lg:justify-end" suppressHydrationWarning>
+                <div className="w-full lg:w-auto" suppressHydrationWarning>
+                  <div className="flex flex-wrap items-center gap-1 sm:gap-1.5 lg:gap-2 justify-center lg:justify-end" suppressHydrationWarning>
                     <div className="relative shrink-0">
-                      <label className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-4 py-3 rounded-lg text-sm flex items-center gap-2 cursor-pointer shadow-sm hover:shadow-md active:scale-95 justify-center whitespace-nowrap">
+                      <label className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-2 sm:px-4 py-2 sm:py-3 rounded-lg text-xs sm:text-sm flex items-center gap-1 sm:gap-2 cursor-pointer shadow-sm hover:shadow-md active:scale-95 justify-center whitespace-nowrap" style={{ height: '40px', minWidth: '80px' }}>
                         <span className="text-base">📤</span>
                         <span className="inline">导入</span>
                       </label>
@@ -1160,7 +1215,7 @@ export default function Home() {
                         URL.revokeObjectURL(url)
                         addNotification('游戏数据导出成功！', 'success')
                       }}
-                      className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-4 py-3 rounded-lg text-sm flex items-center gap-2 shadow-sm hover:shadow-md active:scale-95 justify-center whitespace-nowrap"
+                      className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-2 sm:px-4 py-2 sm:py-3 rounded-lg text-xs sm:text-sm flex items-center gap-1 sm:gap-2 cursor-pointer shadow-sm hover:shadow-md active:scale-95 justify-center whitespace-nowrap" style={{ height: '40px', minWidth: '80px' }}
                     >
                       <span className="text-base">📥</span>
                       <span className="inline">导出JSON</span>
@@ -1169,16 +1224,16 @@ export default function Home() {
                     <a
                       href="https://simplefeedback.app/feedback/nDf7Lhk7Ohnw"
                       target="_blank"
-                      className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-4 py-3 rounded-lg text-sm flex items-center gap-2 shadow-sm hover:shadow-md active:scale-95 justify-center whitespace-nowrap"
+                      className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-2 sm:px-4 py-2 sm:py-3 rounded-lg text-xs sm:text-sm flex items-center gap-1 sm:gap-2 cursor-pointer shadow-sm hover:shadow-md active:scale-95 justify-center whitespace-nowrap" style={{ height: '40px', minWidth: '80px' }}
                       suppressHydrationWarning
                     >
-                      <IconFeedback className="w-5 h-5" />
+                      <IconFeedback className="w-4 h-4 sm:w-5 sm:h-5" />
                       <span className="inline">反馈</span>
                     </a>
                     
                     <button
                       onClick={navigateToValidator}
-                      className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-4 py-3 rounded-lg text-sm flex items-center gap-2 shadow-sm hover:shadow-md active:scale-95 justify-center whitespace-nowrap"
+                      className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-2 sm:px-4 py-2 sm:py-3 rounded-lg text-xs sm:text-sm flex items-center gap-1 sm:gap-2 cursor-pointer shadow-sm hover:shadow-md active:scale-95 justify-center whitespace-nowrap" style={{ height: '40px', minWidth: '80px' }}
                       suppressHydrationWarning
                     >
                       <span className="text-base">✓</span>
@@ -1192,7 +1247,7 @@ export default function Home() {
                         setCurrentScene(null)
                         setChoices([])
                       }}
-                      className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-4 py-3 rounded-lg text-sm flex items-center gap-2 shadow-sm hover:shadow-md active:scale-95 justify-center whitespace-nowrap"
+                      className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-2 sm:px-4 py-2 sm:py-3 rounded-lg text-xs sm:text-sm flex items-center gap-1 sm:gap-2 cursor-pointer shadow-sm hover:shadow-md active:scale-95 justify-center whitespace-nowrap" style={{ height: '40px', minWidth: '80px' }}
                     >
                       <span className="text-base">🏠</span>
                       <span className="inline">返回主菜单</span>
@@ -1286,10 +1341,28 @@ export default function Home() {
                         const displayText = `> ${directionChinese}`
                         setOutputHistory(prev => [...prev, { type: 'user-choice', content: displayText }])
                         
-                        setTimeout(() => {
+                        // 先跳转到新场景（显示chapter和scene_detail），然后再显示effect和status_update
+                        moveToScene(targetSceneId, directionChinese, async () => {
+                          // 按顺序显示effect和status_update，使用CSS过渡动画
+                          if (choice.effect) {
+                            setOutputHistory(prev => [...prev, { type: 'system', content: choice.effect, className: 'transition-opacity duration-300 opacity-0 animate-fade-in', fullContent: choice.effect }])
+                            // 等待打字机效果完成（优化后的延迟，15ms/字符，最小150ms）
+                            const effectDelay = Math.max(150, choice.effect.length * 15)
+                            await new Promise(resolve => setTimeout(resolve, effectDelay))
+                            scrollToBottom()
+                          }
+                          
+                          if (choice.status_update) {
+                            setOutputHistory(prev => [...prev, { type: 'system', content: choice.status_update, className: 'transition-opacity duration-300 opacity-0 animate-fade-in', fullContent: choice.status_update }])
+                            // 等待打字机效果完成
+                            const statusDelay = Math.max(150, choice.status_update.length * 15)
+                            await new Promise(resolve => setTimeout(resolve, statusDelay))
+                            scrollToBottom()
+                          }
+                          
+                          // 所有更新完成后，设置isProcessing为false
                           setIsProcessing(false)
-                          moveToScene(targetSceneId, directionChinese)
-                        }, 500)
+                        })
                       }}
                       disabled={isProcessing}
                       className="bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 transition-all duration-300 font-bold px-4 sm:px-5 lg:px-6 py-2.5 sm:py-3 lg:py-3.5 rounded-xl shadow-lg shadow-purple-500/20 hover:shadow-xl hover:shadow-purple-500/30 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center min-w-[90px] sm:min-w-[100px] lg:min-w-[120px] touch-manipulation relative z-30"
@@ -1303,39 +1376,39 @@ export default function Home() {
           </div>
 
           {/* 快捷操作按钮 */}
-          <div className="p-2.5 sm:p-4 lg:p-5 bg-gradient-to-br from-white/90 to-indigo-50/50 backdrop-blur-xl border-t border-b border-white/60 safe-area-pb" suppressHydrationWarning>
-            <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2.5 lg:gap-3 max-w-4xl mx-auto" suppressHydrationWarning>
-              <button onClick={() => executeCommand('look')} className="bg-indigo-50 text-indigo-600 hover:bg-indigo-100 border border-indigo-200 hover:border-indigo-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-8 sm:h-9" suppressHydrationWarning>
-                <IconEye className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                <span className="text-xs sm:text-sm">观察</span>
+          <div className="p-2 sm:p-3 bg-gradient-to-br from-white/90 to-indigo-50/50 backdrop-blur-xl border-t border-white/60 safe-area-pb" suppressHydrationWarning>
+            <div className="grid grid-cols-4 gap-1.5 sm:gap-2 max-w-md mx-auto" suppressHydrationWarning>
+              <button onClick={() => executeCommand('look')} className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-2 py-2.5 rounded-lg flex flex-row items-center justify-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation" suppressHydrationWarning>
+                <span className="text-xs">观察</span>
+                <IconEye className="w-4 h-4" />
               </button>
-              <button onClick={() => executeCommand('items')} className="bg-emerald-50 text-emerald-600 hover:bg-emerald-100 border border-emerald-200 hover:border-emerald-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-8 sm:h-9" suppressHydrationWarning>
-                <IconBox className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                <span className="text-xs sm:text-sm">物品</span>
+              <button onClick={() => executeCommand('items')} className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-2 py-2.5 rounded-lg flex flex-row items-center justify-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation" suppressHydrationWarning>
+                <span className="text-xs">物品</span>
+                <IconBox className="w-4 h-4" />
               </button>
-              <button onClick={() => executeCommand('inv')} className="bg-amber-50 text-amber-600 hover:bg-amber-100 border border-amber-200 hover:border-amber-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-8 sm:h-9" suppressHydrationWarning>
-                <IconInventory className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                <span className="text-xs sm:text-sm">背包</span>
+              <button onClick={() => executeCommand('inv')} className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-2 py-2.5 rounded-lg flex flex-row items-center justify-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation" suppressHydrationWarning>
+                <span className="text-xs">背包</span>
+                <IconInventory className="w-4 h-4" />
               </button>
-              <button onClick={() => executeCommand('help')} className="bg-rose-50 text-rose-600 hover:bg-rose-100 border border-rose-200 hover:border-rose-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-8 sm:h-9" suppressHydrationWarning>
-                <IconHelp className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                <span className="text-xs sm:text-sm">帮助</span>
+              <button onClick={() => executeCommand('help')} className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-2 py-2.5 rounded-lg flex flex-row items-center justify-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation" suppressHydrationWarning>
+                <span className="text-xs">帮助</span>
+                <IconHelp className="w-4 h-4" />
               </button>
-              <button onClick={() => executeCommand('save')} className="bg-cyan-50 text-cyan-600 hover:bg-cyan-100 border border-cyan-200 hover:border-cyan-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-8 sm:h-9" suppressHydrationWarning>
-                <IconSave className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                <span className="text-xs sm:text-sm">保存</span>
+              <button onClick={() => executeCommand('save')} className="bg-transparent text-emerald-600 hover:text-emerald-700 border-2 border-emerald-600 hover:border-emerald-700 transition-all duration-300 font-bold px-2 py-2.5 rounded-lg flex flex-row items-center justify-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation" suppressHydrationWarning>
+                <span className="text-xs">保存</span>
+                <IconSave className="w-4 h-4" />
               </button>
-              <button onClick={() => executeCommand('load')} className="bg-violet-50 text-violet-600 hover:bg-violet-100 border border-violet-200 hover:border-violet-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-8 sm:h-9" suppressHydrationWarning>
-                <IconLoad className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                <span className="text-xs sm:text-sm">读取</span>
+              <button onClick={() => executeCommand('load')} className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-2 py-2.5 rounded-lg flex flex-row items-center justify-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation" suppressHydrationWarning>
+                <span className="text-xs">读取</span>
+                <IconLoad className="w-4 h-4" />
               </button>
-              <button onClick={() => executeCommand('clear')} className="bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 hover:border-red-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-8 sm:h-9" suppressHydrationWarning>
-                <IconDelete className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                <span className="text-xs sm:text-sm">清除</span>
+              <button onClick={() => executeCommand('clear')} className="bg-transparent text-red-600 hover:text-red-700 border-2 border-red-600 hover:border-red-700 transition-all duration-300 font-bold px-2 py-2.5 rounded-lg flex flex-row items-center justify-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation" suppressHydrationWarning>
+                <span className="text-xs">清除</span>
+                <IconDelete className="w-4 h-4" />
               </button>
-              <button onClick={() => setShowTimeline(!showTimeline)} className={`bg-slate-100 hover:bg-slate-200 border border-slate-200 hover:border-slate-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-8 sm:h-9 ${showTimeline ? 'text-indigo-800' : 'text-slate-600'}`} suppressHydrationWarning>
-                <IconScroll className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                <span className="text-xs sm:text-sm">时间线</span>
+              <button onClick={() => setShowTimeline(!showTimeline)} className={`bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-2 py-2.5 rounded-lg flex flex-row items-center justify-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation ${showTimeline ? 'bg-purple-100' : ''}`} suppressHydrationWarning>
+                <span className="text-xs">时间线</span>
+                <IconScroll className="w-4 h-4" />
               </button>
             </div>
           </div>

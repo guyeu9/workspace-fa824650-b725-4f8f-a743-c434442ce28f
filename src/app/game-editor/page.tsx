@@ -313,7 +313,8 @@ export default function GameEditor() {
                 <span>文本游戏制作</span>
               </h1>
               
-              <div className="flex flex-nowrap gap-2 sm:gap-2 lg:gap-3 items-center justify-center w-full sm:w-auto">
+              <div className="w-full sm:w-auto overflow-x-auto scrollbar-hide">
+                <div className="flex flex-nowrap gap-2 sm:gap-2 lg:gap-3 items-center justify-center min-w-max sm:min-w-0">
                 <button
                   onClick={undo}
                   disabled={historyIndex <= 0}
@@ -372,6 +373,7 @@ export default function GameEditor() {
                   <IconHome className="w-4 h-4 sm:w-5 sm:h-5 lg:w-5 lg:h-5" />
                   <span className="inline">返回</span>
                 </button>
+                </div>
               </div>
             </div>
           </div>
