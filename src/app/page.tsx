@@ -2,6 +2,9 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import * as Icons from './icons'
+import { exportJson as exportJsonFile, exportText as exportTextFile } from '../lib/file-export'
+import { useAppNavigation } from '../lib/navigation'
+import { useExportNotifications } from '../components/export-notifications'
 
 const { IconTimeline, IconInventory, IconSettings, IconCompass, IconEye, IconSave, IconLoad, IconDelete, IconClose, IconSend, IconMove, IconInteract, IconUse, IconFeedback, IconHome, IconBox, IconHelp, IconScroll, IconFile } = Icons
 
@@ -72,6 +75,12 @@ export default function Home() {
   const [showTimeline, setShowTimeline] = useState(false)
   const [sceneHistory, setSceneHistory] = useState<Array<{ id: string; name: string; timestamp: string; action: string }>>([])
   const outputRef = useRef<HTMLDivElement>(null)
+
+  // 使用新的导航钩子
+  const { navigateToValidator, navigateToGameEditor } = useAppNavigation()
+
+  // 使用导出通知钩子
+  const { notifications, addNotification, removeNotification, NotificationContainer } = useExportNotifications()
 
   // 故事数据
   const [storyData, setStoryData] = useState<any>({
@@ -575,48 +584,69 @@ export default function Home() {
   }
 
   // 导出 JSON 功能（仅导出 JSON 数据）
-  const exportJson = () => {
-    const data = storyData
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'game-data.json'
-    a.click()
-    URL.revokeObjectURL(url)
+  const exportJson = async () => {
+    try {
+      addNotification('正在导出游戏数据...', 'info')
+      const result = await exportJsonFile('game-data.json', storyData)
+      if (result.success) {
+        addNotification(`游戏数据导出成功！`, 'success')
+      } else {
+        addNotification(`导出失败: ${result.error}`, 'error')
+        console.error('导出失败:', result.error)
+      }
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : '导出失败'
+      addNotification(`导出失败: ${errorMessage}`, 'error')
+      console.error('导出JSON失败:', error)
+    }
   }
 
   // 导出进度功能
-  const exportProgress = () => {
-    const data = {
-      ...storyData,
-      playerState: {
-        scene: currentScene?.id,
-        inventory: inventory,
-        history: outputHistory,
-        choices: choices,
-        timestamp: new Date().toISOString()
+  const exportProgress = async () => {
+    try {
+      addNotification('正在导出游戏进度...', 'info')
+      const data = {
+        ...storyData,
+        playerState: {
+          scene: currentScene?.id,
+          inventory: inventory,
+          history: outputHistory,
+          choices: choices,
+          timestamp: new Date().toISOString()
+        }
       }
+      
+      const result = await exportJsonFile('game-progress.json', data)
+      if (result.success) {
+        addNotification(`游戏进度导出成功！`, 'success')
+      } else {
+        addNotification(`导出失败: ${result.error}`, 'error')
+        console.error('导出进度失败:', result.error)
+      }
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : '导出失败'
+      addNotification(`导出失败: ${errorMessage}`, 'error')
+      console.error('导出进度失败:', error)
     }
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'game-progress.json'
-    a.click()
-    URL.revokeObjectURL(url)
   }
 
   // 导出 txt 功能
-  const exportTxt = () => {
-    const text = outputHistory.map(item => item.fullContent || item.content).join('\n\n')
-    const blob = new Blob([text], { type: 'text/plain' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'game-log.txt'
-    a.click()
-    URL.revokeObjectURL(url)
+  const exportTxt = async () => {
+    try {
+      addNotification('正在导出游戏日志...', 'info')
+      const text = outputHistory.map(item => item.fullContent || item.content).join('\n\n')
+      const result = await exportTextFile('game-log.txt', text)
+      if (result.success) {
+        addNotification(`游戏日志导出成功！`, 'success')
+      } else {
+        addNotification(`导出失败: ${result.error}`, 'error')
+        console.error('导出TXT失败:', result.error)
+      }
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : '导出失败'
+      addNotification(`导出失败: ${errorMessage}`, 'error')
+      console.error('导出TXT失败:', error)
+    }
   }
 
   // 导入 JSON 功能
@@ -869,6 +899,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white text-gray-900 font-sans antialiased" suppressHydrationWarning>
+      <NotificationContainer />
       {showEditor && (
         <div className="fixed inset-0 z-50">
           <iframe
@@ -924,10 +955,7 @@ export default function Home() {
               </button>
               <button
                 className="w-full mt-3 sm:mt-4 bg-gradient-to-r from-orange-500 to-red-500 text-white hover:from-orange-600 hover:to-red-600 transition-all duration-300 font-bold px-6 sm:px-8 py-3.5 sm:py-4 lg:py-5 rounded-xl shadow-lg shadow-orange-500/20 hover:shadow-xl hover:shadow-orange-500/30 active:scale-95 text-base sm:text-lg lg:text-xl"
-                onClick={() => {
-                  setShowWelcome(false);
-                  setShowEditor(true);
-                }}
+                onClick={navigateToGameEditor}
               >
                 📝 文本游戏制作
               </button>
@@ -1066,9 +1094,7 @@ export default function Home() {
                 ✅ JSON验证器
               </button>
               <button
-                onClick={() => {
-                  window.location.href = '/validator';
-                }}
+                onClick={navigateToValidator}
                 className="bg-transparent text-emerald-600 hover:text-emerald-700 border-2 border-emerald-600 hover:border-emerald-700 transition-all duration-300 font-bold px-3 sm:px-4 py-2.5 sm:py-3 lg:py-4 rounded-xl shadow-sm hover:shadow-md active:scale-95"
               >
                 🎯 增强验证器
