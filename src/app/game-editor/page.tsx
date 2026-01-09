@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import { IconSave, IconLoad, IconDelete, IconClose, IconHome, IconBox } from '../icons'
+import { gameStore } from '@/lib/game-store'
+import { toast } from 'sonner'
 
 interface Choice {
   id: string
@@ -17,6 +19,8 @@ interface Branch {
   chapter: string
   scene_detail: string
   choices: Choice[]
+  background_image?: string
+  background_asset_id?: string
 }
 
 interface GameData {
@@ -32,12 +36,24 @@ export default function GameEditor() {
     description: '这是一个精彩的故事...',
     branches: []
   })
+  const [backgroundImageUrl, setBackgroundImageUrl] = useState<string>('')
+  const [backgroundAssetId, setBackgroundAssetId] = useState<string>('')
   const [selectedBranchId, setSelectedBranchId] = useState<string>('')
   const [history, setHistory] = useState<GameData[]>([])
   const [historyIndex, setHistoryIndex] = useState(-1)
   const [showPreview, setShowPreview] = useState(false)
   const [viewMode, setViewMode] = useState<'list' | 'graph'>('list')
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const [currentStep, setCurrentStep] = useState(1)
+
+  // 步骤引导：1-基础信息 2-创建分支 3-编辑分支 4-添加选项 5-完成
+  const steps = [
+    { id: 1, title: '基础信息', description: '填写游戏标题和描述' },
+    { id: 2, title: '创建分支', description: '添加故事场景分支' },
+    { id: 3, title: '编辑分支', description: '设置场景内容和背景' },
+    { id: 4, title: '添加选项', description: '为分支添加选择选项' },
+    { id: 5, title: '完成', description: '测试和导出游戏' }
+  ]
 
   const saveToHistory = (data: GameData) => {
     const newHistory = history.slice(0, historyIndex + 1)
@@ -168,20 +184,49 @@ export default function GameEditor() {
         const data = JSON.parse(e.target?.result as string)
         if (data.game_title && data.branches && Array.isArray(data.branches)) {
           setGameData(data)
+          // 设置背景图片信息
+          if (data.background_image) {
+            setBackgroundImageUrl(data.background_image)
+          }
+          if (data.background_asset_id) {
+            setBackgroundAssetId(data.background_asset_id)
+          }
           saveToHistory(data)
-          alert('导入成功！')
+          toast.success('导入成功！')
         } else {
-          alert('无效的游戏文件格式')
+          toast.error('无效的游戏文件格式')
         }
       } catch (error) {
-        alert('JSON解析失败：' + error)
+        toast.error('JSON解析失败：' + error)
       }
     }
     reader.readAsText(file)
   }
 
   const startGame = () => {
-    sessionStorage.setItem('gameData', JSON.stringify(gameData))
+    // 保存游戏到IndexedDB
+    if (gameData.game_title && gameData.game_title !== '我的故事') {
+      gameStore.createGame(gameData.game_title, {
+        ...gameData,
+        background_image: backgroundImageUrl,
+        background_asset_id: backgroundAssetId
+      }, {
+        description: gameData.description,
+        author: 'Unknown'
+      }).then(() => {
+        toast.success('游戏已保存到游戏库！')
+      }).catch(error => {
+        console.error('保存游戏失败:', error)
+      })
+    }
+    
+    // 设置游戏数据并跳转
+    const gameDataWithBg = {
+      ...gameData,
+      background_image: backgroundImageUrl,
+      background_asset_id: backgroundAssetId
+    }
+    sessionStorage.setItem('gameData', JSON.stringify(gameDataWithBg))
     window.location.href = '/'
   }
 
@@ -362,7 +407,47 @@ export default function GameEditor() {
           </div>
         </div>
 
+        {/* 步骤引导 */}
         <div className="p-3 sm:p-4 lg:p-6 max-w-7xl mx-auto">
+          <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg shadow-orange-500/10 p-4 sm:p-5 lg:p-6 border border-white/50 mb-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-bold text-slate-800 flex items-center gap-2">
+                <span>🚀</span> 制作进度
+              </h3>
+              <div className="text-sm text-slate-600">
+                步骤 {currentStep} / {steps.length}
+              </div>
+            </div>
+            <div className="flex items-center space-x-4 overflow-x-auto pb-2">
+              {steps.map((step, index) => (
+                <div key={step.id} className="flex items-center flex-shrink-0">
+                  <div className={`flex items-center justify-center w-8 h-8 rounded-full text-sm font-bold transition-all duration-300 ${
+                    index + 1 < currentStep ? 'bg-gradient-to-r from-orange-500 to-red-500 text-white' :
+                    index + 1 === currentStep ? 'bg-gradient-to-r from-orange-500 to-red-500 text-white ring-4 ring-orange-200' :
+                    'bg-slate-200 text-slate-600'
+                  }`}>
+                    {index + 1 < currentStep ? '✓' : index + 1}
+                  </div>
+                  <div className="ml-3 min-w-[120px]">
+                    <div className={`font-semibold text-sm ${
+                      index + 1 <= currentStep ? 'text-slate-800' : 'text-slate-500'
+                    }`}>
+                      {step.title}
+                    </div>
+                    <div className="text-xs text-slate-500 mt-1">
+                      {step.description}
+                    </div>
+                  </div>
+                  {index < steps.length - 1 && (
+                    <div className={`w-8 h-0.5 mx-4 ${
+                      index + 1 < currentStep ? 'bg-gradient-to-r from-orange-500 to-red-500' : 'bg-slate-300'
+                    }`} />
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
             <div className="lg:col-span-1">
               <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg shadow-orange-500/10 p-4 sm:p-5 lg:p-6 border border-white/50 sticky top-24">
@@ -637,6 +722,85 @@ export default function GameEditor() {
                         rows={6}
                         className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm sm:text-base resize-none"
                       />
+                    </div>
+
+                    {/* 背景图片上传 */}
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 mb-1 sm:mb-2">背景图片</label>
+                      <div className="space-y-3">
+                        {selectedBranch.background_image && (
+                          <div className="relative">
+                            <img
+                              src={selectedBranch.background_image}
+                              alt="背景图片"
+                              className="w-full h-32 object-cover rounded-lg border"
+                            />
+                            <button
+                              onClick={() => updateBranch(selectedBranch.branch_id, 'background_image', '')}
+                              className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600 transition-colors"
+                            >
+                              ×
+                            </button>
+                          </div>
+                        )}
+                        <div className="flex gap-2">
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={async (e) => {
+                              const file = e.target.files?.[0]
+                              if (file) {
+                                // 文件大小验证（5MB限制）
+                                const maxSize = 5 * 1024 * 1024 // 5MB
+                                if (file.size > maxSize) {
+                                  toast.error(`图片大小不能超过5MB，当前大小: ${(file.size / 1024 / 1024).toFixed(2)}MB`)
+                                  return
+                                }
+                                
+                                // 文件格式验证
+                                const allowedTypes = ['image/jpeg', 'image/png', 'image/webp']
+                                if (!allowedTypes.includes(file.type)) {
+                                  toast.error('请上传 JPG、PNG 或 WebP 格式的图片')
+                                  return
+                                }
+                                
+                                try {
+                                  const assetId = await gameStore.storeAsset(file, file.name, 'image')
+                                  const imageUrl = URL.createObjectURL(file)
+                                  updateBranch(selectedBranch.branch_id, 'background_image', imageUrl)
+                                  updateBranch(selectedBranch.branch_id, 'background_asset_id', assetId)
+                                  toast.success('背景图片上传成功')
+                                } catch (error) {
+                                  console.error('上传背景图片失败:', error)
+                                  toast.error('上传背景图片失败')
+                                }
+                              }
+                            }}
+                            className="flex-1 text-sm"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 实时预览 */}
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 mb-1 sm:mb-2">实时预览</label>
+                      <div 
+                        className="relative w-full h-48 rounded-lg border-2 border-slate-300 overflow-hidden bg-slate-100"
+                        style={{
+                          backgroundImage: selectedBranch.background_image ? `url(${selectedBranch.background_image})` : 'none',
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                          backgroundRepeat: 'no-repeat'
+                        }}
+                      >
+                        <div className="absolute inset-0 bg-black/50 p-4">
+                          <div className="text-white">
+                            <h4 className="font-bold text-lg mb-2">{selectedBranch.chapter}</h4>
+                            <p className="text-sm opacity-90">{selectedBranch.scene_detail}</p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
 
                     <div>

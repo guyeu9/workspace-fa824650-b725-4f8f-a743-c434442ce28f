@@ -2,9 +2,10 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import * as Icons from './icons'
-import { exportJson as exportJsonFile, exportText as exportTextFile } from '../lib/file-export'
+import { exportJsonFile, exportTextFile } from '../lib/file-export'
 import { useAppNavigation } from '../lib/navigation'
 import { useExportNotifications } from '../components/export-notifications'
+import { GameLibraryWidget } from '../components/game-library-widget'
 
 const { IconTimeline, IconInventory, IconSettings, IconCompass, IconEye, IconSave, IconLoad, IconDelete, IconClose, IconSend, IconMove, IconInteract, IconUse, IconFeedback, IconHome, IconBox, IconHelp, IconScroll, IconFile } = Icons
 
@@ -199,12 +200,12 @@ export default function Home() {
               setCurrentScene(newScene)
               setChoices(newScene.exits)
               
-              // 添加场景信息到输出历史
+              // 添加场景信息到输出历史（先显示场景，再显示游戏信息）
               setOutputHistory([
-                { type: 'room-name', content: data.game_title, className: 'room-name', fullContent: data.game_title },
-                { type: 'room-desc', content: data.description || '', fullContent: data.description || '' },
                 { type: 'room-name', content: startBranch.chapter || startBranch.branch_id, className: 'room-name', fullContent: startBranch.chapter || startBranch.branch_id },
-                { type: 'room-desc', content: startBranch.scene_detail || '', fullContent: startBranch.scene_detail || '' }
+                { type: 'room-desc', content: startBranch.scene_detail || '', fullContent: startBranch.scene_detail || '' },
+                { type: 'room-name', content: data.game_title, className: 'room-name', fullContent: data.game_title },
+                { type: 'room-desc', content: data.description || '', fullContent: data.description || '' }
               ])
               
               // 保存游戏数据以便后续使用
@@ -985,6 +986,19 @@ export default function Home() {
               >
                 📝 文本游戏制作
               </button>
+            </div>
+
+            <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg shadow-indigo-500/10 p-4 sm:p-6 lg:p-8 mb-4 sm:mb-5 border border-white/50">
+              <div className="flex items-center justify-between mb-3 sm:mb-4">
+                <h3 className="text-lg sm:text-xl font-bold text-slate-800">我的游戏库</h3>
+                <button
+                  onClick={() => window.location.href = '/game-library'}
+                  className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 font-bold px-4 py-2 rounded-lg shadow-md hover:shadow-lg active:scale-95 text-sm flex items-center gap-2"
+                >
+                  📚 游戏库管理
+                </button>
+              </div>
+              <GameLibraryWidget maxItems={3} />
             </div>
 
             <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg shadow-indigo-500/10 p-4 sm:p-6 lg:p-8 mb-4 sm:mb-5 border border-white/50">
