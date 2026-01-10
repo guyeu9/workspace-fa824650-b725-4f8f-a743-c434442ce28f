@@ -4,6 +4,8 @@ import React, { useState, useEffect, useRef } from 'react'
 import { IconSave, IconLoad, IconDelete, IconClose, IconHome, IconBox } from '../icons'
 import { gameStore } from '@/lib/game-store'
 import { toast } from 'sonner'
+import Link from 'next/link'
+import { LayoutTemplate } from 'lucide-react'
 
 interface Choice {
   id: string
@@ -339,6 +341,12 @@ export default function GameEditor() {
               <h1 className="text-base sm:text-xl lg:text-3xl font-extrabold bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 bg-clip-text text-transparent tracking-tight flex items-center gap-1 sm:gap-1.5 lg:gap-2 whitespace-nowrap">
                 <span className="text-base sm:text-xl lg:text-3xl">📝</span>
                 <span>文本游戏制作</span>
+                <Link href="/studio">
+                  <button className="ml-4 inline-flex items-center gap-2 px-3 py-1.5 text-xs sm:text-sm font-medium text-blue-600 bg-blue-50/80 hover:bg-blue-100 rounded-lg transition-colors border border-blue-200 shadow-sm">
+                    <LayoutTemplate className="w-4 h-4" />
+                    新版编辑器 (Studio)
+                  </button>
+                </Link>
               </h1>
               
               <div className="flex flex-nowrap gap-2 sm:gap-2 lg:gap-3 items-center justify-center w-full sm:w-auto">

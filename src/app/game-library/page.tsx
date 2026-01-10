@@ -23,7 +23,13 @@ import {
   Search,
   ArrowUpDown,
   Check,
-  X
+  X,
+  Globe,
+  Import,
+  RefreshCw,
+  MessageSquare,
+  ThumbsUp,
+  ThumbsDown
 } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { zhCN } from 'date-fns/locale';
@@ -38,6 +44,10 @@ export default function GameLibraryPage() {
   const [sortBy, setSortBy] = useState<'priority' | 'title' | 'updatedAt' | 'createdAt'>('priority');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   const [filterPriority, setFilterPriority] = useState<'all' | 'high' | 'medium' | 'low'>('all');
+  const [viewMode, setViewMode] = useState<'local' | 'community'>('local');
+  const [communityGames, setCommunityGames] = useState<any[]>([]);
+  const [communityLoading, setCommunityLoading] = useState(false);
+  const [communityError, setCommunityError] = useState<string | null>(null);
 
   // 加载游戏列表
   const loadGames = useCallback(async () => {
@@ -257,7 +267,103 @@ export default function GameLibraryPage() {
     };
   };
 
-  if (isLoading) {
+  const loadCommunityGames = useCallback(async () => {
+    try {
+      setCommunityLoading(true);
+      setCommunityError(null);
+      const res = await fetch('/api/games');
+      if (!res.ok) {
+        throw new Error('加载社区游戏失败');
+      }
+      const data = await res.json();
+      setCommunityGames(data);
+    } catch (error) {
+      setCommunityError(error instanceof Error ? error.message : '加载社区游戏失败');
+      toast.error('加载社区游戏失败');
+    } finally {
+      setCommunityLoading(false);
+    }
+  }, []);
+
+  const handleImportCommunityGame = async (gameId: string) => {
+    try {
+      const res = await fetch(`/api/games/${gameId}`);
+      if (!res.ok) {
+        throw new Error('加载社区游戏数据失败');
+      }
+      const data = await res.json();
+      const metadata = enhancedGameStore.extractMetadata(data.jsonData);
+      await gameStore.createGame(metadata.title, data.jsonData, {
+        description: metadata.description,
+        author: metadata.author,
+        tags: metadata.tags
+      });
+      toast.success('已导入到本地游戏库');
+      if (viewMode === 'local') {
+        await loadGames();
+      }
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : '导入游戏失败');
+    }
+  };
+
+  const publishGameToCommunity = async (gameId: string) => {
+    try {
+      const result = await gameStore.getGame(gameId);
+      if (!result) {
+        toast.error('无法加载本地游戏数据');
+        return;
+      }
+      const metadata = enhancedGameStore.extractMetadata(result.data.data);
+      const blob = new Blob([JSON.stringify(result.data.data, null, 2)], {
+        type: 'application/json'
+      });
+      const file = new File([blob], `${metadata.title || 'game'}.json`, {
+        type: 'application/json'
+      });
+      const formData = new FormData();
+      formData.append('title', metadata.title);
+      formData.append('description', metadata.description);
+      formData.append('file', file);
+      const res = await fetch('/api/games', {
+        method: 'POST',
+        body: formData
+      });
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(text || '发布到社区失败');
+      }
+      toast.success('已发布到游戏社区');
+      if (viewMode === 'community') {
+        await loadCommunityGames();
+      }
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : '发布到社区失败');
+    }
+  };
+
+  const handleBatchPublishToCommunity = async () => {
+    if (selectedGames.size === 0) {
+      toast.error('请选择要发布到社区的游戏');
+      return;
+    }
+    try {
+      for (const gameId of selectedGames) {
+        await publishGameToCommunity(gameId);
+      }
+      toast.success(`成功发布 ${selectedGames.size} 个游戏到社区`);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : '批量发布失败');
+    }
+  };
+
+  useEffect(() => {
+    if (viewMode === 'community') {
+      loadCommunityGames();
+    }
+  }, [viewMode, loadCommunityGames]);
+
+  if (viewMode === 'local' && isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50/30 to-purple-50/30 p-4">
         <div className="max-w-7xl mx-auto">
@@ -292,10 +398,29 @@ export default function GameLibraryPage() {
       <div className="max-w-7xl mx-auto">
         {/* 页面标题 */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-slate-800 mb-2">游戏库管理</h1>
-          <p className="text-slate-600">管理您的所有游戏</p>
+          <h1 className="text-3xl font-bold text-slate-800 mb-2">游戏库与社区</h1>
+          <p className="text-slate-600">管理本地游戏并浏览社区作品</p>
         </div>
 
+        <div className="mb-4 flex gap-3">
+          <Button
+            variant={viewMode === 'local' ? 'default' : 'outline'}
+            onClick={() => setViewMode('local')}
+          >
+            <Database className="h-4 w-4 mr-2" />
+            本地游戏库
+          </Button>
+          <Button
+            variant={viewMode === 'community' ? 'default' : 'outline'}
+            onClick={() => setViewMode('community')}
+          >
+            <Globe className="h-4 w-4 mr-2" />
+            游戏社区
+          </Button>
+        </div>
+
+        {viewMode === 'local' && (
+        <>
         {/* 工具栏 */}
         <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
           <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
@@ -404,6 +529,15 @@ export default function GameLibraryPage() {
                 <Trash2 className="h-4 w-4 mr-1" />
                 删除
               </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleBatchPublishToCommunity}
+                disabled={selectedGames.size === 0}
+              >
+                <Upload className="h-4 w-4 mr-1" />
+                发布到社区
+              </Button>
             </div>
           </div>
         </div>
@@ -500,6 +634,15 @@ export default function GameLibraryPage() {
                         <Edit className="h-3 w-3 mr-1" />
                         编辑
                       </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => publishGameToCommunity(game.id)}
+                        className="flex-1"
+                      >
+                        <Upload className="h-3 w-3 mr-1" />
+                        发布到社区
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
@@ -558,6 +701,102 @@ export default function GameLibraryPage() {
             </div>
           </div>
         </div>
+        </>
+        )}
+
+        {viewMode === 'community' && (
+          <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <h2 className="text-xl font-semibold text-slate-800 flex items-center gap-2">
+                  <Globe className="h-5 w-5" />
+                  游戏社区
+                </h2>
+                <p className="text-sm text-slate-500">浏览社区发布的游戏，并一键导入到本地游戏库</p>
+              </div>
+              <Button onClick={loadCommunityGames} variant="outline" size="sm" disabled={communityLoading}>
+                <RefreshCw className="h-4 w-4 mr-2" />
+                刷新
+              </Button>
+            </div>
+            {communityLoading && (
+              <div className="py-8 text-center text-sm text-slate-500">
+                正在加载社区游戏...
+              </div>
+            )}
+            {!communityLoading && communityError && (
+              <div className="py-8 text-center text-sm text-red-500">
+                {communityError}
+              </div>
+            )}
+            {!communityLoading && !communityError && communityGames.length === 0 && (
+              <div className="py-8 text-center text-sm text-slate-500">
+                目前社区中还没有游戏，您可以先发布一个。
+              </div>
+            )}
+            {!communityLoading && !communityError && communityGames.length > 0 && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {communityGames.map((game) => (
+                  <Card key={game.id} className="flex flex-col">
+                    <CardHeader className="pb-3">
+                      <CardTitle className="text-lg truncate">{game.title}</CardTitle>
+                      <div className="flex items-center justify-between mt-1">
+                        <div className="flex items-center gap-1 text-xs text-slate-500">
+                          <User className="h-3 w-3" />
+                          {game.author?.name || '匿名玩家'}
+                        </div>
+                        <div className="flex items-center gap-2 text-xs text-slate-500">
+                          <div className="flex items-center gap-1">
+                            <ThumbsUp className="h-3 w-3" />
+                            {game.upvotes}
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <ThumbsDown className="h-3 w-3" />
+                            {game.downvotes}
+                          </div>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="flex-1 flex flex-col">
+                      {game.coverUrl && (
+                        <div className="mb-3">
+                          <div
+                            className="w-full h-32 rounded-md bg-cover bg-center"
+                            style={{ backgroundImage: `url(${game.coverUrl})` }}
+                          />
+                        </div>
+                      )}
+                      {game.description && (
+                        <p className="text-sm text-slate-600 mb-3 line-clamp-2">
+                          {game.description}
+                        </p>
+                      )}
+                      <div className="flex items-center justify-between text-xs text-slate-500 mb-3">
+                        <div className="flex items-center gap-1">
+                          <Clock className="h-3 w-3" />
+                          {formatTimeAgo(game.updatedAt)}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <MessageSquare className="h-3 w-3" />
+                          {game.commentsCount}
+                        </div>
+                      </div>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="w-full mt-auto"
+                        onClick={() => handleImportCommunityGame(game.id)}
+                      >
+                        <Import className="h-4 w-4 mr-2" />
+                        一键导入到本地游戏库
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

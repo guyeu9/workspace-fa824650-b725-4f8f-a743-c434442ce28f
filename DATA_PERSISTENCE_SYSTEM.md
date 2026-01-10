@@ -6,7 +6,7 @@
 
 ## 🏗️ 核心功能实现
 
-### 1. 数据存储层 (IndexedDB + Dexie.js)
+### 1. 本地数据存储层 (IndexedDB + Dexie.js)
 
 **核心文件**: [`src/lib/game-store.ts`](src/lib/game-store.ts)
 
@@ -103,6 +103,60 @@ const connections = this.validateBranchConnections(branches);
 // 提取元数据
 const metadata = GameDataValidator.extractMetadata(data);
 ```
+
+### 6. 线上社区与后端数据库层 (Prisma + Next.js Route Handlers)
+
+**核心文件**:
+
+- [`prisma/schema.prisma`](prisma/schema.prisma)
+- [`src/lib/db.ts`](src/lib/db.ts)
+- [`src/app/api/games/route.ts`](src/app/api/games/route.ts)
+- [`src/app/api/games/[id]/vote/route.ts`](src/app/api/games/%5Bid%5D/vote/route.ts)
+- [`src/app/api/games/[id]/comments/route.ts`](src/app/api/games/%5Bid%5D/comments/route.ts)
+- [`src/app/game-library/new/page.tsx`](src/app/game-library/new/page.tsx)
+
+**数据库设计概览**:
+
+- `User` 表扩展支持账号、多端会话以及和社区数据的关联
+- `Game` 表负责存储社区发布的游戏元信息和完整 JSON 配置
+- `Vote` 表记录用户对游戏的点赞和点踩行为
+- `Comment` 表存储用户的评论内容
+
+**关键字段说明**:
+
+- `Game.jsonData` 使用 Prisma 的 `Json` 类型直接存储上传的 JSON 文件内容
+- `Game.coverUrl` 为外部图床链接，页面展示时直接通过 URL 拉取图片
+- `Vote.type` 为 `VoteType` 枚举，取值为 `UP` 或 `DOWN`
+- `Comment.content` 为评论文本内容
+
+**一键部署与数据库兼容性**:
+
+- 当前默认使用 SQLite 作为开发和本地环境的数据源
+- Prisma 模型仅使用通用特性，兼容迁移到 PostgreSQL 等生产级数据库
+- 生产环境可通过调整 `DATABASE_URL` 和 `provider` 切换到托管数据库服务
+
+**服务端逻辑**:
+
+- `/api/games`:
+  - `GET` 返回按创建时间倒序的游戏列表，附带点赞数、点踩数和评论数等统计信息
+  - `POST` 接收包含 JSON 文件的表单，校验标题、封面链接和 JSON 内容后创建新游戏
+- `/api/games/[id]/vote`:
+  - `POST` 按 `(userId, gameId)` 唯一键进行 `upsert`，实现重复投票覆盖更新
+- `/api/games/[id]/comments`:
+  - `GET` 支持基于游标的分页拉取评论
+  - `POST` 创建新评论并返回作者和时间信息
+
+**安全与限制**:
+
+- 发布接口仅接受扩展名为 `.json` 的文件
+- 服务器端再次解析和验证 JSON，有效防止非 JSON 内容混入
+- 图片由外部图床托管，后端不存储二进制图片文件
+
+**线上社区与本地存储的关系**:
+
+- IndexedDB 负责本地创作和草稿管理，适合离线和单机体验
+- 后端数据库负责在线社区的公开作品、点赞、评论等社交属性
+- 二者通过统一的 JSON 游戏数据结构实现互通，可将本地作品导出 JSON 后上传到社区
 
 ## 🚀 新增页面和组件
 
