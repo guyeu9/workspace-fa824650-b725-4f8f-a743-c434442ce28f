@@ -1,5 +1,6 @@
 import Dexie, { Table } from 'dexie';
 import JSZip from 'jszip';
+import { ImageHostingService } from './image-hosting-service';
 
 // 游戏元数据接口
 export interface GameIndexItem {
@@ -193,24 +194,40 @@ export class GameStore {
 
   // 存储资产
   async storeAsset(blob: Blob, name: string, type: 'image' | 'audio' | 'video'): Promise<string> {
-    const assetId = this.generateId();
-    const now = new Date().toISOString();
+    if (type === 'image') {
+      const imageHostingService = new ImageHostingService();
+      const file = new File([blob], name, { type: blob.type });
+      const result = await imageHostingService.uploadImage(file);
+      
+      if (!result.success || !result.url) {
+        throw new Error('图片上传失败: ' + result.error);
+      }
+      
+      return result.url;
+    } else {
+      const assetId = this.generateId();
+      const now = new Date().toISOString();
 
-    const asset: AssetItem = {
-      id: assetId,
-      blob,
-      type,
-      name,
-      size: blob.size,
-      createdAt: now
-    };
+      const asset: AssetItem = {
+        id: assetId,
+        blob,
+        type,
+        name,
+        size: blob.size,
+        createdAt: now
+      };
 
-    await db.assets.add(asset);
-    return assetId;
+      await db.assets.add(asset);
+      return assetId;
+    }
   }
 
   // 获取资产
-  async getAsset(id: string): Promise<AssetItem | undefined> {
+  async getAsset(id: string): Promise<AssetItem | string | undefined> {
+    if (id.startsWith('http://') || id.startsWith('https://')) {
+      return id;
+    }
+    
     return await db.assets.get(id);
   }
 

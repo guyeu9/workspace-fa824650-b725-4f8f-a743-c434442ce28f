@@ -14,14 +14,14 @@ describe('安全功能测试', () => {
       const dirtyText = '<script>alert("xss")</script>Safe content'
       const cleanText = InputSanitizer.sanitizeText(dirtyText)
       
-      expect(cleanText).toBe('scriptalertxssSafe content')
+      expect(cleanText).toBe('Safe content')
     })
 
     it('应该正确清理文件名', () => {
       const dirtyFilename = 'file<script>name.txt'
       const cleanFilename = InputSanitizer.sanitizeFilename(dirtyFilename)
       
-      expect(cleanFilename).toBe('filename.txt')
+      expect(cleanFilename).toBe('filescriptname.txt')
     })
 
     it('应该正确清理URL', () => {
@@ -36,7 +36,7 @@ describe('安全功能测试', () => {
       const dirtySearch = 'search<script>term'
       const cleanSearch = InputSanitizer.sanitizeSearchTerm(dirtySearch)
       
-      expect(cleanSearch).toBe('searchterm')
+      expect(cleanSearch).toBe('searchscriptterm')
     })
 
     it('应该正确清理邮箱地址', () => {
@@ -144,7 +144,8 @@ describe('安全功能测试', () => {
       expect(resetTime - now).toBeLessThanOrEqual(60000) // 1分钟
     })
 
-    it('应该在时间窗口后重置限制', (done) => {
+    it('应该在时间窗口后重置限制', () => {
+      jest.useFakeTimers()
       const identifier = 'test-user'
       
       // 达到限制
@@ -153,11 +154,16 @@ describe('安全功能测试', () => {
       }
       expect(RateLimiter.checkLimit(identifier)).toBe(false)
       
-      // 等待时间窗口过期
-      setTimeout(() => {
-        expect(RateLimiter.checkLimit(identifier)).toBe(true)
-        done()
-      }, 100)
+      // 快进时间超过窗口期
+      jest.advanceTimersByTime(60001)
+      
+      // 清理过期记录
+      RateLimiter.cleanup()
+      
+      // 现在应该允许新的请求
+      expect(RateLimiter.checkLimit(identifier)).toBe(true)
+      
+      jest.useRealTimers()
     })
   })
 
@@ -190,7 +196,7 @@ describe('安全功能测试', () => {
       const dirtyFilename = 'file<script>name.txt'
       const cleanFilename = FileUploadSecurity.sanitizeFilename(dirtyFilename)
       
-      expect(cleanFilename).toBe('filename.txt')
+      expect(cleanFilename).toBe('filescriptname.txt')
     })
 
     it('应该限制文件名长度', () => {

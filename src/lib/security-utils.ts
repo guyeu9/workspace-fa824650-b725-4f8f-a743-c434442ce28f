@@ -32,6 +32,7 @@ export class InputSanitizer {
   // 清理纯文本
   static sanitizeText(text: string): string {
     return text
+      .replace(/<script[^>]*>.*?<\/script>/gi, '') // 移除script标签
       .replace(/[<>\"'&]/g, '') // 移除HTML特殊字符
       .trim()
   }
@@ -60,6 +61,7 @@ export class InputSanitizer {
   // 清理搜索词
   static sanitizeSearchTerm(term: string): string {
     return term
+      .replace(/<script[^>]*>.*?<\/script>/gi, '') // 移除script标签
       .replace(/[^\w\s\u4e00-\u9fa5]/g, '') // 只允许字母、数字、空格、中文
       .trim()
       .substring(0, 100) // 限制长度
@@ -88,7 +90,11 @@ export class InputSanitizer {
   // 清理用户代理字符串
   static sanitizeUserAgent(userAgent: string): string {
     return userAgent
+      .replace(/<script[^>]*>/gi, 'script') // 移除script开始标签，保留script文本
+      .replace(/<\/script>/gi, '') // 移除script结束标签
       .replace(/[<>\"'&]/g, '') // 移除HTML特殊字符
+      .replace(/\(/g, '') // 移除左括号
+      .replace(/\)/g, '') // 移除右括号
       .substring(0, 500) // 限制长度
       .trim()
   }
@@ -179,9 +185,16 @@ export class SqlInjectionProtection {
   static sanitizeInput(input: string): string {
     let sanitized = input
 
-    // 移除危险字符
+    // 移除危险关键字（不区分大小写）
+    for (const keyword of this.DANGEROUS_KEYWORDS) {
+      const regex = new RegExp(keyword, 'gi')
+      sanitized = sanitized.replace(regex, '')
+    }
+
+    // 移除危险字符（需要转义正则表达式中的特殊字符）
     for (const char of this.DANGEROUS_CHARS) {
-      sanitized = sanitized.replace(new RegExp(char, 'gi'), '')
+      const escapedChar = char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+      sanitized = sanitized.replace(new RegExp(escapedChar, 'gi'), '')
     }
 
     // 移除SQL注释

@@ -124,15 +124,18 @@ export default function EnhancedGameEditor() {
 
   // 保存游戏数据
   const saveGame = useCallback(async () => {
+    if (!gameData.game_title.trim()) {
+      toast.error('请输入游戏标题');
+      return;
+    }
+
     try {
-      // 创建包含背景图片信息的完整游戏数据
       const gameDataWithBg = {
         ...gameData,
         background_image: bgImageUrl,
         background_asset_id: bgAssetId
       };
 
-      // 保存到IndexedDB
       await gameStore.createGame(
         gameData.game_title,
         gameDataWithBg,
@@ -288,18 +291,26 @@ export default function EnhancedGameEditor() {
       toast.warning('游戏至少需要一个分支');
       return;
     }
-    
-    setGameData(prev => ({
-      ...prev,
-      branches: prev.branches.filter((_, i) => i !== index)
-    }));
-    
-    if (currentBranchIndex >= gameData.branches.length - 1) {
-      setCurrentBranchIndex(gameData.branches.length - 2);
-    }
-    
+
+    setGameData(prev => {
+      const newBranches = prev.branches.filter((_, i) => i !== index);
+      const newLength = newBranches.length;
+
+      setCurrentBranchIndex(prevIndex => {
+        if (prevIndex >= newLength) {
+          return newLength - 1;
+        }
+        return prevIndex;
+      });
+
+      return {
+        ...prev,
+        branches: newBranches
+      };
+    });
+
     setHasChanges(true);
-  }, [gameData.branches.length, currentBranchIndex]);
+  }, [gameData.branches.length]);
 
   // 测试游戏
   const testGame = useCallback(() => {

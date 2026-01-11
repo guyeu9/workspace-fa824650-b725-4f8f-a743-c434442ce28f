@@ -1,5 +1,6 @@
 import JSZip from 'jszip';
 import { gameStore, ImportResult, ValidationResult } from './game-store';
+import { ImageUrlValidator } from './image-url-validator';
 
 // 游戏数据验证器
 export class GameDataValidator {
@@ -21,6 +22,15 @@ export class GameDataValidator {
     if (!data.branches && !data.scenes) {
       errors.push('缺少游戏分支或场景数据');
     }
+
+    // 验证图片URL
+    const imageUrls = ImageUrlValidator.extractImageUrls(data);
+    imageUrls.forEach(url => {
+      const validation = ImageUrlValidator.validateUrl(url);
+      if (!validation.valid) {
+        errors.push(`无效的图片URL: ${url} - ${validation.error}`);
+      }
+    });
 
     // 分支验证
     if (data.branches) {
@@ -136,7 +146,6 @@ export class GameDataValidator {
 
   // 提取缩略图
   static extractThumbnail(data: any): string | null {
-    // 尝试从各种可能的字段中提取缩略图
     const possibleFields = [
       'thumbnail',
       'cover_image',
@@ -148,16 +157,23 @@ export class GameDataValidator {
 
     for (const field of possibleFields) {
       if (data[field]) {
-        return data[field];
+        const value = data[field];
+        if (typeof value === 'string' && (value.startsWith('http://') || value.startsWith('https://'))) {
+          return value;
+        }
+        return value;
       }
     }
 
-    // 如果没有明确的缩略图，尝试从第一个分支提取
     if (data.branches && data.branches.length > 0) {
       const firstBranch = data.branches[0];
       for (const field of possibleFields) {
         if (firstBranch[field]) {
-          return firstBranch[field];
+          const value = firstBranch[field];
+          if (typeof value === 'string' && (value.startsWith('http://') || value.startsWith('https://'))) {
+            return value;
+          }
+          return value;
         }
       }
     }
@@ -277,16 +293,23 @@ export class GamePackImporter {
           let backgroundAssetId: string | undefined;
 
           if (metadata.thumbnail) {
-            // 查找对应的资产文件
-            const assetFile = assetFiles.get(metadata.thumbnail) || 
-                             Array.from(assetFiles.values()).find(f => 
-                               f.name.includes(metadata.thumbnail!) || 
-                               metadata.thumbnail!.includes(f.name)
-                             );
-            
-            if (assetFile) {
-              const blob = await assetFile.async('blob');
-              thumbnailAssetId = await gameStore.storeAsset(blob, assetFile.name, 'image');
+            // 检查是否是图床URL
+            if (typeof metadata.thumbnail === 'string' && 
+                (metadata.thumbnail.startsWith('http://') || metadata.thumbnail.startsWith('https://'))) {
+              // 直接使用图床URL
+              thumbnailAssetId = metadata.thumbnail;
+            } else {
+              // 查找对应的资产文件
+              const assetFile = assetFiles.get(metadata.thumbnail) || 
+                               Array.from(assetFiles.values()).find(f => 
+                                 f.name.includes(metadata.thumbnail!) || 
+                                 metadata.thumbnail!.includes(f.name)
+                               );
+              
+              if (assetFile) {
+                const blob = await assetFile.async('blob');
+                thumbnailAssetId = await gameStore.storeAsset(blob, assetFile.name, 'image');
+              }
             }
           }
 

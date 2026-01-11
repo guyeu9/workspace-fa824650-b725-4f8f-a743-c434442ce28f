@@ -15,7 +15,7 @@ import {
   FileImage,
   RefreshCw
 } from 'lucide-react';
-import { gameStore } from '@/lib/game-store';
+import { ImageHostingService } from '@/lib/image-hosting-service';
 
 interface FileUploadProps {
   gameId: string;
@@ -69,24 +69,23 @@ export function FileUpload({
     setIsUploading(true);
 
     try {
-      // 模拟上传进度
-      setUploadProgress(10);
+      // 上传到图床
+      const imageHostingService = new ImageHostingService();
+      const result = await imageHostingService.uploadImage(file, (progress) => {
+        setUploadProgress(progress.percentage);
+      });
       
-      // 创建预览URL
-      const objectUrl = URL.createObjectURL(file);
-      setPreviewUrl(objectUrl);
-      setUploadProgress(50);
+      if (!result.success || !result.url) {
+        throw new Error(result.error || '上传失败');
+      }
 
-      // 存储到IndexedDB
-      const assetId = await gameStore.storeAsset(file, file.name, 'image');
-      setUploadProgress(80);
-
-      // 通知父组件
+      // 通知父组件（返回图床URL）
       if (onImageUploaded) {
-        onImageUploaded(assetId, objectUrl);
+        onImageUploaded(result.url, result.url);
       }
       
-      setUploadProgress(100);
+      setPreviewUrl(result.url);
+      
       setTimeout(() => {
         setIsUploading(false);
         setUploadProgress(0);

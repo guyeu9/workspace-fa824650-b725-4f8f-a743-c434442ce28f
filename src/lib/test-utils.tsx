@@ -104,11 +104,15 @@ export const TestDataFactory = {
       id: 'test-game-1',
       title: 'Test Game',
       description: 'A test game',
-      coverUrl: null,
-      authorId: 'test-user-1',
-      jsonData: {
-        game_title: 'Test Game',
-        branches: [],
+      data: {
+        metadata: {
+          game_title: 'Test Game',
+          branches: [],
+        },
+        data: {
+          game_title: 'Test Game',
+          branches: [],
+        },
       },
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),

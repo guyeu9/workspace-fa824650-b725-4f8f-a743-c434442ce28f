@@ -1,5 +1,16 @@
-import { GameData } from '@/lib/game-store'
 import pako from 'pako'
+
+export interface GameData {
+  id: string
+  title: string
+  description?: string
+  data: {
+    metadata: any
+    data: any
+  }
+  createdAt: string
+  updatedAt: string
+}
 
 export interface BackupMetadata {
   version: string
@@ -236,14 +247,16 @@ export class GameLibraryBackup {
     try {
       const jsonString = JSON.stringify(backupData)
       
-      // 使用pako进行压缩（比Base64更高效）
-      const compressed = pako.deflate(jsonString, { 
-        level: 6, 
-        to: 'string' 
-      })
+      const encoder = new TextEncoder()
+      const uint8Array = encoder.encode(jsonString)
       
-      // 转换为Base64以便存储
-      return btoa(compressed)
+      let binaryString = ''
+      const len = uint8Array.length
+      for (let i = 0; i < len; i++) {
+        binaryString += String.fromCharCode(uint8Array[i])
+      }
+      
+      return btoa(binaryString)
     } catch (error) {
       console.error('压缩备份失败:', error)
       throw new Error('压缩备份失败')
@@ -255,13 +268,16 @@ export class GameLibraryBackup {
    */
   static async decompressBackup(compressedData: string): Promise<BackupData> {
     try {
-      // 从Base64解码
-      const compressed = atob(compressedData)
+      const binaryString = atob(compressedData)
+      const len = binaryString.length
       
-      // 使用pako解压
-      const jsonString = pako.inflate(compressed, { 
-        to: 'string' 
-      })
+      const uint8Array = new Uint8Array(len)
+      for (let i = 0; i < len; i++) {
+        uint8Array[i] = binaryString.charCodeAt(i)
+      }
+      
+      const decoder = new TextDecoder()
+      const jsonString = decoder.decode(uint8Array)
       
       return JSON.parse(jsonString)
     } catch (error) {

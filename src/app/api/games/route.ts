@@ -117,11 +117,22 @@ export async function POST(request: NextRequest) {
     return new Response('Invalid JSON content', { status: 400 })
   }
 
+  let finalCoverUrl: string | null = null
+  
+  if (typeof coverUrl === 'string' && coverUrl.trim().length > 0) {
+    const trimmedUrl = coverUrl.trim()
+    if (trimmedUrl.startsWith('http://') || trimmedUrl.startsWith('https://')) {
+      finalCoverUrl = trimmedUrl
+    } else {
+      return new Response('Invalid cover URL. Must be a valid image hosting URL', { status: 400 })
+    }
+  }
+
   const game = await db.game.create({
     data: {
       title: title.trim(),
       description: typeof description === 'string' ? description : null,
-      coverUrl: typeof coverUrl === 'string' && coverUrl.trim().length > 0 ? coverUrl.trim() : null,
+      coverUrl: finalCoverUrl,
       jsonData,
       authorId: user.id,
     },

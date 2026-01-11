@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { TestUtils, TestDataFactory } from '@/lib/test-utils'
 import VoteButtons from '@/components/community/VoteButtons'
 import CommentsSection from '@/components/community/CommentsSection'
-import { SessionProvider } from 'next-auth/react'
+import { SessionProvider, useSession } from 'next-auth/react'
 
 // 模拟API调用
 jest.mock('@/lib/api-client', () => ({
@@ -11,6 +11,14 @@ jest.mock('@/lib/api-client', () => ({
     get: jest.fn(),
     post: jest.fn(),
   },
+}))
+
+// 模拟 toast
+jest.mock('@/hooks/use-toast', () => ({
+  useToast: () => ({
+    toast: jest.fn(),
+    dismiss: jest.fn(),
+  }),
 }))
 
 describe('社区互动功能测试', () => {
@@ -40,6 +48,18 @@ describe('社区互动功能测试', () => {
       const mockPost = jest.fn().mockResolvedValue({ success: false })
       require('@/lib/api-client').apiClient.post = mockPost
 
+      const mockUseSession = jest.fn(() => ({
+        data: null,
+        status: 'unauthenticated',
+      }))
+      jest.spyOn(require('next-auth/react'), 'useSession').mockImplementation(mockUseSession)
+
+      const mockToast = jest.fn()
+      jest.spyOn(require('@/hooks/use-toast'), 'useToast').mockReturnValue({
+        toast: mockToast,
+        dismiss: jest.fn(),
+      })
+
       render(
         <VoteButtons
           gameId={mockGameId}
@@ -48,11 +68,17 @@ describe('社区互动功能测试', () => {
         />
       )
 
-      const upvoteButton = screen.getByRole('button', { name: /👍/i })
+      const upvoteButton = screen.getByRole('button', { name: `${mockInitialUpvotes}` })
       await userEvent.click(upvoteButton)
 
       await waitFor(() => {
-        expect(screen.getByText('请先登录')).toBeInTheDocument()
+        expect(mockToast).toHaveBeenCalledWith(
+          expect.objectContaining({
+            title: '请先登录',
+            description: '登录后才能进行投票',
+            variant: 'destructive',
+          })
+        )
       })
     })
 
@@ -65,6 +91,18 @@ describe('社区互动功能测试', () => {
         status: 'authenticated',
       }
 
+      const mockUseSession = jest.fn(() => ({
+        data: mockSession,
+        status: 'authenticated',
+      }))
+      jest.spyOn(require('next-auth/react'), 'useSession').mockImplementation(mockUseSession)
+
+      const mockToast = jest.fn()
+      jest.spyOn(require('@/hooks/use-toast'), 'useToast').mockReturnValue({
+        toast: mockToast,
+        dismiss: jest.fn(),
+      })
+
       render(
         <SessionProvider session={mockSession}>
           <VoteButtons
@@ -75,7 +113,7 @@ describe('社区互动功能测试', () => {
         </SessionProvider>
       )
 
-      const upvoteButton = screen.getByRole('button', { name: /👍/i })
+      const upvoteButton = screen.getByRole('button', { name: `${mockInitialUpvotes}` })
       await userEvent.click(upvoteButton)
 
       await waitFor(() => {
@@ -95,6 +133,18 @@ describe('社区互动功能测试', () => {
         status: 'authenticated',
       }
 
+      const mockUseSession = jest.fn(() => ({
+        data: mockSession,
+        status: 'authenticated',
+      }))
+      jest.spyOn(require('next-auth/react'), 'useSession').mockImplementation(mockUseSession)
+
+      const mockToast = jest.fn()
+      jest.spyOn(require('@/hooks/use-toast'), 'useToast').mockReturnValue({
+        toast: mockToast,
+        dismiss: jest.fn(),
+      })
+
       render(
         <SessionProvider session={mockSession}>
           <VoteButtons
@@ -106,7 +156,7 @@ describe('社区互动功能测试', () => {
         </SessionProvider>
       )
 
-      const upvoteButton = screen.getByRole('button', { name: /👍/i })
+      const upvoteButton = screen.getByRole('button', { name: `${mockInitialUpvotes}` })
       await userEvent.click(upvoteButton)
 
       await waitFor(() => {
@@ -151,14 +201,22 @@ describe('社区互动功能测试', () => {
       })
     })
 
-    it('应该显示登录提示当用户未登录时', () => {
+    it('应该显示登录提示当用户未登录时', async () => {
+      const mockUseSession = jest.fn(() => ({
+        data: null,
+        status: 'unauthenticated',
+      }))
+      jest.spyOn(require('next-auth/react'), 'useSession').mockImplementation(mockUseSession)
+
       render(
         <SessionProvider session={null}>
           <CommentsSection gameId={mockGameId} />
         </SessionProvider>
       )
 
-      expect(screen.getByText('请登录后发表评论')).toBeInTheDocument()
+      await waitFor(() => {
+        expect(screen.getByText('请登录后发表评论')).toBeInTheDocument()
+      })
     })
 
     it('应该正确处理评论发表', async () => {
@@ -175,6 +233,12 @@ describe('社区互动功能测试', () => {
         user: { id: '1', name: 'Test User', email: 'test@example.com' },
         status: 'authenticated',
       }
+
+      const mockUseSession = jest.fn(() => ({
+        data: mockSession,
+        status: 'authenticated',
+      }))
+      jest.spyOn(require('next-auth/react'), 'useSession').mockImplementation(mockUseSession)
 
       render(
         <SessionProvider session={mockSession}>
@@ -208,6 +272,18 @@ describe('社区互动功能测试', () => {
         status: 'authenticated',
       }
 
+      const mockUseSession = jest.fn(() => ({
+        data: mockSession,
+        status: 'authenticated',
+      }))
+      jest.spyOn(require('next-auth/react'), 'useSession').mockImplementation(mockUseSession)
+
+      const mockToast = jest.fn()
+      jest.spyOn(require('@/hooks/use-toast'), 'useToast').mockReturnValue({
+        toast: mockToast,
+        dismiss: jest.fn(),
+      })
+
       render(
         <SessionProvider session={mockSession}>
           <CommentsSection gameId={mockGameId} />
@@ -221,7 +297,13 @@ describe('社区互动功能测试', () => {
       await userEvent.click(submitButton)
 
       await waitFor(() => {
-        expect(screen.getByText('发表失败')).toBeInTheDocument()
+        expect(mockToast).toHaveBeenCalledWith(
+          expect.objectContaining({
+            title: '发表评论失败',
+            description: '发表失败',
+            variant: 'destructive',
+          })
+        )
       })
     })
 
@@ -231,6 +313,18 @@ describe('社区互动功能测试', () => {
         status: 'authenticated',
       }
 
+      const mockUseSession = jest.fn(() => ({
+        data: mockSession,
+        status: 'authenticated',
+      }))
+      jest.spyOn(require('next-auth/react'), 'useSession').mockImplementation(mockUseSession)
+
+      const mockToast = jest.fn()
+      jest.spyOn(require('@/hooks/use-toast'), 'useToast').mockReturnValue({
+        toast: mockToast,
+        dismiss: jest.fn(),
+      })
+
       render(
         <SessionProvider session={mockSession}>
           <CommentsSection gameId={mockGameId} />
@@ -238,15 +332,20 @@ describe('社区互动功能测试', () => {
       )
 
       const submitButton = screen.getByRole('button', { name: /发表评论/i })
+      
+      expect(submitButton).toBeDisabled()
+
       await userEvent.click(submitButton)
 
       await waitFor(() => {
-        expect(screen.getByText('评论内容不能为空')).toBeInTheDocument()
+        expect(mockToast).not.toHaveBeenCalled()
       })
     })
   })
 
   describe('性能测试', () => {
+    const mockGameId = 'test-game-1'
+
     it('应该快速渲染大量评论', () => {
       const manyComments = Array.from({ length: 100 }, (_, i) =>
         TestDataFactory.createComment({
@@ -261,6 +360,12 @@ describe('社区互动功能测试', () => {
         data: { items: manyComments },
       })
       require('@/lib/api-client').apiClient.get = mockGet
+
+      const mockUseSession = jest.fn(() => ({
+        data: null,
+        status: 'unauthenticated',
+      }))
+      jest.spyOn(require('next-auth/react'), 'useSession').mockImplementation(mockUseSession)
 
       const startTime = performance.now()
       
@@ -290,6 +395,12 @@ describe('社区互动功能测试', () => {
         user: { id: '1', name: 'Test User', email: 'test@example.com' },
         status: 'authenticated',
       }
+
+      const mockUseSession = jest.fn(() => ({
+        data: mockSession,
+        status: 'authenticated',
+      }))
+      jest.spyOn(require('next-auth/react'), 'useSession').mockImplementation(mockUseSession)
 
       render(
         <SessionProvider session={mockSession}>

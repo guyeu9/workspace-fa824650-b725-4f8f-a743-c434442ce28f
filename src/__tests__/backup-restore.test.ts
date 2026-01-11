@@ -287,6 +287,19 @@ describe('游戏库备份恢复功能测试', () => {
   })
 
   describe('文件操作测试', () => {
+    const mockGames = [
+      TestDataFactory.createGame({
+        id: 'game-1',
+        title: 'Test Game 1',
+        description: 'Description 1',
+      }),
+      TestDataFactory.createGame({
+        id: 'game-2',
+        title: 'Test Game 2',
+        description: 'Description 2',
+      }),
+    ]
+
     // 注意：由于测试环境的限制，文件导出/导入功能需要特殊处理
     // 这里主要测试逻辑，实际的文件操作需要集成测试
 
