@@ -67,8 +67,9 @@ export async function GET(request: NextRequest) {
     })
   } catch (error) {
     console.error('获取用户列表失败:', error)
+    const errorMessage = error instanceof Error ? error.message : '未知错误'
     return NextResponse.json(
-      { error: '获取用户列表失败' },
+      { error: '获取用户列表失败', details: errorMessage },
       { status: 500 }
     )
   }

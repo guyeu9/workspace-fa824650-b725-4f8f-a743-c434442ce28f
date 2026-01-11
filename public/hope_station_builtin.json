@@ -1,0 +1,451 @@
+{
+  "game_title": "希望号 - 深空求生",
+  "description": "一艘探索宇宙深处的科研飞船「希望号」接收到了来自『忒修斯』科研空间站的求救信号。作为指挥官，你需要探索空间站，揭开真相，做出艰难的抉择。",
+  "author": "DeepSeek",
+  "tags": ["科幻", "悬疑", "探索", "生存"],
+  "version": 1.0,
+  "background_image": "",
+  "background_asset_id": "",
+  "branches": [
+    {
+      "branch_id": "spaceship_bridge",
+      "branch_title": "「希望号」舰桥 - 寂静中的蜂鸣",
+      "content": "「希望号」的舰桥浸没在深海般的幽蓝光线中。全息星图在中央无声旋转，投射出斑驳的光斑，洒在冰冷的合金甲板上。\n\n主屏幕上，一行猩红的文字反复闪烁：【未知源求救信号 - 坐标锁定 - 起源：『忒修斯』科研空间站 - 状态：███】。\n\n除了设备低沉的嗡鸣，这里只剩下你呼吸的声音。空气里有一股臭氧和旧电路板混合的、属于星舰的独特气味。",
+      "options": [
+        {
+          "option_id": "opt_to_medical",
+          "option_text": "前往医疗舱（右舷）",
+          "target_branch_id": "medical_bay"
+        },
+        {
+          "option_id": "opt_to_cargo",
+          "option_text": "前往货运舱（下层甲板）",
+          "target_branch_id": "cargo_bay"
+        },
+        {
+          "option_id": "opt_to_engineering",
+          "option_text": "深入工程核心（左舷禁区）",
+          "target_branch_id": "engineering_bay",
+          "conditions": [
+            {
+              "type": "hasItem",
+              "key": "engineer_keycard",
+              "operator": "eq",
+              "value": true
+            }
+          ]
+        },
+        {
+          "option_id": "opt_to_station",
+          "option_text": "启动跃迁，前往『忒修斯』站（响应求救）",
+          "target_branch_id": "space_station_docking",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "warp_warning",
+              "value": "『塞壬』：『跃迁坐标已设定。警告：未知生物信号读数极高。建议全舰战备。』"
+            },
+            {
+              "type": "show_message",
+              "key": "warp_effect",
+              "value": "引擎发出巨兽苏醒般的咆哮，窗外的星辰被拉成光之河流。你正驶向黑暗的中心。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "branch_id": "medical_bay",
+      "branch_title": "医疗舱 - 过载的镇静剂气味",
+      "content": "惨白的无影灯照亮了纤尘不染的医疗舱。自动手术台处于待命状态，机械臂悬挂如沉睡的蜘蛛。\n\n药柜的玻璃上有几道细密的裂痕，似乎曾有过激烈的挣扎。一份被撕去大半的日志散落在地。",
+      "options": [
+        {
+          "option_id": "opt_take_medkit",
+          "option_text": "拾取纳米急救喷雾",
+          "target_branch_id": "medical_bay",
+          "consequences": [
+            {
+              "type": "add_item",
+              "key": "medkit",
+              "value": "纳米急救喷雾"
+            },
+            {
+              "type": "show_message",
+              "key": "medkit_take",
+              "value": "你将它别在腰带上。冰冷的触感带来一丝安心。"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_take_log_page",
+          "option_text": "拾取残缺的日志页",
+          "target_branch_id": "medical_bay",
+          "consequences": [
+            {
+              "type": "add_item",
+              "key": "log_page",
+              "value": "残缺的日志页"
+            },
+            {
+              "type": "show_message",
+              "key": "log_take",
+              "value": "纸张边缘粗糙，仿佛被匆忙撕下。"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_back_bridge",
+          "option_text": "返回舰桥",
+          "target_branch_id": "spaceship_bridge"
+        }
+      ]
+    },
+    {
+      "branch_id": "cargo_bay",
+      "branch_title": "货运舱 - 阴影中的集装箱迷宫",
+      "content": "巨大的仓储空间里，标准集装箱堆砌成沉默的钢铁山脉。仅有几盏应急灯提供照明，在角落投下深不见底的黑暗。\n\n空气循环系统似乎有故障，弥漫着一股铁锈和……若有若无的甜腥味。你的脚步声在这里产生悠长的回音。",
+      "options": [
+        {
+          "option_id": "opt_take_keycard",
+          "option_text": "拾取工程师权限卡",
+          "target_branch_id": "cargo_bay",
+          "consequences": [
+            {
+              "type": "add_item",
+              "key": "engineer_keycard",
+              "value": "工程师权限卡"
+            },
+            {
+              "type": "show_message",
+              "key": "keycard_take",
+              "value": "你在一个打翻的工具箱下面找到了它。"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_take_torch",
+          "option_text": "拾取切割火炬",
+          "target_branch_id": "cargo_bay",
+          "consequences": [
+            {
+              "type": "add_item",
+              "key": "torch",
+              "value": "切割火炬"
+            },
+            {
+              "type": "show_message",
+              "key": "torch_take",
+              "value": "手柄很重，但能量读数满格。"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_back_bridge",
+          "option_text": "返回舰桥",
+          "target_branch_id": "spaceship_bridge"
+        }
+      ]
+    },
+    {
+      "branch_id": "engineering_bay",
+      "branch_title": "工程核心 - 战舰的心脏与伤疤",
+      "content": "这里是「希望号」的动力源泉，也是它的旧伤所在。巨大的聚变反应堆被包裹在厚重的铅硼玻璃后，散发着迷人的蔚蓝光辉。\n\n但一侧的舱壁布满了狰狞的撞击凹痕和已经发黑的能量灼迹——一次旧战斗的纪念。控制台上，一个鲜红的【自毁系统覆写】按钮被锁在透明护盖下。",
+      "options": [
+        {
+          "option_id": "opt_take_report",
+          "option_text": "拾取反应堆状态报告",
+          "target_branch_id": "engineering_bay",
+          "consequences": [
+            {
+              "type": "add_item",
+              "key": "report",
+              "value": "反应堆状态报告"
+            },
+            {
+              "type": "show_message",
+              "key": "report_take",
+              "value": "报告纸上的图表曲线疯狂跳跃，触目惊心。"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_back_bridge",
+          "option_text": "返回舰桥",
+          "target_branch_id": "spaceship_bridge"
+        }
+      ]
+    },
+    {
+      "branch_id": "space_station_docking",
+      "branch_title": "「忒修斯」站对接舱 - 失血的巨兽",
+      "content": "对接成功。但迎接你的不是气闸开启的嘶鸣，而是死寂。\n\n「忒修斯」站的对接舱像一具巨大的金属棺椁。灯光全部失效，只有你头盔射灯切割出的光锥。墙壁上覆盖着一层搏动着的、半透明的生物膜状物质，如同站点的血管瘤。\n\n远处，规律的、如同心跳般的"咚……咚……"声透过船体传来。",
+      "options": [
+        {
+          "option_id": "opt_to_core",
+          "option_text": "前往主控室（深入）",
+          "target_branch_id": "space_station_core"
+        },
+        {
+          "option_id": "opt_to_vent",
+          "option_text": "沿维修管道爬行（潜入）",
+          "target_branch_id": "space_station_vent",
+          "conditions": [
+            {
+              "type": "hasItem",
+              "key": "torch",
+              "operator": "eq",
+              "value": true
+            }
+          ],
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "vent_enter",
+              "value": "你使用切割火炬撬开了通风管道的格栅，钻入了更加狭窄、黑暗的通道。"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_abort",
+          "option_text": "紧急返回希望号（撤退）",
+          "target_branch_id": "spaceship_bridge",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "abort_fear",
+              "value": "恐惧压倒了你。你仓促撤回飞船，断开了对接。"
+            },
+            {
+              "type": "show_message",
+              "key": "abort_vision",
+              "value": "在你逃离的最后一刻，通过舷窗看到，空间站外部似乎有巨大的、软组织构成的触须缓缓拂过。"
+            },
+            {
+              "type": "end_game",
+              "key": "escape_ending",
+              "value": "【结局分支：可理解的溃逃】你活了下来，但噩梦将常伴左右。游戏结束。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "branch_id": "space_station_vent",
+      "branch_title": "维修管道 - 钢铁的肠道",
+      "content": "你在一团漆黑中爬行。管道内壁湿滑粘腻，那层生物膜在这里更厚了，甚至能感觉到微弱的脉动。\n\n唯一的光源是你的头盔灯，它照出前方管道壁上几个巨大的、被暴力撕开的破口。",
+      "options": [
+        {
+          "option_id": "opt_take_id_tag",
+          "option_text": "拾取研究员的身份牌",
+          "target_branch_id": "space_station_vent",
+          "consequences": [
+            {
+              "type": "add_item",
+              "key": "id_tag",
+              "value": "研究员的身份牌"
+            },
+            {
+              "type": "show_message",
+              "key": "id_take",
+              "value": "金属牌冰冷刺骨。"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_forward",
+          "option_text": "爬向主控室方向（向前）",
+          "target_branch_id": "space_station_core"
+        },
+        {
+          "option_id": "opt_back_docking",
+          "option_text": "后退，返回对接舱",
+          "target_branch_id": "space_station_docking"
+        }
+      ]
+    },
+    {
+      "branch_id": "space_station_core",
+      "branch_title": "主控室 - 进化之茧",
+      "content": "这里曾是空间站的大脑，现在则变成了一个怪诞的生物腔室。\n\n控制台被扭曲增生的血肉组织包裹、融合，屏幕的光芒从半透明的组织下透出，显示着疯狂跳动的数据。房间中央，一个由电缆、金属和生物组织构成的巨大"茧"正在缓慢搏动。\n\n那个悬浮的AI核心——"向导"，其外壳已被类似的生物组织部分侵蚀，光芒明灭不定。",
+      "options": [
+        {
+          "option_id": "opt_ask_what",
+          "option_text": "质问这里发生的一切",
+          "target_branch_id": "space_station_core",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "ai_response_what",
+              "value": "实……验……成功……也失败了……伊莱恩博士……她渴望超越血肉的脆弱……她……与'源质'融合了……现在……她是这座站的……心脏……和癌症……"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_ask_how",
+          "option_text": "询问阻止这一切的方法",
+          "target_branch_id": "space_station_core",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "ai_response_how",
+              "value": "两个……选择……\n一……启动实验室的……净化协议（需能量核心）……焚烧一切……但博士……也会死……\n二……接入主控台……尝试用强电击……剥离生物网络……风险……巨大……可能加速扩散……\n三……最彻底……从外部……引爆反应堆……或启动……希望号的自毁……同归于尽……"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_ask_core",
+          "option_text": "询问能量核心的位置",
+          "target_branch_id": "space_station_core",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "ai_response_core",
+              "value": "能源舱……但那里……已被……最强的'守护者'占据……它是……博士的……'得意之作'……"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_goodbye",
+          "option_text": "结束这令人不适的对话",
+          "target_branch_id": "space_station_core",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "ai_goodbye",
+              "value": "祝……好运……人类……或者……欢迎……加入……进化……"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_use_console",
+          "option_text": "使用主控台覆写接口",
+          "target_branch_id": "space_station_core",
+          "conditions": [
+            {
+              "type": "hasItem",
+              "key": "id_tag",
+              "operator": "eq",
+              "value": true
+            }
+          ],
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "console_options",
+              "value": "你面前浮现两个血红色的选项："
+            }
+          ]
+        },
+        {
+          "option_id": "opt_to_power",
+          "option_text": "前往能源舱（最深处）",
+          "target_branch_id": "power_core_chamber"
+        },
+        {
+          "option_id": "opt_escape",
+          "option_text": "返回对接舱（撤离）",
+          "target_branch_id": "space_station_docking"
+        }
+      ]
+    },
+    {
+      "branch_id": "power_core_chamber",
+      "branch_title": "能源舱 - 活体反应堆",
+      "content": "你见到了"守护者"。\n\n一个庞大的、由反应堆管道与 pulsating 生物组织融合而成的怪物盘踞在房间中央，它没有固定的形态，无数鞭毛般的触手在空中缓缓舞动，核心处一张模糊的、类似伊莱恩博士面孔的轮廓在痛苦地扭曲。\n\n能量核心就在它身躯的下方，闪烁着诱人的、未被污染的光芒。",
+      "options": [
+        {
+          "option_id": "opt_take_core",
+          "option_text": "拾取未污染的能量核心",
+          "target_branch_id": "power_core_chamber",
+          "consequences": [
+            {
+              "type": "add_item",
+              "key": "energy_core",
+              "value": "未污染的能量核心"
+            },
+            {
+              "type": "show_message",
+              "key": "core_take",
+              "value": "你必须在躲避触手攻击的同时拿到它！（需要掷一个虚拟的运气检定……）"
+            },
+            {
+              "type": "show_message",
+              "key": "core_success",
+              "value": "……你侥幸成功！触手的猛击擦过你的装甲，但你牢牢抓住了核心！现在，必须立刻决定如何使用它！"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_purge",
+          "option_text": "立刻返回主控室启动净化",
+          "target_branch_id": "space_station_core",
+          "conditions": [
+            {
+              "type": "hasItem",
+              "key": "energy_core",
+              "operator": "eq",
+              "value": true
+            }
+          ],
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "purge_escape",
+              "value": "你抱着核心，在狂舞的触手间亡命奔逃，冲回主控室！"
+            },
+            {
+              "type": "show_message",
+              "key": "purge_activate",
+              "value": "将核心插入接口！冰冷的机械音响起：『净化协议启动。高温等离子流将在60秒内充斥所有管道。』"
+            },
+            {
+              "type": "show_message",
+              "key": "purge_scream",
+              "value": "你冲向对接舱。身后传来非人的哀嚎与灼热的光暴。"
+            },
+            {
+              "type": "end_game",
+              "key": "purge_ending",
+              "value": "【结局分支：悲悯的焚化】你终结了痛苦，也抹去了一切。返回舰桥，星空依旧沉默。"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_fight",
+          "option_text": "在此地用切割火炬殊死一搏",
+          "target_branch_id": "power_core_chamber",
+          "conditions": [
+            {
+              "type": "hasItem",
+              "key": "torch",
+              "operator": "eq",
+              "value": true
+            }
+          ],
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "fight_attack",
+              "value": "你没有逃跑，而是举起切割火炬，冲向那扭曲的核心！"
+            },
+            {
+              "type": "show_message",
+              "key": "fight_explosion",
+              "value": "高能等离子流与生物组织激烈反应，引发剧烈的爆炸！你被气浪抛飞……"
+            },
+            {
+              "type": "show_message",
+              "key": "fight_wake",
+              "value": "……醒来时，你躺在废墟中。怪物化为焦炭，空间站结构严重受损，正发出解体呻吟。你勉强爬回飞船。"
+            },
+            {
+              "type": "end_game",
+              "key": "fight_ending",
+              "value": "【结局分支：英勇的疯狂】你赢得了九死一生的胜利，但「希望号」也伤痕累累。未来，依旧漫长。"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

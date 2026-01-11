@@ -30,7 +30,9 @@ import {
   RefreshCw,
   MessageSquare,
   ThumbsUp,
-  ThumbsDown
+  ThumbsDown,
+  ChevronUp,
+  ChevronDown
 } from 'lucide-react';
 import { PlatformFileDownloader } from '@/lib/platform-file-download';
 import VoteButtons from '@/components/community/VoteButtons';
@@ -72,14 +74,6 @@ export default function GameLibraryPage() {
         if (searchTerm && !game.title.toLowerCase().includes(searchTerm.toLowerCase()) && 
             !game.description?.toLowerCase().includes(searchTerm.toLowerCase())) {
           return false;
-        }
-        
-        // 优先级筛选
-        if (filterPriority !== 'all') {
-          const priorityMap = { 'high': 2, 'medium': 1, 'low': 0 };
-          if (game.priority !== priorityMap[filterPriority]) {
-            return false;
-          }
         }
         
         return true;
@@ -253,7 +247,7 @@ export default function GameLibraryPage() {
   };
 
   // 批量调整优先级
-  const handleBatchPriority = async (priority: number) => {
+  const handleBatchPriority = async (action: 'up' | 'down' | 'top') => {
     if (selectedGames.size === 0) {
       toast.error('请选择要调整优先级的游戏');
       return;
@@ -263,10 +257,25 @@ export default function GameLibraryPage() {
       for (const gameId of selectedGames) {
         const game = games.find(g => g.id === gameId);
         if (game) {
-          await gameStore.updateGameMetadata(gameId, { ...game, priority });
+          let newPriority: number;
+          if (action === 'top') {
+            // 置顶：设置为优先级0（显示为1）
+            newPriority = 0;
+          } else {
+            // 上移：优先级-1（不低于0）
+            // 下移：优先级+1
+            newPriority = action === 'up' ? Math.max(0, game.priority - 1) : game.priority + 1;
+          }
+          await gameStore.updateGameMetadata(gameId, { ...game, priority: newPriority });
         }
       }
-      toast.success(`成功调整 ${selectedGames.size} 个游戏的优先级`);
+      let actionText = '';
+      if (action === 'top') {
+        actionText = '置顶';
+      } else {
+        actionText = action === 'up' ? '上移' : '下移';
+      }
+      toast.success(`成功${actionText} ${selectedGames.size} 个游戏的优先级`);
       await loadGames();
     } catch (error) {
       console.error('调整优先级失败:', error);
@@ -293,11 +302,11 @@ export default function GameLibraryPage() {
 
   // 获取优先级标签
   const getPriorityLabel = (priority: number) => {
-    const labels = { 0: '普通', 1: '重要', 2: '置顶' };
-    const colors = { 0: 'bg-gray-100 text-gray-800', 1: 'bg-blue-100 text-blue-800', 2: 'bg-red-100 text-red-800' };
+    // 调整优先级显示，从1开始
+    const displayPriority = priority + 1;
     return {
-      label: labels[priority as keyof typeof labels] || '普通',
-      color: colors[priority as keyof typeof colors] || 'bg-gray-100 text-gray-800'
+      label: `优先级 ${displayPriority}`,
+      color: 'bg-blue-100 text-blue-800'
     };
   };
 
@@ -453,7 +462,7 @@ export default function GameLibraryPage() {
         {/* 工具栏 */}
         <div className="bg-white rounded-xl shadow-2xl p-6 mb-6 border-2 border-slate-300">
           <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
-            {/* 搜索和筛选 */}
+            {/* 搜索 */}
             <div className="flex flex-col sm:flex-row gap-4 flex-1">
               <div className="relative flex-1 max-w-md">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-blue-500" />
@@ -466,17 +475,6 @@ export default function GameLibraryPage() {
               </div>
               
               <div className="flex gap-2">
-                <select
-                  value={filterPriority}
-                  onChange={(e) => setFilterPriority(e.target.value as any)}
-                  className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                >
-                  <option value="all">所有优先级</option>
-                  <option value="high">置顶</option>
-                  <option value="medium">重要</option>
-                  <option value="low">普通</option>
-                </select>
-                
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as any)}
@@ -514,7 +512,7 @@ export default function GameLibraryPage() {
                 <Button
                   variant="default"
                   size="sm"
-                  onClick={() => handleBatchPriority(2)}
+                  onClick={() => handleBatchPriority('top')}
                   disabled={selectedGames.size === 0}
                   className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white transition-all duration-300"
                 >
@@ -525,21 +523,23 @@ export default function GameLibraryPage() {
                 <Button
                   variant="default"
                   size="sm"
-                  onClick={() => handleBatchPriority(1)}
+                  onClick={() => handleBatchPriority('up')}
                   disabled={selectedGames.size === 0}
                   className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white transition-all duration-300"
                 >
-                  重要
+                  <ChevronUp className="h-4 w-4 mr-1" />
+                  上移
                 </Button>
                 
                 <Button
                   variant="default"
                   size="sm"
-                  onClick={() => handleBatchPriority(0)}
+                  onClick={() => handleBatchPriority('down')}
                   disabled={selectedGames.size === 0}
                   className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white transition-all duration-300"
                 >
-                  普通
+                  <ChevronDown className="h-4 w-4 mr-1" />
+                  下移
                 </Button>
                 
                 <Button

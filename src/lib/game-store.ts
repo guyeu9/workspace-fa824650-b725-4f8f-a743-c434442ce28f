@@ -410,6 +410,26 @@ export class GameStore {
     return null;
   }
 
+  // 获取优先级最高的游戏
+  async getHighestPriorityGame(): Promise<GameData | null> {
+    try {
+      const games = await db.games_index
+        .orderBy('priority')
+        .reverse()
+        .first();
+      
+      if (games) {
+        const gameData = await db.games_data.get(games.id);
+        if (gameData) {
+          return gameData.data;
+        }
+      }
+    } catch (error) {
+      console.error('获取优先级最高的游戏失败:', error);
+    }
+    return null;
+  }
+
   // 清理过期数据
   async cleanup(): Promise<void> {
     const now = Date.now();

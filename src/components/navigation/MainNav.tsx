@@ -11,7 +11,8 @@ export default function MainNav() {
   const router = useRouter()
   
   const handleHomeClick = () => {
-    router.push('/?reset=true')
+    sessionStorage.setItem('resetGame', 'true')
+    window.location.href = '/'
   }
   
   return (

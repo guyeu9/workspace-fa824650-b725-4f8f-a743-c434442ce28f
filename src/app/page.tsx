@@ -166,14 +166,13 @@ export default function Home() {
   // 检查是否需要重置游戏状态（从导航栏首页按钮触发）
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search)
-      if (params.get('reset') === 'true') {
+      const shouldReset = sessionStorage.getItem('resetGame')
+      if (shouldReset === 'true') {
         setShowWelcome(true)
         setOutputHistory([])
         setCurrentScene(null)
         setChoices([])
-        // 清除 URL 参数
-        window.history.replaceState({}, '', '/')
+        sessionStorage.removeItem('resetGame')
       }
     }
   }, [])
