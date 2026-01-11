@@ -3,22 +3,57 @@ import { getServerSession } from 'next-auth'
 import { db } from '@/lib/db'
 
 export async function GET() {
+  // 使用聚合查询优化性能
   const games = await db.game.findMany({
     orderBy: {
       createdAt: 'desc',
     },
     include: {
-      votes: true,
-      comments: true,
-      author: true,
+      author: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+      _count: {
+        select: {
+          votes: true,
+          comments: true,
+        },
+      },
     },
     take: 50,
   })
 
-  const result = games.map((game) => {
-    const upvotes = game.votes.filter((v) => v.type === 'UP').length
-    const downvotes = game.votes.filter((v) => v.type === 'DOWN').length
+  // 获取投票统计（使用单独的查询来优化性能）
+  const gameIds = games.map(game => game.id)
+  const voteStats = await db.vote.groupBy({
+    by: ['gameId', 'type'],
+    where: {
+      gameId: {
+        in: gameIds,
+      },
+    },
+    _count: true,
+  })
 
+  // 构建投票统计映射
+  const voteStatsMap = new Map<string, { upvotes: number; downvotes: number }>()
+  voteStats.forEach(stat => {
+    if (!voteStatsMap.has(stat.gameId)) {
+      voteStatsMap.set(stat.gameId, { upvotes: 0, downvotes: 0 })
+    }
+    const current = voteStatsMap.get(stat.gameId)!
+    if (stat.type === 'UP') {
+      current.upvotes = stat._count
+    } else {
+      current.downvotes = stat._count
+    }
+  })
+
+  const result = games.map((game) => {
+    const stats = voteStatsMap.get(game.id) || { upvotes: 0, downvotes: 0 }
+    
     return {
       id: game.id,
       title: game.title,
@@ -26,14 +61,11 @@ export async function GET() {
       coverUrl: game.coverUrl,
       createdAt: game.createdAt,
       updatedAt: game.updatedAt,
-      author: {
-        id: game.author.id,
-        name: game.author.name,
-      },
-      score: upvotes - downvotes,
-      upvotes,
-      downvotes,
-      commentsCount: game.comments.length,
+      author: game.author,
+      score: stats.upvotes - stats.downvotes,
+      upvotes: stats.upvotes,
+      downvotes: stats.downvotes,
+      commentsCount: game._count.comments,
     }
   })
 

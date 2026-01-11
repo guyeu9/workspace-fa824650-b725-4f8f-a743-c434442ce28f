@@ -14,17 +14,22 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(cuid())
-  email     String    @unique
-  name      String?
-  image     String?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  accounts  Account[]
-  sessions  Session[]
-  games     Game[]
-  comments  Comment[]
-  votes     Vote[]
+  id           String         @id @default(cuid())
+  email        String         @unique
+  name         String?
+  image        String?
+  password     String?        // 用于本地认证
+  role         UserRole       @default(USER)
+  isActive     Boolean        @default(true)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  accounts     Account[]
+  sessions     Session[]
+  games        Game[]
+  comments     Comment[]
+  votes        Vote[]
+  loginRecords LoginRecord[]
+  onlineStats  OnlineStats?
 }
 
 model Account {
@@ -106,9 +111,40 @@ model Comment {
   gameId    String
   content   String
   createdAt DateTime @default(now())
+  isDeleted Boolean  @default(false) // 软删除标记
 
   user User @relation(fields: [userId], references: [id])
   game Game @relation(fields: [gameId], references: [id])
 
   @@index([gameId, createdAt])
+}
+
+model LoginRecord {
+  id        String   @id @default(cuid())
+  userId    String
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+}
+
+model OnlineStats {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  totalOnlineTime Int      @default(0) // 总在线时长（分钟）
+  lastLoginAt     DateTime?
+  lastLogoutAt    DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum UserRole {
+  USER
+  ADMIN
+  SUPER_ADMIN
 }

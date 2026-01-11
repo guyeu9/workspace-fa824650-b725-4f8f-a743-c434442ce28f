@@ -1,6 +1,9 @@
 import { NextRequest } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { db } from '@/lib/db'
+import { InputSanitizer, ValidationRules } from '@/lib/security-utils'
+
+export const dynamic = 'force-dynamic'
 
 export async function GET(
   request: NextRequest,
@@ -15,6 +18,7 @@ export async function GET(
   const comments = await db.comment.findMany({
     where: {
       gameId: context.params.id,
+      isDeleted: false, // 只获取未删除的评论
     },
     orderBy: {
       createdAt: 'desc',
@@ -25,8 +29,16 @@ export async function GET(
           id: cursor,
         }
       : undefined,
-    include: {
-      user: true,
+    select: {
+      id: true,
+      content: true,
+      createdAt: true,
+      user: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
     },
   })
 
@@ -78,18 +90,31 @@ export async function POST(
   const body = await request.json()
   const content = body?.content
 
-  if (typeof content !== 'string' || !content.trim()) {
-    return new Response('Invalid content', { status: 400 })
+  // 验证评论内容
+  const validationResult = ValidationRules.commentContent.safeParse(content)
+  if (!validationResult.success) {
+    return new Response(validationResult.error.errors[0].message, { status: 400 })
   }
+
+  // 清理评论内容
+  const sanitizedContent = InputSanitizer.sanitizeHtml(content.trim())
 
   const comment = await db.comment.create({
     data: {
-      content: content.trim(),
+      content: sanitizedContent,
       userId: user.id,
       gameId: context.params.id,
     },
-    include: {
-      user: true,
+    select: {
+      id: true,
+      content: true,
+      createdAt: true,
+      user: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
     },
   })
 

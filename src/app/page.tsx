@@ -1,11 +1,13 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import * as Icons from './icons'
 import { exportJsonFile, exportTextFile } from '../lib/file-export'
 import { useAppNavigation } from '../lib/navigation'
 import { useExportNotifications } from '../components/export-notifications'
 import { GameLibraryWidget } from '../components/game-library-widget'
+import ResponsiveMainNav from '@/components/navigation/ResponsiveMainNav'
 
 const { IconTimeline, IconInventory, IconSettings, IconCompass, IconEye, IconSave, IconLoad, IconDelete, IconClose, IconSend, IconMove, IconInteract, IconUse, IconFeedback, IconHome, IconBox, IconHelp, IconScroll, IconFile } = Icons
 
@@ -145,6 +147,35 @@ export default function Home() {
   // 修复 Hydration 错误：确保组件只在客户端渲染
   useEffect(() => {
     setIsClient(true)
+  }, [])
+
+  // 监听路由变化，自动重置游戏状态返回主菜单
+  const pathname = usePathname()
+  const prevPathnameRef = useRef(pathname)
+  
+  useEffect(() => {
+    if (pathname === '/' && prevPathnameRef.current !== '/') {
+      setShowWelcome(true)
+      setOutputHistory([])
+      setCurrentScene(null)
+      setChoices([])
+    }
+    prevPathnameRef.current = pathname
+  }, [pathname])
+
+  // 检查是否需要重置游戏状态（从导航栏首页按钮触发）
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search)
+      if (params.get('reset') === 'true') {
+        setShowWelcome(true)
+        setOutputHistory([])
+        setCurrentScene(null)
+        setChoices([])
+        // 清除 URL 参数
+        window.history.replaceState({}, '', '/')
+      }
+    }
   }, [])
 
   // 检查localStorage中是否有导入的游戏数据

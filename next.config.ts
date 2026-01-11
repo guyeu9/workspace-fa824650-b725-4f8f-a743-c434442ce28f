@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
+  // output: "export", // 注释掉静态导出以支持API路由
   /* config options here */
   typescript: {
     ignoreBuildErrors: true,

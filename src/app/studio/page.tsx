@@ -186,14 +186,16 @@ export default function TextEngineStudio() {
     })
   }, [gameData.branches, search])
 
-  const handleUpdateGame = (updates: Partial<GameData>) => {
+  // 使用useCallback缓存函数，减少不必要的重渲染
+  const handleUpdateGame = React.useCallback((updates: Partial<GameData>) => {
     setGameData((prev) => ({
       ...prev,
       ...updates,
     }))
-  }
+  }, [])
 
-  const handleAddBranch = () => {
+  // 使用useCallback缓存函数，减少不必要的重渲染
+  const handleAddBranch = React.useCallback(() => {
     const id = `branch_${Date.now()}`
     const newBranch: Branch = {
       branch_id: id,
@@ -206,9 +208,9 @@ export default function TextEngineStudio() {
       branches: [...prev.branches, newBranch],
     }))
     setSelectedBranchId(id)
-  }
+  }, [])
 
-  const handleDeleteBranch = (branchId: string) => {
+  const handleDeleteBranch = React.useCallback((branchId: string) => {
     setGameData((prev) => {
       const branches = prev.branches.filter((b) => b.branch_id !== branchId)
       const nextSelected =
@@ -221,18 +223,18 @@ export default function TextEngineStudio() {
         branches,
       }
     })
-  }
+  }, [selectedBranchId])
 
-  const handleUpdateBranch = (branchId: string, updates: Partial<Branch>) => {
+  const handleUpdateBranch = React.useCallback((branchId: string, updates: Partial<Branch>) => {
     setGameData((prev) => ({
       ...prev,
       branches: prev.branches.map((b) =>
         b.branch_id === branchId ? { ...b, ...updates } : b,
       ),
     }))
-  }
+  }, [])
 
-  const handleAddChoice = (branchId: string) => {
+  const handleAddChoice = React.useCallback((branchId: string) => {
     const newChoice: Choice = {
       id: `choice_${Date.now()}`,
       choice: "新选项",
@@ -247,9 +249,9 @@ export default function TextEngineStudio() {
           : b,
       ),
     }))
-  }
+  }, [])
 
-  const handleUpdateChoice = (
+  const handleUpdateChoice = React.useCallback((
     branchId: string,
     choiceId: string,
     updates: Partial<Choice>,
@@ -267,9 +269,9 @@ export default function TextEngineStudio() {
           : b,
       ),
     }))
-  }
+  }, [])
 
-  const handleDeleteChoice = (branchId: string, choiceId: string) => {
+  const handleDeleteChoice = React.useCallback((branchId: string, choiceId: string) => {
     setGameData((prev) => ({
       ...prev,
       branches: prev.branches.map((b) =>
@@ -278,7 +280,7 @@ export default function TextEngineStudio() {
           : b,
       ),
     }))
-  }
+  }, [])
 
   const handleSaveToLibrary = async () => {
     if (!gameData.game_title.trim()) {
@@ -304,45 +306,65 @@ export default function TextEngineStudio() {
     }
   }
 
-  const handleExportJson = () => {
-    const blob = new Blob([JSON.stringify(gameData, null, 2)], {
-      type: "application/json",
-    })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement("a")
-    a.href = url
-    a.download = `${gameData.game_title || "game"}.json`
-    a.click()
-    URL.revokeObjectURL(url)
+  const handleExportJson = async () => {
+    try {
+      await PlatformFileDownloader.downloadJson(
+        `${gameData.game_title || "game"}.json`,
+        gameData,
+        {
+          onProgress: (progress) => {
+            console.log(`导出进度: ${progress}%`)
+          },
+          onSuccess: () => {
+            toast.success("游戏导出成功！")
+          },
+          onError: (error) => {
+            toast.error(`导出失败: ${error.message}`)
+          }
+        }
+      )
+    } catch (error) {
+      console.error("导出游戏失败:", error)
+      toast.error("导出游戏失败")
+    }
   }
 
-  const handleImportJson = (file: File) => {
-    const reader = new FileReader()
-    reader.onload = (e) => {
-      try {
-        const raw = JSON.parse(e.target?.result as string)
-        if (raw.game_title && Array.isArray(raw.branches)) {
-          const data = normalizeGameData(raw)
-          setGameData(data)
-          setSelectedBranchId(data.branches[0]?.branch_id ?? "")
-          toast.success("导入成功")
-        } else {
-          toast.error("JSON 结构不符合游戏格式")
+  const handleImportJson = async (file: File) => {
+    try {
+      const result = await PlatformFileUploader.upload({
+        file,
+        accept: "application/json,.json",
+        maxSize: 10 * 1024 * 1024,
+        onProgress: (progress) => {
+          console.log(`导入进度: ${progress}%`)
+        },
+        onSuccess: (uploadResult) => {
+          if (uploadResult.success && uploadResult.data) {
+            const raw = JSON.parse(uploadResult.data as string)
+            if (raw.game_title && Array.isArray(raw.branches)) {
+              const data = normalizeGameData(raw)
+              setGameData(data)
+              setSelectedBranchId(data.branches[0]?.branch_id ?? "")
+              toast.success("导入成功")
+            } else {
+              toast.error("JSON 结构不符合游戏格式")
+            }
+          }
+        },
+        onError: (error) => {
+          toast.error(`导入失败: ${error.message}`)
         }
-      } catch (error) {
-        toast.error("JSON 解析失败")
-      }
+      })
+    } catch (error) {
+      console.error("导入游戏失败:", error)
+      toast.error("导入游戏失败")
     }
-    reader.readAsText(file)
   }
 
   return (
-    <div className="h-screen w-full flex flex-col bg-gradient-to-br from-slate-50 via-sky-50/60 to-indigo-50/40 text-slate-900 overflow-hidden">
-      <header className="h-20 border-b bg-white/90 backdrop-blur-xl text-slate-900 flex items-center justify-between px-4 shrink-0 z-10 shadow-sm">
+    <div className="h-screen w-full flex flex-col bg-gradient-to-br from-slate-100 via-sky-100 to-indigo-100 text-slate-900 overflow-hidden">
+      <header className="h-20 border-b bg-white/95 backdrop-blur-xl text-slate-900 flex items-center justify-between px-4 shrink-0 z-10 shadow-sm">
         <div className="flex items-start gap-3 flex-1 min-w-0">
-          <div className="bg-indigo-100 p-2.5 rounded-md shadow-sm">
-            <LayoutTemplate className="h-5 w-5 text-indigo-600" />
-          </div>
           <div className="flex flex-col gap-2 flex-1 min-w-0">
             <h1
               className="text-base md:text-xl font-extrabold max-w-full text-left bg-gradient-to-r from-emerald-500 via-sky-500 to-indigo-500 bg-clip-text text-transparent drop-shadow-sm leading-tight outline-none border border-transparent rounded-md px-2 py-1 hover:border-indigo-200 focus-visible:border-indigo-400 focus-visible:ring-2 focus-visible:ring-indigo-200 focus-visible:ring-offset-1 focus-visible:ring-offset-white"
@@ -388,32 +410,44 @@ export default function TextEngineStudio() {
         </div>
 
         <div className="flex items-center gap-2 ml-4">
-          <label className="flex items-center gap-1">
-            <input
-              type="file"
-              accept="application/json"
-              className="hidden"
-              onChange={(e) => {
-                const file = e.target.files?.[0]
-                if (file) {
-                  handleImportJson(file)
-                  e.target.value = ""
-                }
-              }}
-            />
-            <Button
-              variant="outline"
-              size="sm"
-              className="gap-1 bg-white border-slate-200 text-slate-800 hover:bg-slate-50"
-            >
-              <Upload className="h-4 w-4" /> 导入
-            </Button>
-          </label>
+          <input
+            ref={(ref) => {
+              if (ref) {
+                // 保存ref到组件实例，以便在点击按钮时调用
+                ;(ref as any).parentElement?.previousElementSibling?.setAttribute('data-input-ref', ref.id)
+              }
+            }}
+            id="json-import"
+            type="file"
+            accept="application/json"
+            className="hidden"
+            onChange={async (e) => {
+              const file = e.target.files?.[0]
+              if (file) {
+                await handleImportJson(file)
+                e.target.value = ""
+              }
+            }}
+          />
+          <Button
+            variant="outline"
+            size="sm"
+            className="gap-1 bg-white border-slate-200 text-slate-800 hover:bg-slate-50"
+            onClick={() => {
+              // 直接触发文件选择对话框
+              const input = document.getElementById('json-import') as HTMLInputElement
+              input?.click()
+            }}
+          >
+            <Upload className="h-4 w-4" /> 导入
+          </Button>
           <Button
             variant="outline"
             size="sm"
             className="gap-2 bg-white border-slate-200 text-slate-800 hover:bg-slate-50"
-            onClick={handleExportJson}
+            onClick={async () => {
+              await handleExportJson()
+            }}
           >
             <Upload className="h-4 w-4 rotate-180" /> 导出
           </Button>
@@ -433,18 +467,18 @@ export default function TextEngineStudio() {
           defaultSize={25}
           minSize={18}
           maxSize={35}
-          className="bg-white/80 border-r border-slate-200 backdrop-blur-sm"
+          className="bg-white/90 border-r border-slate-200 backdrop-blur-sm"
         >
           <div className="flex flex-col h-full">
             <div className="p-3 border-b border-slate-200 space-y-3 bg-white/90">
               <div className="relative">
                 <Search className="absolute left-2 top-2.5 h-4 w-4 text-slate-400" />
                 <Input
-                  placeholder="搜索场景..."
-                  className="pl-8 h-9 bg-slate-50 border-slate-200 text-slate-800 placeholder:text-slate-400"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
+                          placeholder="搜索场景..."
+                          className="pl-8 h-9 bg-slate-100 border-slate-200 text-slate-800 placeholder:text-slate-400"
+                          value={search}
+                          onChange={(e) => setSearch(e.target.value)}
+                        />
               </div>
               <div className="flex items-center justify-between text-xs text-slate-500 px-1">
                 <span>视图: 列表</span>
@@ -465,8 +499,8 @@ export default function TextEngineStudio() {
                         onClick={() => setSelectedBranchId(branch.branch_id)}
                         className={`w-full flex flex-col items-start px-2 py-1.5 rounded-md text-sm transition-colors border ${
                           selectedBranchId === branch.branch_id
-                            ? "bg-emerald-50 text-emerald-900 border-emerald-300 shadow-sm"
-                            : "bg-white/0 text-slate-800 border-transparent hover:bg-slate-50"
+                            ? "bg-emerald-100 text-emerald-900 border-emerald-300 shadow-sm"
+                            : "bg-white/0 text-slate-800 border-transparent hover:bg-slate-100"
                         }`}
                       >
                         <div className="flex items-center gap-2 w-full">
@@ -529,7 +563,7 @@ export default function TextEngineStudio() {
         <ResizableHandle withHandle className="bg-border/80" />
 
         <ResizablePanel defaultSize={75} minSize={50}>
-          <div className="h-full flex flex-col bg-slate-50/60">
+          <div className="h-full flex flex-col bg-slate-100">
             {selectedBranch ? (
               <>
                 <div className="p-4 border-b border-slate-200 flex items-start justify-between gap-4 bg-white/90 shadow-xs">
@@ -577,10 +611,10 @@ export default function TextEngineStudio() {
                   <div className="p-4 space-y-6 max-w-5xl mx-auto w-full">
                       <div className="space-y-3">
                         <Label>背景图片</Label>
-                        <div className="border-2 border-dashed rounded-lg p-6 flex flex-col items-center justify-center gap-2 text-slate-500 bg-slate-50">
+                        <div className="border-2 border-dashed rounded-lg p-6 flex flex-col items-center justify-center gap-2 text-slate-500 bg-slate-100">
                           {selectedBranch.background_image ? (
-                            <div className="relative w-full aspect-video bg-slate-100 rounded overflow-hidden">
-                              <div className="absolute inset-0 flex items-center justify-center bg-slate-100 text-slate-400">
+                            <div className="relative w-full aspect-video bg-slate-200 rounded overflow-hidden">
+                              <div className="absolute inset-0 flex items-center justify-center bg-slate-200 text-slate-500">
                                 <ImageIcon className="h-10 w-10" />
                                 <span className="ml-2">
                                   {selectedBranch.background_image}
@@ -648,9 +682,9 @@ export default function TextEngineStudio() {
                       <div className="space-y-3">
                         {selectedBranch.choices.map((option, index) => (
                           <Card
-                            key={option.id}
-                            className="relative group bg-slate-50 border-slate-200 shadow-sm"
-                          >
+                          key={option.id}
+                          className="relative group bg-slate-100 border-slate-200 shadow-sm"
+                        >
                             <Button
                               variant="ghost"
                               size="icon"
@@ -792,7 +826,7 @@ export default function TextEngineStudio() {
                         ))}
 
                         {selectedBranch.choices.length === 0 && (
-                          <div className="text-center py-8 border-2 border-dashed rounded-lg text-slate-400 text-sm bg-slate-50">
+                          <div className="text-center py-8 border-2 border-dashed rounded-lg text-slate-500 text-sm bg-slate-100">
                             此场景目前没有可选项，通常代表结局场景。
                           </div>
                         )}

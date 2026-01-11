@@ -6,6 +6,8 @@ import { gameStore } from '@/lib/game-store'
 import { toast } from 'sonner'
 import Link from 'next/link'
 import { LayoutTemplate } from 'lucide-react'
+import { PlatformFileDownloader } from '@/lib/platform-file-download'
+import { PlatformFileUploader } from '@/lib/platform-file-upload'
 
 interface Choice {
   id: string
@@ -58,10 +60,21 @@ export default function GameEditor() {
   ]
 
   const saveToHistory = (data: GameData) => {
-    const newHistory = history.slice(0, historyIndex + 1)
-    newHistory.push(JSON.parse(JSON.stringify(data)))
-    setHistory(newHistory)
-    setHistoryIndex(newHistory.length - 1)
+    // 限制历史记录数量，最多保存50条
+    const MAX_HISTORY = 50;
+    const newHistory = history.slice(0, historyIndex + 1);
+    
+    // 使用更高效的深拷贝方式
+    const clonedData = structuredClone(data);
+    newHistory.push(clonedData);
+    
+    // 如果历史记录超过限制，移除最旧的记录
+    if (newHistory.length > MAX_HISTORY) {
+      newHistory.shift();
+      setHistoryIndex(newHistory.length - 1);
+    }
+    
+    setHistory(newHistory);
   }
 
   const undo = () => {
@@ -169,40 +182,65 @@ export default function GameEditor() {
     saveToHistory(newData)
   }
 
-  const exportJson = () => {
-    const blob = new Blob([JSON.stringify(gameData, null, 2)], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `${gameData.game_title}.json`
-    a.click()
-    URL.revokeObjectURL(url)
+  const exportJson = async () => {
+    try {
+      const result = await PlatformFileDownloader.downloadJson(
+        `${gameData.game_title}.json`,
+        gameData,
+        {
+          onProgress: (progress) => {
+            console.log(`导出进度: ${progress}%`)
+          },
+          onSuccess: () => {
+            toast.success('游戏导出成功！')
+          },
+          onError: (error) => {
+            toast.error(`导出失败: ${error.message}`)
+          }
+        }
+      )
+    } catch (error) {
+      console.error('导出游戏失败:', error)
+      toast.error('导出游戏失败')
+    }
   }
 
-  const importJson = (file: File) => {
-    const reader = new FileReader()
-    reader.onload = (e) => {
-      try {
-        const data = JSON.parse(e.target?.result as string)
-        if (data.game_title && data.branches && Array.isArray(data.branches)) {
-          setGameData(data)
-          // 设置背景图片信息
-          if (data.background_image) {
-            setBackgroundImageUrl(data.background_image)
+  const importJson = async (file: File) => {
+    try {
+      const result = await PlatformFileUploader.upload({
+        file,
+        accept: 'application/json,.json',
+        maxSize: 10 * 1024 * 1024,
+        onProgress: (progress) => {
+          console.log(`导入进度: ${progress}%`)
+        },
+        onSuccess: (uploadResult) => {
+          if (uploadResult.success && uploadResult.data) {
+            const data = JSON.parse(uploadResult.data as string)
+            if (data.game_title && data.branches && Array.isArray(data.branches)) {
+              setGameData(data)
+              // 设置背景图片信息
+              if (data.background_image) {
+                setBackgroundImageUrl(data.background_image)
+              }
+              if (data.background_asset_id) {
+                setBackgroundAssetId(data.background_asset_id)
+              }
+              saveToHistory(data)
+              toast.success('导入成功！')
+            } else {
+              toast.error('无效的游戏文件格式')
+            }
           }
-          if (data.background_asset_id) {
-            setBackgroundAssetId(data.background_asset_id)
-          }
-          saveToHistory(data)
-          toast.success('导入成功！')
-        } else {
-          toast.error('无效的游戏文件格式')
+        },
+        onError: (error) => {
+          toast.error(`导入失败: ${error.message}`)
         }
-      } catch (error) {
-        toast.error('JSON解析失败：' + error)
-      }
+      })
+    } catch (error) {
+      console.error('导入游戏失败:', error)
+      toast.error('导入游戏失败')
     }
-    reader.readAsText(file)
   }
 
   const startGame = () => {
@@ -339,10 +377,14 @@ export default function GameEditor() {
           <div className="px-3 sm:px-5 lg:px-7 py-3 sm:py-4 lg:py-5">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-3 lg:gap-4">
               <h1 className="text-base sm:text-xl lg:text-3xl font-extrabold bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 bg-clip-text text-transparent tracking-tight flex items-center gap-1 sm:gap-1.5 lg:gap-2 whitespace-nowrap">
+                <Link href="/" className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive shadow-xs hover:bg-primary/90 h-9 px-4 py-2 has-[>svg]:px-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white transition-all duration-300 flex items-center gap-2">
+                  <IconHome className="h-4 w-4" />
+                  首页
+                </Link>
                 <span className="text-base sm:text-xl lg:text-3xl">📝</span>
                 <span>文本游戏制作</span>
                 <Link href="/studio">
-                  <button className="ml-4 inline-flex items-center gap-2 px-3 py-1.5 text-xs sm:text-sm font-medium text-blue-600 bg-blue-50/80 hover:bg-blue-100 rounded-lg transition-colors border border-blue-200 shadow-sm">
+                  <button className="ml-4 inline-flex items-center gap-2 px-3 py-1.5 text-xs sm:text-sm font-medium bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg transition-all duration-300 shadow-md">
                     <LayoutTemplate className="w-4 h-4" />
                     新版编辑器 (Studio)
                   </button>
@@ -350,46 +392,24 @@ export default function GameEditor() {
               </h1>
               
               <div className="flex flex-nowrap gap-2 sm:gap-2 lg:gap-3 items-center justify-center w-full sm:w-auto">
-                <button
-                  onClick={undo}
-                  disabled={historyIndex <= 0}
-                  className="bg-transparent text-slate-600 hover:text-slate-700 border-2 border-slate-600 hover:border-slate-700 transition-all duration-300 font-bold px-3 sm:px-4 lg:px-4 py-2 sm:py-2.5 lg:py-3 rounded-lg text-xs sm:text-sm lg:text-sm flex items-center gap-1 sm:gap-1.5 lg:gap-1.5 shadow-sm hover:shadow-md active:scale-95 min-w-[90px] h-[44px] sm:h-auto justify-center disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  ↩️ 撤销
-                </button>
-                
-                <button
-                  onClick={redo}
-                  disabled={historyIndex >= history.length - 1}
-                  className="bg-transparent text-slate-600 hover:text-slate-700 border-2 border-slate-600 hover:border-slate-700 transition-all duration-300 font-bold px-3 sm:px-4 lg:px-4 py-2 sm:py-2.5 lg:py-3 rounded-lg text-xs sm:text-sm lg:text-sm flex items-center gap-1 sm:gap-1.5 lg:gap-1.5 shadow-sm hover:shadow-md active:scale-95 min-w-[90px] h-[44px] sm:h-auto justify-center disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  ↪️ 重做
-                </button>
-                
                 <div className="relative">
-                  <label className="bg-transparent text-orange-600 hover:text-orange-700 border-2 border-orange-600 hover:border-orange-700 transition-all duration-300 font-bold px-3 sm:px-4 lg:px-4 py-2 sm:py-2.5 lg:py-3 rounded-lg text-xs sm:text-sm lg:text-sm flex items-center gap-1 sm:gap-1.5 lg:gap-1.5 cursor-pointer shadow-sm hover:shadow-md active:scale-95 min-w-[90px] h-[44px] sm:h-auto justify-center">
-                    <span className="text-base sm:text-base lg:text-base">📤</span>
-                    <span className="inline">导入</span>
-                  </label>
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept=".json,application/json"
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                      const file = event.target.files?.[0]
-                      if (file) {
-                        importJson(file)
+                  <button
+                    onClick={async () => {
+                      const result = await PlatformFileUploader.uploadJson()
+                      if (result.success && result.file) {
+                        await importJson(result.file)
                       }
                     }}
-                    className="absolute inset-0 opacity-0 cursor-pointer"
-                  />
+                    className="bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white transition-all duration-300 font-bold px-3 sm:px-4 lg:px-4 py-2 sm:py-2.5 lg:py-3 rounded-lg text-xs sm:text-sm lg:text-sm flex items-center gap-1 sm:gap-1.5 lg:gap-1.5 cursor-pointer shadow-sm hover:shadow-md active:scale-95 min-w-[90px] h-[44px] sm:h-auto justify-center"
+                  >
+                    <span className="inline">导入</span>
+                  </button>
                 </div>
                 
                 <button
                   onClick={exportJson}
-                  className="bg-transparent text-orange-600 hover:text-orange-700 border-2 border-orange-600 hover:border-orange-700 transition-all duration-300 font-bold px-3 sm:px-4 lg:px-4 py-2 sm:py-2.5 lg:py-3 rounded-lg text-xs sm:text-sm lg:text-sm flex items-center gap-1 sm:gap-1.5 lg:gap-1.5 shadow-sm hover:shadow-md active:scale-95 min-w-[90px] h-[44px] sm:h-auto justify-center"
+                  className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white transition-all duration-300 font-bold px-3 sm:px-4 lg:px-4 py-2 sm:py-2.5 lg:py-3 rounded-lg text-xs sm:text-sm lg:text-sm flex items-center gap-1 sm:gap-1.5 lg:gap-1.5 shadow-sm hover:shadow-md active:scale-95 min-w-[90px] h-[44px] sm:h-auto justify-center"
                 >
-                  <span className="text-base sm:text-base lg:text-base">📥</span>
                   <span className="inline">导出</span>
                 </button>
                 
@@ -401,15 +421,7 @@ export default function GameEditor() {
                   <span className="inline">开始游戏</span>
                 </button>
                 
-                <button
-                  onClick={() => {
-                    window.location.href = '/'
-                  }}
-                  className="bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300 font-bold px-3 sm:px-4 lg:px-4 py-2 sm:py-2.5 lg:py-3 rounded-lg text-xs sm:text-sm lg:text-sm flex items-center gap-1 sm:gap-1.5 lg:gap-1.5 shadow-sm hover:shadow-md active:scale-95 min-w-[90px] h-[44px] sm:h-auto justify-center"
-                >
-                  <IconHome className="w-4 h-4 sm:w-5 sm:h-5 lg:w-5 lg:h-5" />
-                  <span className="inline">返回</span>
-                </button>
+
               </div>
             </div>
           </div>

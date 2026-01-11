@@ -1,6 +1,9 @@
 import { NextRequest } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { db } from '@/lib/db'
+import { ValidationRules } from '@/lib/security-utils'
+
+export const dynamic = 'force-dynamic'
 
 export async function POST(
   request: NextRequest,
@@ -25,7 +28,9 @@ export async function POST(
   const body = await request.json()
   const type = body?.type
 
-  if (type !== 'UP' && type !== 'DOWN') {
+  // 验证投票类型
+  const validationResult = z.enum(['UP', 'DOWN']).safeParse(type)
+  if (!validationResult.success) {
     return new Response('Invalid vote type', { status: 400 })
   }
 

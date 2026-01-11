@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>离线模式 - 文字冒险游戏平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+
+        .offline-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            max-width: 400px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .offline-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 40px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .retry-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            margin-bottom: 20px;
+        }
+
+        .retry-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .retry-button:active {
+            transform: translateY(0);
+        }
+
+        .retry-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .offline-games {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .offline-games h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .game-list {
+            list-style: none;
+        }
+
+        .game-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .game-item:hover {
+            background: #e9ecef;
+        }
+
+        .game-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .game-info h4 {
+            font-size: 14px;
+            margin-bottom: 4px;
+            color: #333;
+        }
+
+        .game-info p {
+            font-size: 12px;
+            color: #666;
+            margin: 0;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-offline {
+            background-color: #dc3545;
+        }
+
+        .status-online {
+            background-color: #28a745;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .network-status {
+            font-size: 12px;
+            color: #666;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 480px) {
+            .offline-container {
+                margin: 20px;
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 20px;
+            }
+            
+            .offline-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">📱</div>
+        <h1>离线模式</h1>
+        <p>您当前处于离线状态，但您仍然可以游玩已缓存的游戏。</p>
+        
+        <button id="retryButton" class="retry-button">
+            重新连接
+        </button>
+        
+        <div class="network-status">
+            <span id="statusIndicator" class="status-indicator status-offline"></span>
+            <span id="statusText">离线状态</span>
+        </div>
+        
+        <div class="offline-games">
+            <h3>可离线游玩的游戏</h3>
+            <ul id="gameList" class="game-list">
+                <li class="game-item">
+                    <div class="game-icon">🎮</div>
+                    <div class="game-info">
+                        <h4>加载中...</h4>
+                        <p>正在获取离线游戏列表</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        class OfflineManager {
+            constructor() {
+                this.retryButton = document.getElementById('retryButton');
+                this.statusIndicator = document.getElementById('statusIndicator');
+                this.statusText = document.getElementById('statusText');
+                this.gameList = document.getElementById('gameList');
+                
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.loadOfflineGames();
+                this.startNetworkMonitoring();
+            }
+
+            setupEventListeners() {
+                this.retryButton.addEventListener('click', () => this.retryConnection());
+                
+                // 监听网络状态变化
+                window.addEventListener('online', () => this.handleOnline());
+                window.addEventListener('offline', () => this.handleOffline());
+            }
+
+            async retryConnection() {
+                this.retryButton.disabled = true;
+                this.retryButton.innerHTML = '连接中<span class="loading"></span>';
+                
+                try {
+                    // 尝试连接网络
+                    const response = await fetch('/api/health', {
+                        method: 'GET',
+                        cache: 'no-cache',
+                        timeout: 5000
+                    });
+                    
+                    if (response.ok) {
+                        this.handleOnline();
+                        // 重定向到主页
+                        setTimeout(() => {
+                            window.location.href = '/';
+                        }, 1000);
+                    } else {
+                        this.handleOffline();
+                    }
+                } catch (error) {
+                    console.error('连接失败:', error);
+                    this.handleOffline();
+                } finally {
+                    this.retryButton.disabled = false;
+                    this.retryButton.innerHTML = '重新连接';
+                }
+            }
+
+            async loadOfflineGames() {
+                try {
+                    // 从Service Worker获取缓存的游戏列表
+                    if ('caches' in window) {
+                        const cache = await caches.open('text-adventure-v1');
+                        const gameRequests = [];
+                        
+                        // 获取所有缓存的请求
+                        const requests = await cache.keys();
+                        
+                        // 筛选出游戏相关的缓存
+                        for (const request of requests) {
+                            if (request.url.includes('/api/games/') && request.url.includes('/play')) {
+                                gameRequests.push(request);
+                            }
+                        }
+                        
+                        if (gameRequests.length > 0) {
+                            this.renderGameList(gameRequests);
+                        } else {
+                            this.renderEmptyGameList();
+                        }
+                    } else {
+                        this.renderEmptyGameList();
+                    }
+                } catch (error) {
+                    console.error('加载离线游戏失败:', error);
+                    this.renderEmptyGameList();
+                }
+            }
+
+            renderGameList(gameRequests) {
+                this.gameList.innerHTML = '';
+                
+                gameRequests.forEach((request, index) => {
+                    const gameId = this.extractGameId(request.url);
+                    const gameItem = this.createGameItem(gameId, `离线游戏 ${index + 1}`, '已缓存，可离线游玩');
+                    this.gameList.appendChild(gameItem);
+                });
+            }
+
+            renderEmptyGameList() {
+                this.gameList.innerHTML = `
+                    <li class="game-item">
+                        <div class="game-icon">😔</div>
+                        <div class="game-info">
+                            <h4>暂无离线游戏</h4>
+                            <p>在线时游玩过的游戏会自动缓存</p>
+                        </div>
+                    </li>
+                `;
+            }
+
+            createGameItem(gameId, title, description) {
+                const li = document.createElement('li');
+                li.className = 'game-item';
+                li.innerHTML = `
+                    <div class="game-icon">🎮</div>
+                    <div class="game-info">
+                        <h4>${title}</h4>
+                        <p>${description}</p>
+                    </div>
+                `;
+                
+                li.addEventListener('click', () => this.playGame(gameId));
+                
+                return li;
+            }
+
+            extractGameId(url) {
+                const match = url.match(/\/api\/games\/([^\/]+)/);
+                return match ? match[1] : 'unknown';
+            }
+
+            playGame(gameId) {
+                // 尝试打开游戏
+                window.location.href = `/games/${gameId}`;
+            }
+
+            startNetworkMonitoring() {
+                // 定期检查网络状态
+                setInterval(() => {
+                    this.checkNetworkStatus();
+                }, 5000);
+            }
+
+            async checkNetworkStatus() {
+                try {
+                    const response = await fetch('/api/health', {
+                        method: 'HEAD',
+                        cache: 'no-cache',
+                        timeout: 3000
+                    });
+                    
+                    if (response.ok) {
+                        this.updateNetworkStatus(true);
+                    } else {
+                        this.updateNetworkStatus(false);
+                    }
+                } catch (error) {
+                    this.updateNetworkStatus(false);
+                }
+            }
+
+            updateNetworkStatus(isOnline) {
+                if (isOnline) {
+                    this.statusIndicator.className = 'status-indicator status-online';
+                    this.statusText.textContent = '网络已恢复';
+                } else {
+                    this.statusIndicator.className = 'status-indicator status-offline';
+                    this.statusText.textContent = '离线状态';
+                }
+            }
+
+            handleOnline() {
+                this.updateNetworkStatus(true);
+                this.retryButton.innerHTML = '网络已恢复，点击返回主页';
+                this.retryButton.style.background = 'linear-gradient(135deg, #28a745 0%, #20c997 100%)';
+            }
+
+            handleOffline() {
+                this.updateNetworkStatus(false);
+                this.retryButton.innerHTML = '重新连接';
+                this.retryButton.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            }
+        }
+
+        // 初始化离线管理器
+        document.addEventListener('DOMContentLoaded', () => {
+            new OfflineManager();
+        });
+
+        // 注册Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('Service Worker 注册成功:', registration.scope);
+                    })
+                    .catch((error) => {
+                        console.error('Service Worker 注册失败:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

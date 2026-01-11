@@ -27,6 +27,8 @@ import { FileUpload } from '@/components/file-upload';
 import { gameStore } from '@/lib/game-store';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { PlatformFileDownloader } from '@/lib/platform-file-download';
+import { PlatformFileUploader } from '@/lib/platform-file-upload';
 
 interface Choice {
   id: string;
@@ -312,54 +314,64 @@ export default function EnhancedGameEditor() {
   }, [gameData, bgImageUrl, bgAssetId, router]);
 
   // 导出游戏
-  const exportGame = useCallback(() => {
-    const gameDataWithBg = {
-      ...gameData,
-      background_image: bgImageUrl,
-      background_asset_id: bgAssetId
-    };
-    
-    const dataStr = JSON.stringify(gameDataWithBg, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
-    const url = URL.createObjectURL(dataBlob);
-    
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `${gameData.game_title || '游戏'}.json`;
-    link.click();
-    
-    URL.revokeObjectURL(url);
+  const exportGame = useCallback(async () => {
+    try {
+      const gameDataWithBg = {
+        ...gameData,
+        background_image: bgImageUrl,
+        background_asset_id: bgAssetId
+      };
+
+      await PlatformFileDownloader.downloadJson(
+        `${gameData.game_title || '游戏'}.json`,
+        gameDataWithBg,
+        {
+          onProgress: (progress) => {
+            console.log(`导出进度: ${progress}%`)
+          },
+          onSuccess: () => {
+            toast.success('游戏导出成功！')
+          },
+          onError: (error) => {
+            toast.error(`导出失败: ${error.message}`)
+          }
+        }
+      )
+    } catch (error) {
+      console.error('导出游戏失败:', error)
+      toast.error('导出游戏失败')
+    }
   }, [gameData, bgImageUrl, bgAssetId]);
 
   // 导入游戏
-  const importGame = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
+  const importGame = useCallback(async () => {
+    try {
+      const result = await PlatformFileUploader.uploadJson({
+        onProgress: (progress) => {
+          console.log(`导入进度: ${progress}%`)
+        }
+      })
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const data = JSON.parse(e.target?.result as string);
-        setGameData(data);
-        
+      if (result.success && result.data) {
+        const data = JSON.parse(result.data as string)
+        setGameData(data)
+
         // 设置背景图片
         if (data.background_image) {
-          setBgImageUrl(data.background_image);
+          setBgImageUrl(data.background_image)
         }
+
         if (data.background_asset_id) {
-          setBgAssetId(data.background_asset_id);
+          setBgAssetId(data.background_asset_id)
         }
-        
-        setCurrentBranchIndex(0);
-        toast.success('游戏导入成功！');
-      } catch (error) {
-        toast.error('导入失败：无效的JSON文件');
+
+        setCurrentBranchIndex(0)
+        toast.success('游戏导入成功！')
       }
-    };
-    reader.readAsText(file);
-    
-    // 清空文件输入
-    event.target.value = '';
+    } catch (error) {
+      console.error('导入游戏失败:', error)
+      toast.error('导入失败：无效的JSON文件')
+    }
   }, []);
 
   if (isLoading) {
@@ -405,21 +417,10 @@ export default function EnhancedGameEditor() {
                 导出
               </Button>
               
-              <Label htmlFor="import-file" className="cursor-pointer">
-                <Button variant="outline" size="sm" asChild>
-                  <div>
-                    <Upload className="h-4 w-4 mr-2" />
-                    导入
-                  </div>
-                </Button>
-                <input
-                  id="import-file"
-                  type="file"
-                  accept=".json"
-                  className="hidden"
-                  onChange={importGame}
-                />
-              </Label>
+              <Button variant="outline" size="sm" onClick={importGame}>
+                <Upload className="h-4 w-4 mr-2" />
+                导入
+              </Button>
               
               <Button size="sm" onClick={saveGame} disabled={!hasChanges}>
                 <Save className="h-4 w-4 mr-2" />

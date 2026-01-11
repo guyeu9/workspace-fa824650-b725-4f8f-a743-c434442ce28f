@@ -1,0 +1,243 @@
+# Google Play 商店元数据
+# 用于自动化发布到Google Play商店
+
+# 应用信息
+app_name: "文字冒险游戏创作平台"
+package_name: "com.textadventure.app"
+version_code: 1
+version_name: "1.0.0"
+
+# 应用描述
+default_language: "zh-CN"
+
+# 中文描述
+zh-CN:
+  title: "文字冒险游戏创作平台"
+  short_description: "创建、分享和游玩文字冒险游戏的创作平台"
+  full_description: |
+    文字冒险游戏创作平台是一个创新的游戏创作工具，让您能够轻松创建、分享和游玩精彩的文字冒险游戏。
+    
+    主要功能：
+    • 可视化游戏编辑器 - 拖拽式操作，无需编程知识
+    • 丰富的故事分支 - 创建复杂的故事线和多重结局
+    • 社区分享 - 与全球玩家分享您的创作
+    • 离线游玩 - 下载游戏，随时随地享受游戏乐趣
+    • 个性化定制 - 自定义游戏界面和交互体验
+    • 实时协作 - 与朋友一起创作游戏
+    • 云端同步 - 自动备份您的创作进度
+    
+    适用人群：
+    • 游戏爱好者 - 体验各种类型的文字冒险游戏
+    • 创作者 - 将您的故事创意转化为互动游戏
+    • 教育工作者 - 制作教育性互动内容
+    • 团队协作 - 多人协作创作大型游戏项目
+    
+    为什么选择我们：
+    • 简单易用 - 直观的界面设计，新手也能快速上手
+    • 功能强大 - 支持复杂的游戏逻辑和丰富的交互
+    • 社区活跃 - 数千名创作者的活跃社区
+    • 持续更新 - 定期推出新功能和优化体验
+    • 安全可靠 - 数据加密保护，隐私安全有保障
+    
+    开始您的创作之旅，打造属于您的文字冒险世界！
+
+# 英文描述
+en-US:
+  title: "Text Adventure Game Creator"
+  short_description: "Create, share and play text adventure games"
+  full_description: |
+    Text Adventure Game Creator is an innovative game creation tool that allows you to easily create, share and play amazing text adventure games.
+    
+    Key Features:
+    • Visual Game Editor - Drag-and-drop interface, no programming required
+    • Rich Story Branches - Create complex storylines and multiple endings
+    • Community Sharing - Share your creations with players worldwide
+    • Offline Play - Download games and enjoy them anywhere, anytime
+    • Personalization - Customize game interface and interaction experience
+    • Real-time Collaboration - Create games together with friends
+    • Cloud Sync - Automatic backup of your creative progress
+    
+    Perfect for:
+    • Game Enthusiasts - Experience various types of text adventure games
+    • Creators - Transform your story ideas into interactive games
+    • Educators - Create educational interactive content
+    • Team Collaboration - Multi-person collaborative large game projects
+    
+    Why Choose Us:
+    • Easy to Use - Intuitive interface design, beginners can get started quickly
+    • Powerful Features - Support complex game logic and rich interactions
+    • Active Community - Thousands of active creators in our community
+    • Continuous Updates - Regular new features and experience optimizations
+    • Safe & Secure - Data encryption protection, privacy guaranteed
+    
+    Start your creative journey and build your own text adventure world!
+
+# 应用截图
+screenshots:
+  - path: "screenshots/mobile-home-zh.png"
+    language: "zh-CN"
+    device_type: "phone"
+    
+  - path: "screenshots/mobile-editor-zh.png"
+    language: "zh-CN"
+    device_type: "phone"
+    
+  - path: "screenshots/mobile-library-zh.png"
+    language: "zh-CN"
+    device_type: "phone"
+    
+  - path: "screenshots/mobile-community-zh.png"
+    language: "zh-CN"
+    device_type: "phone"
+    
+  - path: "screenshots/tablet-home-zh.png"
+    language: "zh-CN"
+    device_type: "tablet"
+    
+  - path: "screenshots/tablet-editor-zh.png"
+    language: "zh-CN"
+    device_type: "tablet"
+
+  - path: "screenshots/mobile-home-en.png"
+    language: "en-US"
+    device_type: "phone"
+    
+  - path: "screenshots/mobile-editor-en.png"
+    language: "en-US"
+    device_type: "phone"
+    
+  - path: "screenshots/mobile-library-en.png"
+    language: "en-US"
+    device_type: "phone"
+    
+  - path: "screenshots/mobile-community-en.png"
+    language: "en-US"
+    device_type: "phone"
+    
+  - path: "screenshots/tablet-home-en.png"
+    language: "en-US"
+    device_type: "tablet"
+    
+  - path: "screenshots/tablet-editor-en.png"
+    language: "en-US"
+    device_type: "tablet"
+
+# 应用图标
+icon:
+  path: "icons/icon-512x512.png"
+  background_color: "#6366f1"
+  
+# 功能图片
+feature_graphic:
+  path: "graphics/feature-graphic.png"
+  
+# 宣传视频
+promo_video:
+  youtube_id: "your-promo-video-id"
+  
+# 分类和标签
+category: "GAME_ADVENTURE"
+content_rating: "Everyone"
+tags:
+  - "text adventure"
+  - "game creator"
+  - "storytelling"
+  - "interactive fiction"
+  - "game development"
+  - "creative tools"
+  - "education"
+
+# 定价和分发
+pricing:
+  free: true
+  currency: "USD"
+  
+# 分发国家
+distribution:
+  countries:
+    - "CN"  # 中国
+    - "US"  # 美国
+    - "GB"  # 英国
+    - "JP"  # 日本
+    - "KR"  # 韩国
+    - "SG"  # 新加坡
+    - "AU"  # 澳大利亚
+    - "CA"  # 加拿大
+    - "DE"  # 德国
+    - "FR"  # 法国
+  
+# 隐私政策
+privacy_policy_url: "https://your-domain.com/privacy-policy"
+
+# 应用网站
+website_url: "https://your-domain.com"
+
+# 支持邮箱
+support_email: "support@your-domain.com"
+
+# 开发者信息
+developer:
+  name: "文字冒险游戏工作室"
+  website: "https://your-domain.com"
+  email: "developer@your-domain.com"
+  address: "北京市朝阳区"
+  
+# 测试信息
+testing:
+  instructions: |
+    测试说明：
+    1. 创建新游戏并测试编辑器功能
+    2. 测试游戏保存和加载功能
+    3. 测试社区分享功能
+    4. 测试离线游玩功能
+    5. 测试推送通知功能
+    
+  accounts:
+    - username: "testuser1"
+      password: "testpassword123"
+      
+    - username: "testuser2"
+      password: "testpassword456"
+      
+# 发布设置
+release:
+  rollout_percentage: 100
+  staged_rollout: false
+  
+# 内容分级问卷
+content_rating_questionnaire:
+  violence: "No"
+  drugs: "No"
+  alcohol: "No"
+  smoking: "No"
+  language: "No"
+  nudity: "No"
+  gambling: "No"
+  profanity: "No"
+  sexual_content: "No"
+  user_generated_content: "Yes"
+  
+# 目标受众
+target_audience:
+  primary: "13-17"
+  secondary: "18-24"
+  
+# 商店优化关键词
+keywords:
+  zh-CN:
+    - "文字冒险"
+    - "游戏创作"
+    - "互动小说"
+    - "故事创作"
+    - "游戏开发"
+    - "创意工具"
+    - "教育应用"
+    
+  en-US:
+    - "text adventure"
+    - "game creator"
+    - "interactive fiction"
+    - "story creation"
+    - "game development"
+    - "creative tools"
+    - "educational app"
