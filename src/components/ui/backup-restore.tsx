@@ -38,7 +38,7 @@ export default function BackupRestore({ className = '' }: BackupRestoreProps) {
       setBackupProgress(0)
 
       // 获取所有游戏
-      const games = await enhancedGameStore.getAllGames()
+      const games = await enhancedGameStore.getAllGamesForBackup()
       
       // 创建备份
       const backupData = await GameLibraryBackup.createBackup(games)

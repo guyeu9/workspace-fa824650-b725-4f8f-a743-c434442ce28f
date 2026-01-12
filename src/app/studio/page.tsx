@@ -331,30 +331,17 @@ export default function TextEngineStudio() {
 
   const handleImportJson = async (file: File) => {
     try {
-      const result = await PlatformFileUploader.upload({
-        file,
-        accept: "application/json,.json",
-        maxSize: 10 * 1024 * 1024,
-        onProgress: (progress) => {
-          console.log(`导入进度: ${progress}%`)
-        },
-        onSuccess: (uploadResult) => {
-          if (uploadResult.success && uploadResult.data) {
-            const raw = JSON.parse(uploadResult.data as string)
-            if (raw.game_title && Array.isArray(raw.branches)) {
-              const data = normalizeGameData(raw)
-              setGameData(data)
-              setSelectedBranchId(data.branches[0]?.branch_id ?? "")
-              toast.success("导入成功")
-            } else {
-              toast.error("JSON 结构不符合游戏格式")
-            }
-          }
-        },
-        onError: (error) => {
-          toast.error(`导入失败: ${error.message}`)
-        }
-      })
+      const text = await file.text()
+      const raw = JSON.parse(text)
+      
+      if (raw.game_title && Array.isArray(raw.branches)) {
+        const data = normalizeGameData(raw)
+        setGameData(data)
+        setSelectedBranchId(data.branches[0]?.branch_id ?? "")
+        toast.success("导入成功")
+      } else {
+        toast.error("JSON 结构不符合游戏格式")
+      }
     } catch (error) {
       console.error("导入游戏失败:", error)
       toast.error("导入游戏失败")

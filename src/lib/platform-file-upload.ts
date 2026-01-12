@@ -120,11 +120,18 @@ export class PlatformFileUploader {
       input.accept = options.accept || '*/*'
       input.style.display = 'none'
 
+      const cleanup = () => {
+        if (document.body.contains(input)) {
+          document.body.removeChild(input)
+        }
+      }
+
       input.addEventListener('change', async (event) => {
         const target = event.target as HTMLInputElement
         const file = target.files?.[0]
 
         if (!file) {
+          cleanup()
           resolve({
             success: false,
             error: '未选择文件'
@@ -139,6 +146,7 @@ export class PlatformFileUploader {
           const validation = this.validateFile(file, maxSize, options.accept)
 
           if (!validation.valid) {
+            cleanup()
             resolve({
               success: false,
               error: validation.error
@@ -149,6 +157,7 @@ export class PlatformFileUploader {
           options.onProgress?.(50)
 
           if (options.validateFile && !options.validateFile(file)) {
+            cleanup()
             resolve({
               success: false,
               error: '文件验证失败'
@@ -177,10 +186,12 @@ export class PlatformFileUploader {
           }
 
           options.onSuccess?.(result)
+          cleanup()
           resolve(result)
         } catch (error) {
           const errorObj = error instanceof Error ? error : new Error(String(error))
           options.onError?.(errorObj)
+          cleanup()
           resolve({
             success: false,
             error: errorObj.message
@@ -188,9 +199,16 @@ export class PlatformFileUploader {
         }
       })
 
+      input.addEventListener('cancel', () => {
+        cleanup()
+        resolve({
+          success: false,
+          error: '用户取消了文件选择'
+        })
+      })
+
       document.body.appendChild(input)
       input.click()
-      document.body.removeChild(input)
     })
   }
 

@@ -136,6 +136,72 @@ export class GameStore {
     return await query.toArray();
   }
 
+  // 获取所有游戏的完整信息
+  async getAllGames(): Promise<Array<{ index: GameIndexItem; data: GameDataItem }>> {
+    const games = await db.games_index.toArray();
+    const gameIds = games.map(g => g.id);
+    const gameDataItems = await db.games_data.bulkGet(gameIds);
+    
+    const result: Array<{ index: GameIndexItem; data: GameDataItem }> = [];
+    
+    for (let i = 0; i < games.length; i++) {
+      const data = gameDataItems[i];
+      if (data) {
+        result.push({ index: games[i], data });
+      }
+    }
+    
+    return result;
+  }
+
+  // 获取所有游戏（用于备份）
+  async getAllGamesForBackup(): Promise<Array<{
+    id: string;
+    title: string;
+    description?: string;
+    data: {
+      metadata: any;
+      data: any;
+    };
+    createdAt: string;
+    updatedAt: string;
+  }>> {
+    const games = await db.games_index.toArray();
+    const gameIds = games.map(g => g.id);
+    const gameDataItems = await db.games_data.bulkGet(gameIds);
+    
+    const result: Array<{
+      id: string;
+      title: string;
+      description?: string;
+      data: {
+        metadata: any;
+        data: any;
+      };
+      createdAt: string;
+      updatedAt: string;
+    }> = [];
+    
+    for (let i = 0; i < games.length; i++) {
+      const data = gameDataItems[i];
+      if (data) {
+        result.push({
+          id: games[i].id,
+          title: games[i].title,
+          description: games[i].description,
+          data: {
+            metadata: games[i],
+            data: data.data
+          },
+          createdAt: games[i].createdAt,
+          updatedAt: games[i].updatedAt
+        });
+      }
+    }
+    
+    return result;
+  }
+
   // 获取游戏详情
   async getGame(id: string): Promise<{ index: GameIndexItem; data: GameDataItem } | null> {
     const [index, data] = await Promise.all([

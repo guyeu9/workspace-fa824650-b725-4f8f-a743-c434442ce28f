@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { IconSave, IconLoad, IconDelete, IconClose, IconHome, IconBox } from '../icons'
 import { gameStore } from '@/lib/game-store'
 import { toast } from 'sonner'
@@ -8,6 +8,17 @@ import Link from 'next/link'
 import { LayoutTemplate } from 'lucide-react'
 import { PlatformFileDownloader } from '@/lib/platform-file-download'
 import { PlatformFileUploader } from '@/lib/platform-file-upload'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog'
 
 interface Choice {
   id: string
@@ -207,36 +218,32 @@ export default function GameEditor() {
 
   const importJson = async (file: File) => {
     try {
-      const result = await PlatformFileUploader.upload({
-        file,
-        accept: 'application/json,.json',
-        maxSize: 10 * 1024 * 1024,
-        onProgress: (progress) => {
-          console.log(`导入进度: ${progress}%`)
-        },
-        onSuccess: (uploadResult) => {
-          if (uploadResult.success && uploadResult.data) {
-            const data = JSON.parse(uploadResult.data as string)
-            if (data.game_title && data.branches && Array.isArray(data.branches)) {
-              setGameData(data)
-              // 设置背景图片信息
-              if (data.background_image) {
-                setBackgroundImageUrl(data.background_image)
-              }
-              if (data.background_asset_id) {
-                setBackgroundAssetId(data.background_asset_id)
-              }
-              saveToHistory(data)
-              toast.success('导入成功！')
-            } else {
-              toast.error('无效的游戏文件格式')
-            }
-          }
-        },
-        onError: (error) => {
-          toast.error(`导入失败: ${error.message}`)
+      const text = await file.text()
+      const data = JSON.parse(text)
+      
+      if (data.game_title && data.branches && Array.isArray(data.branches)) {
+        const processedData = {
+          ...data,
+          branches: data.branches.map((branch: any) => ({
+            ...branch,
+            choices: branch.choices.map((choice: any) => ({
+              ...choice,
+              id: choice.id || `choice_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+            }))
+          }))
         }
-      })
+        setGameData(processedData)
+        if (processedData.background_image) {
+          setBackgroundImageUrl(processedData.background_image)
+        }
+        if (processedData.background_asset_id) {
+          setBackgroundAssetId(processedData.background_asset_id)
+        }
+        saveToHistory(processedData)
+        toast.success('导入成功！')
+      } else {
+        toast.error('无效的游戏文件格式')
+      }
     } catch (error) {
       console.error('导入游戏失败:', error)
       toast.error('导入游戏失败')
@@ -279,10 +286,12 @@ export default function GameEditor() {
   }
 
   const [nodePositions, setNodePositions] = useState<NodePosition[]>([])
+  const [visibleNodes, setVisibleNodes] = useState<NodePosition[]>([])
   const [scale, setScale] = useState(1)
   const [pan, setPan] = useState({ x: 0, y: 0 })
   const [isDragging, setIsDragging] = useState(false)
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
+  const [pendingImportFile, setPendingImportFile] = useState<File | null>(null)
   const graphRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -348,10 +357,8 @@ export default function GameEditor() {
   }
 
   const handleMouseDown = (e: React.MouseEvent) => {
-    if (e.target === graphRef.current) {
-      setIsDragging(true)
-      setDragStart({ x: e.clientX - pan.x, y: e.clientY - pan.y })
-    }
+    setIsDragging(true)
+    setDragStart({ x: e.clientX - pan.x, y: e.clientY - pan.y })
   }
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -367,6 +374,37 @@ export default function GameEditor() {
   const getNodePosition = (branchId: string) => {
     return nodePositions.find(pos => pos.id === branchId)
   }
+
+  const getVisibleNodes = useCallback(() => {
+    const container = graphRef.current
+    if (!container || nodePositions.length === 0) return nodePositions
+
+    const rect = container.getBoundingClientRect()
+    const padding = 200
+
+    const visibleArea = {
+      x: (-pan.x / scale) - padding,
+      y: (-pan.y / scale) - padding,
+      width: (rect.width / scale) + padding * 2,
+      height: (rect.height / scale) + padding * 2
+    }
+
+    return nodePositions.filter(pos =>
+      pos.x >= visibleArea.x &&
+      pos.x <= visibleArea.x + visibleArea.width &&
+      pos.y >= visibleArea.y &&
+      pos.y <= visibleArea.y + visibleArea.height
+    )
+  }, [nodePositions, pan, scale])
+
+  useEffect(() => {
+    const updateVisibleNodes = () => {
+      const visible = getVisibleNodes()
+      setVisibleNodes(visible)
+    }
+
+    requestAnimationFrame(updateVisibleNodes)
+  }, [nodePositions, pan, scale, getVisibleNodes])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-orange-50/20 to-red-50/20 relative overflow-hidden">
@@ -397,7 +435,7 @@ export default function GameEditor() {
                     onClick={async () => {
                       const result = await PlatformFileUploader.uploadJson()
                       if (result.success && result.file) {
-                        await importJson(result.file)
+                        setPendingImportFile(result.file)
                       }
                     }}
                     className="bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white transition-all duration-300 font-bold px-3 sm:px-4 lg:px-4 py-2 sm:py-2.5 lg:py-3 rounded-lg text-xs sm:text-sm lg:text-sm flex items-center gap-1 sm:gap-1.5 lg:gap-1.5 cursor-pointer shadow-sm hover:shadow-md active:scale-95 min-w-[90px] h-[44px] sm:h-auto justify-center"
@@ -405,12 +443,81 @@ export default function GameEditor() {
                     <span className="inline">导入</span>
                   </button>
                 </div>
+
+                {/* 导入确认弹窗 */}
+                <AlertDialog open={!!pendingImportFile} onOpenChange={(open) => {
+                  if (!open) setPendingImportFile(null)
+                }}>
+                  <AlertDialogContent className="max-w-md bg-white/100 backdrop-blur-none">
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>确认导入游戏</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        导入新游戏将覆盖当前编辑的游戏内容（{gameData.branches.length} 个分支）。此操作不可撤销，请确认是否继续？
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <div className="flex justify-end gap-3 mt-4">
+                      <AlertDialogCancel asChild>
+                        <button
+                          onClick={() => setPendingImportFile(null)}
+                          className="px-4 py-2 text-slate-600 bg-slate-100 rounded-lg hover:bg-slate-200 transition-all"
+                        >
+                          取消
+                        </button>
+                      </AlertDialogCancel>
+                      <button
+                        onClick={async () => {
+                          if (pendingImportFile) {
+                            await importJson(pendingImportFile)
+                            setPendingImportFile(null)
+                          }
+                        }}
+                        className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all"
+                      >
+                        确认导入
+                      </button>
+                    </div>
+                  </AlertDialogContent>
+                </AlertDialog>
                 
                 <button
                   onClick={exportJson}
                   className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white transition-all duration-300 font-bold px-3 sm:px-4 lg:px-4 py-2 sm:py-2.5 lg:py-3 rounded-lg text-xs sm:text-sm lg:text-sm flex items-center gap-1 sm:gap-1.5 lg:gap-1.5 shadow-sm hover:shadow-md active:scale-95 min-w-[90px] h-[44px] sm:h-auto justify-center"
                 >
                   <span className="inline">导出</span>
+                </button>
+                
+                <button
+                  onClick={async () => {
+                    if (gameData.game_title && gameData.game_title !== '我的故事') {
+                      try {
+                        await gameStore.createGame(gameData.game_title, {
+                          ...gameData,
+                          background_image: backgroundImageUrl,
+                          background_asset_id: backgroundAssetId
+                        }, {
+                          description: gameData.description,
+                        })
+                        toast.success(`${gameData.game_title}`, {
+                          description: '已成功保存到游戏库',
+                          duration: 3000,
+                        })
+                      } catch (error) {
+                        console.error('保存游戏失败:', error)
+                        toast.error('保存游戏失败', {
+                          description: '请稍后重试',
+                          duration: 4000,
+                        })
+                      }
+                    } else {
+                      toast.error('请先设置游戏标题', {
+                        description: '需要在左侧设置游戏标题后才能保存',
+                        duration: 4000,
+                      })
+                    }
+                  }}
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white transition-all duration-300 font-bold px-3 sm:px-4 lg:px-4 py-2 sm:py-2.5 lg:py-3 rounded-lg text-xs sm:text-sm lg:text-sm flex items-center gap-1 sm:gap-1.5 lg:gap-1.5 shadow-sm hover:shadow-md active:scale-95 min-w-[90px] h-[44px] sm:h-auto justify-center"
+                >
+                  <span className="inline">保存</span>
                 </button>
                 
                 <button
@@ -623,7 +730,7 @@ export default function GameEditor() {
                       </defs>
                       
                       {/* Draw connections between nodes */}
-                      {gameData.branches.map(branch => {
+                      {visibleNodes.map(branch => {
                         const nodePos = getNodePosition(branch.branch_id)
                         if (!nodePos) return null
                         
@@ -652,7 +759,7 @@ export default function GameEditor() {
                       })}
                       
                       {/* Draw nodes */}
-                      {nodePositions.map(pos => {
+                      {visibleNodes.map(pos => {
                         const branch = gameData.branches.find(b => b.branch_id === pos.id)
                         if (!branch) return null
                         

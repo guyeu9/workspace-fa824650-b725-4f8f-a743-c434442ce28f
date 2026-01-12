@@ -362,5 +362,6 @@ export const enhancedGameStore = {
   ...gameStore,
   importGamePack: GamePackImporter.importGamePack.bind(GamePackImporter),
   validateGameData: GameDataValidator.validateGameData.bind(GameDataValidator),
-  extractMetadata: GameDataValidator.extractMetadata.bind(GameDataValidator)
+  extractMetadata: GameDataValidator.extractMetadata.bind(GameDataValidator),
+  getAllGamesForBackup: gameStore.getAllGamesForBackup.bind(gameStore)
 };

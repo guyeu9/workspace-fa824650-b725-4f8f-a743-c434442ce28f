@@ -19,6 +19,16 @@ import {
 } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { zhCN } from 'date-fns/locale';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 
 interface GameListProps {
   onGameSelect?: (game: GameIndexItem) => void;
@@ -37,6 +47,9 @@ export function GameList({
 }: GameListProps) {
   const [games, setGames] = useState<GameIndexItem[]>([]);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [deleteTargetId, setDeleteTargetId] = useState<string | null>(null);
+  const [showBatchDeleteDialog, setShowBatchDeleteDialog] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [sortBy, setSortBy] = useState<'priority' | 'updated' | 'created'>('priority');
 
@@ -145,33 +158,43 @@ export function GameList({
 
   // 处理删除
   const handleDelete = async (gameId: string) => {
-    if (confirm('确定要删除这个游戏吗？此操作无法撤销。')) {
-      try {
-        await gameStore.deleteGame(gameId);
-        setSelectedIds(prev => {
-          const newSet = new Set(prev);
-          newSet.delete(gameId);
-          return newSet;
-        });
-        await loadGames();
-      } catch (error) {
-        console.error('删除游戏失败:', error);
-      }
+    setDeleteTargetId(gameId);
+    setShowDeleteDialog(true);
+  };
+
+  // 执行单个删除
+  const executeDelete = async () => {
+    if (!deleteTargetId) return;
+    try {
+      await gameStore.deleteGame(deleteTargetId);
+      setSelectedIds(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(deleteTargetId);
+        return newSet;
+      });
+      setShowDeleteDialog(false);
+      setDeleteTargetId(null);
+      await loadGames();
+    } catch (error) {
+      console.error('删除游戏失败:', error);
     }
   };
 
   // 处理批量删除
   const handleBatchDelete = async () => {
     if (selectedIds.size === 0) return;
-    
-    if (confirm(`确定要删除选中的 ${selectedIds.size} 个游戏吗？此操作无法撤销。`)) {
-      try {
-        await gameStore.deleteGames(Array.from(selectedIds));
-        setSelectedIds(new Set());
-        await loadGames();
-      } catch (error) {
-        console.error('批量删除失败:', error);
-      }
+    setShowBatchDeleteDialog(true);
+  };
+
+  // 执行批量删除
+  const executeBatchDelete = async () => {
+    try {
+      await gameStore.deleteGames(Array.from(selectedIds));
+      setSelectedIds(new Set());
+      setShowBatchDeleteDialog(false);
+      await loadGames();
+    } catch (error) {
+      console.error('批量删除失败:', error);
     }
   };
 
@@ -375,6 +398,64 @@ export function GameList({
           </Card>
         ))}
       </div>
+
+      {/* 单个删除确认弹窗 */}
+      <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
+        <AlertDialogContent className="max-w-md bg-white/100 backdrop-blur-none">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-red-600 flex items-center gap-2">
+              <Trash2 className="h-5 w-5" />
+              确认删除游戏
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-slate-600">
+              确定要删除这个游戏吗？此操作 <span className="font-bold text-red-600">不可撤销</span>，游戏数据将被永久删除。
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter className="mt-4">
+            <AlertDialogCancel asChild>
+              <button className="px-4 py-2 text-slate-600 bg-slate-100 rounded-lg hover:bg-slate-200 transition-all cursor-pointer">
+                取消
+              </button>
+            </AlertDialogCancel>
+            <button
+              onClick={executeDelete}
+              className="px-4 py-2 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white rounded-lg transition-all cursor-pointer shadow-md hover:shadow-lg"
+            >
+              确认删除
+            </button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* 批量删除确认弹窗 */}
+      <AlertDialog open={showBatchDeleteDialog} onOpenChange={setShowBatchDeleteDialog}>
+        <AlertDialogContent className="max-w-md bg-white/100 backdrop-blur-none">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-red-600 flex items-center gap-2">
+              <Trash2 className="h-5 w-5" />
+              确认删除游戏
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-slate-600">
+              确定要删除选中的 <span className="font-bold text-red-600">{selectedIds.size}</span> 个游戏吗？
+              <br /><br />
+              此操作 <span className="font-bold text-red-600">不可撤销</span>，所有游戏数据将被永久删除。
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter className="mt-4">
+            <AlertDialogCancel asChild>
+              <button className="px-4 py-2 text-slate-600 bg-slate-100 rounded-lg hover:bg-slate-200 transition-all cursor-pointer">
+                取消
+              </button>
+            </AlertDialogCancel>
+            <button
+              onClick={executeBatchDelete}
+              className="px-4 py-2 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white rounded-lg transition-all cursor-pointer shadow-md hover:shadow-lg"
+            >
+              确认删除
+            </button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

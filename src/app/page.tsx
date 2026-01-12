@@ -230,12 +230,12 @@ export default function Home() {
               setCurrentScene(newScene)
               setChoices(newScene.exits)
               
-              // 添加场景信息到输出历史（先显示场景，再显示游戏信息）
+              // 添加场景信息到输出历史（先显示游戏信息，再显示场景）
               setOutputHistory([
-                { type: 'room-name', content: startBranch.chapter || startBranch.branch_id, className: 'room-name', fullContent: startBranch.chapter || startBranch.branch_id },
-                { type: 'room-desc', content: startBranch.scene_detail || '', fullContent: startBranch.scene_detail || '' },
                 { type: 'room-name', content: data.game_title, className: 'room-name', fullContent: data.game_title },
-                { type: 'room-desc', content: data.description || '', fullContent: data.description || '' }
+                { type: 'room-desc', content: data.description || '', fullContent: data.description || '' },
+                { type: 'room-name', content: startBranch.chapter || startBranch.branch_id, className: 'room-name', fullContent: startBranch.chapter || startBranch.branch_id },
+                { type: 'room-desc', content: startBranch.scene_detail || '', fullContent: startBranch.scene_detail || '' }
               ])
               
               // 保存游戏数据以便后续使用

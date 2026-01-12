@@ -47,6 +47,16 @@ import { GameCardSkeleton } from '@/components/ui/skeletons';
 import BackupRestore from '@/components/ui/backup-restore';
 import CommunityStats from '@/components/community/CommunityStats';
 import GameRecommendations from '@/components/community/GameRecommendations';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 
 export default function GameLibraryPage() {
   const router = useRouter();
@@ -61,6 +71,7 @@ export default function GameLibraryPage() {
   const [communityGames, setCommunityGames] = useState<any[]>([]);
   const [communityLoading, setCommunityLoading] = useState(false);
   const [communityError, setCommunityError] = useState<string | null>(null);
+  const [showBatchDeleteDialog, setShowBatchDeleteDialog] = useState(false);
 
   // 加载游戏列表
   const loadGames = useCallback(async () => {
@@ -163,19 +174,22 @@ export default function GameLibraryPage() {
       toast.error('请选择要删除的游戏');
       return;
     }
+    setShowBatchDeleteDialog(true);
+  };
 
-    if (confirm(`确定要删除选中的 ${selectedGames.size} 个游戏吗？此操作不可恢复。`)) {
-      try {
-        for (const gameId of selectedGames) {
-          await gameStore.deleteGame(gameId);
-        }
-        toast.success(`成功删除 ${selectedGames.size} 个游戏`);
-        setSelectedGames(new Set());
-        await loadGames();
-      } catch (error) {
-        console.error('删除游戏失败:', error);
-        toast.error('删除游戏失败');
+  // 执行批量删除
+  const executeBatchDelete = async () => {
+    try {
+      for (const gameId of selectedGames) {
+        await gameStore.deleteGame(gameId);
       }
+      toast.success(`成功删除 ${selectedGames.size} 个游戏`);
+      setSelectedGames(new Set());
+      setShowBatchDeleteDialog(false);
+      await loadGames();
+    } catch (error) {
+      console.error('删除游戏失败:', error);
+      toast.error('删除游戏失败');
     }
   };
 
@@ -844,6 +858,36 @@ export default function GameLibraryPage() {
           </div>
         </div>
         )}
+
+        {/* 批量删除确认弹窗 */}
+        <AlertDialog open={showBatchDeleteDialog} onOpenChange={setShowBatchDeleteDialog}>
+          <AlertDialogContent className="max-w-md bg-white/100 backdrop-blur-none">
+            <AlertDialogHeader>
+              <AlertDialogTitle className="text-red-600 flex items-center gap-2">
+                <Trash2 className="h-5 w-5" />
+                确认删除游戏
+              </AlertDialogTitle>
+              <AlertDialogDescription className="text-slate-600">
+                确定要删除选中的 <span className="font-bold text-red-600">{selectedGames.size}</span> 个游戏吗？
+                <br /><br />
+                此操作 <span className="font-bold text-red-600">不可撤销</span>，所有游戏数据将被永久删除。
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter className="mt-4">
+              <AlertDialogCancel asChild>
+                <button className="px-4 py-2 text-slate-600 bg-slate-100 rounded-lg hover:bg-slate-200 transition-all cursor-pointer">
+                  取消
+                </button>
+              </AlertDialogCancel>
+              <button
+                onClick={executeBatchDelete}
+                className="px-4 py-2 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white rounded-lg transition-all cursor-pointer shadow-md hover:shadow-lg"
+              >
+                确认删除
+              </button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
     </div>
   );

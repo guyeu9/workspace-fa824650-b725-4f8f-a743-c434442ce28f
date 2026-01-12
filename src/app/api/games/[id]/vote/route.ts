@@ -2,6 +2,7 @@ import { NextRequest } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { db } from '@/lib/db'
 import { ValidationRules } from '@/lib/security-utils'
+import { z } from 'zod'
 
 export const dynamic = 'force-dynamic'
 
