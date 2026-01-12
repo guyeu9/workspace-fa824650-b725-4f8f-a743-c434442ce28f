@@ -1109,9 +1109,74 @@ export default function Home() {
                   示例故事1
                 </button>
                 <button
-                  onClick={() => {
-                    // 示例故事2 - 暂时显示提示
-                    alert('示例故事2即将推出！');
+                  onClick={async () => {
+                    try {
+                      // 从public目录加载指定的JSON文件
+                      const response = await fetch('/游戏2.0版本月王故事_转换版.json');
+                      const data = await response.json();
+                       
+                      // 清空输出历史
+                      setOutputHistory([]);
+                      setInventory([]);
+                      setChoices([]);
+                       
+                      // 找到起始分支（第一个分支）
+                      const startBranch = data.branches[0];
+                      if (startBranch) {
+                        // 设置当前场景
+                        const newScene = {
+                          id: startBranch.branch_id,
+                          name: startBranch.chapter || startBranch.branch_id,
+                          desc: startBranch.scene_detail || '',
+                          exits: startBranch.choices?.map((choice: any) => ({
+                            text: choice.choice,
+                            target: choice.next_branch,
+                            effect: choice.effect,
+                            status_update: choice.status_update,
+                            end_game: choice.end_game
+                          })) || []
+                        };
+                        setCurrentScene(newScene);
+                        setChoices(newScene.exits);
+                         
+                        // 添加场景信息到输出历史（先显示游戏信息，再显示场景）
+                        setOutputHistory([
+                          { type: 'room-name', content: data.game_title, className: 'room-name', fullContent: data.game_title },
+                          { type: 'room-desc', content: data.description || '', fullContent: data.description || '' },
+                          { type: 'room-name', content: startBranch.chapter || startBranch.branch_id, className: 'room-name', fullContent: startBranch.chapter || startBranch.branch_id },
+                          { type: 'room-desc', content: startBranch.scene_detail || '', fullContent: startBranch.scene_detail || '' }
+                        ]);
+                         
+                        // 保存游戏数据以便后续使用
+                        setStoryData({
+                          start: startBranch.branch_id,
+                          scenes: data.branches.reduce((acc: any, branch: any) => {
+                            acc[branch.branch_id] = {
+                              id: branch.branch_id,
+                              name: branch.chapter || branch.branch_id,
+                              desc: branch.scene_detail || '',
+                              exits: branch.choices?.map((choice: any) => ({
+                                text: choice.choice,
+                                target: choice.next_branch,
+                                effect: choice.effect,
+                                status_update: choice.status_update,
+                                end_game: choice.end_game
+                              })) || []
+                            };
+                            return acc;
+                          }, {})
+                        });
+                         
+                        // 关闭欢迎界面，开始游戏
+                        setShowWelcome(false);
+                      }
+                    } catch (error) {
+                      console.error('加载示例故事失败:', error);
+                      setOutputHistory([
+                        { type: 'system', content: '加载示例故事失败，请重试。', fullContent: '加载示例故事失败，请重试。' }
+                      ]);
+                      setShowWelcome(false);
+                    }
                   }}
                   className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 transition-all duration-300 font-bold px-4 sm:px-5 py-3 sm:py-4 rounded-xl shadow-lg shadow-purple-500/20 hover:shadow-xl hover:shadow-purple-500/30 active:scale-95 text-sm sm:text-base"
                 >
