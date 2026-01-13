@@ -4,6 +4,8 @@ import { TestUtils, TestDataFactory } from '@/lib/test-utils'
 import VoteButtons from '@/components/community/VoteButtons'
 import CommentsSection from '@/components/community/CommentsSection'
 import { SessionProvider, useSession } from 'next-auth/react'
+import { apiClient } from '@/lib/api-client'
+import { useToast } from '@/hooks/use-toast'
 
 // 模拟API调用
 jest.mock('@/lib/api-client', () => ({
@@ -15,10 +17,16 @@ jest.mock('@/lib/api-client', () => ({
 
 // 模拟 toast
 jest.mock('@/hooks/use-toast', () => ({
-  useToast: () => ({
+  useToast: jest.fn(() => ({
     toast: jest.fn(),
     dismiss: jest.fn(),
-  }),
+  })),
+}))
+
+// 模拟next-auth/react的useSession
+jest.mock('next-auth/react', () => ({
+  ...jest.requireActual('next-auth/react'),
+  useSession: jest.fn(),
 }))
 
 describe('社区互动功能测试', () => {
@@ -46,16 +54,16 @@ describe('社区互动功能测试', () => {
 
     it('应该显示登录提示当用户未登录时', async () => {
       const mockPost = jest.fn().mockResolvedValue({ success: false })
-      require('@/lib/api-client').apiClient.post = mockPost
+      apiClient.post = mockPost
 
       const mockUseSession = jest.fn(() => ({
         data: null,
         status: 'unauthenticated',
       }))
-      jest.spyOn(require('next-auth/react'), 'useSession').mockImplementation(mockUseSession)
+      useSession.mockImplementation(mockUseSession)
 
       const mockToast = jest.fn()
-      jest.spyOn(require('@/hooks/use-toast'), 'useToast').mockReturnValue({
+      useToast.mockReturnValue({
         toast: mockToast,
         dismiss: jest.fn(),
       })
@@ -84,7 +92,7 @@ describe('社区互动功能测试', () => {
 
     it('应该正确处理投票逻辑', async () => {
       const mockPost = jest.fn().mockResolvedValue({ success: true })
-      require('@/lib/api-client').apiClient.post = mockPost
+      apiClient.post = mockPost
 
       const mockSession = {
         user: { id: '1', name: 'Test User', email: 'test@example.com' },
@@ -95,10 +103,10 @@ describe('社区互动功能测试', () => {
         data: mockSession,
         status: 'authenticated',
       }))
-      jest.spyOn(require('next-auth/react'), 'useSession').mockImplementation(mockUseSession)
+      useSession.mockImplementation(mockUseSession)
 
       const mockToast = jest.fn()
-      jest.spyOn(require('@/hooks/use-toast'), 'useToast').mockReturnValue({
+      useToast.mockReturnValue({
         toast: mockToast,
         dismiss: jest.fn(),
       })
@@ -126,7 +134,7 @@ describe('社区互动功能测试', () => {
 
     it('应该正确处理取消投票', async () => {
       const mockPost = jest.fn().mockResolvedValue({ success: true })
-      require('@/lib/api-client').apiClient.post = mockPost
+      apiClient.post = mockPost
 
       const mockSession = {
         user: { id: '1', name: 'Test User', email: 'test@example.com' },
@@ -137,10 +145,10 @@ describe('社区互动功能测试', () => {
         data: mockSession,
         status: 'authenticated',
       }))
-      jest.spyOn(require('next-auth/react'), 'useSession').mockImplementation(mockUseSession)
+      useSession.mockImplementation(mockUseSession)
 
       const mockToast = jest.fn()
-      jest.spyOn(require('@/hooks/use-toast'), 'useToast').mockReturnValue({
+      useToast.mockReturnValue({
         toast: mockToast,
         dismiss: jest.fn(),
       })
@@ -185,7 +193,7 @@ describe('社区互动功能测试', () => {
         success: true,
         data: { items: mockComments },
       })
-      require('@/lib/api-client').apiClient.get = mockGet
+      apiClient.get = mockGet
     })
 
     it('应该正确显示评论列表', async () => {
@@ -206,7 +214,7 @@ describe('社区互动功能测试', () => {
         data: null,
         status: 'unauthenticated',
       }))
-      jest.spyOn(require('next-auth/react'), 'useSession').mockImplementation(mockUseSession)
+      useSession.mockImplementation(mockUseSession)
 
       render(
         <SessionProvider session={null}>
@@ -227,7 +235,7 @@ describe('社区互动功能测试', () => {
           user: { name: 'Test User', email: 'test@example.com' },
         }),
       })
-      require('@/lib/api-client').apiClient.post = mockPost
+      apiClient.post = mockPost
 
       const mockSession = {
         user: { id: '1', name: 'Test User', email: 'test@example.com' },
@@ -238,7 +246,7 @@ describe('社区互动功能测试', () => {
         data: mockSession,
         status: 'authenticated',
       }))
-      jest.spyOn(require('next-auth/react'), 'useSession').mockImplementation(mockUseSession)
+      useSession.mockImplementation(mockUseSession)
 
       render(
         <SessionProvider session={mockSession}>
@@ -265,7 +273,7 @@ describe('社区互动功能测试', () => {
         success: false,
         error: { message: '发表失败' },
       })
-      require('@/lib/api-client').apiClient.post = mockPost
+      apiClient.post = mockPost
 
       const mockSession = {
         user: { id: '1', name: 'Test User', email: 'test@example.com' },
@@ -276,10 +284,10 @@ describe('社区互动功能测试', () => {
         data: mockSession,
         status: 'authenticated',
       }))
-      jest.spyOn(require('next-auth/react'), 'useSession').mockImplementation(mockUseSession)
+      useSession.mockImplementation(mockUseSession)
 
       const mockToast = jest.fn()
-      jest.spyOn(require('@/hooks/use-toast'), 'useToast').mockReturnValue({
+      useToast.mockReturnValue({
         toast: mockToast,
         dismiss: jest.fn(),
       })
@@ -317,10 +325,10 @@ describe('社区互动功能测试', () => {
         data: mockSession,
         status: 'authenticated',
       }))
-      jest.spyOn(require('next-auth/react'), 'useSession').mockImplementation(mockUseSession)
+      useSession.mockImplementation(mockUseSession)
 
       const mockToast = jest.fn()
-      jest.spyOn(require('@/hooks/use-toast'), 'useToast').mockReturnValue({
+      useToast.mockReturnValue({
         toast: mockToast,
         dismiss: jest.fn(),
       })
@@ -359,13 +367,13 @@ describe('社区互动功能测试', () => {
         success: true,
         data: { items: manyComments },
       })
-      require('@/lib/api-client').apiClient.get = mockGet
+      apiClient.get = mockGet
 
       const mockUseSession = jest.fn(() => ({
         data: null,
         status: 'unauthenticated',
       }))
-      jest.spyOn(require('next-auth/react'), 'useSession').mockImplementation(mockUseSession)
+      useSession.mockImplementation(mockUseSession)
 
       const startTime = performance.now()
       
@@ -389,7 +397,7 @@ describe('社区互动功能测试', () => {
           user: { name: 'Test User', email: 'test@example.com' },
         }),
       })
-      require('@/lib/api-client').apiClient.post = mockPost
+      apiClient.post = mockPost
 
       const mockSession = {
         user: { id: '1', name: 'Test User', email: 'test@example.com' },
@@ -400,7 +408,7 @@ describe('社区互动功能测试', () => {
         data: mockSession,
         status: 'authenticated',
       }))
-      jest.spyOn(require('next-auth/react'), 'useSession').mockImplementation(mockUseSession)
+      useSession.mockImplementation(mockUseSession)
 
       render(
         <SessionProvider session={mockSession}>

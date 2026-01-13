@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移动端布局调试</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 10px;
+            background: #f8fafc;
+        }
+        
+        .test-wrapper {
+            max-width: 400px;
+            margin: 0 auto;
+            border: 2px solid #6366f1;
+            background: white;
+        }
+        
+        .quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2px;
+            padding: 6px 12px;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            width: 100%;
+            box-sizing: border-box;
+            flex-direction: row;
+            justify-content: flex-start;
+        }
+        
+        .quick-btn {
+            padding: 3px 6px;
+            border: 1px solid #e2e8f0;
+            border-radius: 3px;
+            background: #fff;
+            color: #64748b;
+            font-size: 9px;
+            cursor: pointer;
+            text-align: center;
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+            /* 测试不同的宽度计算方式 */
+            flex: 0 0 calc(25% - 1.5px);
+            width: calc(25% - 1.5px);
+            min-width: calc(25% - 1.5px);
+            max-width: calc(25% - 1.5px);
+            margin-bottom: 2px;
+        }
+        
+        .quick-btn:hover {
+            background: #6366f1;
+            color: white;
+        }
+        
+        .debug-info {
+            padding: 15px;
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+        }
+        
+        .button-debug {
+            border: 1px dashed #ef4444;
+            position: relative;
+            padding: 2px;
+            margin: 5px;
+            background: rgba(239, 68, 68, 0.05);
+        }
+        
+        .button-debug::before {
+            content: attr(data-index);
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            background: #ef4444;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+        }
+        
+        .width-test {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2px;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f0f9ff;
+            border: 1px solid #0ea5e9;
+        }
+        
+        .width-test-item {
+            background: #0ea5e9;
+            color: white;
+            padding: 5px;
+            text-align: center;
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-wrapper">
+        <h3 style="margin: 0; padding: 10px; text-align: center; background: #6366f1; color: white;">
+            移动端快捷按钮布局调试
+        </h3>
+        
+        <div class="quick-actions" id="quick-actions">
+            <!-- 按钮将通过JS生成 -->
+        </div>
+        
+        <div class="debug-info">
+            <div><strong>当前按钮宽度计算:</strong> calc(25% - 1.5px)</div>
+            <div><strong>容器宽度:</strong> <span id="container-width">0</span>px</div>
+            <div><strong>按钮数量:</strong> 8个</div>
+            <div><strong>预期布局:</strong> 2行×4列</div>
+            <div><strong>实际布局:</strong> <span id="actual-layout">检测中...</span></div>
+        </div>
+        
+        <div class="width-test">
+            <div style="width: 100%; padding: 5px; background: #0ea5e9; color: white; text-align: center;">容器宽度对比测试</div>
+            <div class="width-test-item" style="width: 25%;">25%</div>
+            <div class="width-test-item" style="width: 25%;">25%</div>
+            <div class="width-test-item" style="width: 25%;">25%</div>
+            <div class="width-test-item" style="width: 25%;">25%</div>
+            <div class="width-test-item" style="width: 25%;">25%</div>
+            <div class="width-test-item" style="width: 25%;">25%</div>
+            <div class="width-test-item" style="width: 25%;">25%</div>
+            <div class="width-test-item" style="width: 25%;">25%</div>
+        </div>
+    </div>
+
+    <script>
+        const buttonData = ['查看', '背包', '地图', '状态', '对话', '战斗', '搜索', '移动'];
+        
+        function createButton(text, index) {
+            const button = document.createElement('button');
+            button.className = 'quick-btn';
+            button.textContent = text;
+            button.setAttribute('data-index', index + 1);
+            return button;
+        }
+        
+        function analyzeLayout() {
+            const container = document.getElementById('quick-actions');
+            const buttons = container.querySelectorAll('.quick-btn');
+            const containerWidth = container.offsetWidth;
+            
+            document.getElementById('container-width').textContent = containerWidth;
+            
+            // 分析按钮位置
+            const positions = Array.from(buttons).map(btn => {
+                const rect = btn.getBoundingClientRect();
+                const containerRect = container.getBoundingClientRect();
+                return {
+                    index: parseInt(btn.getAttribute('data-index')),
+                    x: Math.round(rect.left - containerRect.left),
+                    y: Math.round(rect.top - containerRect.top),
+                    width: Math.round(rect.width),
+                    text: btn.textContent
+                };
+            });
+            
+            // 按行分组
+            const rows = {};
+            positions.forEach(pos => {
+                const rowKey = pos.y;
+                if (!rows[rowKey]) rows[rowKey] = [];
+                rows[rowKey].push(pos);
+            });
+            
+            const rowCount = Object.keys(rows).length;
+            const rowCounts = Object.values(rows).map(row => row.length);
+            
+            document.getElementById('actual-layout').textContent = 
+                `${rowCount}行，每行[${rowCounts.join(', ')}]个`;
+            
+            console.log('📊 布局分析:', {
+                containerWidth,
+                buttonWidth: positions[0]?.width,
+                rowCount,
+                rowCounts,
+                positions
+            });
+            
+            // 计算正确的按钮宽度
+            const gap = 2; // CSS中设置的gap
+            const correctWidth = (containerWidth - gap * 3) / 4; // 4个按钮，3个gap
+            console.log('💡 正确的按钮宽度应该是:', correctWidth, 'px');
+            
+            return { rowCount, rowCounts, correctWidth };
+        }
+        
+        // 初始化
+        window.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('quick-actions');
+            
+            buttonData.forEach((text, index) => {
+                container.appendChild(createButton(text, index));
+            });
+            
+            setTimeout(() => {
+                analyzeLayout();
+            }, 100);
+        });
+        
+        window.addEventListener('resize', () => {
+            setTimeout(analyzeLayout, 50);
+        });
+    </script>
+</body>
+</html>

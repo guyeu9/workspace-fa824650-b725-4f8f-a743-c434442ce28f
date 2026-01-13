@@ -54,10 +54,10 @@ const renderMarkdown = (text: string) => {
 export default function Home() {
   const [showWelcome, setShowWelcome] = useState(true)
   const [outputHistory, setOutputHistory] = useState<Array<{ 
-    type: 'user' | 'system' | 'room-name' | 'room-desc' | 'choices-data', 
+    type: 'user' | 'system' | 'room-name' | 'room-desc' | 'choices-data' | 'user-choice', 
     content: string; 
-    className?: string;
-    fullContent?: string;
+    className?: string; 
+    fullContent?: string; 
   }>>([])
   const [choices, setChoices] = useState<any[]>([])
   const [inventory, setInventory] = useState<string[]>([])
@@ -187,7 +187,7 @@ export default function Home() {
           'north': 'north', 'south': 'south', 'east': 'east', 'west': 'west'
         }
 
-        let matchedDir = null
+        let matchedDir: string | null = null
         const commandLower = cmd.toLowerCase()
 
         for (const [key, dir] of Object.entries(dirMap)) {

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>快捷按钮修复验证</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 10px;
+            background: #f8fafc;
+        }
+        
+        .test-container {
+            max-width: 400px;
+            margin: 0 auto 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            padding: 12px 16px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        /* 修复后的快捷区域样式 */
+        .quick-actions {
+            display: flex;
+            gap: 1px;
+            padding: 3px 6px;
+            background: #f1f5f9;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+            flex-wrap: wrap;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+            align-items: center;
+            min-height: auto;
+            flex-shrink: 0;
+            order: 2;
+            flex-direction: row;
+            justify-content: flex-start;
+        }
+        
+        .quick-btn {
+            padding: 1px 2px;
+            border: 1px solid #e2e8f0;
+            border-radius: 3px;
+            background: #fff;
+            color: #64748b;
+            font-size: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 1px;
+            flex: 0 0 calc(25% - 0.75px);
+            min-width: 25px;
+            max-width: calc(25% - 0.75px);
+            text-align: center;
+            justify-content: center;
+            line-height: 1.0;
+            margin-bottom: 1px;
+            box-sizing: border-box;
+        }
+        
+        .quick-btn:hover {
+            background: #6366f1;
+            color: white;
+            border-color: #6366f1;
+            transform: translateY(-1px);
+        }
+        
+        .quick-btn:nth-child(-n+4) {
+            margin-bottom: 1px;
+        }
+        
+        .quick-btn:nth-child(n+5) {
+            margin-bottom: 0;
+        }
+        
+        .status {
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .success {
+            background: #dcfce7;
+            color: #166534;
+            font-weight: bold;
+        }
+        
+        .failure {
+            background: #fef2f2;
+            color: #dc2626;
+            font-weight: bold;
+        }
+        
+        .info {
+            padding: 15px;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            font-size: 12px;
+            color: #64748b;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 10px;
+            background: #f1f5f9;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 8px;
+            background: white;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        .stat-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1f2937;
+        }
+        
+        .stat-label {
+            color: #6b7280;
+            margin-top: 2px;
+        }
+        
+        @media (max-width: 320px) {
+            .quick-actions {
+                gap: 0.5px;
+                padding: 2px 4px;
+            }
+            
+            .quick-btn {
+                padding: 1px 1px;
+                font-size: 5px;
+                flex: 0 0 calc(25% - 0.375px);
+                min-width: 22px;
+                max-width: calc(25% - 0.375px);
+                margin-bottom: 0.5px;
+                line-height: 0.9;
+            }
+            
+            .quick-btn:nth-child(-n+4) {
+                margin-bottom: 0.5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="header">🎮 Text Engine 快捷按钮测试</div>
+        
+        <div class="quick-actions" id="quick-actions">
+            <!-- 按钮将由JS生成 -->
+        </div>
+        
+        <div class="status" id="status">
+            正在检测按钮显示状态...
+        </div>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-value" id="total-buttons">0</div>
+                <div class="stat-label">应显示按钮</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="visible-buttons">0</div>
+                <div class="stat-label">实际显示</div>
+            </div>
+        </div>
+        
+        <div class="info">
+            <strong>📱 测试内容：</strong><br>
+            • 验证所有8个快捷按钮是否正确显示<br>
+            • 检查按钮布局是否为2行×4列<br>
+            • 确认按钮在小屏幕上是否自适应
+        </div>
+    </div>
+
+    <script>
+        // 快捷按钮数据
+        const quickButtonData = [
+            '📖查看', '🎒背包', '🗺️地图', '📊状态',
+            '💬对话', '⚔️战斗', '🔍搜索', '🏃移动'
+        ];
+        
+        function createQuickButton(text) {
+            const button = document.createElement('button');
+            button.className = 'quick-btn';
+            button.textContent = text;
+            button.onclick = () => {
+                alert(`点击了: ${text}`);
+            };
+            return button;
+        }
+        
+        function initializeQuickButtons() {
+            const container = document.getElementById('quick-actions');
+            container.innerHTML = '';
+            
+            quickButtonData.forEach(text => {
+                container.appendChild(createQuickButton(text));
+            });
+        }
+        
+        function checkButtonDisplay() {
+            const container = document.getElementById('quick-actions');
+            const buttons = container.querySelectorAll('.quick-btn');
+            const totalButtons = quickButtonData.length;
+            const visibleButtons = buttons.length;
+            
+            // 更新统计
+            document.getElementById('total-buttons').textContent = totalButtons;
+            document.getElementById('visible-buttons').textContent = visibleButtons;
+            
+            // 检查显示状态
+            const statusElement = document.getElementById('status');
+            if (visibleButtons === totalButtons) {
+                statusElement.textContent = '✅ 所有按钮正确显示！';
+                statusElement.className = 'status success';
+            } else {
+                statusElement.textContent = `❌ 只显示了 ${visibleButtons}/${totalButtons} 个按钮`;
+                statusElement.className = 'status failure';
+            }
+            
+            // 检查容器高度是否符合2行要求
+            const containerHeight = container.offsetHeight;
+            const expectedMinHeight = 35; // 2行按钮的最小高度
+            
+            if (containerHeight >= expectedMinHeight) {
+                console.log('✅ 容器高度正常，可以显示2行按钮');
+            } else {
+                console.log('⚠️ 容器高度可能不足以显示2行按钮');
+            }
+        }
+        
+        // 延迟检查，确保DOM完全渲染
+        window.addEventListener('DOMContentLoaded', () => {
+            initializeQuickButtons();
+            
+            // 稍微延迟检查，确保样式完全应用
+            setTimeout(() => {
+                checkButtonDisplay();
+            }, 100);
+        });
+        
+        // 窗口大小变化时重新检查
+        window.addEventListener('resize', () => {
+            setTimeout(checkButtonDisplay, 50);
+        });
+    </script>
+</body>
+</html>

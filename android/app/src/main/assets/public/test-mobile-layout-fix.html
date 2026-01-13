@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>移动端布局修复测试</title>
+    <style>
+        :root {
+            --bg: #f5f7fa;
+            --panel-bg: white;
+            --text: #1e293b;
+            --muted: #64748b;
+            --accent: #6366f1;
+            --border: #e2e8f0;
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            /* 移动端安全区域支持 */
+            padding-top: env(safe-area-inset-top, 0);
+            padding-bottom: env(safe-area-inset-bottom, 0);
+            padding-left: env(safe-area-inset-left, 0);
+            padding-right: env(safe-area-inset-right, 0);
+        }
+
+        /* 主容器 - 移动端优化的修复布局 */
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            flex-wrap: nowrap;
+        }
+
+        /* 确保所有主要区域都有正确的order */
+        .container > #game-title { order: 0; }
+        .container > #output { order: 1; }
+        .container > #choices { order: 2; }
+        .container > .quick-actions { order: 3; }
+        .container > #input-area { order: 4; }
+
+        /* 防止布局错位的额外保护 - 移动端强化 */
+        .container > * {
+            position: relative;
+            width: 100%;
+            flex-shrink: 0;
+            box-sizing: border-box;
+        }
+
+        .container > #output {
+            flex-shrink: 1; /* 输出区域可以伸缩 */
+        }
+
+        /* 游戏标题 - 移动端优化 */
+        #game-title {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            padding: 16px 20px;
+            text-align: center;
+        }
+
+        #game-title h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* 输出区域 - 移动端优化 */
+        #output {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 20px;
+            font-family: 'SF Mono', Monaco, Inconsolata, monospace;
+            font-size: 13px;
+            line-height: 1.5;
+            background: var(--panel-bg);
+            min-height: 200px; /* 移动端降低最小高度 */
+            order: 1;
+        }
+
+        #output p {
+            margin: 8px 0;
+            padding: 8px 12px;
+            background: var(--bg);
+            border-radius: 6px;
+            border-left: 3px solid var(--accent);
+        }
+
+        /* 动态选择按钮 - 移动端优化 */
+        #choices {
+            padding: 6px 12px;
+            background: var(--panel-bg);
+            border-top: 1px solid var(--border);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            justify-content: center;
+            min-height: 45px;
+            align-items: center;
+            flex-shrink: 0;
+            order: 2;
+        }
+
+        #choices button {
+            padding: 5px 8px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex: 1 1 calc(50% - 2px);
+            max-width: calc(50% - 2px);
+            text-align: center;
+        }
+
+        #choices button:hover {
+            background: #5558e3;
+            transform: translateY(-1px);
+        }
+
+        /* 快捷按钮区域 - 移动端2行×4列布局 */
+        .quick-actions {
+            display: grid !important;
+            grid-template-columns: repeat(4, 1fr) !important;
+            grid-template-rows: repeat(2, auto) !important;
+            gap: 2px !important;
+            padding: 6px 12px;
+            background: var(--panel-bg);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            min-height: auto;
+            flex-shrink: 0;
+            order: 3;
+            width: 100%;
+            box-sizing: border-box;
+            justify-items: stretch !important;
+            align-items: stretch !important;
+        }
+
+        .quick-btn {
+            padding: 3px 5px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: var(--panel-bg);
+            color: var(--muted);
+            font-size: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            width: 100% !important;
+            min-width: auto !important;
+            max-width: none !important;
+            flex: none !important;
+            justify-content: center;
+            box-sizing: border-box;
+            margin: 0 !important;
+        }
+
+        .quick-btn:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        /* 输入区域 - 移动端优化 */
+        #input-area {
+            padding: 8px 12px;
+            background: var(--panel-bg);
+            border-top: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            min-height: 100px; /* 移动端降低高度 */
+            flex-shrink: 0;
+            order: 4;
+        }
+
+        #input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: 'SF Mono', Monaco, Inconsolata, monospace;
+            background: var(--panel-bg);
+            color: var(--text);
+        }
+
+        #input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+
+        .button-group button {
+            flex: 1;
+            min-width: 0;
+            padding: 8px 12px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .button-group button:hover {
+            background: #5558e3;
+        }
+
+        /* 布局调试信息 */
+        .layout-debug {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            z-index: 1000;
+            max-width: 180px;
+        }
+
+        .layout-debug div {
+            margin: 3px 0;
+        }
+
+        /* 调试模式边框 */
+        .debug-mode #game-title,
+        .debug-mode #output,
+        .debug-mode #choices,
+        .debug-mode .quick-actions,
+        .debug-mode #input-area {
+            border: 2px dashed;
+            position: relative;
+        }
+
+        .debug-mode #game-title { border-color: #ff6b6b; }
+        .debug-mode #output { border-color: #4ecdc4; }
+        .debug-mode #choices { border-color: #45b7d1; }
+        .debug-mode .quick-actions { border-color: #f9ca24; }
+        .debug-mode #input-area { border-color: #6c5ce7; }
+
+        .order-badge {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            font-size: 9px;
+            padding: 2px 4px;
+            border-radius: 2px;
+            z-index: 10;
+            font-weight: bold;
+        }
+
+        /* 测试内容样式 */
+        .test-info {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            padding: 12px;
+            border-radius: 8px;
+            margin: 8px 0;
+            border-left: 4px solid #2196f3;
+        }
+
+        .layout-status {
+            background: #e8f5e8;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border-left: 4px solid #22c55e;
+            margin: 4px 0;
+            font-size: 12px;
+        }
+
+        .layout-error {
+            background: #ffebee;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border-left: 4px solid #f44336;
+            margin: 4px 0;
+            font-size: 12px;
+        }
+
+        /* 响应式断点测试 */
+        @media (max-width: 480px) {
+            .quick-actions {
+                gap: 1px !important;
+                padding: 4px 8px;
+            }
+            
+            .quick-btn {
+                font-size: 7px;
+                padding: 2px 3px;
+            }
+            
+            #choices button {
+                font-size: 10px;
+                padding: 4px 6px;
+            }
+            
+            #input-area {
+                padding: 6px 10px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .quick-actions {
+                gap: 0.5px !important;
+                padding: 3px 6px;
+            }
+            
+            .quick-btn {
+                font-size: 6px;
+                padding: 1px 2px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container debug-mode">
+        <!-- 游戏标题 -->
+        <div id="game-title">
+            <div class="order-badge">0</div>
+            <h1>🎮 移动端布局修复测试</h1>
+        </div>
+
+        <!-- 输出区域 -->
+        <div id="output">
+            <div class="order-badge">1</div>
+            <div class="test-info">
+                <strong>移动端布局测试</strong><br>
+                验证快捷区域和输入框始终在正确位置
+            </div>
+            <div class="layout-status" id="layout-status">
+                ✅ 布局验证中...
+            </div>
+            <p><strong>文字输出区域 (Order: 1)</strong></p>
+            <p>这里应该始终显示在游戏标题下方</p>
+            <p>快捷按钮区域和输入框应该始终在文字区域下方</p>
+        </div>
+
+        <!-- 动态选择按钮 -->
+        <div id="choices">
+            <div class="order-badge">2</div>
+            <button>选择1</button>
+            <button>选择2</button>
+            <button>选择3</button>
+            <button>选择4</button>
+        </div>
+
+        <!-- 快捷按钮区域 -->
+        <div class="quick-actions">
+            <div class="order-badge">3</div>
+            <button class="quick-btn">👁️ 观察</button>
+            <button class="quick-btn">📦 物品</button>
+            <button class="quick-btn">🎒 背包</button>
+            <button class="quick-btn">❓ 帮助</button>
+            <button class="quick-btn">💾 保存</button>
+            <button class="quick-btn">📂 读取</button>
+            <button class="quick-btn">🗑️ 清除</button>
+            <button class="quick-btn">📚 指南</button>
+        </div>
+
+        <!-- 输入区域 -->
+        <div id="input-area">
+            <div class="order-badge">4</div>
+            <input id="input" type="text" placeholder="输入命令..." autocomplete="off">
+            <div class="button-group">
+                <button id="send">发送</button>
+                <button id="export">导出</button>
+                <button id="import">导入</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 布局调试信息 -->
+    <div class="layout-debug">
+        <div><strong>布局验证</strong></div>
+        <div>窗口: <span id="window-width"></span>px</div>
+        <div>标题: order 0</div>
+        <div>输出: order 1</div>
+        <div>选择: order 2</div>
+        <div>快捷: order 3</div>
+        <div>输入: order 4</div>
+        <div id="layout-result">检查中...</div>
+    </div>
+
+    <script>
+        // 调试信息更新
+        function updateDebugInfo() {
+            document.getElementById('window-width').textContent = window.innerWidth;
+        }
+
+        updateDebugInfo();
+        window.addEventListener('resize', updateDebugInfo);
+
+        // 布局验证函数
+        function verifyMobileLayout() {
+            const container = document.querySelector('.container');
+            const elements = Array.from(container.children);
+            const statusElement = document.getElementById('layout-status');
+            const resultElement = document.getElementById('layout-result');
+            
+            let layoutCorrect = true;
+            let errors = [];
+
+            elements.forEach((element, index) => {
+                const computedOrder = parseInt(window.getComputedStyle(element).order) || 0;
+                const expectedOrder = index;
+                
+                if (computedOrder !== expectedOrder) {
+                    layoutCorrect = false;
+                    const elementName = element.id || element.tagName;
+                    errors.push(`${elementName}: 期望${expectedOrder}, 实际${computedOrder}`);
+                }
+            });
+
+            // 检查快捷按钮是否正确显示为8个
+            const quickButtons = document.querySelectorAll('.quick-btn');
+            if (quickButtons.length !== 8) {
+                layoutCorrect = false;
+                errors.push(`快捷按钮数量错误: 期望8个, 实际${quickButtons.length}个`);
+            }
+
+            // 检查快捷按钮是否按2行×4列排列
+            const quickActions = document.querySelector('.quick-actions');
+            const quickActionsStyle = window.getComputedStyle(quickActions);
+            const displayGrid = quickActionsStyle.display === 'grid';
+            const gridColumns = quickActionsStyle.gridTemplateColumns;
+            
+            if (!displayGrid || !gridColumns.includes('repeat(4')) {
+                layoutCorrect = false;
+                errors.push('快捷按钮布局不正确: 应该是2行×4列网格');
+            }
+
+            // 更新状态显示
+            if (layoutCorrect) {
+                statusElement.innerHTML = '✅ 布局验证通过！所有区域都在正确位置';
+                statusElement.className = 'layout-status';
+                resultElement.innerHTML = '✅ 正确';
+                resultElement.style.color = '#22c55e';
+            } else {
+                statusElement.innerHTML = '❌ 布局验证失败:<br>' + errors.join('<br>');
+                statusElement.className = 'layout-error';
+                resultElement.innerHTML = '❌ 错误';
+                resultElement.style.color = '#f44336';
+            }
+
+            console.log('移动端布局验证结果:', layoutCorrect ? '通过' : '失败', errors);
+            return layoutCorrect;
+        }
+
+        // 页面加载完成后验证布局
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const result = verifyMobileLayout();
+                console.log('移动端布局修复测试结果:', result ? '成功' : '失败');
+            }, 1000);
+        });
+
+        // 窗口大小改变时重新验证
+        window.addEventListener('resize', () => {
+            setTimeout(verifyMobileLayout, 500);
+        });
+
+        // 测试按钮交互
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const output = document.getElementById('output');
+                const message = document.createElement('p');
+                message.innerHTML = `<strong>测试点击:</strong> ${this.textContent}`;
+                message.style.background = '#fff3cd';
+                message.style.borderLeftColor = '#ffc107';
+                output.appendChild(message);
+                output.scrollTop = output.scrollHeight;
+
+                // 重新验证布局
+                setTimeout(verifyMobileLayout, 100);
+            });
+        });
+
+        // 测试输入功能
+        document.getElementById('send').addEventListener('click', function() {
+            const input = document.getElementById('input');
+            const output = document.getElementById('output');
+            if (input.value.trim()) {
+                const message = document.createElement('p');
+                message.innerHTML = `<strong>命令:</strong> ${input.value}`;
+                message.style.background = '#e8f5e8';
+                message.style.borderLeftColor = '#22c55e';
+                output.appendChild(message);
+                output.scrollTop = output.scrollHeight;
+                input.value = '';
+
+                // 重新验证布局
+                setTimeout(verifyMobileLayout, 100);
+            }
+        });
+
+        // Enter键发送
+        document.getElementById('input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('send').click();
+            }
+        });
+
+        // 动态添加内容测试布局稳定性
+        setTimeout(() => {
+            const output = document.getElementById('output');
+            const testMessage = document.createElement('div');
+            testMessage.className = 'test-info';
+            testMessage.innerHTML = '<strong>动态内容测试</strong><br>添加新内容后，布局应该保持正确顺序';
+            output.appendChild(testMessage);
+            
+            setTimeout(verifyMobileLayout, 100);
+        }, 2000);
+
+        console.log('移动端布局修复测试页面已加载');
+        console.log('验证重点: 快捷区域和输入框始终在文字内容下方');
+    </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+{
+	"appId": "com.textadventure.app",
+	"appName": "文字冒险游戏平台",
+	"webDir": "out",
+	"bundledWebRuntime": false,
+	"android": {
+		"path": "android",
+		"package": "com.textadventure.app"
+	},
+	"ios": {
+		"path": "ios",
+		"scheme": "TextAdventureApp",
+		"bundleId": "com.textadventure.app"
+	},
+	"server": {
+		"url": "http://localhost:3000",
+		"cleartext": true
+	},
+	"plugins": {
+		"PushNotifications": {
+			"presentationOptions": [
+				"badge",
+				"sound",
+				"alert"
+			]
+		},
+		"LocalNotifications": {
+			"smallIcon": "ic_stat_icon_config_sample",
+			"iconColor": "#488AFF",
+			"sound": "beep.wav"
+		},
+		"Camera": {
+			"source": "CAMERA",
+			"direction": "REAR",
+			"resultType": "base64"
+		},
+		"Filesystem": {
+			"directories": {
+				"Documents": "DOCUMENTS",
+				"Data": "DATA"
+			}
+		},
+		"Device": {
+			"enableLogging": true
+		},
+		"Network": {
+			"enableLogging": true
+		},
+		"Battery": {
+			"enableLogging": true
+		},
+		"ScreenOrientation": {
+			"orientation": "portrait"
+		},
+		"StatusBar": {
+			"style": "DARK",
+			"backgroundColor": "#6366f1",
+			"overlaysWebView": false
+		},
+		"SplashScreen": {
+			"launchShowDuration": 3000,
+			"launchAutoHide": true,
+			"backgroundColor": "#6366f1",
+			"androidSplashResourceName": "splash",
+			"androidScaleType": "CENTER_CROP",
+			"showSpinner": true,
+			"androidSpinnerStyle": "large",
+			"iosSpinnerStyle": "small",
+			"spinnerColor": "#ffffff",
+			"splashFullScreen": true,
+			"splashImmersive": true,
+			"layoutName": "launch_screen",
+			"useDialog": true
+		},
+		"Share": {
+			"dialogTitle": "分享游戏"
+		},
+		"Browser": {
+			"toolbarColor": "#6366f1",
+			"showTitle": true
+		},
+		"Storage": {
+			"group": "textadventure"
+		},
+		"Preferences": {
+			"group": "textadventure"
+		},
+		"ActionSheet": {
+			"title": "选择操作"
+		},
+		"Dialog": {
+			"title": "提示"
+		},
+		"Haptics": {
+			"enabled": true
+		},
+		"Keyboard": {
+			"resize": "native",
+			"style": "DARK",
+			"resizeOnFullScreen": true
+		},
+		"Geolocation": {
+			"enableHighAccuracy": true,
+			"timeout": 10000,
+			"maximumAge": 60000
+		},
+		"Motion": {
+			"frequency": 60
+		},
+		"Audio": {
+			"enabled": true
+		},
+		"Video": {
+			"enabled": true
+		}
+	},
+	"cordova": {
+		"preferences": {
+			"android-minSdkVersion": "21",
+			"android-targetSdkVersion": "33",
+			"android-compileSdkVersion": "33",
+			"android-buildToolsVersion": "33.0.0",
+			"android-useAndroidX": "true",
+			"android-enableJetifier": "true",
+			"ios-deployment-target": "13.0",
+			"SwiftVersion": "5.0",
+			"UseSwiftLanguageVersion": "5.0"
+		}
+	},
+	"buildOptions": {
+		"android": {
+			"keystorePath": "./keystore/android-release.keystore",
+			"keystoreAlias": "text-adventure-key",
+			"releaseType": "APK",
+			"buildConfig": {
+				"debuggable": true,
+				"minifyEnabled": false,
+				"shrinkResources": false,
+				"proguardFiles": [
+					"proguard-android.txt",
+					"proguard-rules.pro"
+				]
+			}
+		},
+		"ios": {
+			"exportMethod": "app-store",
+			"buildFlag": [
+				"-UseModernBuildSystem=0"
+			]
+		}
+	},
+	"package": {
+		"android": {
+			"outputPath": "./release/android",
+			"outputName": "TextAdventure-v{version}-{build}.apk",
+			"signingConfig": {
+				"storeFile": "./keystore/android-release.keystore",
+				"keyAlias": "text-adventure-key"
+			}
+		},
+		"ios": {
+			"outputPath": "./release/ios",
+			"outputName": "TextAdventure-v{version}-{build}.ipa",
+			"signing": {}
+		}
+	}
+}
