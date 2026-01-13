@@ -17,7 +17,7 @@
     "db:migrate": "prisma migrate dev",
     "db:reset": "prisma migrate reset",
     "cap:init": "npx cap init",
-    "cap:add": "npx cap add android",
+    "cap:add": "if [ ! -d \"android\" ]; then npx cap add android; else echo 'Android platform already exists, skipping...'; fi",
     "cap:sync": "npx cap sync android",
     "cap:open": "npx cap open android",
     "cap:build": "npm run build:static && npx cap sync android && npx cap open android"
