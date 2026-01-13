@@ -93,7 +93,7 @@ export async function POST(
   // 验证评论内容
   const validationResult = ValidationRules.commentContent.safeParse(content)
   if (!validationResult.success) {
-    return new Response(validationResult.error.errors[0].message, { status: 400 })
+    return new Response(validationResult.error.issues[0].message, { status: 400 })
   }
 
   // 清理评论内容
