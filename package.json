@@ -9,6 +9,7 @@
     "build:win": "next build",
     "start": "next start",
     "lint": "next lint",
+    "type-check": "tsc --noEmit --skipLibCheck --project tsconfig.json --isolatedModules",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",

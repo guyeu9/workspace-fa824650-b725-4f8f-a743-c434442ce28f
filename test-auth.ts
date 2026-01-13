@@ -58,8 +58,8 @@ export async function POST(request: NextRequest) {
     
   } catch (error) {
     if (error instanceof z.ZodError) {
-      const errorMessage = error.errors && error.errors.length > 0 
-        ? error.errors[0].message 
+      const errorMessage = error.issues && error.issues.length > 0 
+        ? error.issues[0].message 
         : '输入数据验证失败'
       return NextResponse.json(
         { error: errorMessage },
