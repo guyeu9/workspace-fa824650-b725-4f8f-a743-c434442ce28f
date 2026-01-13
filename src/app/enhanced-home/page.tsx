@@ -17,8 +17,8 @@ import {
   User,
   Settings
 } from 'lucide-react';
-import { gameStore, GameIndexItem } from '@/lib/game-store';
-import { enhancedGameStore, ImportResult } from '@/lib/game-importer';
+import { gameStore, GameIndexItem, ImportResult } from '@/lib/game-store';
+import { enhancedGameStore } from '@/lib/game-importer';
 import { toast } from 'sonner';
 import { formatDistanceToNow } from 'date-fns';
 import { zhCN } from 'date-fns/locale';

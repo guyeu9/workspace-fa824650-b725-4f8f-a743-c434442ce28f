@@ -133,7 +133,7 @@ export async function POST(request: NextRequest) {
       title: title.trim(),
       description: typeof description === 'string' ? description : null,
       coverUrl: finalCoverUrl,
-      jsonData,
+      jsonData: jsonData as any,
       authorId: user.id,
     },
   })

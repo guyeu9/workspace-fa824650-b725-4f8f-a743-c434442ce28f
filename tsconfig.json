@@ -1,8 +1,14 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "types": ["node"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "types": [
+      "node"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -21,9 +27,30 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx", "upload/**/*.ts", "upload/**/*.tsx"],
-  "exclude": ["node_modules", "src/__tests__", "tests", "test-auth.ts", ".next", "src/lib/test-utils.tsx", "src/lib/mobile-native.ts", "src/lib/push-notifications.ts", "src/lib/rate-limit.ts", "src/lib/database-optimization.ts", "src/components/mobile"]
+  "include": [
+    "next-env.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "upload/**/*.ts",
+    "upload/**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/__tests__",
+    "tests",
+    "test-auth.ts",
+    ".next",
+    "src/lib/test-utils.tsx",
+    "src/lib/mobile-native.ts",
+    "src/lib/push-notifications.ts",
+    "src/lib/rate-limit.ts",
+    "src/lib/database-optimization.ts",
+    "src/components/mobile"
+  ]
 }

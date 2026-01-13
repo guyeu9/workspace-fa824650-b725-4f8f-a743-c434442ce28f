@@ -730,7 +730,7 @@ export default function GameEditor() {
                       </defs>
                       
                       {/* Draw connections between nodes */}
-                      {visibleNodes.map(branch => {
+                      {gameData.branches.map(branch => {
                         const nodePos = getNodePosition(branch.branch_id)
                         if (!nodePos) return null
                         

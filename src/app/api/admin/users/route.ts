@@ -26,8 +26,8 @@ export async function GET(request: NextRequest) {
           { name: { contains: search, mode: 'insensitive' as const } }
         ]
       }),
-      ...(role !== 'all' && { role })
-    }
+      ...(role !== 'all' && { role: role as any })
+    } as any
 
     // 获取用户列表
     const users = await db.user.findMany({
