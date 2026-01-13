@@ -75,22 +75,27 @@ export default function BackupRestore({ className = '' }: BackupRestoreProps) {
 
   const handleRestore = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
-    if (!file) return
+    if (!file) {
+      console.log('未选择文件')
+      return
+    }
 
     try {
       setIsRestoring(true)
       setError(null)
       setRestoreProgress(0)
+      
+      // 显示文件选择成功提示
+      toast({
+        title: '正在处理',
+        description: `正在处理备份文件: ${file.name}`,
+      })
 
       // 导入备份文件
+      console.log('开始导入备份文件:', file.name, '文件大小:', file.size)
       const backupData = await GameLibraryBackup.importBackupFile(file)
+      console.log('备份文件导入成功，完整备份数据:', JSON.stringify(backupData, null, 2))
       
-      // 验证备份
-      const validation = GameLibraryBackup.validateBackup(backupData)
-      if (!validation.valid) {
-        throw new Error(validation.error)
-      }
-
       // 获取统计信息
       const stats = GameLibraryBackup.getBackupStats(backupData)
       setBackupStats({
@@ -101,37 +106,101 @@ export default function BackupRestore({ className = '' }: BackupRestoreProps) {
         appVersion: '1.0.0',
       })
 
-      // 恢复游戏
-      const restoredGames = await GameLibraryBackup.restoreFromBackup(
-        backupData,
-        {
-          mergeMode: 'merge',
-          onProgress: (progress, current, total) => {
-            setRestoreProgress(Math.round(progress * 100))
-          },
-        }
-      )
-
-      // 将恢复的游戏添加到本地存储
-      for (const game of restoredGames) {
-        if (game) {
-          await enhancedGameStore.saveGame(game.title, game.data, game.metadata)
-        }
+      // 调用restoreFromBackup方法处理备份数据
+      console.log('开始恢复游戏...')
+      let restoredGames: any[] = []
+      try {
+        restoredGames = await GameLibraryBackup.restoreFromBackup(
+          backupData,
+          {
+            mergeMode: 'merge',
+            onProgress: (progress, current, total) => {
+              const progressPercent = Math.round(progress * 100)
+              setRestoreProgress(progressPercent)
+              console.log(`恢复进度: ${progressPercent}% (${current}/${total})`)
+            },
+          }
+        )
+      } catch (restoreError) {
+        console.error('restoreFromBackup失败:', restoreError)
+        throw new Error(`恢复处理失败: ${restoreError instanceof Error ? restoreError.message : '未知错误'}`)
+      }
+      
+      const totalGames = restoredGames.length
+      
+      if (totalGames === 0) {
+        console.log('没有可恢复的游戏')
+        toast({
+          title: '恢复完成',
+          description: '没有可恢复的游戏数据',
+          variant: 'destructive',
+        })
+        return
       }
 
-      toast({
-        title: '恢复成功',
-        description: `已恢复 ${restoredGames.length} 个游戏`,
-      })
+      // 将恢复的游戏添加到本地存储
+      console.log('开始保存恢复的游戏...')
+      let savedCount = 0
+      for (let i = 0; i < totalGames; i++) {
+        const game = restoredGames[i]
+        console.log(`处理第 ${i + 1} 个游戏:`, JSON.stringify(game, null, 2))
+        
+        if (game) {
+          try {
+            // 准备创建游戏的参数
+            const gameTitle = game.title || '未命名游戏'
+            console.log(`游戏标题: ${gameTitle}`)
+            
+            // 获取游戏数据 - 直接使用game.data.data，这是从getAllGamesForBackup中构建的格式
+            const gameData = game.data?.data || {} 
+            console.log(`游戏数据:`, JSON.stringify(gameData, null, 2))
+            
+            // 从game.data.metadata中提取createGame需要的选项
+            const metadata = game.data?.metadata || {} 
+            const options = {
+              description: metadata.description || '',
+              tags: metadata.tags || [],
+              author: metadata.author || 'Unknown',
+              thumbnailAssetId: metadata.thumbnailAssetId,
+              backgroundAssetId: metadata.backgroundAssetId
+            }
+            console.log(`游戏选项:`, JSON.stringify(options, null, 2))
+            
+            // 调用createGame保存游戏 - 使用正确的参数格式
+            console.log('准备调用createGame...')
+            await enhancedGameStore.createGame(gameTitle, gameData, options)
+            savedCount++
+            console.log(`保存游戏成功: ${gameTitle} (${i + 1}/${totalGames})`)
+          } catch (saveError) {
+            console.error(`保存游戏失败: ${game.title || '未知游戏'}`, saveError, '错误详情:', saveError instanceof Error ? saveError.stack : '')
+            // 继续保存其他游戏
+          }
+        }
+      }
+      console.log('游戏保存完成，成功保存:', savedCount, '个')
+
+      if (savedCount > 0) {
+        toast({
+          title: '恢复成功',
+          description: `已恢复并保存 ${savedCount} 个游戏`,
+        })
+      } else {
+        toast({
+          title: '恢复失败',
+          description: '没有成功恢复任何游戏',
+          variant: 'destructive',
+        })
+      }
 
       // 重置文件输入
       event.target.value = ''
     } catch (error) {
       console.error('恢复失败:', error)
-      setError(error instanceof Error ? error.message : '恢复失败')
+      const errorMessage = error instanceof Error ? error.message : '恢复过程中出现错误'
+      setError(errorMessage)
       toast({
         title: '恢复失败',
-        description: error instanceof Error ? error.message : '恢复过程中出现错误',
+        description: errorMessage,
         variant: 'destructive',
       })
     } finally {
@@ -153,82 +222,68 @@ export default function BackupRestore({ className = '' }: BackupRestoreProps) {
   }
 
   return (
-    <Card className={className}>
+    <Card className={`${className} bg-white border-2 border-slate-300 transition-all duration-200 hover:shadow-2xl`}>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <FileText className="h-5 w-5" />
           游戏库备份与恢复
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-6">
-        {/* 备份功能 */}
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h3 className="font-medium">备份游戏库</h3>
-              <p className="text-sm text-gray-600">
-                将您的所有游戏导出为备份文件
-              </p>
-            </div>
-            <Button
-              onClick={handleBackup}
-              disabled={isBackingUp}
-              className="flex items-center gap-2"
-            >
-              <Download className="h-4 w-4" />
-              {isBackingUp ? '备份中...' : '立即备份'}
-            </Button>
-          </div>
+      <CardContent className="space-y-4">
+        {/* 备份和恢复按钮 */}
+        <div className="flex gap-2">
+          {/* 导出按钮 - 蓝色 */}
+          <Button
+            onClick={handleBackup}
+            disabled={isBackingUp}
+            size="sm"
+            className="bg-blue-600 hover:bg-blue-700 text-white transition-all duration-300 flex items-center gap-2 flex-1"
+          >
+            <Download className="h-4 w-4" />
+            {isBackingUp ? '备份中...' : '立即备份'}
+          </Button>
 
-          {isBackingUp && (
-            <div className="space-y-2">
-              <Progress value={backupProgress} className="w-full" />
-              <p className="text-sm text-gray-600 text-center">
-                备份进度: {backupProgress}%
-              </p>
-            </div>
-          )}
-        </div>
-
-        {/* 恢复功能 */}
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h3 className="font-medium">恢复游戏库</h3>
-              <p className="text-sm text-gray-600">
-                从备份文件恢复您的游戏
-              </p>
-            </div>
-            <Button
-              variant="outline"
+          {/* 导入按钮 - 绿色渐变 */}
+          <Button
+            disabled={isRestoring}
+            size="sm"
+            className="relative bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white transition-all duration-300 flex items-center gap-2 flex-1"
+          >
+            <Upload className="h-4 w-4" />
+            {isRestoring ? '恢复中...' : '备份合并本地'}
+            <input
+              type="file"
+              accept=".json"
+              onChange={handleRestore}
               disabled={isRestoring}
-              className="relative flex items-center gap-2"
-            >
-              <Upload className="h-4 w-4" />
-              {isRestoring ? '恢复中...' : '选择备份文件'}
-              <input
-                type="file"
-                accept=".json"
-                onChange={handleRestore}
-                disabled={isRestoring}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-              />
-            </Button>
-          </div>
-
-          {isRestoring && (
-            <div className="space-y-2">
-              <Progress value={restoreProgress} className="w-full" />
-              <p className="text-sm text-gray-600 text-center">
-                恢复进度: {restoreProgress}%
-              </p>
-            </div>
-          )}
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+            />
+          </Button>
         </div>
+
+        {/* 备份进度 */}
+        {isBackingUp && (
+          <div className="space-y-2">
+            <Progress value={backupProgress} className="w-full" />
+            <p className="text-sm text-gray-600 text-center">
+              备份进度: {backupProgress}%
+            </p>
+          </div>
+        )}
+
+        {/* 恢复进度 */}
+        {isRestoring && (
+          <div className="space-y-2">
+            <Progress value={restoreProgress} className="w-full" />
+            <p className="text-sm text-gray-600 text-center">
+              恢复进度: {restoreProgress}%
+            </p>
+          </div>
+        )}
 
         {/* 错误提示 */}
         {error && (
-          <Alert variant="destructive">
+          <Alert variant="destructive" className="mt-2">
             <AlertCircle className="h-4 w-4" />
             <AlertDescription>{error}</AlertDescription>
           </Alert>
@@ -236,12 +291,12 @@ export default function BackupRestore({ className = '' }: BackupRestoreProps) {
 
         {/* 备份统计 */}
         {backupStats && (
-          <div className="bg-gray-50 rounded-lg p-4 space-y-3">
-            <h4 className="font-medium flex items-center gap-2">
+          <div className="mt-4 border rounded-lg p-3 bg-gray-50">
+            <h4 className="font-medium flex items-center gap-2 mb-3">
               <CheckCircle className="h-4 w-4 text-green-600" />
               备份信息
             </h4>
-            <div className="grid grid-cols-2 gap-4 text-sm">
+            <div className="grid grid-cols-2 gap-3 text-sm">
               <div className="flex items-center gap-2">
                 <Gamepad2 className="h-4 w-4 text-gray-500" />
                 <span>游戏数量: {backupStats.gameCount}</span>
@@ -261,17 +316,6 @@ export default function BackupRestore({ className = '' }: BackupRestoreProps) {
             </div>
           </div>
         )}
-
-        {/* 使用说明 */}
-        <div className="bg-blue-50 rounded-lg p-4">
-          <h4 className="font-medium text-blue-900 mb-2">使用说明</h4>
-          <ul className="text-sm text-blue-800 space-y-1">
-            <li>• 备份文件包含您的所有游戏数据和元信息</li>
-            <li>• 建议定期备份以防止数据丢失</li>
-            <li>• 恢复时会合并现有游戏，不会删除原有数据</li>
-            <li>• 备份文件格式为JSON，可以手动编辑</li>
-          </ul>
-        </div>
       </CardContent>
     </Card>
   )

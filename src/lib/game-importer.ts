@@ -360,6 +360,7 @@ export class GamePackImporter {
 // 导出增强的导入功能
 export const enhancedGameStore = {
   ...gameStore,
+  createGame: gameStore.createGame.bind(gameStore),
   importGamePack: GamePackImporter.importGamePack.bind(GamePackImporter),
   validateGameData: GameDataValidator.validateGameData.bind(GameDataValidator),
   extractMetadata: GameDataValidator.extractMetadata.bind(GameDataValidator),

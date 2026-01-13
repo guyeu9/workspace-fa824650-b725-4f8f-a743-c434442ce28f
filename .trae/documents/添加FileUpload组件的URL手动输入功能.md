@@ -1,0 +1,34 @@
+# 为FileUpload组件添加手动输入图片URL功能
+
+## 问题描述
+当前FileUpload组件只支持文件上传，缺少：
+- 显示上传后的图片链接
+- 手动输入/粘贴图片URL的功能
+
+## 解决方案
+
+### 1. 修改FileUpload组件 (`src/components/file-upload.tsx`)
+
+**新增Props：**
+- `showUrlInput?: boolean` - 是否显示URL输入框（默认false）
+- `onUrlChange?: (url: string) => void` - URL变化时的回调
+
+**功能实现：**
+- 在预览区域下方添加URL输入框
+- 输入框显示当前图片URL（上传的或手动输入的）
+- 支持用户手动输入/粘贴URL
+- 当用户输入URL时，调用`onUrlChange`回调更新父组件
+- 输入框样式遵循UI设计指南：`bg-white border-blue-300 focus:border-blue-500 focus:ring-blue-500/20 text-slate-800 placeholder:text-slate-400`
+
+### 2. 修改studio页面 (`src/app/studio/page.tsx`)
+
+**启用URL输入功能：**
+- 为FileUpload组件添加`showUrlInput={true}`
+- 添加`onUrlChange`回调，处理手动输入的URL
+- 当用户手动输入URL时，更新`selectedBranch.background_image`
+
+## 预期效果
+- 用户可以看到上传后的图片链接
+- 用户可以手动输入或粘贴图片URL
+- 上传和手动输入两种方式可以共存
+- 保持原有的拖拽上传、预览、进度显示等功能

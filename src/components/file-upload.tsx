@@ -15,6 +15,7 @@ import {
   FileImage,
   RefreshCw
 } from 'lucide-react';
+import { Input } from '@/components/ui/input';
 import { ImageHostingService } from '@/lib/image-hosting-service';
 
 interface FileUploadProps {
@@ -22,7 +23,9 @@ interface FileUploadProps {
   currentImageUrl?: string;
   onImageUploaded?: (assetId: string, imageUrl: string) => void;
   onImageRemoved?: () => void;
-  maxSize?: number; // 最大文件大小 (MB)
+  onUrlChange?: (url: string) => void;
+  showUrlInput?: boolean;
+  maxSize?: number;
   acceptedTypes?: string[];
   label?: string;
   description?: string;
@@ -33,6 +36,8 @@ export function FileUpload({
   currentImageUrl,
   onImageUploaded,
   onImageRemoved,
+  onUrlChange,
+  showUrlInput = false,
   maxSize = 10,
   acceptedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'],
   label = '背景图片',
@@ -42,7 +47,40 @@ export function FileUpload({
   const [uploadProgress, setUploadProgress] = useState(0);
   const [error, setError] = useState<string>('');
   const [previewUrl, setPreviewUrl] = useState<string | null>(currentImageUrl || null);
+  const [manualUrl, setManualUrl] = useState<string>(currentImageUrl || '');
+  const [imageLoadError, setImageLoadError] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // 处理URL输入变化
+  const handleUrlChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const newUrl = e.target.value;
+    setManualUrl(newUrl);
+    setImageLoadError(false);
+    
+    if (newUrl.trim()) {
+      setPreviewUrl(newUrl.trim());
+      if (onUrlChange) {
+        onUrlChange(newUrl.trim());
+      }
+    } else {
+      setPreviewUrl(null);
+      if (onUrlChange) {
+        onUrlChange('');
+      }
+    }
+  }, [onUrlChange]);
+
+  // 处理图片加载错误
+  const handleImageError = useCallback(() => {
+    setImageLoadError(true);
+    setError('图片加载失败，请检查链接是否正确');
+  }, []);
+
+  // 处理图片加载成功
+  const handleImageLoad = useCallback(() => {
+    setImageLoadError(false);
+    setError('');
+  }, []);
 
   // 处理文件选择
   const handleFileSelect = useCallback(async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,7 +108,11 @@ export function FileUpload({
 
     try {
       // 上传到图床
-      const imageHostingService = new ImageHostingService();
+      const imageHostingService = new ImageHostingService(undefined, {
+        provider: 'chevereto',
+        endpoint: 'https://www.picgo.net/api/1/upload',
+        apiKey: 'chv_SB3xd_77c449af9e93a0bd1db20a74b4ce825cbe1688cb747b34dd6ce2d5fa0164b1e9_2397459290fc8b2bc736ff2cd13a58bf93d4e31896b04fa5c461af8eb3b34b43'
+      });
       const result = await imageHostingService.uploadImage(file, (progress) => {
         setUploadProgress(progress.percentage);
       });
@@ -85,6 +127,9 @@ export function FileUpload({
       }
       
       setPreviewUrl(result.url);
+      setManualUrl(result.url);
+      setImageLoadError(false);
+      setError('');
       
       setTimeout(() => {
         setIsUploading(false);
@@ -106,17 +151,22 @@ export function FileUpload({
     }
     
     setPreviewUrl(null);
+    setManualUrl('');
     setError('');
     
     if (onImageRemoved) {
       onImageRemoved();
+    }
+    
+    if (onUrlChange) {
+      onUrlChange('');
     }
 
     // 清空文件输入
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
-  }, [previewUrl, onImageRemoved]);
+  }, [previewUrl, onImageRemoved, onUrlChange]);
 
   // 处理拖拽
   const handleDragOver = useCallback((e: React.DragEvent) => {
@@ -160,11 +210,20 @@ export function FileUpload({
           {previewUrl && (
             <div className="relative">
               <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden border-2 border-dashed border-gray-300">
-                <img
-                  src={previewUrl}
-                  alt="预览"
-                  className="w-full h-full object-cover"
-                />
+                {imageLoadError ? (
+                  <div className="w-full h-full flex flex-col items-center justify-center text-slate-500">
+                    <AlertCircle className="h-12 w-12 mb-2 text-red-500" />
+                    <p className="text-sm">图片加载失败</p>
+                  </div>
+                ) : (
+                  <img
+                    src={previewUrl}
+                    alt="预览"
+                    className="w-full h-full object-cover"
+                    onError={handleImageError}
+                    onLoad={handleImageLoad}
+                  />
+                )}
               </div>
               
               <div className="absolute top-2 right-2 flex gap-2">
@@ -249,6 +308,39 @@ export function FileUpload({
             <div className="flex items-center gap-2 text-sm text-green-600">
               <CheckCircle className="h-4 w-4" />
               <span>文件上传成功</span>
+            </div>
+          )}
+
+          {/* URL输入框 */}
+          {showUrlInput && (
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <label className="text-sm font-medium text-slate-700">图片链接</label>
+                {previewUrl && (
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => {
+                      navigator.clipboard.writeText(manualUrl);
+                    }}
+                    className="h-6 px-2 text-xs"
+                  >
+                    复制链接
+                  </Button>
+                )}
+              </div>
+              <Input
+                value={manualUrl}
+                onChange={handleUrlChange}
+                placeholder="输入图片URL或上传文件"
+                className="bg-white border-blue-300 focus:border-blue-500 focus:ring-blue-500/20 text-slate-800 placeholder:text-slate-400"
+              />
+              {imageLoadError && error && (
+                <div className="flex items-center gap-2 text-sm text-red-600 mt-2">
+                  <AlertCircle className="h-4 w-4" />
+                  <span>{error}</span>
+                </div>
+              )}
             </div>
           )}
 

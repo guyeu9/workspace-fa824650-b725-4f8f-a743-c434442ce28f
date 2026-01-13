@@ -28,6 +28,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
 import { Label } from "@/components/ui/label"
+import { FileUpload } from "@/components/file-upload"
 import {
   Select,
   SelectContent,
@@ -596,37 +597,30 @@ export default function TextEngineStudio() {
 
                 <ScrollArea className="flex-1 min-h-0">
                   <div className="p-4 space-y-6 max-w-5xl mx-auto w-full">
-                      <div className="space-y-3">
-                        <Label>背景图片</Label>
-                        <div className="border-2 border-dashed rounded-lg p-6 flex flex-col items-center justify-center gap-2 text-slate-500 bg-slate-100">
-                          {selectedBranch.background_image ? (
-                            <div className="relative w-full aspect-video bg-slate-200 rounded overflow-hidden">
-                              <div className="absolute inset-0 flex items-center justify-center bg-slate-200 text-slate-500">
-                                <ImageIcon className="h-10 w-10" />
-                                <span className="ml-2">
-                                  {selectedBranch.background_image}
-                                </span>
-                              </div>
-                          </div>
-                        ) : (
-                          <>
-                            <ImageIcon className="h-8 w-8" />
-                            <span className="text-sm">
-                              未设置背景图片，将使用默认背景
-                            </span>
-                            <span className="text-xs">建议尺寸: 800x600</span>
-                          </>
-                        )}
-                      </div>
-                      <Input
-                        value={selectedBranch.background_image ?? ""}
-                        onChange={(e) =>
+                    <div className="space-y-3">
+                      <FileUpload
+                        gameId={gameData.game_title || "temp_game"}
+                        currentImageUrl={selectedBranch.background_image}
+                        onImageUploaded={(assetId, imageUrl) =>
                           handleUpdateBranch(selectedBranch.branch_id, {
-                            background_image: e.target.value || undefined,
+                            background_image: imageUrl,
+                            background_asset_id: assetId,
                           })
                         }
-                        className="bg-white border-slate-200 text-slate-900 placeholder:text-slate-400"
-                        placeholder="输入背景图片 URL 或资源说明"
+                        onImageRemoved={() =>
+                          handleUpdateBranch(selectedBranch.branch_id, {
+                            background_image: undefined,
+                            background_asset_id: undefined,
+                          })
+                        }
+                        onUrlChange={(url) =>
+                          handleUpdateBranch(selectedBranch.branch_id, {
+                            background_image: url || undefined,
+                          })
+                        }
+                        showUrlInput={true}
+                        label="背景图片"
+                        description="上传游戏背景图片，支持 JPG、PNG、WebP、GIF 格式"
                       />
                     </div>
 

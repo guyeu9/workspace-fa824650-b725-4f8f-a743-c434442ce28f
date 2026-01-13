@@ -93,7 +93,7 @@ export function GameLibraryWidget({
       gameStore.getGame(game.id).then(result => {
         if (result) {
           sessionStorage.setItem('gameData', JSON.stringify(result.data.data));
-          window.location.href = '/game-editor';
+          window.location.href = '/studio';
         } else {
           toast.error('无法加载游戏数据');
         }
@@ -169,12 +169,12 @@ export function GameLibraryWidget({
               还没有任何游戏
             </div>
             <Button 
-              size="sm" 
-              onClick={() => window.location.href = '/game-editor'}
-            >
-              <Plus className="h-4 w-4 mr-2" />
-              创建第一个游戏
-            </Button>
+            size="sm" 
+            onClick={() => window.location.href = '/studio'}
+          >
+            <Plus className="h-4 w-4 mr-2" />
+            创建第一个游戏
+          </Button>
           </div>
         ) : (
           <>
@@ -266,7 +266,7 @@ export function GameLibraryWidget({
               <Button
                 size="sm"
                 variant="outline"
-                onClick={() => window.location.href = '/game-editor'}
+                onClick={() => window.location.href = '/studio'}
                 className="flex-1"
               >
                 <Plus className="h-4 w-4 mr-2" />

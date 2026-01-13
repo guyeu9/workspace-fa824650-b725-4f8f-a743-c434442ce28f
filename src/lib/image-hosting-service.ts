@@ -1,6 +1,6 @@
 import { ImageCacheManager } from './image-cache-manager';
 
-export type HostingProvider = 'aliyun-oss' | 'tencent-cos' | 'qiniu' | 'cloudflare' | 'custom' | 'imgbb';
+export type HostingProvider = 'aliyun-oss' | 'tencent-cos' | 'qiniu' | 'cloudflare' | 'custom' | 'imgbb' | 'chevereto';
 
 export interface UploadProgress {
   loaded: number;
@@ -51,7 +51,7 @@ export class ImageHostingService {
   async uploadImage(
     file: File,
     onProgress?: (progress: UploadProgress) => void,
-    useImgBB: boolean = true,
+    useImgBB: boolean = false,
     timeout?: number
   ): Promise<UploadResult> {
     try {
@@ -88,99 +88,19 @@ export class ImageHostingService {
 
       onProgress?.({ loaded: 30, total: 100, percentage: 30 });
 
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('key', fileHash);
-      formData.append('useImgBB', useImgBB.toString());
+      let uploadResult: UploadResult;
 
-      const uploadPromise = fetch('/api/images/upload', {
-        method: 'POST',
-        body: formData
-      });
-
-      const progressInterval = setInterval(() => {
-        const currentProgress = onProgress?.({ 
-          loaded: 50, 
-          total: 100, 
-          percentage: Math.min(95, 30 + Math.random() * 50) 
-        });
-      }, 100);
-
-      onProgress?.({ loaded: 50, total: 100, percentage: 50 });
-
-      const timeoutMs = timeout ?? ImageHostingService.DEFAULT_TIMEOUT;
-      const timeoutPromise = new Promise((_, reject) => {
-        setTimeout(() => reject(new Error('timeout')), timeoutMs);
-      });
-
-      let response: Response;
-      try {
-        response = await Promise.race([uploadPromise, timeoutPromise]) as Response;
-      } catch (fetchError) {
-        clearInterval(progressInterval);
-        
-        if (fetchError instanceof Error && fetchError.message === 'timeout') {
-          return {
-            success: false,
-            error: 'timeout'
-          };
-        }
-        
-        const errorMessage = fetchError instanceof Error ? fetchError.message : '';
-        if (errorMessage.toLowerCase().includes('imgbb')) {
-          const fallbackUrl = await this.uploadToLocalFallback(file);
-          if (fallbackUrl) {
-            await this.cacheManager.saveToCache(fileHash, fallbackUrl, file.size);
-            onProgress?.({ loaded: 100, total: 100, percentage: 100 });
-            return {
-              success: true,
-              url: fallbackUrl,
-              cached: false
-            };
-          }
-        }
-        
-        return {
-          success: false,
-          error: errorMessage || '上传失败'
-        };
-      }
-      
-      clearInterval(progressInterval);
-      onProgress?.({ loaded: 100, total: 100, percentage: 100 });
-
-      if (!response.ok) {
-        return {
-          success: false,
-          error: `上传失败: ${response.status}`
-        };
-      }
-
-      const responseData = await response.json();
-      
-      if (responseData.success && responseData.url) {
-        await this.cacheManager.saveToCache(fileHash, responseData.url, file.size);
-        
-        onProgress?.({ loaded: 100, total: 100, percentage: 100 });
-        
-        return {
-          success: true,
-          url: responseData.url,
-          thumbnailUrls: responseData.thumbnailUrl ? [responseData.thumbnailUrl] : undefined,
-          cached: false,
-          optimization: {
-            originalSize: responseData.originalSize || file.size,
-            optimizedSize: responseData.size || file.size,
-            compressionRatio: responseData.compressionRatio || 0,
-            format: responseData.format || 'webp'
-          }
-        };
+      if (this.config.provider === 'chevereto') {
+        uploadResult = await this.uploadToChevereto(file, onProgress);
       } else {
-        return {
-          success: false,
-          error: responseData.error || '上传失败'
-        };
+        uploadResult = await this.uploadToLocal(file, onProgress, useImgBB);
       }
+
+      if (uploadResult.success && uploadResult.url) {
+        await this.cacheManager.saveToCache(fileHash, uploadResult.url, file.size);
+      }
+
+      return uploadResult;
     } catch (error) {
       console.error('图片上传失败:', error);
       return {
@@ -221,26 +141,173 @@ export class ImageHostingService {
     return hashHex;
   }
 
-  private async uploadToLocalFallback(file: File): Promise<string | null> {
+  private async uploadToChevereto(
+    file: File,
+    onProgress?: (progress: UploadProgress) => void
+  ): Promise<UploadResult> {
+    try {
+      const formData = new FormData();
+      formData.append('source', file);
+      formData.append('format', 'json');
+
+      const endpoint = this.config.endpoint || 'https://www.picgo.net/api/1/upload';
+      const apiKey = this.config.apiKey || 'chv_SB3xd_77c449af9e93a0bd1db20a74b4ce825cbe1688cb747b34dd6ce2d5fa0164b1e9_2397459290fc8b2bc736ff2cd13a58bf93d4e31896b04fa5c461af8eb3b34b43';
+
+      const xhr = new XMLHttpRequest();
+      
+      return new Promise<UploadResult>((resolve, reject) => {
+        xhr.open('POST', endpoint, true);
+        xhr.setRequestHeader('X-API-Key', apiKey);
+        
+        xhr.upload.onprogress = (event) => {
+          if (event.lengthComputable && onProgress) {
+            const percentage = Math.round((event.loaded / event.total) * 100);
+            onProgress({
+              loaded: event.loaded,
+              total: event.total,
+              percentage
+            });
+          }
+        };
+
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            try {
+              const response = JSON.parse(xhr.responseText);
+              
+              if (response.status_code === 200 && response.image && response.image.url) {
+                resolve({
+                  success: true,
+                  url: response.image.url,
+                  thumbnailUrls: response.image.medium ? [response.image.medium.url] : undefined
+                });
+              } else {
+                resolve({
+                  success: false,
+                  error: response.error?.message || '上传失败'
+                });
+              }
+            } catch (parseError) {
+              resolve({
+                success: false,
+                error: '响应解析失败'
+              });
+            }
+          } else {
+            resolve({
+              success: false,
+              error: `上传失败: ${xhr.status}`
+            });
+          }
+        };
+
+        xhr.onerror = () => {
+          resolve({
+            success: false,
+            error: '网络错误'
+          });
+        };
+
+        xhr.ontimeout = () => {
+          resolve({
+            success: false,
+            error: '上传超时'
+          });
+        };
+
+        xhr.timeout = ImageHostingService.DEFAULT_TIMEOUT;
+        xhr.send(formData);
+      });
+    } catch (error) {
+      console.error('Chevereto上传失败:', error);
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : '上传失败'
+      };
+    }
+  }
+
+  private async uploadToLocal(
+    file: File,
+    onProgress?: (progress: UploadProgress) => void,
+    useImgBB: boolean = false
+  ): Promise<UploadResult> {
     try {
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('useImgBB', 'false');
+      formData.append('key', await this.calculateHash(file));
+      formData.append('useImgBB', useImgBB.toString());
 
-      const response = await fetch('/api/images/upload', {
-        method: 'POST',
-        body: formData
+      const xhr = new XMLHttpRequest();
+      
+      return new Promise<UploadResult>((resolve, reject) => {
+        xhr.open('POST', '/api/images/upload', true);
+        
+        xhr.upload.onprogress = (event) => {
+          if (event.lengthComputable && onProgress) {
+            const percentage = Math.round((event.loaded / event.total) * 100);
+            onProgress({
+              loaded: event.loaded,
+              total: event.total,
+              percentage
+            });
+          }
+        };
+
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            try {
+              const response = JSON.parse(xhr.responseText);
+              
+              if (response.success && response.url) {
+                resolve({
+                  success: true,
+                  url: response.url,
+                  thumbnailUrls: response.thumbnailUrl ? [response.thumbnailUrl] : undefined
+                });
+              } else {
+                resolve({
+                  success: false,
+                  error: response.error || '上传失败'
+                });
+              }
+            } catch (parseError) {
+              resolve({
+                success: false,
+                error: '响应解析失败'
+              });
+            }
+          } else {
+            resolve({
+              success: false,
+              error: `上传失败: ${xhr.status}`
+            });
+          }
+        };
+
+        xhr.onerror = () => {
+          resolve({
+            success: false,
+            error: '网络错误'
+          });
+        };
+
+        xhr.ontimeout = () => {
+          resolve({
+            success: false,
+            error: '上传超时'
+          });
+        };
+
+        xhr.timeout = ImageHostingService.DEFAULT_TIMEOUT;
+        xhr.send(formData);
       });
-
-      if (response.ok) {
-        const data = await response.json();
-        if (data.url) {
-          return data.url;
-        }
-      }
-      return null;
-    } catch {
-      return null;
+    } catch (error) {
+      console.error('本地上传失败:', error);
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : '上传失败'
+      };
     }
   }
 

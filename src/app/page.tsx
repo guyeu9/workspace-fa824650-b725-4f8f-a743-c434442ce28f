@@ -277,7 +277,14 @@ export default function Home() {
       if (initialScene) {
         setCurrentScene(initialScene)
         setChoices(initialScene.exits || [])
+        
+        // 游戏标题和描述
+        const gameTitle = storyData.game_title || '未命名游戏'
+        const gameDescription = storyData.description || ''
+        
         setOutputHistory([
+          { type: 'room-name', content: gameTitle, className: 'room-name', fullContent: gameTitle },
+          { type: 'room-desc', content: gameDescription, fullContent: gameDescription },
           { type: 'room-name', content: initialScene.name, className: 'room-name', fullContent: initialScene.name },
           { type: 'room-desc', content: initialScene.desc, fullContent: initialScene.desc }
         ])
@@ -732,8 +739,14 @@ export default function Home() {
             setCurrentScene(startScene)
             setChoices(startScene.exits || [])
             
+            // 游戏标题和描述
+            const gameTitle = data.game_title || '未命名游戏'
+            const gameDescription = data.description || ''
+            
             // 添加房间信息到输出历史
             setOutputHistory([
+              { type: 'room-name', content: gameTitle, className: 'room-name', fullContent: gameTitle },
+              { type: 'room-desc', content: gameDescription, fullContent: gameDescription },
               { type: 'room-name', content: startScene.name, className: 'room-name', fullContent: startScene.name },
               { type: 'room-desc', content: startScene.desc, fullContent: startScene.desc }
             ])
@@ -775,8 +788,14 @@ export default function Home() {
             setCurrentScene(newScene)
             setChoices(startRoom.exits || [])
             
+            // 游戏标题和描述
+            const gameTitle = data.game_title || data.playerName || '未命名游戏'
+            const gameDescription = data.description || '欢迎来到文本冒险游戏！'
+            
             // 添加房间信息到输出历史
             setOutputHistory([
+              { type: 'room-name', content: gameTitle, className: 'room-name', fullContent: gameTitle },
+              { type: 'room-desc', content: gameDescription, fullContent: gameDescription },
               { type: 'room-name', content: startRoom.name, className: 'room-name', fullContent: startRoom.name },
               { type: 'room-desc', content: desc, fullContent: desc }
             ])
@@ -1002,7 +1021,14 @@ export default function Home() {
                   const initialScene = storyData.scenes[storyData.start]
                   setCurrentScene(initialScene)
                   setChoices(initialScene.exits || [])
+                  
+                  // 游戏标题和描述
+                  const gameTitle = storyData.game_title || '文本冒险游戏'
+                  const gameDescription = storyData.description || '欢迎来到文本冒险游戏！这是一个演示场景，展示了文本引擎的核心功能。'
+                  
                   setOutputHistory([
+                    { type: 'room-name', content: gameTitle, className: 'room-name', fullContent: gameTitle },
+                    { type: 'room-desc', content: gameDescription, fullContent: gameDescription },
                     { type: 'room-name', content: initialScene.name, className: 'room-name', fullContent: initialScene.name },
                     { type: 'room-desc', content: initialScene.desc, fullContent: initialScene.desc }
                   ])

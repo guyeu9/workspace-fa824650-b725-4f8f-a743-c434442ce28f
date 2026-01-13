@@ -158,7 +158,7 @@ export default function GameLibraryPage() {
       const result = await gameStore.getGame(game.id);
       if (result) {
         sessionStorage.setItem('gameData', JSON.stringify(result.data.data));
-        window.location.href = '/game-editor';
+        window.location.href = '/studio';
       } else {
         toast.error('无法加载游戏数据');
       }
@@ -598,7 +598,7 @@ export default function GameLibraryPage() {
             <h3 className="text-xl font-semibold text-slate-800 mb-2">还没有任何游戏</h3>
             <p className="text-slate-600 mb-6">开始创建您的第一个游戏吧！</p>
             <Button
-                onClick={() => window.location.href = '/game-editor'}
+                onClick={() => window.location.href = '/studio'}
                 className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white transition-all duration-300"
               >
                 <Plus className="h-4 w-4 mr-2" />
@@ -742,7 +742,7 @@ export default function GameLibraryPage() {
               </Button>
               
               <Button
-                onClick={() => window.location.href = '/game-editor'}
+                onClick={() => window.location.href = '/studio'}
                 className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white transition-all duration-300"
               >
                 <Plus className="h-4 w-4 mr-2" />
