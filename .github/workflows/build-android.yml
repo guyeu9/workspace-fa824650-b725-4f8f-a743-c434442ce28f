@@ -1,0 +1,73 @@
+name: Build Android APK (Fixed)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Build static site
+      run: npm run build:static
+      
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+      
+    - name: Check if Android platform exists
+      id: check-android
+      run: |
+        if [ -d "android" ]; then
+          echo "exists=true" >> $GITHUB_OUTPUT
+        else
+          echo "exists=false" >> $GITHUB_OUTPUT
+        fi
+        
+    - name: Initialize Capacitor (if needed)
+      if: steps.check-android.outputs.exists == 'false'
+      run: npx cap init
+      
+    - name: Add Android platform (if needed)
+      if: steps.check-android.outputs.exists == 'false'
+      run: npx cap add android
+      
+    - name: Sync Android platform
+      run: npx cap sync android
+      
+    - name: Grant execute permission for gradlew
+      run: chmod +x android/gradlew
+      
+    - name: Build APK
+      run: |
+        cd android
+        ./gradlew assembleDebug --no-daemon
+        
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-debug
+        path: android/app/build/outputs/apk/debug/app-debug.apk

@@ -1,60 +1,14 @@
-name: Build Android APK
+name: Build Android APK (Disabled)
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+  # 禁用此工作流，使用新的 build-android.yml
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    if: false  # 禁用此工作流
+    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '22'
-        cache: 'npm'
-
-    - name: Install dependencies
-      run: npm ci
-
-    - name: Build static site
-      run: npm run build:static
-
-    - name: Setup Java
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'temurin'
-        java-version: '21'
-
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
-
-    - name: Install Capacitor CLI
-      run: npm install -g @capacitor/cli
-
-    - name: Add Android platform
-      run: npx cap add android
-
-    - name: Sync web build with native project
-      run: npx cap sync android
-
-    - name: Grant execute permission for gradlew
-      run: chmod +x android/gradlew
-
-    - name: Build APK
-      run: |
-        cd android
-        ./gradlew assembleDebug --no-daemon
-
-    - name: Upload APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: app-debug
-        path: android/app/build/outputs/apk/debug/app-debug.apk
+    - name: This workflow is disabled
+      run: echo "This workflow has been disabled. Use build-android.yml instead."
