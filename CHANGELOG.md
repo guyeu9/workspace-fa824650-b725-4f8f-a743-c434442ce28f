@@ -1,5 +1,72 @@
 # 更新记录
 
+## 版本 1.2.0 (2026-01-14)
+
+### 新增功能
+
+#### FileUpload组件增强
+- 添加URL手动输入功能，支持用户直接粘贴或输入图片链接
+- 新增`showUrlInput`和`onUrlChange` props，控制URL输入框显示
+- 添加"复制链接"按钮，方便用户快速复制图片URL
+- URL输入框样式遵循UI设计指南，使用蓝色边框和聚焦效果
+
+#### 图片加载错误处理
+- 新增`imageLoadError`状态跟踪图片加载状态
+- 实现`handleImageError`和`handleImageLoad`回调处理图片加载事件
+- 预览区域显示加载失败时的友好错误提示（红色警告图标+文字）
+- URL输入框下方显示错误信息，提示用户检查链接
+- 上传成功或重新输入URL时自动重置错误状态
+
+#### Chevereto图床集成
+- 集成Chevereto API作为主要图床服务
+- 使用提供的API Key进行认证：
+- API端点：`https://www.picgo.net/api/1/upload`
+- 使用XMLHttpRequest实现实时上传进度回调
+- 支持Chevereto API响应格式解析
+- 添加`chevereto`到HostingProvider类型
+
+#### ImageHostingService优化
+- 重构上传逻辑，支持Chevereto和本地存储双模式
+- 实现`uploadToChevereto`方法，使用XMLHttpRequest上传到Chevereto API
+- 重构`uploadToLocal`方法，使用XMLHttpRequest替代fetch，支持实时进度
+- 移除冗余的`uploadToLocalFallback`方法
+- 统一错误处理和进度回调机制
+
+### 改进
+
+#### 用户体验优化
+- 图片加载失败时不再显示灰色空白区域，改为显示明确的错误提示
+- 支持上传和手动输入两种方式自由切换
+- 上传进度实时显示，提升用户感知
+- 错误信息更加友好和具体
+
+### 技术细节
+
+#### 新增文件
+- `src/components/file-upload.tsx` - 添加URL输入、错误处理、复制链接功能
+- `src/lib/image-hosting-service.ts` - 添加Chevereto支持、重构上传逻辑
+
+#### 修改文件
+- `src/app/studio/page.tsx` - 启用FileUpload的URL输入功能
+
+#### 核心功能
+- URL输入：支持手动输入或粘贴外部图片URL
+- 图片预览：实时显示上传或输入的图片
+- 错误处理：图片加载失败时显示友好提示
+- 上传进度：使用XMLHttpRequest实现实时进度回调
+- Chevereto API：使用multipart/form-data上传，支持X-API-Key认证
+- 响应解析：支持Chevereto JSON格式响应
+- 缓存机制：上传成功后自动缓存，避免重复上传
+- 降级机制：Chevereto失败时自动切换到本地存储
+
+### 兼容性
+- 完全向后兼容现有游戏数据
+- 支持所有现有图片格式（JPEG、PNG、WebP、GIF、BMP、TIFF）
+- 支持混合模式（图床URL + 本地文件）
+- 降级机制确保服务可用性
+
+---
+
 ## 版本 1.1.0 (2026-01-11)
 
 ### 新增功能

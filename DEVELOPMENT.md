@@ -144,7 +144,52 @@
   - 压缩存储
   - 恢复功能
 
-### 5. 跨平台文件处理
+### 5. 图片上传与图床服务
+
+#### 图片上传组件 (FileUpload)
+- **路径**: `src/components/file-upload.tsx`
+- **功能**: 统一的图片上传组件
+- **特性**:
+  - 支持文件上传（拖拽、点击选择）
+  - 支持URL手动输入（粘贴、直接输入）
+  - 实时上传进度显示
+  - 图片预览功能
+  - 图片加载错误处理
+  - 复制链接功能
+  - 遵循UI设计指南（蓝色边框、聚焦效果）
+
+#### 图床服务 (ImageHostingService)
+- **路径**: `src/lib/image-hosting-service.ts`
+- **功能**: 图片上传服务管理
+- **特性**:
+  - 支持多种图床提供商（Chevereto、本地存储）
+  - 统一的上传接口
+  - 实时进度回调
+  - 自动缓存检查
+  - 客户端哈希计算
+  - 降级机制（图床失败时切换到本地）
+
+#### Chevereto图床集成
+- **API端点**: `https://www.picgo.net/api/1/upload`
+- **认证方式**: X-API-Key header
+- **API Key**: `chv_SB3xd_77c449af9e93a0bd1db20a74b4ce825cbe1688cb747b34dd6ce2d5fa0164b1e9_2397459290fc8b2bc736ff2cd13a58bf93d4e31896b04fa5c461af8eb3b34b43`
+- **上传方式**: XMLHttpRequest with multipart/form-data
+- **响应格式**: JSON
+- **特性**:
+  - 实时上传进度
+  - 自动错误处理
+  - 支持缩略图返回
+
+#### 图片缓存管理 (ImageCacheManager)
+- **路径**: `src/lib/image-cache-manager.ts`
+- **功能**: 图片缓存管理
+- **特性**:
+  - 使用 Dexie.js + IndexedDB 存储
+  - LRU 缓存淘汰策略
+  - 30 天 TTL 自动清理
+  - 避免重复上传相同图片
+
+### 6. 跨平台文件处理
 
 #### 文件下载 (platform-file-download)
 - **路径**: `src/lib/platform-file-download.ts`
