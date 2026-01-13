@@ -41,10 +41,19 @@ jobs:
     - name: Check if Android platform exists
       id: check-android
       run: |
-        if [ -d "android" ]; then
+        if [ -f "android/gradlew" ] || [ -f "android/gradlew.bat" ]; then
           echo "exists=true" >> $GITHUB_OUTPUT
         else
           echo "exists=false" >> $GITHUB_OUTPUT
+        fi
+        
+    - name: Verify and fix Android platform
+      run: |
+        if [ ! -f "android/gradlew" ] && [ ! -f "android/gradlew.bat" ]; then
+          echo "Android platform is incomplete, re-initializing..."
+          rm -rf android
+          npx cap init
+          npx cap add android
         fi
         
     - name: Initialize Capacitor (if needed)
