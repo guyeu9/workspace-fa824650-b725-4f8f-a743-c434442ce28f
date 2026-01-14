@@ -2,6 +2,30 @@ import Dexie, { Table } from 'dexie';
 import JSZip from 'jszip';
 import { ImageHostingService } from './image-hosting-service';
 
+// 游戏状态接口
+export interface GameState {
+  [key: string]: number;  // 支持任意自定义属性
+}
+
+// 数值变更接口
+export interface StatusChange {
+  attribute: string;  // 属性名（如"金币"、"暴露度"）
+  operation: '+' | '-' | '*' | '/' | '=';  // 运算符
+  value: number;  // 数值
+  min?: number;  // 最小值限制
+  max?: number;  // 最大值限制
+}
+
+// 游戏进度接口
+export interface GameProgress {
+  id: string;  // 主键
+  gameId: string;  // 游戏ID
+  currentSceneId: string;  // 当前场景ID
+  gameState: GameState;  // 游戏状态
+  timestamp: string;  // 保存时间
+  playTime: number;  // 游玩时长（秒）
+}
+
 // 游戏元数据接口
 export interface GameIndexItem {
   id: string;
@@ -55,13 +79,15 @@ export class GameDatabase extends Dexie {
   games_index!: Table<GameIndexItem>;
   games_data!: Table<GameDataItem>;
   assets!: Table<AssetItem>;
+  game_progress!: Table<GameProgress>;
 
   constructor() {
     super('GameDatabase');
-    this.version(1).stores({
+    this.version(2).stores({
       games_index: 'id, title, priority, createdAt, updatedAt, version',
       games_data: 'id, createdAt, updatedAt',
-      assets: 'id, type, name, createdAt'
+      assets: 'id, type, name, createdAt',
+      game_progress: 'id, gameId, timestamp'
     });
   }
 }
@@ -526,6 +552,85 @@ export class GameStore {
 
     if (oldAssets.length > 0) {
       await db.assets.bulkDelete(oldAssets.map(a => a.id));
+    }
+  }
+
+  // 应用数值变更
+  applyStatusChanges(currentState: GameState, changes: StatusChange[]): GameState {
+    const newState = { ...currentState };
+    
+    changes.forEach(change => {
+      const currentValue = newState[change.attribute] || 0;
+      let newValue: number;
+      
+      switch (change.operation) {
+        case '+':
+          newValue = currentValue + change.value;
+          break;
+        case '-':
+          newValue = currentValue - change.value;
+          break;
+        case '*':
+          newValue = currentValue * change.value;
+          break;
+        case '/':
+          // 防止除零错误
+          newValue = change.value !== 0 ? currentValue / change.value : currentValue;
+          break;
+        case '=':
+          newValue = change.value;
+          break;
+        default:
+          newValue = currentValue;
+      }
+      
+      // 确保数值是有效的数字
+      if (!isFinite(newValue)) {
+        newValue = currentValue;
+      }
+      
+      // 应用数值限制
+      if (change.min !== undefined) {
+        newValue = Math.max(newValue, change.min);
+      }
+      if (change.max !== undefined) {
+        newValue = Math.min(newValue, change.max);
+      }
+      
+      // 百分比自动限制（在 min/max 之前应用，以避免覆盖）
+      if (change.attribute.includes('度') || change.attribute.includes('率')) {
+        newValue = Math.max(0, Math.min(100, newValue));
+      }
+      
+      newState[change.attribute] = newValue;
+    });
+    
+    return newState;
+  }
+
+  // 保存游戏进度（自动覆盖）
+  async saveProgress(gameId: string, progress: Omit<GameProgress, 'id' | 'gameId'>): Promise<void> {
+    const fullProgress: GameProgress = {
+      ...progress,
+      id: gameId,  // 使用 gameId 作为主键
+      gameId,
+      timestamp: new Date().toISOString()
+    };
+    
+    // 使用 put 方法，如果存在则更新，不存在则添加
+    await db.game_progress.put(fullProgress);
+  }
+
+  // 获取游戏进度
+  async getGameProgress(gameId: string): Promise<GameProgress | null> {
+    return await db.game_progress.where('gameId').equals(gameId).first();
+  }
+
+  // 删除游戏进度（新游戏时调用）
+  async deleteGameProgress(gameId: string): Promise<void> {
+    const progress = await db.game_progress.where('gameId').equals(gameId).first();
+    if (progress) {
+      await db.game_progress.delete(progress.id);
     }
   }
 }

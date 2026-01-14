@@ -8,6 +8,8 @@ import { useAppNavigation } from '../lib/navigation'
 import { useExportNotifications } from '../components/export-notifications'
 import { GameLibraryWidget } from '../components/game-library-widget'
 import ResponsiveMainNav from '@/components/navigation/ResponsiveMainNav'
+import { gameStore, GameState, StatusChange } from '@/lib/game-store'
+import { toast } from 'sonner'
 
 const { IconTimeline, IconInventory, IconSettings, IconCompass, IconEye, IconSave, IconLoad, IconDelete, IconClose, IconSend, IconMove, IconInteract, IconUse, IconFeedback, IconHome, IconBox, IconHelp, IconScroll, IconFile } = Icons
 
@@ -77,6 +79,14 @@ export default function Home() {
   const [hasImportedData, setHasImportedData] = useState(false)
   const [showTimeline, setShowTimeline] = useState(false)
   const [sceneHistory, setSceneHistory] = useState<Array<{ id: string; name: string; timestamp: string; action: string }>>([])
+  const [gameState, setGameState] = useState<GameState>({
+    暴露度: 0,
+    羞耻感: 0,
+    兴奋度: 0,
+    任务完成数: 0,
+    场景解锁数: 0
+  })
+  const [gameStartTime, setGameStartTime] = useState<number>(Date.now())
   const outputRef = useRef<HTMLDivElement>(null)
 
   // 使用新的导航钩子
@@ -200,6 +210,8 @@ export default function Home() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const gameData = sessionStorage.getItem('gameData')
+      const gameProgress = sessionStorage.getItem('gameProgress')
+      
       if (gameData) {
         try {
           const data = JSON.parse(gameData)
@@ -214,29 +226,86 @@ export default function Home() {
             // 找到起始分支（第一个分支）
             const startBranch = data.branches[0]
             if (startBranch) {
-              // 设置当前场景
-              const newScene = {
-                id: startBranch.branch_id,
-                name: startBranch.chapter || startBranch.branch_id,
-                desc: startBranch.scene_detail || '',
-                exits: startBranch.choices?.map((choice: any) => ({
-                  text: choice.choice,
-                  target: choice.next_branch,
-                  effect: choice.effect,
-                  status_update: choice.status_update,
-                  end_game: choice.end_game
-                })) || []
-              }
-              setCurrentScene(newScene)
-              setChoices(newScene.exits)
+              // 初始化游戏状态
+              const initialGameState: GameState = {}
               
-              // 添加场景信息到输出历史（先显示游戏信息，再显示场景）
-              setOutputHistory([
-                { type: 'room-name', content: data.game_title, className: 'room-name', fullContent: data.game_title },
-                { type: 'room-desc', content: data.description || '', fullContent: data.description || '' },
-                { type: 'room-name', content: startBranch.chapter || startBranch.branch_id, className: 'room-name', fullContent: startBranch.chapter || startBranch.branch_id },
-                { type: 'room-desc', content: startBranch.scene_detail || '', fullContent: startBranch.scene_detail || '' }
-              ])
+              // 如果游戏数据中有状态配置，使用它
+              if (data.game_states && Array.isArray(data.game_states)) {
+                data.game_states.forEach((stateConfig: any) => {
+                  initialGameState[stateConfig.name] = stateConfig.initial_value
+                })
+              }
+              
+              // 如果有存档，加载存档
+              if (gameProgress) {
+                try {
+                  const progress = JSON.parse(gameProgress)
+                  setGameState(progress.gameState)
+                  setGameStartTime(Date.now() - progress.playTime * 1000)
+                  
+                  // 找到保存的场景
+                  const savedBranch = data.branches.find((branch: any) => branch.branch_id === progress.currentSceneId)
+                  if (savedBranch) {
+                    const newScene = {
+                      id: savedBranch.branch_id,
+                      name: savedBranch.branch_title || savedBranch.branch_id,
+                      desc: savedBranch.content || '',
+                      exits: savedBranch.options?.map((option: any) => ({
+                        text: option.option_text,
+                        target: option.target_branch_id,
+                        effect: option.effect,
+                        status_update: option.status_update,
+                        status_changes: option.status_changes,
+                        end_game: option.end_game
+                      })) || []
+                    }
+                    setCurrentScene(newScene)
+                    setChoices(newScene.exits)
+                    
+                    setOutputHistory([
+                      { type: 'room-name', content: data.game_title, className: 'room-name', fullContent: data.game_title },
+                      { type: 'room-desc', content: data.description || '', fullContent: data.description || '' },
+                      { type: 'room-name', content: savedBranch.branch_title || savedBranch.branch_id, className: 'room-name', fullContent: savedBranch.branch_title || savedBranch.branch_id },
+                      { type: 'room-desc', content: savedBranch.content || '', fullContent: savedBranch.content || '' }
+                    ])
+                    
+                    sessionStorage.removeItem('gameProgress')
+                  }
+                } catch (error) {
+                  console.error('加载游戏进度失败:', error)
+                  // 如果加载进度失败，使用初始状态
+                  setGameState(initialGameState)
+                  setGameStartTime(Date.now())
+                }
+              } else {
+                setGameState(initialGameState)
+                setGameStartTime(Date.now())
+                
+                // 设置当前场景
+                const newScene = {
+                  id: startBranch.branch_id,
+                  name: startBranch.branch_title || startBranch.branch_id,
+                  desc: startBranch.content || '',
+                  exits: startBranch.options?.map((option: any) => ({
+                    text: option.option_text,
+                    target: option.target_branch_id,
+                    effect: option.effect,
+                    status_update: option.status_update,
+                    status_changes: option.status_changes,
+                    end_game: option.end_game
+                  })) || []
+                }
+                setCurrentScene(newScene)
+                setChoices(newScene.exits)
+                
+                // 添加场景信息到输出历史（先显示游戏信息，再显示场景）
+                setOutputHistory([
+                  { type: 'room-name', content: data.game_title, className: 'room-name', fullContent: data.game_title },
+                  { type: 'room-desc', content: data.description || '', fullContent: data.description || '' },
+                  { type: 'room-name', content: startBranch.branch_title || startBranch.branch_id, className: 'room-name', fullContent: startBranch.branch_title || startBranch.branch_id },
+                  { type: 'room-desc', content: startBranch.content || '', fullContent: startBranch.content || '' }
+                ])
+              }
               
               // 保存游戏数据以便后续使用
               setStoryData({
@@ -244,14 +313,15 @@ export default function Home() {
                 scenes: data.branches.reduce((acc: any, branch: any) => {
                   acc[branch.branch_id] = {
                     id: branch.branch_id,
-                    name: branch.chapter || branch.branch_id,
-                    desc: branch.scene_detail || '',
-                    exits: branch.choices?.map((choice: any) => ({
-                      text: choice.choice,
-                      target: choice.next_branch,
-                      effect: choice.effect,
-                      status_update: choice.status_update,
-                      end_game: choice.end_game
+                    name: branch.branch_title || branch.branch_id,
+                    desc: branch.content || '',
+                    exits: branch.options?.map((option: any) => ({
+                      text: option.option_text,
+                      target: option.target_branch_id,
+                      effect: option.effect,
+                      status_update: option.status_update,
+                      status_changes: option.status_changes,
+                      end_game: option.end_game
                     })) || []
                   }
                   return acc
@@ -500,13 +570,32 @@ export default function Home() {
           const displayText = `> ${directionChinese}`
           setOutputHistory(prev => [...prev, { type: 'user-choice', content: displayText }])
           
-          // 处理choice的effect和status_update字段
+          // 处理choice的effect、status_update和status_changes字段
           const outputUpdates: any[] = []
           if (matchedChoice.effect) {
             outputUpdates.push({ type: 'system', content: matchedChoice.effect, fullContent: matchedChoice.effect })
           }
           if (matchedChoice.status_update) {
             outputUpdates.push({ type: 'system', content: matchedChoice.status_update, fullContent: matchedChoice.status_update })
+          }
+          
+          // 处理status_changes：应用数值变更
+          if (matchedChoice.status_changes && Array.isArray(matchedChoice.status_changes)) {
+            const newGameState = gameStore.applyStatusChanges(gameState, matchedChoice.status_changes)
+            setGameState(newGameState)
+            
+            // 显示数值变更信息
+            const changeDescriptions = matchedChoice.status_changes.map(change => {
+              const operationText = {
+                '+': '增加',
+                '-': '减少',
+                '*': '乘以',
+                '/': '除以',
+                '=': '设置为'
+              }[change.operation]
+              return `${change.attribute} ${operationText} ${change.value}`
+            })
+            outputUpdates.push({ type: 'system', content: `状态更新：${changeDescriptions.join('、')}`, fullContent: `状态更新：${changeDescriptions.join('、')}` })
           }
           
           // 分批次添加到输出历史
@@ -875,17 +964,36 @@ export default function Home() {
           // 找到起始分支（第一个分支）
           const startBranch = data.branches[0]
           if (startBranch) {
+            // 初始化游戏状态
+            const initialGameState: GameState = {
+              暴露度: 0,
+              羞耻感: 0,
+              兴奋度: 0,
+              任务完成数: 0,
+              场景解锁数: 0
+            }
+            
+            // 如果游戏数据中有初始状态，使用它
+            if (data.status) {
+              Object.keys(data.status).forEach(key => {
+                initialGameState[key] = data.status[key]
+              })
+            }
+            
+            setGameState(initialGameState)
+            
             // 设置当前场景
             const newScene = {
               id: startBranch.branch_id,
-              name: startBranch.chapter || startBranch.branch_id,
-              desc: startBranch.scene_detail || '',
-              exits: startBranch.choices?.map((choice: any) => ({
-                text: choice.choice,
-                target: choice.next_branch,
-                effect: choice.effect,
-                status_update: choice.status_update,
-                end_game: choice.end_game
+              name: startBranch.branch_title || startBranch.branch_id,
+              desc: startBranch.content || '',
+              exits: startBranch.options?.map((option: any) => ({
+                text: option.option_text,
+                target: option.target_branch_id,
+                effect: option.effect,
+                status_update: option.status_update,
+                status_changes: option.status_changes,
+                end_game: option.end_game
               })) || []
             }
             setCurrentScene(newScene)
@@ -895,8 +1003,8 @@ export default function Home() {
             setOutputHistory([
               { type: 'room-name', content: data.game_title, className: 'room-name', fullContent: data.game_title },
               { type: 'room-desc', content: data.description || '', fullContent: data.description || '' },
-              { type: 'room-name', content: startBranch.chapter || startBranch.branch_id, className: 'room-name', fullContent: startBranch.chapter || startBranch.branch_id },
-              { type: 'room-desc', content: startBranch.scene_detail || '', fullContent: startBranch.scene_detail || '' }
+              { type: 'room-name', content: startBranch.branch_title || startBranch.branch_id, className: 'room-name', fullContent: startBranch.branch_title || startBranch.branch_id },
+              { type: 'room-desc', content: startBranch.content || '', fullContent: startBranch.content || '' }
             ])
             
             // 保存游戏数据以便后续使用
@@ -905,14 +1013,15 @@ export default function Home() {
               scenes: data.branches.reduce((acc: any, branch: any) => {
                 acc[branch.branch_id] = {
                   id: branch.branch_id,
-                  name: branch.chapter || branch.branch_id,
-                  desc: branch.scene_detail || '',
-                  exits: branch.choices?.map((choice: any) => ({
-                    text: choice.choice,
-                    target: choice.next_branch,
-                    effect: choice.effect,
-                    status_update: choice.status_update,
-                    end_game: choice.end_game
+                  name: branch.branch_title || branch.branch_id,
+                  desc: branch.content || '',
+                  exits: branch.options?.map((option: any) => ({
+                    text: option.option_text,
+                    target: option.target_branch_id,
+                    effect: option.effect,
+                    status_update: option.status_update,
+                    status_changes: option.status_changes,
+                    end_game: option.end_game
                   })) || []
                 }
                 return acc
@@ -1078,14 +1187,15 @@ export default function Home() {
                         // 设置当前场景
                         const newScene = {
                           id: startBranch.branch_id,
-                          name: startBranch.chapter || startBranch.branch_id,
-                          desc: startBranch.scene_detail || '',
-                          exits: startBranch.choices?.map((choice: any) => ({
-                            text: choice.choice,
-                            target: choice.next_branch,
-                            effect: choice.effect,
-                            status_update: choice.status_update,
-                            end_game: choice.end_game
+                          name: startBranch.branch_title || startBranch.branch_id,
+                          desc: startBranch.content || '',
+                          exits: startBranch.options?.map((option: any) => ({
+                            text: option.option_text,
+                            target: option.target_branch_id,
+                            effect: option.effect,
+                            status_update: option.status_update,
+                            status_changes: option.status_changes,
+                            end_game: option.end_game
                           })) || []
                         };
                         setCurrentScene(newScene);
@@ -1095,8 +1205,8 @@ export default function Home() {
                         setOutputHistory([
                           { type: 'room-name', content: data.game_title, className: 'room-name', fullContent: data.game_title },
                           { type: 'room-desc', content: data.description || '', fullContent: data.description || '' },
-                          { type: 'room-name', content: startBranch.chapter || startBranch.branch_id, className: 'room-name', fullContent: startBranch.chapter || startBranch.branch_id },
-                          { type: 'room-desc', content: startBranch.scene_detail || '', fullContent: startBranch.scene_detail || '' }
+                          { type: 'room-name', content: startBranch.branch_title || startBranch.branch_id, className: 'room-name', fullContent: startBranch.branch_title || startBranch.branch_id },
+                          { type: 'room-desc', content: startBranch.content || '', fullContent: startBranch.content || '' }
                         ]);
                         
                         // 保存游戏数据以便后续使用
@@ -1105,14 +1215,15 @@ export default function Home() {
                           scenes: data.branches.reduce((acc: any, branch: any) => {
                             acc[branch.branch_id] = {
                               id: branch.branch_id,
-                              name: branch.chapter || branch.branch_id,
-                              desc: branch.scene_detail || '',
-                              exits: branch.choices?.map((choice: any) => ({
-                                text: choice.choice,
-                                target: choice.next_branch,
-                                effect: choice.effect,
-                                status_update: choice.status_update,
-                                end_game: choice.end_game
+                              name: branch.branch_title || branch.branch_id,
+                              desc: branch.content || '',
+                              exits: branch.options?.map((option: any) => ({
+                                text: option.option_text,
+                                target: option.target_branch_id,
+                                effect: option.effect,
+                                status_update: option.status_update,
+                                status_changes: option.status_changes,
+                                end_game: option.end_game
                               })) || []
                             };
                             return acc;
@@ -1152,14 +1263,15 @@ export default function Home() {
                         // 设置当前场景
                         const newScene = {
                           id: startBranch.branch_id,
-                          name: startBranch.chapter || startBranch.branch_id,
-                          desc: startBranch.scene_detail || '',
-                          exits: startBranch.choices?.map((choice: any) => ({
-                            text: choice.choice,
-                            target: choice.next_branch,
-                            effect: choice.effect,
-                            status_update: choice.status_update,
-                            end_game: choice.end_game
+                          name: startBranch.branch_title || startBranch.branch_id,
+                          desc: startBranch.content || '',
+                          exits: startBranch.options?.map((option: any) => ({
+                            text: option.option_text,
+                            target: option.target_branch_id,
+                            effect: option.effect,
+                            status_update: option.status_update,
+                            status_changes: option.status_changes,
+                            end_game: option.end_game
                           })) || []
                         };
                         setCurrentScene(newScene);
@@ -1169,8 +1281,8 @@ export default function Home() {
                         setOutputHistory([
                           { type: 'room-name', content: data.game_title, className: 'room-name', fullContent: data.game_title },
                           { type: 'room-desc', content: data.description || '', fullContent: data.description || '' },
-                          { type: 'room-name', content: startBranch.chapter || startBranch.branch_id, className: 'room-name', fullContent: startBranch.chapter || startBranch.branch_id },
-                          { type: 'room-desc', content: startBranch.scene_detail || '', fullContent: startBranch.scene_detail || '' }
+                          { type: 'room-name', content: startBranch.branch_title || startBranch.branch_id, className: 'room-name', fullContent: startBranch.branch_title || startBranch.branch_id },
+                          { type: 'room-desc', content: startBranch.content || '', fullContent: startBranch.content || '' }
                         ]);
                          
                         // 保存游戏数据以便后续使用
@@ -1179,14 +1291,15 @@ export default function Home() {
                           scenes: data.branches.reduce((acc: any, branch: any) => {
                             acc[branch.branch_id] = {
                               id: branch.branch_id,
-                              name: branch.chapter || branch.branch_id,
-                              desc: branch.scene_detail || '',
-                              exits: branch.choices?.map((choice: any) => ({
-                                text: choice.choice,
-                                target: choice.next_branch,
-                                effect: choice.effect,
-                                status_update: choice.status_update,
-                                end_game: choice.end_game
+                              name: branch.branch_title || branch.branch_id,
+                              desc: branch.content || '',
+                              exits: branch.options?.map((option: any) => ({
+                                text: option.option_text,
+                                target: option.target_branch_id,
+                                effect: option.effect,
+                                status_update: option.status_update,
+                                status_changes: option.status_changes,
+                                end_game: option.end_game
                               })) || []
                             };
                             return acc;
@@ -1447,13 +1560,32 @@ export default function Home() {
                         const displayText = `> ${directionChinese}`
                         setOutputHistory(prev => [...prev, { type: 'user-choice', content: displayText }])
                         
-                        // 处理choice的effect和status_update字段
+                        // 处理choice的effect、status_update和status_changes字段
                         const outputUpdates: any[] = []
                         if (choice.effect) {
                           outputUpdates.push({ type: 'system', content: choice.effect, fullContent: choice.effect })
                         }
                         if (choice.status_update) {
                           outputUpdates.push({ type: 'system', content: choice.status_update, fullContent: choice.status_update })
+                        }
+                        
+                        // 处理status_changes：应用数值变更
+                        if (choice.status_changes && Array.isArray(choice.status_changes)) {
+                          const newGameState = gameStore.applyStatusChanges(gameState, choice.status_changes)
+                          setGameState(newGameState)
+                          
+                          // 显示数值变更信息
+                          const changeDescriptions = choice.status_changes.map(change => {
+                            const operationText = {
+                              '+': '增加',
+                              '-': '减少',
+                              '*': '乘以',
+                              '/': '除以',
+                              '=': '设置为'
+                            }[change.operation]
+                            return `${change.attribute} ${operationText} ${change.value}`
+                          })
+                          outputUpdates.push({ type: 'system', content: `状态更新：${changeDescriptions.join('、')}`, fullContent: `状态更新：${changeDescriptions.join('、')}` })
                         }
                         
                         // 分批次添加到输出历史
@@ -1489,6 +1621,18 @@ export default function Home() {
             </div>
           </div>
 
+          {/* 游戏状态显示 */}
+          <div className="p-2.5 sm:p-4 lg:p-5 bg-gradient-to-br from-white/90 to-indigo-50/50 backdrop-blur-xl border-t border-b border-indigo-100" suppressHydrationWarning>
+            <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2.5 lg:gap-3 max-w-4xl mx-auto" suppressHydrationWarning>
+              {Object.entries(gameState).map(([key, value]) => (
+                <div key={key} className="bg-white/80 backdrop-blur-sm border border-indigo-200 rounded-lg px-3 py-2 flex items-center gap-2 shadow-sm" suppressHydrationWarning>
+                  <span className="text-xs sm:text-sm font-semibold text-indigo-600">{key}</span>
+                  <span className="text-sm sm:text-base font-bold text-slate-800">{value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* 快捷操作按钮 */}
           <div className="p-2.5 sm:p-4 lg:p-5 bg-gradient-to-br from-white/90 to-indigo-50/50 backdrop-blur-xl border-t border-b border-white/60 safe-area-pb" suppressHydrationWarning>
             <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2.5 lg:gap-3 max-w-4xl mx-auto" suppressHydrationWarning>
@@ -1508,7 +1652,24 @@ export default function Home() {
                 <IconHelp className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 <span className="text-xs sm:text-sm">帮助</span>
               </button>
-              <button onClick={() => executeCommand('save')} className="bg-cyan-50 text-cyan-600 hover:bg-cyan-100 border border-cyan-200 hover:border-cyan-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-8 sm:h-9" suppressHydrationWarning>
+              <button onClick={async () => {
+                try {
+                  const gameData = JSON.parse(sessionStorage.getItem('gameData') || '{}');
+                  const gameId = gameData.game_title || 'unknown';
+                  
+                  const progress = {
+                    currentSceneId: currentScene?.id || '',
+                    gameState: gameState,
+                    playTime: Math.floor((Date.now() - gameStartTime) / 1000)
+                  };
+                  
+                  await gameStore.saveProgress(gameId, progress);
+                  toast.success('进度已保存！');
+                } catch (error) {
+                  console.error('保存进度失败:', error);
+                  toast.error('保存进度失败');
+                }
+              }} className="bg-cyan-50 text-cyan-600 hover:bg-cyan-100 border border-cyan-200 hover:border-cyan-300 transition-all duration-300 font-bold px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg flex items-center gap-1 shadow-sm hover:shadow-md active:scale-95 touch-manipulation shrink-0 h-8 sm:h-9" suppressHydrationWarning>
                 <IconSave className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 <span className="text-xs sm:text-sm">保存</span>
               </button>

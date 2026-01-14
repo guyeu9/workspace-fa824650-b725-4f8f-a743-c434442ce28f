@@ -1,0 +1,259 @@
+{
+  "game_title": "午夜冒险：禁忌之夜的无限循环",
+  "description": "在城市的阴影中，你化身为夜间的冒险者，探索禁忌的边界。每个场景都是一种仪式，每项任务都是一次蜕变。游戏将无限循环，直到你选择结束这场夜行。",
+  "author": "Gem",
+  "tags": ["冒险", "都市", "禁忌", "无限循环"],
+  "version": 1.0,
+  "background_image": "",
+  "background_asset_id": "",
+  "branches": [
+    {
+      "branch_id": "game_start",
+      "branch_title": "夜幕降临 - 冒险的开始",
+      "content": "月光如水银般倾泻在城市的轮廓线上，霓虹灯在远处闪烁，如同诱惑的瞳孔。你站在公寓的窗前，感受着夜晚的召唤。\n\n衣柜里，那些特制的衣物静静等待着它们的使命。每一件都承载着一个故事，每一个选择都将开启一段未知的旅程。",
+      "options": [
+        {
+          "option_id": "start_university",
+          "option_text": "前往大学校园 - 知识的殿堂与禁忌的试探",
+          "target_branch_id": "university_campus"
+        },
+        {
+          "option_id": "start_convenience",
+          "option_text": "探索午夜便利店 - 都市孤岛的隐秘交易",
+          "target_branch_id": "midnight_convenience"
+        },
+        {
+          "option_id": "start_parking",
+          "option_text": "潜入地下停车场 - 钢铁森林中的仪式空间",
+          "target_branch_id": "parking_lot"
+        }
+      ]
+    },
+    {
+      "branch_id": "university_campus",
+      "branch_title": "大学校园 - 知识的殿堂与禁忌的试探",
+      "content": "象牙塔在夜色中显得格外肃穆，图书馆的灯光如同灯塔，指引着求知者的方向。你穿着特制的开口衣物，感受着布料在肌肤上的微妙触感。\n\n知识的殿堂与身体的秘密在此刻交织，每一个书架都可能成为见证者，每一本书都可能记录下这个夜晚的故事。",
+      "options": [
+        {
+          "option_id": "task_library",
+          "option_text": "图书馆任务 - 在知识的海洋中试探边界",
+          "target_branch_id": "library_task",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "library_start",
+              "value": "你走进图书馆，书香与纸张的气息扑面而来。每一排书架都像是等待被翻阅的章节。"
+            }
+          ]
+        },
+        {
+          "option_id": "task_lake",
+          "option_text": "湖边任务 - 水边的隐秘仪式",
+          "target_branch_id": "lake_task"
+        },
+        {
+          "option_id": "task_restroom",
+          "option_text": "洗手间任务 - 私密空间的极限挑战",
+          "target_branch_id": "restroom_task"
+        },
+        {
+          "option_id": "next_random",
+          "option_text": "继续夜行 - 随机前往下一个场景",
+          "target_branch_id": "random_scene_selector"
+        }
+      ]
+    },
+    {
+      "branch_id": "library_task",
+      "branch_title": "图书馆 - 知识的见证者",
+      "content": "你选择了一个人数适中的楼层，书架间的空气仿佛凝固。你脱下外套，将它轻轻放在书架上，如同卸下一层伪装。开口的衣物让你感受到空气的流动，每一寸肌肤都在诉说着秘密。\n\n你拿起一本书，假装阅读，但注意力却集中在每一个经过的身影上。等待，成为了这个夜晚最漫长的仪式。",
+      "options": [
+        {
+          "option_id": "complete_library",
+          "option_text": "任务完成 - 三位见证者已出现",
+          "target_branch_id": "task_completion",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "library_complete",
+              "value": "你重新穿上外套，仿佛将秘密重新包裹。书架上的书依然沉默，但它们见证了这个夜晚的仪式。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "branch_id": "midnight_convenience",
+      "branch_title": "午夜便利店 - 都市的孤岛",
+      "content": "24小时便利店的灯光在深夜中格外醒目，如同都市中的孤岛。你穿着球衣，感受着夜风在肌肤上的轻抚。跳蛋的震动如同心跳，提醒着你此行的目的。\n\n货架上的商品在灯光下闪烁着诱人的光泽，每一个选择都是一种暗示，每一个动作都是一种表达。",
+      "options": [
+        {
+          "option_id": "task_shopping",
+          "option_text": "购物任务 - 在监控下进行隐秘交易",
+          "target_branch_id": "shopping_task"
+        },
+        {
+          "option_id": "task_street",
+          "option_text": "街头漫步 - 在无人街道上的解放",
+          "target_branch_id": "street_task"
+        },
+        {
+          "option_id": "next_random",
+          "option_text": "继续夜行 - 随机前往下一个场景",
+          "target_branch_id": "random_scene_selector"
+        }
+      ]
+    },
+    {
+      "branch_id": "parking_lot",
+      "branch_title": "地下停车场 - 钢铁森林的仪式空间",
+      "content": "地下停车场的空气带着机油和混凝土的味道，灯光在远处投下长长的影子。这里是一个被遗忘的空间，适合进行隐秘的仪式。\n\n四个角落如同仪式的祭坛，每一件衣物的脱下都是一次蜕变，每一次移动都是一次重生。",
+      "options": [
+        {
+          "option_id": "task_ritual",
+          "option_text": "四角仪式 - 在停车场进行的蜕变仪式",
+          "target_branch_id": "ritual_task"
+        },
+        {
+          "option_id": "task_dice",
+          "option_text": "骰子游戏 - 命运的随机选择",
+          "target_branch_id": "dice_task"
+        },
+        {
+          "option_id": "next_random",
+          "option_text": "继续夜行 - 随机前往下一个场景",
+          "target_branch_id": "random_scene_selector"
+        }
+      ]
+    },
+    {
+      "branch_id": "task_completion",
+      "branch_title": "任务完成 - 仪式的终结",
+      "content": "你完成了这个场景的仪式，感受着身体和心灵的微妙变化。夜晚还在继续，城市中还有无数个空间等待你的探索。\n\n每一次冒险都是一次蜕变，每一个选择都是一次成长。你站在当下的位置，感受着夜晚的召唤，准备前往下一个目的地。",
+      "options": [
+        {
+          "option_id": "continue_random",
+          "option_text": "继续夜行 - 让命运决定下一个场景",
+          "target_branch_id": "random_scene_selector"
+        },
+        {
+          "option_id": "return_start",
+          "option_text": "返回起点 - 重新规划夜行路线",
+          "target_branch_id": "game_start"
+        },
+        {
+          "option_id": "end_game",
+          "option_text": "结束冒险 - 回归日常的生活",
+          "target_branch_id": "game_end"
+        }
+      ]
+    },
+    {
+      "branch_id": "random_scene_selector",
+      "branch_title": "命运的十字路口",
+      "content": "你站在城市的某个角落，夜风轻抚着你的面庞。前方的道路分叉成无数可能，每一个方向都通向不同的冒险。\n\n让命运之轮转动吧，它会为你选择最适合的下一个场景。",
+      "options": [
+        {
+          "option_id": "random_1",
+          "option_text": "前往大学校园",
+          "target_branch_id": "university_campus"
+        },
+        {
+          "option_id": "random_2",
+          "option_text": "探索便利店",
+          "target_branch_id": "midnight_convenience"
+        },
+        {
+          "option_id": "random_3",
+          "option_text": "潜入停车场",
+          "target_branch_id": "parking_lot"
+        },
+        {
+          "option_id": "random_4",
+          "option_text": "深夜广场漫步",
+          "target_branch_id": "night_plaza"
+        },
+        {
+          "option_id": "random_5",
+          "option_text": "酒店冒险",
+          "target_branch_id": "hotel_adventure"
+        },
+        {
+          "option_id": "random_6",
+          "option_text": "浴池仪式",
+          "target_branch_id": "bathhouse_ritual"
+        }
+      ]
+    },
+    {
+      "branch_id": "night_plaza",
+      "branch_title": "深夜广场 - 都市的露天剧场",
+      "content": "广场在夜色中显得格外空旷，远处的灯光如同舞台的追光。这里是一个露天的剧场，适合上演最隐秘的戏剧。\n\n每一件衣物的脱下都是一次角色的转换，每一个动作都是一句台词。在这个舞台上，你是唯一的演员，也是唯一的观众。",
+      "options": [
+        {
+          "option_id": "complete_plaza",
+          "option_text": "完成广场仪式",
+          "target_branch_id": "task_completion"
+        }
+      ]
+    },
+    {
+      "branch_id": "hotel_adventure",
+      "branch_title": "酒店走廊 - 暂时的避风港",
+      "content": "酒店的走廊在柔和的灯光下延伸，每一扇门后都隐藏着一个故事。地毯吸收了脚步声，让这个空间显得格外私密。\n\n在这里，你可以暂时卸下所有的伪装，在无人知晓的角落进行最真实的表达。",
+      "options": [
+        {
+          "option_id": "complete_hotel",
+          "option_text": "完成酒店冒险",
+          "target_branch_id": "task_completion"
+        }
+      ]
+    },
+    {
+      "branch_id": "bathhouse_ritual",
+      "branch_title": "浴池 - 水汽中的净化仪式",
+      "content": "浴池的水汽在空气中弥漫，带着消毒水和香氛的味道。这里是一个净化的空间，适合进行身心的洗礼。\n\n在水汽的掩护下，你可以进行最隐秘的仪式，让身体在水中得到解放，让心灵在蒸汽中得到净化。",
+      "options": [
+        {
+          "option_id": "complete_bathhouse",
+          "option_text": "完成浴池仪式",
+          "target_branch_id": "task_completion"
+        }
+      ]
+    },
+    {
+      "branch_id": "game_end",
+      "branch_title": "黎明将至 - 冒险的终结",
+      "content": "东方的天际开始泛白，夜晚的冒险即将结束。你站在窗前，看着城市从睡梦中苏醒。\n\n这个夜晚的经历将成为你记忆中的秘密篇章，那些禁忌的试探、隐秘的仪式、解放的瞬间，都将成为你的一部分。\n\n但你知道，当夜幕再次降临，冒险的召唤依然会响起。",
+      "options": [
+        {
+          "option_id": "restart_game",
+          "option_text": "重新开始冒险",
+          "target_branch_id": "game_start"
+        }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "item_id": "special_clothing",
+      "item_name": "特制开口衣物",
+      "description": "两侧开口的设计，让肌肤能够感受空气的流动，适合进行隐秘的冒险。"
+    },
+    {
+      "item_id": "vibrator",
+      "item_name": "跳蛋",
+      "description": "微小的震动装置，能够带来持续的刺激感，提醒你冒险的目的。"
+    },
+    {
+      "item_id": "mask",
+      "item_name": "口罩",
+      "description": "基本的伪装工具，能够在冒险中保护你的身份。"
+    }
+  ],
+  "variables": {
+    "adventure_count": 0,
+    "current_location": "start",
+    "risk_level": 0
+  }
+}

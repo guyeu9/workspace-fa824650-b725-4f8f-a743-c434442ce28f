@@ -1,0 +1,4580 @@
+{
+  "game_title": "网调任务合集 - 极限暴露冒险完整版",
+  "description": "一个包含53个场景的极限暴露冒险游戏，完整还原原始文档的所有任务内容。玩家将体验从校园到深夜的各种暴露场景，感受被观看、被发现的快感。",
+  "author": "列列",
+  "tags": ["暴露", "羞辱", "冒险", "Gay", "刺激", "完整版", "53场景"],
+  "thumbnail": "https://example.com/thumbnail.jpg",
+  "status": {
+    "暴露度": "0%",
+    "羞耻感": "0%",
+    "兴奋度": "0%",
+    "任务完成数": "0",
+    "场景解锁数": "0"
+  },
+  "branches": [
+    {
+      "branch_id": "start",
+      "chapter": "序章：网调任务开始 - 53个场景任你选择",
+      "scene_detail": "你站在一个充满未知的房间中，面前是列列为你准备的网调任务合集。空气中弥漫着紧张与期待的气息，你的心跳开始加速，鸡巴不自觉地微微发硬。这里有53个不同的暴露场景等待你的挑战，每个场景都充满了刺激与羞辱的快感。",
+      "choices": [
+        {
+          "id": "choice_start_1",
+          "choice": "1. 大学校园系列 - 知识的殿堂中的暴露快感",
+          "effect": "图书馆、湖边、洗手间，校园是暴露的绝佳场所。在知识的殿堂中体验被同学发现的快感，你的鸡巴在期待中微微发硬，空气中弥漫着青春的气息和暴露的诱惑。",
+          "status_update": "暴露度10% 羞耻感5% 兴奋度15%",
+          "next_branch": "university_main"
+        },
+        {
+          "id": "choice_start_2",
+          "choice": "2. 午夜便利店系列 - 深夜购物的刺激冒险",
+          "effect": "凌晨的便利店，跳蛋的震动让你欲罢不能。在深夜的便利店里，体验被店员发现的刺激，鸡巴在震动中不断发硬，前列腺液不自觉地流出。",
+          "status_update": "暴露度15% 羞耻感10% 兴奋度20%",
+          "next_branch": "midnight_convenience_main"
+        },
+        {
+          "id": "choice_start_3",
+          "choice": "3. 停车场系列 - 四角脱衣的羞辱游戏",
+          "effect": "停车场里的骰子游戏，充满了不确定性。每一次脱衣都是一次羞辱的享受，鸡巴在兴奋中不断发硬，体验被陌生人发现的快感。",
+          "status_update": "暴露度12% 羞耻感8% 兴奋度18%",
+          "next_branch": "parking_lot_main"
+        },
+        {
+          "id": "choice_start_4",
+          "choice": "4. 深夜广场系列 - 广场脱衣的极限挑战",
+          "effect": "深夜的广场，脱衣游戏的刺激体验。在空旷的广场上体验赤裸的快感，鸡巴在夜风中微微发硬，感受被路人注视的羞辱与兴奋。",
+          "status_update": "暴露度18% 羞耻感12% 兴奋度25%",
+          "next_branch": "late_night_square_main"
+        },
+        {
+          "id": "choice_start_5",
+          "choice": "5. 酒店任务系列 - 走廊房间的暴露体验",
+          "effect": "酒店的走廊和房间，完美的暴露环境。在私密空间中体验被发现的快感，鸡巴在兴奋中不断发硬，感受被陌生人注视的刺激。",
+          "status_update": "暴露度16% 羞耻感14% 兴奋度22%",
+          "next_branch": "hotel_main"
+        },
+        {
+          "id": "choice_start_6",
+          "choice": "6. 更多场景选择 - 查看完整的53个场景",
+          "effect": "浏览所有53个暴露场景，选择你最感兴趣的挑战。每一个场景都充满了被观看、被发现的快感，让你的鸡巴在期待中不断发硬。",
+          "status_update": "暴露度5% 羞耻感5% 兴奋度10%",
+          "next_branch": "all_scenes_overview"
+        }
+      ]
+    },
+    {
+      "branch_id": "all_scenes_overview",
+      "chapter": "53个暴露场景总览",
+      "scene_detail": "这里列出了所有53个暴露场景，每个场景都有独特的刺激体验。选择你想要挑战的场景类别，开始你的暴露冒险之旅。\n\n你的鸡巴在期待中微微发硬，空气中弥漫着暴露的诱惑气息。每一个场景都充满了被观看、被发现的快感，让你在羞耻与兴奋中不断沉沦。",
+      "choices": [
+        {
+          "id": "choice_overview_0",
+          "choice": "🎲 随机场景挑战 - 让命运决定你的暴露冒险",
+          "effect": "系统将为你随机选择一个暴露场景，体验未知的刺激快感。",
+          "status_update": "暴露度+8% 羞耻感+6% 兴奋度+12%",
+          "next_branch": "random_scene_challenge"
+        },
+        {
+          "id": "choice_overview_1",
+          "choice": "1. 校园类场景 (8个) - 大学校园、学校公厕等",
+          "effect": "校园环境中的暴露挑战，充满青春气息和知识殿堂的神秘感。",
+          "status_update": "暴露度+3% 羞耻感+3% 兴奋度+5%",
+          "next_branch": "campus_scenes"
+        },
+        {
+          "id": "choice_overview_2",
+          "choice": "2. 公共场所类 (12个) - 商场、影院、健身房等",
+          "effect": "公共场所的暴露，风险与刺激并存，在人群中体验被发现的快感。",
+          "status_update": "暴露度+4% 羞耻感+4% 兴奋度+6%",
+          "next_branch": "public_places_scenes"
+        },
+        {
+          "id": "choice_overview_3",
+          "choice": "3. 夜间冒险类 (10个) - 深夜广场、楼道、便利店等",
+          "effect": "夜色掩护下的暴露冒险，更加刺激，在黑暗中体验被发现的快感。",
+          "status_update": "暴露度+5% 羞耻感+5% 兴奋度+7%",
+          "next_branch": "night_adventure_scenes"
+        },
+        {
+          "id": "choice_overview_4",
+          "choice": "4. 特殊环境类 (8个) - 酒店、浴池、KTV等",
+          "effect": "特殊环境中的暴露体验，别具一格，在私密空间中体验暴露的刺激。",
+          "status_update": "暴露度+4% 羞耻感+4% 兴奋度+6%",
+          "next_branch": "special_environment_scenes"
+        },
+        {
+          "id": "choice_overview_5",
+          "choice": "5. 户外冒险类 (7个) - 野外、海边、树林等",
+          "effect": "大自然中的暴露挑战，回归原始，在自然环境中体验野性的暴露快感。",
+          "status_update": "暴露度+6% 羞耻感+6% 兴奋度+8%",
+          "next_branch": "outdoor_adventure_scenes"
+        },
+        {
+          "id": "choice_overview_6",
+          "choice": "6. 日常生活类 (8个) - 小区、家中、工作日等",
+          "effect": "日常生活中的暴露，融入日常的刺激，让暴露成为生活的一部分。",
+          "status_update": "暴露度+3% 羞耻感+3% 兴奋度+5%",
+          "next_branch": "daily_life_scenes"
+        },
+        {
+          "id": "choice_overview_7",
+          "choice": "7. 返回主菜单",
+          "effect": "回到游戏开始界面，重新规划你的暴露冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "random_scene_challenge",
+      "chapter": "🎲 随机场景挑战 - 命运的暴露冒险",
+      "scene_detail": "命运之轮开始转动，系统将为你随机选择一个暴露场景。你的鸡巴在期待中微微发硬，空气中弥漫着未知的刺激气息。每一次随机选择都是一次全新的暴露冒险，充满了被观看、被发现的快感。\n\n闭上眼睛，感受内心的悸动，让命运决定你今天的暴露冒险吧！",
+      "choices": [
+        {
+          "id": "choice_random_1",
+          "choice": "🎲 随机选择校园类场景 (8选1)",
+          "effect": "系统随机选择校园类中的一个暴露场景，充满青春气息的冒险。",
+          "status_update": "暴露度+10% 羞耻感+8% 兴奋度+15%",
+          "next_branch": "random_campus_scene"
+        },
+        {
+          "id": "choice_random_2",
+          "choice": "🎲 随机选择公共场所类 (12选1)",
+          "effect": "系统随机选择公共场所类中的一个暴露场景，人群中的刺激冒险。",
+          "status_update": "暴露度+12% 羞耻感+10% 兴奋度+18%",
+          "next_branch": "random_public_scene"
+        },
+        {
+          "id": "choice_random_3",
+          "choice": "🎲 随机选择夜间冒险类 (10选1)",
+          "effect": "系统随机选择夜间冒险类中的一个暴露场景，夜色中的神秘冒险。",
+          "status_update": "暴露度+15% 羞耻感+12% 兴奋度+20%",
+          "next_branch": "random_night_scene"
+        },
+        {
+          "id": "choice_random_4",
+          "choice": "🎲 随机选择特殊环境类 (8选1)",
+          "effect": "系统随机选择特殊环境类中的一个暴露场景，私密空间的刺激冒险。",
+          "status_update": "暴露度+12% 羞耻感+10% 兴奋度+18%",
+          "next_branch": "random_special_scene"
+        },
+        {
+          "id": "choice_random_5",
+          "choice": "🎲 随机选择户外冒险类 (7选1)",
+          "effect": "系统随机选择户外冒险类中的一个暴露场景，大自然中的野性冒险。",
+          "status_update": "暴露度+14% 羞耻感+11% 兴奋度+19%",
+          "next_branch": "random_outdoor_scene"
+        },
+        {
+          "id": "choice_random_6",
+          "choice": "🎲 随机选择日常生活类 (8选1)",
+          "effect": "系统随机选择日常生活类中的一个暴露场景，日常中的刺激冒险。",
+          "status_update": "暴露度+10% 羞耻感+8% 兴奋度+15%",
+          "next_branch": "random_daily_scene"
+        },
+        {
+          "id": "choice_random_7",
+          "choice": "🎲 完全随机选择 (53选1)",
+          "effect": "系统从所有53个场景中完全随机选择一个，体验真正的未知冒险。",
+          "status_update": "暴露度+20% 羞耻感+15% 兴奋度+25%",
+          "next_branch": "random_complete_scene"
+        },
+        {
+          "id": "choice_random_8",
+          "choice": "返回场景选择中心",
+          "effect": "回到场景选择界面，重新规划你的暴露冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "all_scenes_overview"
+        }
+      ]
+    },
+    {
+      "branch_id": "university_main",
+      "chapter": "大学校园系列 - 完整任务",
+      "scene_detail": "大学校园是知识的殿堂，也是暴露的绝佳场所。这里有图书馆、湖边、洗手间等多个场景，每个场景都有详细的暴露任务。你的鸡巴在期待中微微发硬，空气中弥漫着青春的气息和暴露的诱惑。",
+      "choices": [
+        {
+          "id": "choice_uni_1",
+          "choice": "1. 图书馆暴露任务 - 在书架旁体验暴露",
+          "effect": "穿着两侧开口的上衣，在图书馆书架旁等待同学经过，体验被知识殿堂中的目光注视的快感。",
+          "status_update": "暴露度25% 羞耻感15% 兴奋度35%",
+          "next_branch": "university_library_1"
+        },
+        {
+          "id": "choice_uni_2",
+          "choice": "2. 湖边冒险任务 - 夜色中的赤裸行走",
+          "effect": "在不开灯的学校湖边，放下果照后赤裸行走取回，体验夜色中的暴露快感。",
+          "status_update": "暴露度30% 羞耻感20% 兴奋度40%",
+          "next_branch": "university_lake_1"
+        },
+        {
+          "id": "choice_uni_3",
+          "choice": "3. 洗手间暴露任务 - 上课时间的冒险",
+          "effect": "以肚子疼为由去洗手间，脱光衣服在洗手间走动，体验上课时间的暴露刺激。",
+          "status_update": "暴露度35% 羞耻感25% 兴奋度45%",
+          "next_branch": "university_toilet_1"
+        },
+        {
+          "id": "choice_uni_4",
+          "choice": "4. 返回场景选择",
+          "effect": "选择其他类型的暴露场景，继续你的暴露冒险之旅。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "all_scenes_overview"
+        }
+      ]
+    },
+    {
+      "branch_id": "random_campus_scene",
+      "chapter": "🎲 随机校园场景 - 命运的校园冒险",
+      "scene_detail": "命运为你选择了一个校园场景！你的鸡巴在期待中微微发硬，空气中弥漫着青春的气息和暴露的诱惑。校园中的每一个角落都充满了被发现的快感，无论是图书馆的书架旁，还是湖边的夜色中，都将成为你暴露的舞台。\n\n闭上眼睛，感受内心的悸动，让命运带你进入校园的暴露冒险吧！",
+      "choices": [
+        {
+          "id": "choice_random_campus_1",
+          "choice": "🎲 随机选择：图书馆暴露任务",
+          "effect": "命运选择了图书馆暴露任务！在知识的殿堂中体验被同学发现的快感，你的鸡巴在期待中不断发硬。",
+          "status_update": "暴露度+15% 羞耻感+10% 兴奋度+20%",
+          "next_branch": "university_library_1"
+        },
+        {
+          "id": "choice_random_campus_2",
+          "choice": "🎲 随机选择：湖边冒险任务",
+          "effect": "命运选择了湖边冒险任务！在夜色中的湖边体验赤裸的快感，鸡巴在夜风中微微发硬。",
+          "status_update": "暴露度+18% 羞耻感+12% 兴奋度+22%",
+          "next_branch": "university_lake_1"
+        },
+        {
+          "id": "choice_random_campus_3",
+          "choice": "🎲 随机选择：洗手间暴露任务",
+          "effect": "命运选择了洗手间暴露任务！在上课时间的洗手间体验暴露的刺激，鸡巴在兴奋中不断发硬。",
+          "status_update": "暴露度+20% 羞耻感+15% 兴奋度+25%",
+          "next_branch": "university_toilet_1"
+        },
+        {
+          "id": "choice_random_campus_4",
+          "choice": "🎲 再次随机选择校园场景",
+          "effect": "让命运再次为你选择一个校园场景，体验不同的暴露快感。",
+          "status_update": "暴露度+5% 羞耻感+5% 兴奋度+8%",
+          "next_branch": "random_campus_scene"
+        },
+        {
+          "id": "choice_random_campus_5",
+          "choice": "返回随机场景选择",
+          "effect": "回到随机场景选择界面，选择其他类型的随机冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "random_scene_challenge"
+        }
+      ]
+    },
+    {
+      "branch_id": "university_library_1",
+      "chapter": "大学校园任务 - 图书馆暴露（详细版）",
+      "scene_detail": "你穿着两侧开口的上衣，真空状态下披着外套，戴着口罩来到图书馆。这里的学生们正在认真学习，而你却要在知识的殿堂中体验暴露的快感。你找到一个人数不多的楼层，书架旁是同学们打水必经的地方。你的鸡巴在期待中微微发硬，空气中弥漫着青春的气息和暴露的诱惑。",
+      "choices": [
+        {
+          "id": "choice_uni_lib_1",
+          "choice": "1. 脱下上衣放在书架上，打开开口",
+          "effect": "你脱下外套放在书架上，打开两侧开口，拿起一本书假装在看书。鸡巴在兴奋中微微发硬，感受着被知识殿堂中的目光注视的快感。",
+          "status_update": "暴露度30% 羞耻感20% 兴奋度40%",
+          "next_branch": "university_library_2"
+        },
+        {
+          "id": "choice_uni_lib_2",
+          "choice": "2. 等待三位同学经过或有人看到你",
+          "effect": "你耐心等待，享受可能被看到的快感。鸡巴在期待中不断发硬，前列腺液不自觉地流出，感受着被发现的刺激。",
+          "status_update": "暴露度35% 羞耻感25% 兴奋度45%",
+          "next_branch": "university_library_3"
+        },
+        {
+          "id": "choice_uni_lib_3",
+          "choice": "3. 大胆的留下小号卡片在书架上",
+          "effect": "你在书架上留下联系方式，增加暴露的刺激感。鸡巴在兴奋中不断发硬，感受着被陌生人发现的快感。",
+          "status_update": "暴露度40% 羞耻感30% 兴奋度50%",
+          "next_branch": "university_library_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "university_library_2",
+      "chapter": "图书馆暴露 - 等待被发现",
+      "scene_detail": "你站在书架旁，两侧开口的上衣让你暴露无遗。鸡巴在兴奋中微微发硬，你假装在看书，但注意力完全集中在经过的同学身上。",
+      "choices": [
+        {
+          "id": "choice_uni_lib_2_1",
+          "choice": "1. 继续等待，享受暴露的快感",
+          "effect": "你继续等待，感受着被观看的刺激。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度55%",
+          "next_branch": "university_library_3"
+        },
+        {
+          "id": "choice_uni_lib_2_2",
+          "choice": "2. 调整姿势，增加暴露程度",
+          "effect": "你调整姿势，让开口更加明显。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度60%",
+          "next_branch": "university_library_3"
+        }
+      ]
+    },
+    {
+      "branch_id": "university_library_3",
+      "chapter": "图书馆暴露 - 被发现后的刺激",
+      "scene_detail": "终于有同学经过并注意到了你的异常。他们的目光让你感到既羞耻又兴奋，鸡巴更加硬挺。",
+      "choices": [
+        {
+          "id": "choice_uni_lib_3_1",
+          "choice": "1. 装作若无其事，继续看书",
+          "effect": "你强装镇定，但内心早已波涛汹涌。",
+          "status_update": "暴露度55% 羞耻感45% 兴奋度65%",
+          "next_branch": "university_library_complete"
+        },
+        {
+          "id": "choice_uni_lib_3_2",
+          "choice": "2. 与同学对视，享受被发现的快感",
+          "effect": "你大胆地与同学对视，享受被发现的刺激。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度70%",
+          "next_branch": "university_library_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "university_library_complete",
+      "chapter": "图书馆任务完成",
+      "scene_detail": "你成功完成了图书馆暴露任务，鸡巴在兴奋中微微发硬。这种在知识殿堂中的暴露让你感到前所未有的刺激。",
+      "choices": [
+        {
+          "id": "choice_lib_complete_1",
+          "choice": "1. 继续校园其他任务",
+          "effect": "体验校园中的其他暴露场景。",
+          "status_update": "暴露度+5% 羞耻感+5% 兴奋度+10%",
+          "next_branch": "university_main"
+        },
+        {
+          "id": "choice_lib_complete_2",
+          "choice": "2. 返回场景选择中心",
+          "effect": "选择其他类型的暴露场景。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "all_scenes_overview"
+        }
+      ]
+    },
+    {
+      "branch_id": "midnight_convenience_main",
+      "chapter": "午夜便利店系列 - 完整任务",
+      "scene_detail": "凌晨的便利店，只有你和值班的店员，这是体验暴露的绝佳时机。跳蛋的震动、前列腺液的涂抹，每一个细节都充满了刺激。",
+      "choices": [
+        {
+          "id": "choice_conv_1",
+          "choice": "1. 跳蛋震动下的购物体验",
+          "effect": "凌晨12:30起床，喝一大杯水，穿着球衣真空出门。",
+          "status_update": "暴露度20% 羞耻感15% 兴奋度30%",
+          "next_branch": "midnight_convenience_1"
+        },
+        {
+          "id": "choice_conv_2",
+          "choice": "2. 街道上的赤裸行走",
+          "effect": "高潮后离开超市，脱去球衣一丝不挂站在大街上。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度35%",
+          "next_branch": "midnight_convenience_2"
+        },
+        {
+          "id": "choice_conv_3",
+          "choice": "3. 小区内的冒险挑战",
+          "effect": "穿过小区门时撩起上衣脱下裤子，在楼道中冒险。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度40%",
+          "next_branch": "midnight_convenience_3"
+        }
+      ]
+    },
+    {
+      "branch_id": "task_center",
+      "chapter": "任务选择中心",
+      "scene_detail": "完成当前任务后，你的身体还处于兴奋状态。鸡巴微微发硬，暴露的欲望还在燃烧。选择下一个挑战地点，继续这段刺激的冒险之旅。",
+      "choices": [
+        {
+          "id": "choice_center_1",
+          "choice": "1. 返回场景总览",
+          "effect": "浏览所有53个暴露场景。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "all_scenes_overview"
+        },
+        {
+          "id": "choice_center_2",
+          "choice": "2. 结束冒险",
+          "effect": "暂时休息，保存进度。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "end_game": true
+        }
+      ]
+    },
+    {
+      "branch_id": "campus_scenes",
+      "chapter": "校园类场景 - 8个暴露挑战",
+      "scene_detail": "校园环境中的暴露挑战，充满了青春气息和知识殿堂的神秘感。这里有大学校园、学校公厕、宿舍等多种场景。",
+      "choices": [
+        {
+          "id": "choice_campus_1",
+          "choice": "1. 大学校园任务 - 图书馆、湖边、洗手间",
+          "effect": "完整的大学校园暴露体验。",
+          "status_update": "暴露度+8% 羞耻感+6% 兴奋度+12%",
+          "next_branch": "university_main"
+        },
+        {
+          "id": "choice_campus_2",
+          "choice": "2. 学校公厕任务 - 虐鸡体训暴露",
+          "effect": "公厕中的体训和暴露挑战，在公厕中体验被同学发现的刺激。",
+          "status_update": "暴露度+10% 羞耻感+8% 兴奋度+15%",
+          "next_branch": "university_main"
+        },
+        {
+          "id": "choice_campus_3",
+          "choice": "3. 大学生校园任务 - 10个小任务",
+          "effect": "大学生日常生活中的暴露挑战，在校园中体验被发现的快感。",
+          "status_update": "暴露度+9% 羞耻感+7% 兴奋度+13%",
+          "next_branch": "university_main"
+        },
+        {
+          "id": "choice_campus_4",
+          "choice": "4. 校园任务 - 单独场景",
+          "effect": "专门的校园暴露任务，在校园中体验被同学发现的快感。",
+          "status_update": "暴露度+7% 羞耻感+5% 兴奋度+11%",
+          "next_branch": "university_main"
+        },
+        {
+          "id": "choice_campus_5",
+          "choice": "5. 宿舍楼道任务 - 楼道中的冒险",
+          "effect": "宿舍楼道的暴露挑战，在楼道中体验被室友发现的刺激。",
+          "status_update": "暴露度+8% 羞耻感+6% 兴奋度+12%",
+          "next_branch": "university_main"
+        },
+        {
+          "id": "choice_campus_6",
+          "choice": "6. 宿舍内任务 - 寝室内的暴露",
+          "effect": "宿舍内部的暴露体验，在寝室中体验私密的暴露快感。",
+          "status_update": "暴露度+6% 羞耻感+4% 兴奋度+10%",
+          "next_branch": "university_main"
+        },
+        {
+          "id": "choice_campus_7",
+          "choice": "7. 学校后山任务 - 后山的冒险",
+          "effect": "学校后山的暴露挑战，在后山中体验被同学发现的刺激。",
+          "status_update": "暴露度+9% 羞耻感+7% 兴奋度+13%",
+          "next_branch": "university_main"
+        },
+        {
+          "id": "choice_campus_8",
+          "choice": "8. 返回场景总览",
+          "effect": "浏览其他类型的场景。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "all_scenes_overview"
+        }
+      ]
+    },
+    {
+      "branch_id": "public_places_scenes",
+      "chapter": "公共场所类 - 12个暴露挑战",
+      "scene_detail": "公共场所的暴露，风险与刺激并存。这里有商场、影院、健身房等多种场景，每个场景都有独特的挑战。",
+      "choices": [
+        {
+          "id": "choice_public_1",
+          "choice": "1. 商场露出 - 长款外套下的暴露冒险",
+          "effect": "商场中穿着长款外套进行暴露挑战，体验在人群中的刺激快感。",
+          "status_update": "暴露度+12% 羞耻感+10% 兴奋度+16%",
+          "next_branch": "mall_exposure_detailed"
+        },
+        {
+          "id": "choice_public_2",
+          "choice": "2. 白天影院任务 - 白天的影院暴露冒险",
+          "effect": "白天影院中进行暴露挑战，体验在黑暗环境中的刺激快感。",
+          "status_update": "暴露度+11% 羞耻感+9% 兴奋度+15%",
+          "next_branch": "day_cinema_detailed"
+        },
+        {
+          "id": "choice_public_3",
+          "choice": "3. 晚上影院任务 - 夜间的影院暴露冒险",
+          "effect": "晚上影院中进行暴露挑战，体验在黑暗环境中的刺激快感。",
+          "status_update": "暴露度+13% 羞耻感+11% 兴奋度+17%",
+          "next_branch": "night_cinema_detailed"
+        },
+        {
+          "id": "choice_public_4",
+          "choice": "4. 影院任务进阶版 - 更高级的影院暴露挑战",
+          "effect": "影院暴露的进阶版本，包含更多刺激和风险的挑战。",
+          "status_update": "暴露度+15% 羞耻感+12% 兴奋度+18%",
+          "next_branch": "cinema_advanced_detailed"
+        },
+        {
+          "id": "choice_public_5",
+          "choice": "5. 健身房任务 - 健身房的详细暴露挑战",
+          "effect": "健身房中的详细暴露挑战，包含12个具体步骤。",
+          "status_update": "暴露度+12% 羞耻感+10% 兴奋度+16%",
+          "next_branch": "gym_detailed"
+        },
+        {
+          "id": "choice_public_6",
+          "choice": "6. 商场随机任务 - 随机的商场详细暴露冒险",
+          "effect": "商场中的随机详细暴露挑战，包含10个具体步骤。",
+          "status_update": "暴露度+10% 羞耻感+8% 兴奋度+14%",
+          "next_branch": "mall_random_detailed"
+        },
+        {
+          "id": "choice_public_7",
+          "choice": "7. 酒吧暴露任务 - 酒吧中的详细暴露冒险",
+          "effect": "酒吧环境中的详细暴露体验，包含12个具体步骤。",
+          "status_update": "暴露度+12% 羞耻感+10% 兴奋度+17%",
+          "next_branch": "bar_exposure_detailed"
+        },
+        {
+          "id": "choice_public_8",
+          "choice": "8. 看牙任务 - 牙科医院专业暴露挑战",
+          "effect": "牙科医院的专业环境中进行精心策划的暴露挑战，需要胆量和技巧。",
+          "status_update": "暴露度+15% 羞耻感+12% 兴奋度+18%",
+          "next_branch": "dental_hospital_main"
+        },
+        {
+          "id": "choice_public_9",
+          "choice": "9. 情趣店任务 - 情趣店的详细暴露冒险",
+          "effect": "情趣店中的详细暴露体验，包含12个具体步骤。",
+          "status_update": "暴露度+11% 羞耻感+9% 兴奋度+15%",
+          "next_branch": "sex_shop_detailed"
+        },
+        {
+          "id": "choice_public_10",
+          "choice": "10. 超市暴露任务 - 超市中的详细暴露冒险",
+          "effect": "超市环境中的详细暴露挑战，包含12个具体步骤。",
+          "status_update": "暴露度+10% 羞耻感+8% 兴奋度+14%",
+          "next_branch": "supermarket_detailed"
+        },
+        {
+          "id": "choice_public_11",
+          "choice": "11. 商场露出简单任务 - 简化的商场详细挑战",
+          "effect": "商场暴露的简化详细版本，包含8个具体步骤。",
+          "status_update": "暴露度+8% 羞耻感+6% 兴奋度+12%",
+          "next_branch": "mall_simple_detailed"
+        },
+        {
+          "id": "choice_public_12",
+          "choice": "12. 返回场景总览",
+          "effect": "浏览其他类型的场景。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "all_scenes_overview"
+        }
+      ]
+    },
+    {
+      "branch_id": "dental_hospital_main",
+      "chapter": "牙科医院暴露挑战 - 专业环境中的冒险",
+      "scene_detail": "你来到一家较大的私立牙科医院，这里人员不多但空房间较多。你穿着牛仔裤配T恤，里面真空状态，带着朋友一起来洗牙。你的任务是让男医生注意到你没穿内裤，并在医院内完成一系列暴露挑战。",
+      "choices": [
+        {
+          "id": "choice_dental_1",
+          "choice": "1. 选择医院和准备 - 找合适的私立牙科医院",
+          "effect": "你选择了一家建在商业写字楼内的私立医院，这里没有保安，门禁严格，流动人员少。",
+          "status_update": "暴露度20% 羞耻感15% 兴奋度25%",
+          "next_branch": "dental_hospital_2"
+        }
+      ]
+    },
+    {
+      "branch_id": "dental_hospital_2",
+      "chapter": "牙科医院暴露 - 与医生互动",
+      "scene_detail": "你强烈要求男医生给洗牙，开始与医生扯皮，目的是让他注意到你牛仔裤下没穿内裤的激凸。",
+      "choices": [
+        {
+          "id": "choice_dental_2_1",
+          "choice": "1. 故意找借口与医生扯皮",
+          "effect": "你找各种借口拖延时间，让医生注意到你的异常。",
+          "status_update": "暴露度30% 羞耻感20% 兴奋度35%",
+          "next_branch": "dental_hospital_3"
+        },
+        {
+          "id": "choice_dental_2_2",
+          "choice": "2. 直接展示激凸",
+          "effect": "你大胆地调整姿势，让激凸更加明显。",
+          "status_update": "暴露度35% 羞耻感25% 兴奋度40%",
+          "next_branch": "dental_hospital_3"
+        }
+      ]
+    },
+    {
+      "branch_id": "dental_hospital_3",
+      "chapter": "牙科医院暴露 - 洗手间准备",
+      "scene_detail": "在医生准备时，你要求去洗手间。在洗手间里拍照留念，确保真空状态去洗牙。",
+      "choices": [
+        {
+          "id": "choice_dental_3_1",
+          "choice": "1. 在洗手间拍照留念",
+          "effect": "你在洗手间确认真空状态，拍照记录。",
+          "status_update": "暴露度40% 羞耻感30% 兴奋度45%",
+          "next_branch": "dental_hospital_4"
+        }
+      ]
+    },
+    {
+      "branch_id": "dental_hospital_4",
+      "chapter": "牙科医院暴露 - 洗牙过程中的暴露",
+      "scene_detail": "洗牙开始后，你的朋友假装开玩笑，不停换角度拍照，目的是拍出激凸。你刻意的挺起档部，让医生看见你没穿内裤的裆部。",
+      "choices": [
+        {
+          "id": "choice_dental_4_1",
+          "choice": "1. 挺起档部让医生偷窥",
+          "effect": "你刻意挺起档部，感受医生的细微反应。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "dental_hospital_5"
+        },
+        {
+          "id": "choice_dental_4_2",
+          "choice": "2. 轻轻分开腿让医生隐约看到",
+          "effect": "你在医生拿东西时轻轻分开腿，让他隐约看到你没穿内裤。",
+          "status_update": "暴露度55% 羞耻感45% 兴奋度60%",
+          "next_branch": "dental_hospital_5"
+        }
+      ]
+    },
+    {
+      "branch_id": "dental_hospital_5",
+      "chapter": "牙科医院暴露 - 朋友在医院内探索",
+      "scene_detail": "你的朋友趁前台不注意去没人的地方溜达，寻找机会暴露。",
+      "choices": [
+        {
+          "id": "choice_dental_5_1",
+          "choice": "1. 朋友在没人的诊室脱光",
+          "effect": "朋友找到一间没锁门的诊室，在里面脱光衣服叉开腿躺在治疗椅上。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "dental_hospital_6"
+        }
+      ]
+    },
+    {
+      "branch_id": "dental_hospital_6",
+      "chapter": "牙科医院暴露 - 洗牙后的暴露",
+      "scene_detail": "洗完牙后，你把朋友叫进来，继续赖在牙椅上跟医生聊天。朋友背对着医生和护士脱下裤子露出臀部。",
+      "choices": [
+        {
+          "id": "choice_dental_6_1",
+          "choice": "1. 朋友背对医生露出臀部",
+          "effect": "朋友长时间暴露臀部，让屁股充分暴露在空气中。",
+          "status_update": "暴露度70% 羞耻感60% 兴奋度75%",
+          "next_branch": "dental_hospital_7"
+        }
+      ]
+    },
+    {
+      "branch_id": "dental_hospital_7",
+      "chapter": "牙科医院暴露 - 前台缴费时的暴露",
+      "scene_detail": "到前台缴费时，你去交钱，朋友站在后面。朋友悄悄拉开你的拉链，你叉开腿假装捡东西把鸡鸡暴露在空气中。",
+      "choices": [
+        {
+          "id": "choice_dental_7_1",
+          "choice": "1. 在前台缴费时暴露鸡鸡",
+          "effect": "你巧妙地在缴费时暴露，时间越长说明技术越高超。",
+          "status_update": "暴露度80% 羞耻感70% 兴奋度85%",
+          "next_branch": "dental_hospital_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "dental_hospital_complete",
+      "chapter": "牙科医院暴露挑战完成",
+      "scene_detail": "离开医院后，你们找一个人少的地方，一起脱下裤子撅起屁股嘲讽这家医院，再背对着露出两颗大肉蛋合影留念。",
+      "choices": [
+        {
+          "id": "choice_dental_complete_1",
+          "choice": "1. 在医院外完成最后的暴露",
+          "effect": "你们成功完成了所有步骤，没有被发现和制止。",
+          "status_update": "暴露度100% 羞耻感90% 兴奋度95% 任务完成数+1",
+          "next_branch": "task_selection"
+        },
+        {
+          "id": "choice_dental_complete_2",
+          "choice": "2. 重新挑战其他场景",
+          "effect": "选择其他暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "all_scenes_overview"
+        }
+      ]
+    },
+    {
+      "branch_id": "mall_exposure_detailed",
+      "chapter": "商场露出任务 - 长款外套下的暴露冒险",
+      "scene_detail": "商场露出的详细暴露挑战，包含10个具体任务步骤：\n\n1. 选择人流量适中的大型商场\n2. 穿着长款外套，里面真空状态\n3. 外套只扣最上面的扣子，下面敞开\n4. 在商场内走动，让外套随风飘动\n5. 故意在电梯口停留，让上下电梯的人看到\n6. 在休息区坐下，调整姿势让外套敞开更多\n7. 假装购物，在货架间弯腰展示\n8. 与店员互动，享受被发现的快感\n9. 完成购物后，在商场外停留片刻\n10. 记录感受，准备下一次挑战",
+      "choices": [
+        {
+          "id": "choice_mall_1",
+          "choice": "1. 开始商场露出挑战",
+          "effect": "你进入商场，开始按照10个步骤进行暴露挑战。",
+          "status_update": "暴露度20% 羞耻感15% 兴奋度25%",
+          "next_branch": "mall_exposure_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "mall_exposure_step2",
+      "chapter": "商场露出 - 步骤2：准备暴露",
+      "scene_detail": "你穿着长款外套进入商场，外套只扣最上面的扣子，下面敞开。真空状态让你感到既紧张又兴奋。",
+      "choices": [
+        {
+          "id": "choice_mall_2_1",
+          "choice": "1. 正常走动，让外套自然飘动",
+          "effect": "你正常走动，让外套随风自然飘动。",
+          "status_update": "暴露度30% 羞耻感20% 兴奋度35%",
+          "next_branch": "mall_exposure_step3"
+        },
+        {
+          "id": "choice_mall_2_2",
+          "choice": "2. 故意加快步伐，让外套更明显",
+          "effect": "你故意加快步伐，让外套飘动更加明显。",
+          "status_update": "暴露度35% 羞耻感25% 兴奋度40%",
+          "next_branch": "mall_exposure_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "mall_exposure_step3",
+      "chapter": "商场露出 - 步骤3：电梯口暴露",
+      "scene_detail": "你在电梯口停留，上下电梯的人们注意到你的异常。外套的飘动让他们隐约看到你的真空状态。",
+      "choices": [
+        {
+          "id": "choice_mall_3_1",
+          "choice": "1. 短暂停留后离开",
+          "effect": "你短暂停留后离开，但内心已经充满刺激。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度50%",
+          "next_branch": "mall_exposure_step4"
+        },
+        {
+          "id": "choice_mall_3_2",
+          "choice": "2. 故意延长停留时间",
+          "effect": "你故意延长停留时间，让更多人注意到你的异常。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "mall_exposure_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "mall_exposure_step4",
+      "chapter": "商场露出 - 步骤4：休息区暴露",
+      "scene_detail": "你在休息区坐下，调整姿势让外套敞开更多。这种在公共场合的暴露让你鸡巴微微发硬。",
+      "choices": [
+        {
+          "id": "choice_mall_4_1",
+          "choice": "1. 短暂休息后继续",
+          "effect": "你短暂休息后继续挑战。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "mall_exposure_complete"
+        },
+        {
+          "id": "choice_mall_4_2",
+          "choice": "2. 延长休息时间，增加暴露",
+          "effect": "你延长休息时间，让更多人有机会看到你的异常。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "mall_exposure_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "mall_exposure_complete",
+      "chapter": "商场露出挑战完成",
+      "scene_detail": "你成功完成了商场露出挑战，这种在人群中的暴露体验让你既兴奋又满足。整理好外套后，你带着这种刺激感离开商场。",
+      "choices": [
+        {
+          "id": "choice_mall_complete_1",
+          "choice": "1. 继续挑战其他公共场所场景",
+          "effect": "选择其他公共场所暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "public_places_scenes"
+        },
+        {
+          "id": "choice_mall_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "day_cinema_detailed",
+      "chapter": "白天影院任务 - 白天的影院暴露冒险",
+      "scene_detail": "白天影院的详细暴露挑战，包含12个具体任务步骤：\n\n1. 选择工作日的白天场次，观众稀少\n2. 穿着宽松的裤子，里面真空状态\n3. 选择后排靠边的座位\n4. 电影开始后，悄悄拉开拉链\n5. 让鸡巴暴露在空气中，感受影院的冷气\n6. 观察周围观众的反应\n7. 如果被发现，装作若无其事\n8. 电影高潮时，故意调整姿势\n9. 让更多人有机会看到你的异常\n10. 电影结束后，最后一个离开\n11. 在影厅内停留片刻，享受暴露的快感\n12. 记录感受，准备下一次挑战",
+      "choices": [
+        {
+          "id": "choice_day_cinema_1",
+          "choice": "1. 开始白天影院挑战",
+          "effect": "你进入影院，开始按照12个步骤进行暴露挑战。",
+          "status_update": "暴露度20% 羞耻感15% 兴奋度25%",
+          "next_branch": "day_cinema_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "day_cinema_step2",
+      "chapter": "白天影院 - 步骤2：选择座位",
+      "scene_detail": "你选择后排靠边的座位，这里相对隐蔽但仍有被发现的机会。电影即将开始，你感到既紧张又兴奋。",
+      "choices": [
+        {
+          "id": "choice_day_cinema_2_1",
+          "choice": "1. 选择最角落的座位",
+          "effect": "你选择了最角落的座位，这里最隐蔽。",
+          "status_update": "暴露度25% 羞耻感18% 兴奋度30%",
+          "next_branch": "day_cinema_step3"
+        },
+        {
+          "id": "choice_day_cinema_2_2",
+          "choice": "2. 选择中间靠边的座位",
+          "effect": "你选择了中间靠边的座位，这里更容易被发现。",
+          "status_update": "暴露度30% 羞耻感20% 兴奋度35%",
+          "next_branch": "day_cinema_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "day_cinema_step3",
+      "chapter": "白天影院 - 步骤3：开始暴露",
+      "scene_detail": "电影开始后，你悄悄拉开拉链，让鸡巴暴露在空气中。影院的冷气让你感到既刺激又兴奋。",
+      "choices": [
+        {
+          "id": "choice_day_cinema_3_1",
+          "choice": "1. 慢慢拉开拉链",
+          "effect": "你慢慢拉开拉链，享受这种渐进式的暴露。",
+          "status_update": "暴露度40% 羞耻感30% 兴奋度45%",
+          "next_branch": "day_cinema_step4"
+        },
+        {
+          "id": "choice_day_cinema_3_2",
+          "choice": "2. 直接完全拉开",
+          "effect": "你直接完全拉开拉链，追求更强烈的刺激。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度50%",
+          "next_branch": "day_cinema_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "day_cinema_step4",
+      "chapter": "白天影院 - 步骤4：观察反应",
+      "scene_detail": "你观察周围观众的反应，如果有人注意到你的异常，你装作若无其事。这种被发现的快感让你鸡巴更加硬挺。",
+      "choices": [
+        {
+          "id": "choice_day_cinema_4_1",
+          "choice": "1. 保持姿势，继续观察",
+          "effect": "你保持姿势，继续观察周围观众的反应。",
+          "status_update": "暴露度55% 羞耻感45% 兴奋度60%",
+          "next_branch": "day_cinema_complete"
+        },
+        {
+          "id": "choice_day_cinema_4_2",
+          "choice": "2. 调整姿势，增加暴露",
+          "effect": "你调整姿势，让暴露更加明显。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "day_cinema_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "day_cinema_complete",
+      "chapter": "白天影院挑战完成",
+      "scene_detail": "你成功完成了白天影院挑战，这种在黑暗环境中的暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开影院。",
+      "choices": [
+        {
+          "id": "choice_day_cinema_complete_1",
+          "choice": "1. 继续挑战其他公共场所场景",
+          "effect": "选择其他公共场所暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "public_places_scenes"
+        },
+        {
+          "id": "choice_day_cinema_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "night_cinema_detailed",
+      "chapter": "晚上影院任务 - 夜间的影院暴露冒险",
+      "scene_detail": "晚上影院的详细暴露挑战，包含12个具体任务步骤：\n\n1. 选择周末的晚上场次，观众较多但光线较暗\n2. 穿着宽松的短裤，里面真空状态\n3. 选择中间位置的座位，便于被周围人发现\n4. 电影开始后，悄悄将短裤拉到大腿根部\n5. 让鸡巴完全暴露在空气中，感受影院的氛围\n6. 观察前后左右观众的反应\n7. 如果被发现，装作若无其事继续观影\n8. 电影高潮时，故意调整坐姿增加暴露\n9. 让更多人有机会看到你的异常\n10. 电影结束后，最后一个离开影厅\n11. 在影厅内停留片刻，享受暴露的快感\n12. 记录感受，准备下一次挑战",
+      "choices": [
+        {
+          "id": "choice_night_cinema_1",
+          "choice": "1. 开始晚上影院挑战",
+          "effect": "你进入影院，开始按照12个步骤进行暴露挑战。",
+          "status_update": "暴露度20% 羞耻感15% 兴奋度25%",
+          "next_branch": "night_cinema_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "night_cinema_step2",
+      "chapter": "晚上影院 - 步骤2：选择座位",
+      "scene_detail": "你选择中间位置的座位，这里光线较暗但观众较多，便于被发现。电影即将开始，你感到既紧张又兴奋。",
+      "choices": [
+        {
+          "id": "choice_night_cinema_2_1",
+          "choice": "1. 选择正中间的座位",
+          "effect": "你选择了正中间的座位，这里最容易被周围人发现。",
+          "status_update": "暴露度25% 羞耻感18% 兴奋度30%",
+          "next_branch": "night_cinema_step3"
+        },
+        {
+          "id": "choice_night_cinema_2_2",
+          "choice": "2. 选择靠边的中间座位",
+          "effect": "你选择了靠边的中间座位，这里相对隐蔽但仍有被发现的机会。",
+          "status_update": "暴露度30% 羞耻感20% 兴奋度35%",
+          "next_branch": "night_cinema_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "night_cinema_step3",
+      "chapter": "晚上影院 - 步骤3：开始暴露",
+      "scene_detail": "电影开始后，你悄悄将短裤拉到大腿根部，让鸡巴完全暴露在空气中。影院的黑暗环境让你感到既刺激又兴奋。",
+      "choices": [
+        {
+          "id": "choice_night_cinema_3_1",
+          "choice": "1. 慢慢拉下短裤",
+          "effect": "你慢慢拉下短裤，享受这种渐进式的暴露。",
+          "status_update": "暴露度40% 羞耻感30% 兴奋度45%",
+          "next_branch": "night_cinema_step4"
+        },
+        {
+          "id": "choice_night_cinema_3_2",
+          "choice": "2. 直接完全拉下",
+          "effect": "你直接完全拉下短裤，追求更强烈的刺激。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度50%",
+          "next_branch": "night_cinema_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "night_cinema_step4",
+      "chapter": "晚上影院 - 步骤4：观察反应",
+      "scene_detail": "你观察周围观众的反应，如果有人注意到你的异常，你装作若无其事。这种被发现的快感让你鸡巴更加硬挺。",
+      "choices": [
+        {
+          "id": "choice_night_cinema_4_1",
+          "choice": "1. 保持姿势，继续观察",
+          "effect": "你保持姿势，继续观察周围观众的反应。",
+          "status_update": "暴露度55% 羞耻感45% 兴奋度60%",
+          "next_branch": "night_cinema_complete"
+        },
+        {
+          "id": "choice_night_cinema_4_2",
+          "choice": "2. 调整姿势，增加暴露",
+          "effect": "你调整姿势，让暴露更加明显。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "night_cinema_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "night_cinema_complete",
+      "chapter": "晚上影院挑战完成",
+      "scene_detail": "你成功完成了晚上影院挑战，这种在黑暗环境中的暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开影院。",
+      "choices": [
+        {
+          "id": "choice_night_cinema_complete_1",
+          "choice": "1. 继续挑战其他公共场所场景",
+          "effect": "选择其他公共场所暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "public_places_scenes"
+        },
+        {
+          "id": "choice_night_cinema_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "night_adventure_scenes",
+      "chapter": "夜间冒险类 - 10个暴露挑战",
+      "scene_detail": "夜色掩护下的暴露冒险，更加刺激。这里有深夜广场、楼道、便利店等多种场景，每个场景都充满了夜色的神秘感。",
+      "choices": [
+        {
+          "id": "choice_night_1",
+          "choice": "1. 午夜便利店任务 - 跳蛋震动下的购物冒险",
+          "effect": "凌晨便利店中，在跳蛋震动下完成购物挑战，体验双重刺激的暴露快感。",
+          "status_update": "暴露度+15% 羞耻感+12% 兴奋度+18%",
+          "next_branch": "midnight_convenience_detailed"
+        },
+        {
+          "id": "choice_night_2",
+          "choice": "2. 深夜广场任务 - 广场脱衣的极限挑战",
+          "effect": "深夜广场中，进行脱衣游戏的极限暴露挑战，体验被发现的刺激快感。",
+          "status_update": "暴露度+18% 羞耻感+15% 兴奋度+22%",
+          "next_branch": "late_night_square_detailed"
+        },
+        {
+          "id": "choice_night_3",
+          "choice": "3. 深夜楼道任务 - 高层赤裸行走的详细极限挑战",
+          "effect": "10层以上的楼道中，赤裸行走的详细极限暴露挑战，包含12个具体步骤。",
+          "status_update": "暴露度+18% 羞耻感+15% 兴奋度+22%",
+          "next_branch": "late_night_stairwell_detailed"
+        },
+        {
+          "id": "choice_night_4",
+          "choice": "4. 深夜网吧任务 - 游戏中的详细暴露",
+          "effect": "深夜网吧，游戏失败后的详细惩罚，包含10个具体步骤。",
+          "status_update": "暴露度+11% 羞耻感+9% 兴奋度+15%",
+          "next_branch": "late_night_internet_cafe_detailed"
+        },
+        {
+          "id": "choice_night_5",
+          "choice": "5. 夜晚暴露小任务 - 简化的夜间详细冒险",
+          "effect": "夜晚的简化详细暴露挑战，包含8个具体步骤。",
+          "status_update": "暴露度+9% 羞耻感+7% 兴奋度+13%",
+          "next_branch": "night_small_tasks_detailed"
+        },
+        {
+          "id": "choice_night_6",
+          "choice": "6. 夜晚家中窗口露出 - 家中的详细冒险",
+          "effect": "家中窗口的详细暴露体验，包含10个具体步骤。",
+          "status_update": "暴露度+8% 羞耻感+6% 兴奋度+12%",
+          "next_branch": "night_home_window_detailed"
+        },
+        {
+          "id": "choice_night_7",
+          "choice": "7. 凌晨极限行动任务 - 凌晨的详细冒险",
+          "effect": "凌晨时分的详细极限暴露，包含12个具体步骤。",
+          "status_update": "暴露度+13% 羞耻感+11% 兴奋度+18%",
+          "next_branch": "early_morning_extreme_detailed"
+        },
+        {
+          "id": "choice_night_8",
+          "choice": "8. 楼道扑克牌任务 - 扑克牌的详细游戏",
+          "effect": "楼道中的详细扑克牌暴露游戏，包含10个具体步骤。",
+          "status_update": "暴露度+10% 羞耻感+8% 兴奋度+14%",
+          "next_branch": "hallway_poker_detailed"
+        },
+        {
+          "id": "choice_night_9",
+          "choice": "9. 楼梯间任务 - 楼梯间的详细冒险",
+          "effect": "楼梯间中的详细暴露挑战，包含10个具体步骤。",
+          "status_update": "暴露度+9% 羞耻感+7% 兴奋度+13%",
+          "next_branch": "staircase_detailed"
+        },
+        {
+          "id": "choice_night_10",
+          "choice": "10. 返回场景总览",
+          "effect": "浏览其他类型的场景。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "all_scenes_overview"
+        }
+      ]
+    },
+    {
+      "branch_id": "special_environment_scenes",
+      "chapter": "特殊环境类 - 8个暴露挑战",
+      "scene_detail": "特殊环境中的暴露体验，别具一格。这里有酒店、浴池、KTV等多种场景，每个环境都有独特的刺激感。",
+      "choices": [
+        {
+          "id": "choice_special_1",
+          "choice": "1. 酒店任务 - 走廊房间的暴露体验",
+          "effect": "酒店的走廊和房间，完美的暴露环境。",
+          "status_update": "暴露度+10% 羞耻感+8% 兴奋度+15%",
+          "next_branch": "hotel_main"
+        },
+        {
+          "id": "choice_special_2",
+          "choice": "2. 浴池任务 - 公共浴室的展示",
+          "effect": "浴池中的暴露体验，在公共浴室中体验被陌生人发现的刺激。",
+          "status_update": "暴露度+9% 羞耻感+7% 兴奋度+13%",
+          "next_branch": "hotel_main"
+        },
+        {
+          "id": "choice_special_3",
+          "choice": "3. KTV任务 - KTV中的冒险",
+          "effect": "KTV环境中的暴露挑战，在KTV中体验被朋友发现的快感。",
+          "status_update": "暴露度+11% 羞耻感+9% 兴奋度+16%",
+          "next_branch": "hotel_main"
+        },
+        {
+          "id": "choice_special_4",
+          "choice": "4. 滴滴任务 - 出租车中的暴露",
+          "effect": "出租车中的暴露体验，在出租车中体验被司机发现的刺激。",
+          "status_update": "暴露度+8% 羞耻感+6% 兴奋度+12%",
+          "next_branch": "hotel_main"
+        },
+        {
+          "id": "choice_special_5",
+          "choice": "5. 机场飞机暴露任务 - 机场的冒险",
+          "effect": "机场和飞机上的暴露挑战，在机场中体验被旅客发现的快感。",
+          "status_update": "暴露度+12% 羞耻感+10% 兴奋度+18%",
+          "next_branch": "hotel_main"
+        },
+        {
+          "id": "choice_special_6",
+          "choice": "6. 电影院扑克牌任务 - 影院的详细扑克游戏",
+          "effect": "电影院中的详细扑克牌暴露游戏，包含10个具体步骤。",
+          "status_update": "暴露度+11% 羞耻感+9% 兴奋度+15%",
+          "next_branch": "cinema_poker_detailed"
+        },
+        {
+          "id": "choice_special_7",
+          "choice": "7. 羞辱类任务合集 - 羞辱的体验",
+          "effect": "羞辱类的暴露挑战合集，体验各种羞辱场景的刺激。",
+          "status_update": "暴露度+10% 羞耻感+8% 兴奋度+15%",
+          "next_branch": "hotel_main"
+        },
+        {
+          "id": "choice_special_8",
+          "choice": "8. 返回场景总览",
+          "effect": "浏览其他类型的场景。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "all_scenes_overview"
+        }
+      ]
+    },
+    {
+      "branch_id": "midnight_convenience_detailed",
+      "chapter": "午夜便利店任务 - 跳蛋震动下的购物冒险",
+      "scene_detail": "午夜便利店的详细暴露挑战，包含10个具体任务步骤：\n\n1. 选择凌晨1-3点的24小时便利店，店内顾客稀少\n2. 穿着宽松的运动裤，里面真空状态\n3. 将跳蛋放入体内，调整到中等震动强度\n4. 进入便利店，假装正常购物\n5. 在货架间走动，让跳蛋的震动影响你的步伐\n6. 故意在收银台前停留，让店员注意到你的异常\n7. 购买商品时，手部因震动而颤抖\n8. 与店员对视，享受被发现的快感\n9. 完成购物后，在店外停留片刻\n10. 记录感受，准备下一次挑战",
+      "choices": [
+        {
+          "id": "choice_midnight_conv_1",
+          "choice": "1. 开始午夜便利店挑战",
+          "effect": "你进入便利店，开始按照10个步骤进行暴露挑战。",
+          "status_update": "暴露度20% 羞耻感15% 兴奋度25%",
+          "next_branch": "midnight_convenience_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "midnight_convenience_step2",
+      "chapter": "午夜便利店 - 步骤2：准备跳蛋",
+      "scene_detail": "你将跳蛋放入体内，调整到中等震动强度。这种双重刺激让你既紧张又兴奋，鸡巴在运动裤下微微发硬。",
+      "choices": [
+        {
+          "id": "choice_midnight_conv_2_1",
+          "choice": "1. 调整到中等震动强度",
+          "effect": "你选择中等震动强度，既能感受到刺激又不会太明显。",
+          "status_update": "暴露度30% 羞耻感20% 兴奋度35%",
+          "next_branch": "midnight_convenience_step3"
+        },
+        {
+          "id": "choice_midnight_conv_2_2",
+          "choice": "2. 调整到高强度震动",
+          "effect": "你选择高强度震动，追求更强烈的刺激感。",
+          "status_update": "暴露度35% 羞耻感25% 兴奋度40%",
+          "next_branch": "midnight_convenience_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "midnight_convenience_step3",
+      "chapter": "午夜便利店 - 步骤3：进入便利店",
+      "scene_detail": "你进入便利店，跳蛋的震动让你步伐不稳。店员注意到你的异常，你开始假装正常购物。",
+      "choices": [
+        {
+          "id": "choice_midnight_conv_3_1",
+          "choice": "1. 正常购物，尽量掩饰异常",
+          "effect": "你尽量保持正常，但跳蛋的震动让你难以掩饰。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度50%",
+          "next_branch": "midnight_convenience_step4"
+        },
+        {
+          "id": "choice_midnight_conv_3_2",
+          "choice": "2. 故意表现出异常",
+          "effect": "你故意表现出异常，享受被发现的快感。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "midnight_convenience_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "midnight_convenience_step4",
+      "chapter": "午夜便利店 - 步骤4：与店员互动",
+      "scene_detail": "你在收银台前停留，跳蛋的震动让你手部颤抖。店员注意到你的异常，你与他对视，享受这种被发现的刺激。",
+      "choices": [
+        {
+          "id": "choice_midnight_conv_4_1",
+          "choice": "1. 快速结账离开",
+          "effect": "你快速结账离开，但内心已经充满刺激。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "midnight_convenience_complete"
+        },
+        {
+          "id": "choice_midnight_conv_4_2",
+          "choice": "2. 故意拖延时间",
+          "effect": "你故意拖延时间，让店员更清楚地注意到你的异常。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "midnight_convenience_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "midnight_convenience_complete",
+      "chapter": "午夜便利店挑战完成",
+      "scene_detail": "你成功完成了午夜便利店挑战，这种在公共场合的暴露体验让你既兴奋又满足。跳蛋的震动还在持续，你带着这种刺激感离开便利店。",
+      "choices": [
+        {
+          "id": "choice_midnight_conv_complete_1",
+          "choice": "1. 继续挑战其他夜间场景",
+          "effect": "选择其他夜间暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "night_adventure_scenes"
+        },
+        {
+          "id": "choice_midnight_conv_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "late_night_square_detailed",
+      "chapter": "深夜广场任务 - 广场脱衣的极限挑战",
+      "scene_detail": "深夜广场的详细暴露挑战，包含12个具体任务步骤：\n\n1. 选择深夜11点后的广场，确保人流量稀少\n2. 穿着运动服，里面真空状态\n3. 推着购物车来到广场中心\n4. 脱下上衣放在购物车上\n5. 脱下裤子，完全赤裸地站在广场上\n6. 在广场中心停留3分钟，感受夜风\n7. 走向公厕，进入隔间但不关门\n8. 闭眼计时60秒，感受公厕的寂静\n9. 如果时间不足60秒，接受惩罚任务\n10. 在广场内找三棵树木，面朝马路打开闪光灯自拍\n11. 完成所有步骤后，整理衣物离开\n12. 记录感受，准备下一次挑战",
+      "choices": [
+        {
+          "id": "choice_square_1",
+          "choice": "1. 开始深夜广场挑战",
+          "effect": "你来到广场，开始按照12个步骤进行极限暴露挑战。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "late_night_square_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "late_night_square_step2",
+      "chapter": "深夜广场 - 步骤2：准备脱衣",
+      "scene_detail": "你推着购物车来到广场中心，准备开始脱衣。深夜的广场寂静无人，只有远处偶尔传来的车声。",
+      "choices": [
+        {
+          "id": "choice_square_2_1",
+          "choice": "1. 先脱下上衣",
+          "effect": "你脱下上衣放在购物车上，上半身暴露在夜风中。",
+          "status_update": "暴露度35% 羞耻感25% 兴奋度40%",
+          "next_branch": "late_night_square_step3"
+        },
+        {
+          "id": "choice_square_2_2",
+          "choice": "2. 直接开始脱裤子",
+          "effect": "你直接开始脱裤子，追求更强烈的刺激感。",
+          "status_update": "暴露度40% 羞耻感30% 兴奋度45%",
+          "next_branch": "late_night_square_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "late_night_square_step3",
+      "chapter": "深夜广场 - 步骤3：完全赤裸",
+      "scene_detail": "你完全赤裸地站在广场中心，夜风吹拂着你的身体。鸡巴在兴奋中完全硬挺，在空气中微微颤抖。",
+      "choices": [
+        {
+          "id": "choice_square_3_1",
+          "choice": "1. 在广场中心停留3分钟",
+          "effect": "你按照要求停留3分钟，感受这种极限暴露的快感。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "late_night_square_step4"
+        },
+        {
+          "id": "choice_square_3_2",
+          "choice": "2. 延长停留时间到5分钟",
+          "effect": "你决定延长停留时间，追求更强烈的刺激。",
+          "status_update": "暴露度55% 羞耻感45% 兴奋度60%",
+          "next_branch": "late_night_square_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "late_night_square_step4",
+      "chapter": "深夜广场 - 步骤4：公厕挑战",
+      "scene_detail": "你赤裸地走向公厕，进入隔间后不关门。这种在公共场合赤裸的感觉让你鸡巴硬得发痛。",
+      "choices": [
+        {
+          "id": "choice_square_4_1",
+          "choice": "1. 完成60秒计时",
+          "effect": "你闭眼计时，感受着公厕的寂静。60秒后你睁眼，鸡巴已经完全硬挺。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "late_night_square_complete"
+        },
+        {
+          "id": "choice_square_4_2",
+          "choice": "2. 时间不足60秒，接受惩罚",
+          "effect": "你没能坚持60秒，现在要在广场内找三棵树木，面朝马路打开闪光灯自拍。",
+          "status_update": "暴露度70% 羞耻感60% 兴奋度75%",
+          "next_branch": "late_night_square_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "late_night_square_complete",
+      "chapter": "深夜广场挑战完成",
+      "scene_detail": "你成功完成了深夜广场挑战，这种在公共场合的极限暴露体验让你既羞耻又兴奋。整理好衣物后，你带着这种刺激感离开广场。",
+      "choices": [
+        {
+          "id": "choice_square_complete_1",
+          "choice": "1. 继续挑战其他夜间场景",
+          "effect": "选择其他夜间暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "night_adventure_scenes"
+        },
+        {
+          "id": "choice_square_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "outdoor_adventure_scenes",
+      "chapter": "户外冒险类 - 7个暴露挑战",
+      "scene_detail": "大自然中的暴露挑战，回归原始。这里有野外、海边、树林等多种环境，每个环境都充满了自然的野性。",
+      "choices": [
+        {
+          "id": "choice_outdoor_1",
+          "choice": "1. 野外任务 - 商业楼楼梯的冒险",
+          "effect": "野外环境中的暴露挑战。",
+          "status_update": "暴露度+11% 羞耻感+9% 兴奋度+16%",
+          "next_branch": "wilderness_main"
+        },
+        {
+          "id": "choice_outdoor_2",
+          "choice": "2. 海边暴露小任务 - 海边的冒险",
+          "effect": "海边环境中的暴露体验。",
+          "status_update": "暴露度+10% 羞耻感+8% 兴奋度+15%",
+          "next_branch": "beach_exposure_main"
+        },
+        {
+          "id": "choice_outdoor_3",
+          "choice": "3. 树林任务 - 树林中的冒险",
+          "effect": "树林环境中的暴露挑战。",
+          "status_update": "暴露度+9% 羞耻感+7% 兴奋度+13%",
+          "next_branch": "forest_main"
+        },
+        {
+          "id": "choice_outdoor_4",
+          "choice": "4. 雨天户外任务 - 雨天的冒险",
+          "effect": "雨天环境中的暴露体验。",
+          "status_update": "暴露度+8% 羞耻感+6% 兴奋度+12%",
+          "next_branch": "rainy_outdoor_main"
+        },
+        {
+          "id": "choice_outdoor_5",
+          "choice": "5. 马路任务 - 马路上的冒险",
+          "effect": "马路环境中的暴露挑战。",
+          "status_update": "暴露度+12% 羞耻感+10% 兴奋度+18%",
+          "next_branch": "road_main"
+        },
+        {
+          "id": "choice_outdoor_6",
+          "choice": "6. 公厕任务 - 公厕中的冒险",
+          "effect": "公厕环境中的暴露体验。",
+          "status_update": "暴露度+9% 羞耻感+7% 兴奋度+13%",
+          "next_branch": "public_toilet_main"
+        },
+        {
+          "id": "choice_outdoor_7",
+          "choice": "7. 返回场景总览",
+          "effect": "浏览其他类型的场景。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "all_scenes_overview"
+        }
+      ]
+    },
+    {
+      "branch_id": "daily_life_scenes",
+      "chapter": "日常生活类 - 8个暴露挑战",
+      "scene_detail": "日常生活中的暴露，融入日常的刺激。这里有小区、家中、工作日等多种场景，让暴露成为生活的一部分。",
+      "choices": [
+        {
+          "id": "choice_daily_1",
+          "choice": "1. 小区半夜任务 - 半夜的冒险",
+          "effect": "小区环境中的暴露挑战。",
+          "status_update": "暴露度+8% 羞耻感+6% 兴奋度+12%",
+          "next_branch": "community_night_main"
+        },
+        {
+          "id": "choice_daily_2",
+          "choice": "2. 小区电梯骰子任务 - 电梯中的游戏",
+          "effect": "小区电梯中的暴露游戏。",
+          "status_update": "暴露度+7% 羞耻感+5% 兴奋度+11%",
+          "next_branch": "elevator_dice_main"
+        },
+        {
+          "id": "choice_daily_3",
+          "choice": "3. 社畜工作日的一日任务 - 工作日的冒险",
+          "effect": "工作日中的暴露挑战。",
+          "status_update": "暴露度+9% 羞耻感+7% 兴奋度+13%",
+          "next_branch": "workday_main"
+        },
+        {
+          "id": "choice_daily_4",
+          "choice": "4. 曝光奴的一日任务 - 一整天的冒险",
+          "effect": "一整天的暴露挑战。",
+          "status_update": "暴露度+10% 羞耻感+8% 兴奋度+15%",
+          "next_branch": "exposure_slave_day_main"
+        },
+        {
+          "id": "choice_daily_5",
+          "choice": "5. 入门级任务 - 初学者的冒险",
+          "effect": "适合初学者的暴露挑战。",
+          "status_update": "暴露度+6% 羞耻感+4% 兴奋度+10%",
+          "next_branch": "beginner_main"
+        },
+        {
+          "id": "choice_daily_6",
+          "choice": "6. 露出任务(初级版) - 简化的暴露挑战",
+          "effect": "简化的暴露挑战。",
+          "status_update": "暴露度+7% 羞耻感+5% 兴奋度+11%",
+          "next_branch": "exposure_beginner_main"
+        },
+        {
+          "id": "choice_daily_7",
+          "choice": "7. 勾引暴露 - 勾引中的冒险",
+          "effect": "勾引过程中的暴露挑战。",
+          "status_update": "暴露度+8% 羞耻感+6% 兴奋度+12%",
+          "next_branch": "seduction_exposure_main"
+        },
+        {
+          "id": "choice_daily_8",
+          "choice": "8. 返回场景总览",
+          "effect": "浏览其他类型的场景。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "all_scenes_overview"
+        }
+      ]
+    },
+    {
+      "branch_id": "additional_scenes",
+      "chapter": "其他特殊场景 - 8个暴露挑战",
+      "scene_detail": "其他特殊场景的暴露挑战，包括随机跟踪、多人集体任务等。",
+      "choices": [
+        {
+          "id": "choice_additional_1",
+          "choice": "1. 四任务三难度 - 多种难度的挑战",
+          "effect": "多种难度的暴露挑战。",
+          "status_update": "暴露度+9% 羞耻感+7% 兴奋度+13%",
+          "next_branch": "four_tasks_three_difficulties_main"
+        },
+        {
+          "id": "choice_additional_2",
+          "choice": "2. 随机跟踪随机任务 - 随机的冒险",
+          "effect": "随机跟踪中的暴露挑战。",
+          "status_update": "暴露度+10% 羞耻感+8% 兴奋度+15%",
+          "next_branch": "random_tracking_main"
+        },
+        {
+          "id": "choice_additional_3",
+          "choice": "3. 停车场骰子任务 - 停车场的游戏",
+          "effect": "停车场中的骰子暴露游戏。",
+          "status_update": "暴露度+8% 羞耻感+6% 兴奋度+12%",
+          "next_branch": "parking_lot_dice_main"
+        },
+        {
+          "id": "choice_additional_4",
+          "choice": "4. 大学生基础暴露任务 - 基础暴露挑战",
+          "effect": "大学生的基础暴露挑战。",
+          "status_update": "暴露度+7% 羞耻感+5% 兴奋度+11%",
+          "next_branch": "college_basic_exposure_main"
+        },
+        {
+          "id": "choice_additional_5",
+          "choice": "5. 多人集体任务 - 多人参与的冒险",
+          "effect": "多人参与的暴露挑战。",
+          "status_update": "暴露度+11% 羞耻感+9% 兴奋度+16%",
+          "next_branch": "multiplayer_tasks_main"
+        },
+        {
+          "id": "choice_additional_6",
+          "choice": "6. 随机跟踪随机任务 - 随机的冒险",
+          "effect": "随机跟踪中的暴露挑战。",
+          "status_update": "暴露度+10% 羞耻感+8% 兴奋度+15%",
+          "next_branch": "random_tracking_2_main"
+        },
+        {
+          "id": "choice_additional_7",
+          "choice": "7. 停车场骰子任务 - 停车场的游戏",
+          "effect": "停车场中的骰子暴露游戏。",
+          "status_update": "暴露度+8% 羞耻感+6% 兴奋度+12%",
+          "next_branch": "parking_lot_dice_2_main"
+        },
+        {
+          "id": "choice_additional_8",
+          "choice": "8. 返回场景总览",
+          "effect": "浏览其他类型的场景。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "all_scenes_overview"
+        }
+      ]
+    },
+    {
+      "branch_id": "cinema_advanced_detailed",
+      "chapter": "影院任务进阶版 - 更高级的影院暴露挑战",
+      "scene_detail": "影院暴露的进阶版本，包含更多刺激和风险的挑战。详细任务步骤：\n\n1. 选择周末的黄金时段，观众爆满的影院\n2. 穿着紧身牛仔裤，里面真空状态\n3. 选择前排正中间的座位，便于被后排观众发现\n4. 电影开始前，在座位上调整姿势，让鸡巴轮廓明显\n5. 电影开始后，悄悄解开牛仔裤的扣子\n6. 慢慢拉下拉链，让鸡巴部分暴露\n7. 观察后排观众的反应，享受被发现的快感\n8. 电影高潮时，故意弯腰捡东西，增加暴露程度\n9. 让更多观众有机会看到你的异常\n10. 电影结束后，最后一个离开影厅\n11. 在影厅内停留片刻，享受暴露的快感\n12. 记录感受，准备下一次挑战",
+      "choices": [
+        {
+          "id": "choice_cinema_advanced_1",
+          "choice": "1. 开始影院进阶挑战",
+          "effect": "你进入影院，开始按照12个步骤进行进阶暴露挑战。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "cinema_advanced_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "cinema_advanced_step2",
+      "chapter": "影院进阶版 - 步骤2：选择座位",
+      "scene_detail": "你选择前排正中间的座位，这里最容易被后排观众发现。影院内座无虚席，观众们都在期待电影的开始。",
+      "choices": [
+        {
+          "id": "choice_cinema_advanced_2_1",
+          "choice": "1. 选择前排正中间的座位",
+          "effect": "你选择了前排正中间的座位，这里最容易被后排观众发现。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "cinema_advanced_step3"
+        },
+        {
+          "id": "choice_cinema_advanced_2_2",
+          "choice": "2. 选择前排靠边的座位",
+          "effect": "你选择了前排靠边的座位，这里相对隐蔽但仍有被发现的机会。",
+          "status_update": "暴露度35% 羞耻感30% 兴奋度40%",
+          "next_branch": "cinema_advanced_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "cinema_advanced_step3",
+      "chapter": "影院进阶版 - 步骤3：开始暴露",
+      "scene_detail": "电影开始前，你在座位上调整姿势，让紧身牛仔裤下的鸡巴轮廓更加明显。影院内灯光渐暗，你的心跳开始加速。",
+      "choices": [
+        {
+          "id": "choice_cinema_advanced_3_1",
+          "choice": "1. 慢慢调整姿势，让轮廓更明显",
+          "effect": "你慢慢调整姿势，让紧身牛仔裤下的鸡巴轮廓更加明显。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度50%",
+          "next_branch": "cinema_advanced_step4"
+        },
+        {
+          "id": "choice_cinema_advanced_3_2",
+          "choice": "2. 直接解开扣子，开始暴露",
+          "effect": "你直接解开牛仔裤的扣子，开始暴露。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "cinema_advanced_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "cinema_advanced_step4",
+      "chapter": "影院进阶版 - 步骤4：拉下拉链",
+      "scene_detail": "电影开始后，你悄悄拉下拉链，让鸡巴部分暴露。影院内光线昏暗，但你的异常行为还是可能被后排观众发现。",
+      "choices": [
+        {
+          "id": "choice_cinema_advanced_4_1",
+          "choice": "1. 慢慢拉下拉链，享受渐进式暴露",
+          "effect": "你慢慢拉下拉链，享受这种渐进式的暴露快感。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "cinema_advanced_complete"
+        },
+        {
+          "id": "choice_cinema_advanced_4_2",
+          "choice": "2. 快速拉下，追求更强烈的刺激",
+          "effect": "你快速拉下拉链，追求更强烈的刺激。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "cinema_advanced_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "cinema_advanced_complete",
+      "chapter": "影院进阶挑战完成",
+      "scene_detail": "你成功完成了影院进阶挑战，这种在爆满影院中的暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开影院。",
+      "choices": [
+        {
+          "id": "choice_cinema_advanced_complete_1",
+          "choice": "1. 继续挑战其他公共场所场景",
+          "effect": "选择其他公共场所暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "public_places_scenes"
+        },
+        {
+          "id": "choice_cinema_advanced_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "gym_detailed",
+      "chapter": "健身房任务 - 健身房的详细暴露挑战",
+      "scene_detail": "健身房的详细暴露挑战，包含12个具体任务步骤：\n\n1. 选择人流量适中的健身房，避开高峰时段\n2. 穿着紧身运动裤，里面真空状态\n3. 选择靠近镜子的器械区域，便于被他人看到\n4. 开始热身运动，让鸡巴轮廓更加明显\n5. 在器械区进行训练，故意调整姿势增加暴露\n6. 在镜子前停留，观察自己的暴露状态\n7. 与其他健身者互动，享受被发现的快感\n8. 在更衣室换衣服时，故意拖延时间\n9. 在淋浴间停留，增加暴露的机会\n10. 完成训练后，在休息区停留片刻\n11. 记录感受，准备下一次挑战\n12. 整理衣物，带着刺激感离开健身房",
+      "choices": [
+        {
+          "id": "choice_gym_1",
+          "choice": "1. 开始健身房暴露挑战",
+          "effect": "你进入健身房，开始按照12个步骤进行暴露挑战。",
+          "status_update": "暴露度20% 羞耻感15% 兴奋度25%",
+          "next_branch": "gym_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "gym_step2",
+      "chapter": "健身房挑战 - 步骤2：选择器械区域",
+      "scene_detail": "你选择靠近镜子的器械区域，这里光线充足且便于被他人看到。健身房内其他人在专注训练，而你却要在运动中体验暴露的快感。",
+      "choices": [
+        {
+          "id": "choice_gym_2_1",
+          "choice": "1. 选择靠近镜子的器械区域",
+          "effect": "你选择了靠近镜子的器械区域，这里最容易被他人看到。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "gym_step3"
+        },
+        {
+          "id": "choice_gym_2_2",
+          "choice": "2. 选择角落的器械区域",
+          "effect": "你选择了角落的器械区域，这里相对隐蔽但仍有被发现的机会。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "gym_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "gym_step3",
+      "chapter": "健身房挑战 - 步骤3：开始热身运动",
+      "scene_detail": "你开始热身运动，紧身运动裤下的鸡巴轮廓在运动中更加明显。你感到既紧张又兴奋，期待着被他人发现。",
+      "choices": [
+        {
+          "id": "choice_gym_3_1",
+          "choice": "1. 慢慢热身，让轮廓逐渐明显",
+          "effect": "你慢慢热身，让紧身运动裤下的鸡巴轮廓逐渐明显。",
+          "status_update": "暴露度40% 羞耻感30% 兴奋度45%",
+          "next_branch": "gym_step4"
+        },
+        {
+          "id": "choice_gym_3_2",
+          "choice": "2. 快速热身，追求更强烈的刺激",
+          "effect": "你快速热身，追求更强烈的刺激。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度50%",
+          "next_branch": "gym_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "gym_step4",
+      "chapter": "健身房挑战 - 步骤4：器械训练",
+      "scene_detail": "你开始器械训练，故意调整姿势让暴露更加明显。健身房内有人注意到了你的异常，他们的目光让你感到既羞耻又兴奋。",
+      "choices": [
+        {
+          "id": "choice_gym_4_1",
+          "choice": "1. 保持正常训练姿势",
+          "effect": "你保持正常训练姿势，但内心早已波涛汹涌。",
+          "status_update": "暴露度55% 羞耻感45% 兴奋度60%",
+          "next_branch": "gym_complete"
+        },
+        {
+          "id": "choice_gym_4_2",
+          "choice": "2. 故意调整姿势增加暴露",
+          "effect": "你故意调整姿势，让暴露更加明显。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "gym_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "gym_complete",
+      "chapter": "健身房挑战完成",
+      "scene_detail": "你成功完成了健身房暴露挑战，这种在运动环境中的暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开健身房。",
+      "choices": [
+        {
+          "id": "choice_gym_complete_1",
+          "choice": "1. 继续挑战其他公共场所场景",
+          "effect": "选择其他公共场所暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "public_places_scenes"
+        },
+        {
+          "id": "choice_gym_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "mall_random_detailed",
+      "chapter": "商场随机任务 - 随机的商场详细暴露冒险",
+      "scene_detail": "商场随机任务的详细暴露挑战，包含10个具体任务步骤：\n\n1. 选择大型购物中心，人流量适中\n2. 穿着宽松的裤子，里面真空状态\n3. 随机选择商场内的不同区域进行暴露\n4. 在电梯口停留，让上下电梯的人看到\n5. 在休息区坐下，调整姿势增加暴露\n6. 在试衣间附近走动，增加被发现的机会\n7. 与店员互动，享受被发现的快感\n8. 随机选择不同的楼层进行暴露\n9. 完成所有随机任务后，记录感受\n10. 整理衣物，带着刺激感离开商场",
+      "choices": [
+        {
+          "id": "choice_mall_random_1",
+          "choice": "1. 开始商场随机挑战",
+          "effect": "你进入商场，开始按照10个步骤进行随机暴露挑战。",
+          "status_update": "暴露度20% 羞耻感15% 兴奋度25%",
+          "next_branch": "mall_random_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "mall_random_step2",
+      "chapter": "商场随机挑战 - 步骤2：选择随机区域",
+      "scene_detail": "你随机选择商场内的不同区域进行暴露。商场内人来人往，你需要在人群中寻找合适的暴露机会。",
+      "choices": [
+        {
+          "id": "choice_mall_random_2_1",
+          "choice": "1. 选择电梯口区域",
+          "effect": "你选择了电梯口区域，这里人流量较大。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "mall_random_step3"
+        },
+        {
+          "id": "choice_mall_random_2_2",
+          "choice": "2. 选择休息区区域",
+          "effect": "你选择了休息区区域，这里相对安静但仍有被发现的机会。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "mall_random_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "mall_random_step3",
+      "chapter": "商场随机挑战 - 步骤3：开始暴露",
+      "scene_detail": "你在选择的区域开始暴露，宽松裤子下的鸡巴在兴奋中微微发硬。你需要在人群中寻找合适的暴露机会。",
+      "choices": [
+        {
+          "id": "choice_mall_random_3_1",
+          "choice": "1. 慢慢调整姿势，增加暴露",
+          "effect": "你慢慢调整姿势，让宽松裤子下的鸡巴轮廓更加明显。",
+          "status_update": "暴露度40% 羞耻感30% 兴奋度45%",
+          "next_branch": "mall_random_step4"
+        },
+        {
+          "id": "choice_mall_random_3_2",
+          "choice": "2. 直接开始暴露，追求刺激",
+          "effect": "你直接开始暴露，追求更强烈的刺激。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度50%",
+          "next_branch": "mall_random_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "mall_random_step4",
+      "chapter": "商场随机挑战 - 步骤4：与店员互动",
+      "scene_detail": "你与店员互动，享受被发现的快感。商场内有人注意到了你的异常，他们的目光让你感到既羞耻又兴奋。",
+      "choices": [
+        {
+          "id": "choice_mall_random_4_1",
+          "choice": "1. 保持正常互动",
+          "effect": "你保持正常互动，但内心早已波涛汹涌。",
+          "status_update": "暴露度55% 羞耻感45% 兴奋度60%",
+          "next_branch": "mall_random_complete"
+        },
+        {
+          "id": "choice_mall_random_4_2",
+          "choice": "2. 故意增加互动，让暴露更明显",
+          "effect": "你故意增加互动，让暴露更加明显。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "mall_random_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "mall_random_complete",
+      "chapter": "商场随机挑战完成",
+      "scene_detail": "你成功完成了商场随机暴露挑战，这种在随机环境中的暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开商场。",
+      "choices": [
+        {
+          "id": "choice_mall_random_complete_1",
+          "choice": "1. 继续挑战其他公共场所场景",
+          "effect": "选择其他公共场所暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "public_places_scenes"
+        },
+        {
+          "id": "choice_mall_random_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "bar_exposure_detailed",
+      "chapter": "酒吧暴露任务 - 酒吧中的详细暴露冒险",
+      "scene_detail": "酒吧暴露任务的详细挑战，包含12个具体任务步骤：\n\n1. 选择热闹的酒吧，避开周末高峰\n2. 穿着休闲裤，里面真空状态\n3. 选择吧台位置，便于被酒保和其他顾客看到\n4. 点一杯酒，慢慢调整姿势\n5. 在吧台前坐下，让鸡巴轮廓更加明显\n6. 与酒保聊天，享受被发现的快感\n7. 在酒吧内走动，寻找更多的暴露机会\n8. 在卫生间附近停留，增加被发现的机会\n9. 与其他顾客互动，观察他们的反应\n10. 完成所有任务后，记录感受\n11. 整理衣物，带着刺激感离开酒吧\n12. 准备下一次更高级的挑战",
+      "choices": [
+        {
+          "id": "choice_bar_exposure_1",
+          "choice": "1. 开始酒吧暴露挑战",
+          "effect": "你进入酒吧，开始按照12个步骤进行暴露挑战。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "bar_exposure_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "bar_exposure_step2",
+      "chapter": "酒吧挑战 - 步骤2：选择位置",
+      "scene_detail": "你选择吧台位置，这里最容易被酒保和其他顾客看到。酒吧内音乐轻缓，灯光昏暗，为你的暴露提供了完美的环境。",
+      "choices": [
+        {
+          "id": "choice_bar_exposure_2_1",
+          "choice": "1. 选择吧台位置",
+          "effect": "你选择了吧台位置，这里最容易被酒保和其他顾客看到。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "bar_exposure_step3"
+        },
+        {
+          "id": "choice_bar_exposure_2_2",
+          "choice": "2. 选择角落座位",
+          "effect": "你选择了角落座位，这里相对隐蔽但仍有被发现的机会。",
+          "status_update": "暴露度35% 羞耻感30% 兴奋度40%",
+          "next_branch": "bar_exposure_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "bar_exposure_step3",
+      "chapter": "酒吧挑战 - 步骤3：开始暴露",
+      "scene_detail": "你在吧台前坐下，休闲裤下的鸡巴在兴奋中微微发硬。你点了一杯酒，慢慢调整姿势，让暴露更加明显。",
+      "choices": [
+        {
+          "id": "choice_bar_exposure_3_1",
+          "choice": "1. 慢慢调整姿势，增加暴露",
+          "effect": "你慢慢调整姿势，让休闲裤下的鸡巴轮廓更加明显。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度50%",
+          "next_branch": "bar_exposure_step4"
+        },
+        {
+          "id": "choice_bar_exposure_3_2",
+          "choice": "2. 直接开始暴露，追求刺激",
+          "effect": "你直接开始暴露，追求更强烈的刺激。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "bar_exposure_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "bar_exposure_step4",
+      "chapter": "酒吧挑战 - 步骤4：与酒保互动",
+      "scene_detail": "你与酒保聊天，享受被发现的快感。酒吧内有人注意到了你的异常，他们的目光让你感到既羞耻又兴奋。",
+      "choices": [
+        {
+          "id": "choice_bar_exposure_4_1",
+          "choice": "1. 保持正常聊天",
+          "effect": "你保持正常聊天，但内心早已波涛汹涌。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "bar_exposure_complete"
+        },
+        {
+          "id": "choice_bar_exposure_4_2",
+          "choice": "2. 故意增加互动，让暴露更明显",
+          "effect": "你故意增加互动，让暴露更加明显。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "bar_exposure_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "bar_exposure_complete",
+      "chapter": "酒吧挑战完成",
+      "scene_detail": "你成功完成了酒吧暴露挑战，这种在酒吧环境中的暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开酒吧。",
+      "choices": [
+        {
+          "id": "choice_bar_exposure_complete_1",
+          "choice": "1. 继续挑战其他公共场所场景",
+          "effect": "选择其他公共场所暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "public_places_scenes"
+        },
+        {
+          "id": "choice_bar_exposure_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "sex_shop_detailed",
+      "chapter": "情趣店任务 - 情趣店的详细暴露冒险",
+      "scene_detail": "情趣店任务的详细挑战，包含12个具体任务步骤：\n\n1. 选择大型情趣用品店，避开高峰时段\n2. 穿着紧身裤，里面真空状态\n3. 选择店内最显眼的位置，便于被店员和其他顾客看到\n4. 慢慢浏览商品，调整姿势增加暴露\n5. 在镜子前停留，观察自己的暴露状态\n6. 与店员咨询商品，享受被发现的快感\n7. 在试衣间附近走动，增加被发现的机会\n8. 故意在敏感商品区域停留\n9. 与其他顾客互动，观察他们的反应\n10. 完成所有任务后，记录感受\n11. 整理衣物，带着刺激感离开情趣店\n12. 准备下一次更高级的挑战",
+      "choices": [
+        {
+          "id": "choice_sex_shop_1",
+          "choice": "1. 开始情趣店暴露挑战",
+          "effect": "你进入情趣店，开始按照12个步骤进行暴露挑战。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "sex_shop_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "sex_shop_step2",
+      "chapter": "情趣店挑战 - 步骤2：选择位置",
+      "scene_detail": "你选择店内最显眼的位置，这里最容易被店员和其他顾客看到。情趣店内灯光柔和，商品琳琅满目，为你的暴露提供了完美的环境。",
+      "choices": [
+        {
+          "id": "choice_sex_shop_2_1",
+          "choice": "1. 选择显眼位置",
+          "effect": "你选择了店内最显眼的位置，这里最容易被发现。",
+          "status_update": "暴露度35% 羞耻感30% 兴奋度40%",
+          "next_branch": "sex_shop_step3"
+        },
+        {
+          "id": "choice_sex_shop_2_2",
+          "choice": "2. 选择角落位置",
+          "effect": "你选择了角落位置，这里相对隐蔽但仍有被发现的机会。",
+          "status_update": "暴露度40% 羞耻感35% 兴奋度45%",
+          "next_branch": "sex_shop_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "sex_shop_step3",
+      "chapter": "情趣店挑战 - 步骤3：开始暴露",
+      "scene_detail": "你在店内浏览商品，紧身裤下的鸡巴在兴奋中微微发硬。你慢慢调整姿势，让暴露更加明显。",
+      "choices": [
+        {
+          "id": "choice_sex_shop_3_1",
+          "choice": "1. 慢慢调整姿势，增加暴露",
+          "effect": "你慢慢调整姿势，让紧身裤下的鸡巴轮廓更加明显。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "sex_shop_step4"
+        },
+        {
+          "id": "choice_sex_shop_3_2",
+          "choice": "2. 直接开始暴露，追求刺激",
+          "effect": "你直接开始暴露，追求更强烈的刺激。",
+          "status_update": "暴露度55% 羞耻感45% 兴奋度60%",
+          "next_branch": "sex_shop_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "sex_shop_step4",
+      "chapter": "情趣店挑战 - 步骤4：与店员互动",
+      "scene_detail": "你与店员咨询商品，享受被发现的快感。情趣店内有人注意到了你的异常，他们的目光让你感到既羞耻又兴奋。",
+      "choices": [
+        {
+          "id": "choice_sex_shop_4_1",
+          "choice": "1. 保持正常咨询",
+          "effect": "你保持正常咨询，但内心早已波涛汹涌。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "sex_shop_complete"
+        },
+        {
+          "id": "choice_sex_shop_4_2",
+          "choice": "2. 故意增加互动，让暴露更明显",
+          "effect": "你故意增加互动，让暴露更加明显。",
+          "status_update": "暴露度70% 羞耻感60% 兴奋度75%",
+          "next_branch": "sex_shop_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "sex_shop_complete",
+      "chapter": "情趣店挑战完成",
+      "scene_detail": "你成功完成了情趣店暴露挑战，这种在特殊环境中的暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开情趣店。",
+      "choices": [
+        {
+          "id": "choice_sex_shop_complete_1",
+          "choice": "1. 继续挑战其他公共场所场景",
+          "effect": "选择其他公共场所暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "public_places_scenes"
+        },
+        {
+          "id": "choice_sex_shop_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "supermarket_detailed",
+      "chapter": "超市暴露任务 - 超市中的详细暴露冒险",
+      "scene_detail": "超市暴露任务的详细挑战，包含12个具体任务步骤：\n\n1. 选择大型超市，避开周末高峰\n2. 穿着宽松运动裤，里面真空状态\n3. 选择人流量较大的区域，如生鲜区或收银台附近\n4. 推着购物车慢慢行走，调整姿势增加暴露\n5. 在货架前停留，假装挑选商品\n6. 弯腰拿低层商品，让暴露更加明显\n7. 与店员或其他顾客互动，享受被发现的快感\n8. 在试衣间或卫生间附近走动，增加被发现的机会\n9. 故意在人多的地方停留，观察他人反应\n10. 完成所有任务后，记录感受\n11. 整理衣物，带着刺激感离开超市\n12. 准备下一次更高级的挑战",
+      "choices": [
+        {
+          "id": "choice_supermarket_1",
+          "choice": "1. 开始超市暴露挑战",
+          "effect": "你进入超市，开始按照12个步骤进行暴露挑战。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "supermarket_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "supermarket_step2",
+      "chapter": "超市挑战 - 步骤2：选择区域",
+      "scene_detail": "你选择人流量较大的区域，如生鲜区或收银台附近。超市内顾客众多，你需要在人群中寻找合适的暴露机会。",
+      "choices": [
+        {
+          "id": "choice_supermarket_2_1",
+          "choice": "1. 选择生鲜区",
+          "effect": "你选择了生鲜区，这里人流量较大。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "supermarket_step3"
+        },
+        {
+          "id": "choice_supermarket_2_2",
+          "choice": "2. 选择收银台附近",
+          "effect": "你选择了收银台附近，这里相对隐蔽但仍有被发现的机会。",
+          "status_update": "暴露度35% 羞耻感30% 兴奋度40%",
+          "next_branch": "supermarket_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "supermarket_step3",
+      "chapter": "超市挑战 - 步骤3：开始暴露",
+      "scene_detail": "你推着购物车慢慢行走，宽松运动裤下的鸡巴在兴奋中微微发硬。你需要在人群中寻找合适的暴露机会。",
+      "choices": [
+        {
+          "id": "choice_supermarket_3_1",
+          "choice": "1. 慢慢调整姿势，增加暴露",
+          "effect": "你慢慢调整姿势，让宽松运动裤下的鸡巴轮廓更加明显。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度50%",
+          "next_branch": "supermarket_step4"
+        },
+        {
+          "id": "choice_supermarket_3_2",
+          "choice": "2. 直接开始暴露，追求刺激",
+          "effect": "你直接开始暴露，追求更强烈的刺激。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "supermarket_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "supermarket_step4",
+      "chapter": "超市挑战 - 步骤4：弯腰拿商品",
+      "scene_detail": "你弯腰拿低层商品，让暴露更加明显。超市内有人注意到了你的异常，他们的目光让你感到既羞耻又兴奋。",
+      "choices": [
+        {
+          "id": "choice_supermarket_4_1",
+          "choice": "1. 保持正常姿势",
+          "effect": "你保持正常姿势，但内心早已波涛汹涌。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "supermarket_complete"
+        },
+        {
+          "id": "choice_supermarket_4_2",
+          "choice": "2. 故意弯腰，让暴露更明显",
+          "effect": "你故意弯腰，让暴露更加明显。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "supermarket_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "supermarket_complete",
+      "chapter": "超市挑战完成",
+      "scene_detail": "你成功完成了超市暴露挑战，这种在日常生活环境中的暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开超市。",
+      "choices": [
+        {
+          "id": "choice_supermarket_complete_1",
+          "choice": "1. 继续挑战其他公共场所场景",
+          "effect": "选择其他公共场所暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "public_places_scenes"
+        },
+        {
+          "id": "choice_supermarket_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "mall_simple_detailed",
+      "chapter": "商场露出简单任务 - 简化的商场详细挑战",
+      "scene_detail": "商场露出简单任务的详细挑战，包含8个具体任务步骤：\n\n1. 选择小型商场，人流量较少\n2. 穿着普通休闲裤，里面真空状态\n3. 选择相对隐蔽的位置进行暴露\n4. 简单调整姿势，让鸡巴轮廓稍微明显\n5. 在商场内短暂停留\n6. 观察周围环境，确保安全\n7. 记录感受，准备离开\n8. 整理衣物，安全离开商场",
+      "choices": [
+        {
+          "id": "choice_mall_simple_1",
+          "choice": "1. 开始商场简单挑战",
+          "effect": "你进入商场，开始按照8个步骤进行简单暴露挑战。",
+          "status_update": "暴露度15% 羞耻感10% 兴奋度20%",
+          "next_branch": "mall_simple_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "mall_simple_step2",
+      "chapter": "商场简单挑战 - 步骤2：选择位置",
+      "scene_detail": "你选择相对隐蔽的位置，这里人流量较少，适合初学者进行暴露体验。商场内环境安静，让你感到相对安全。",
+      "choices": [
+        {
+          "id": "choice_mall_simple_2_1",
+          "choice": "1. 选择角落位置",
+          "effect": "你选择了角落位置，这里相对隐蔽。",
+          "status_update": "暴露度20% 羞耻感15% 兴奋度25%",
+          "next_branch": "mall_simple_step3"
+        },
+        {
+          "id": "choice_mall_simple_2_2",
+          "choice": "2. 选择休息区",
+          "effect": "你选择了休息区，这里相对安静。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "mall_simple_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "mall_simple_step3",
+      "chapter": "商场简单挑战 - 步骤3：开始暴露",
+      "scene_detail": "你在选择的位置开始简单暴露，休闲裤下的鸡巴在兴奋中微微发硬。你保持低调，确保安全。",
+      "choices": [
+        {
+          "id": "choice_mall_simple_3_1",
+          "choice": "1. 轻微调整姿势",
+          "effect": "你轻微调整姿势，让暴露程度适中。",
+          "status_update": "暴露度35% 羞耻感25% 兴奋度40%",
+          "next_branch": "mall_simple_complete"
+        },
+        {
+          "id": "choice_mall_simple_3_2",
+          "choice": "2. 保持正常姿势",
+          "effect": "你保持正常姿势，体验简单的暴露感。",
+          "status_update": "暴露度30% 羞耻感20% 兴奋度35%",
+          "next_branch": "mall_simple_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "mall_simple_complete",
+      "chapter": "商场简单挑战完成",
+      "scene_detail": "你成功完成了商场简单暴露挑战，这种初级的暴露体验让你既兴奋又安全。整理好衣物后，你带着这种刺激感离开商场。",
+      "choices": [
+        {
+          "id": "choice_mall_simple_complete_1",
+          "choice": "1. 继续挑战其他公共场所场景",
+          "effect": "选择其他公共场所暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "public_places_scenes"
+        },
+        {
+          "id": "choice_mall_simple_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "cinema_poker_detailed",
+      "chapter": "电影院扑克牌任务 - 影院的详细扑克游戏",
+      "scene_detail": "电影院扑克牌任务的详细挑战，包含10个具体任务步骤：\n\n1. 选择人流量适中的影院，避开周末高峰\n2. 穿着紧身牛仔裤，里面真空状态\n3. 准备一副扑克牌，用于游戏规则\n4. 选择后排座位，便于观察他人\n5. 电影开始前，抽一张扑克牌决定暴露程度\n6. 根据抽到的牌面，调整暴露姿势\n7. 电影进行中，每隔一段时间抽牌调整\n8. 观察周围观众的反应，享受游戏快感\n9. 电影结束后，记录游戏结果和感受\n10. 整理衣物，带着刺激感离开影院",
+      "choices": [
+        {
+          "id": "choice_cinema_poker_1",
+          "choice": "1. 开始电影院扑克牌挑战",
+          "effect": "你进入影院，开始按照10个步骤进行扑克牌暴露游戏。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "cinema_poker_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "cinema_poker_step2",
+      "chapter": "扑克牌挑战 - 步骤2：抽牌决定",
+      "scene_detail": "你抽一张扑克牌，根据牌面决定暴露程度。影院内灯光渐暗，你的心跳开始加速。",
+      "choices": [
+        {
+          "id": "choice_cinema_poker_2_1",
+          "choice": "1. 抽到红心牌 - 轻度暴露",
+          "effect": "你抽到红心牌，进行轻度暴露。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "cinema_poker_step3"
+        },
+        {
+          "id": "choice_cinema_poker_2_2",
+          "choice": "2. 抽到黑桃牌 - 中度暴露",
+          "effect": "你抽到黑桃牌，进行中度暴露。",
+          "status_update": "暴露度35% 羞耻感30% 兴奋度40%",
+          "next_branch": "cinema_poker_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "cinema_poker_step3",
+      "chapter": "扑克牌挑战 - 步骤3：调整姿势",
+      "scene_detail": "你根据抽到的牌面调整姿势，紧身牛仔裤下的鸡巴在兴奋中微微发硬。影院内有人注意到了你的异常。",
+      "choices": [
+        {
+          "id": "choice_cinema_poker_3_1",
+          "choice": "1. 轻微调整姿势",
+          "effect": "你轻微调整姿势，让暴露程度适中。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度50%",
+          "next_branch": "cinema_poker_step4"
+        },
+        {
+          "id": "choice_cinema_poker_3_2",
+          "choice": "2. 明显调整姿势",
+          "effect": "你明显调整姿势，追求更强烈的刺激。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "cinema_poker_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "cinema_poker_step4",
+      "chapter": "扑克牌挑战 - 步骤4：再次抽牌",
+      "scene_detail": "电影进行中，你再次抽牌调整暴露程度。这种随机性的游戏让你感到既紧张又兴奋。",
+      "choices": [
+        {
+          "id": "choice_cinema_poker_4_1",
+          "choice": "1. 抽到方块牌 - 保持现状",
+          "effect": "你抽到方块牌，保持现有暴露程度。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "cinema_poker_complete"
+        },
+        {
+          "id": "choice_cinema_poker_4_2",
+          "choice": "2. 抽到梅花牌 - 增加暴露",
+          "effect": "你抽到梅花牌，增加暴露程度。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "cinema_poker_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "cinema_poker_complete",
+      "chapter": "扑克牌挑战完成",
+      "scene_detail": "你成功完成了电影院扑克牌挑战，这种随机性的暴露游戏让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开影院。",
+      "choices": [
+        {
+          "id": "choice_cinema_poker_complete_1",
+          "choice": "1. 继续挑战其他特殊场景",
+          "effect": "选择其他特殊暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "special_scenes"
+        },
+        {
+          "id": "choice_cinema_poker_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "late_night_stairwell_detailed",
+      "chapter": "深夜楼道任务 - 高层赤裸行走的详细极限挑战",
+      "scene_detail": "深夜楼道任务的详细极限挑战，包含12个具体任务步骤：\n\n1. 选择10层以上的高层住宅楼，深夜时段进行\n2. 完全赤裸状态，不携带任何衣物\n3. 从顶层开始，逐层向下行走\n4. 在楼道中保持正常行走速度\n5. 遇到灯光时，保持镇定继续前行\n6. 听到声音时，适当躲避或继续前进\n7. 在楼梯转角处停留片刻，观察环境\n8. 遇到电梯时，选择走楼梯继续\n9. 完成所有楼层后，记录感受\n10. 在底层停留片刻，享受极限快感\n11. 安全离开大楼，整理衣物\n12. 准备下一次更高级的挑战",
+      "choices": [
+        {
+          "id": "choice_stairwell_1",
+          "choice": "1. 开始深夜楼道极限挑战",
+          "effect": "你进入高层住宅楼，开始按照12个步骤进行极限暴露挑战。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "stairwell_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "stairwell_step2",
+      "chapter": "楼道挑战 - 步骤2：选择楼层",
+      "scene_detail": "你选择10层以上的高层住宅楼，从顶层开始逐层向下行走。楼道内灯光昏暗，寂静无声，你的心跳开始加速。",
+      "choices": [
+        {
+          "id": "choice_stairwell_2_1",
+          "choice": "1. 选择15层楼",
+          "effect": "你选择了15层楼，挑战难度较高。",
+          "status_update": "暴露度35% 羞耻感30% 兴奋度40%",
+          "next_branch": "stairwell_step3"
+        },
+        {
+          "id": "choice_stairwell_2_2",
+          "choice": "2. 选择12层楼",
+          "effect": "你选择了12层楼，挑战难度适中。",
+          "status_update": "暴露度40% 羞耻感35% 兴奋度45%",
+          "next_branch": "stairwell_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "stairwell_step3",
+      "chapter": "楼道挑战 - 步骤3：开始行走",
+      "scene_detail": "你开始逐层向下行走，赤裸的身体在楼道中显得格外显眼。你保持镇定，继续前行。",
+      "choices": [
+        {
+          "id": "choice_stairwell_3_1",
+          "choice": "1. 正常速度行走",
+          "effect": "你保持正常速度行走，体验暴露的快感。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "stairwell_step4"
+        },
+        {
+          "id": "choice_stairwell_3_2",
+          "choice": "2. 快速行走",
+          "effect": "你快速行走，追求更强烈的刺激。",
+          "status_update": "暴露度55% 羞耻感45% 兴奋度60%",
+          "next_branch": "stairwell_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "stairwell_step4",
+      "chapter": "楼道挑战 - 步骤4：遇到灯光",
+      "scene_detail": "楼道中遇到灯光，你的赤裸身体在灯光下更加明显。你保持镇定，继续前行。",
+      "choices": [
+        {
+          "id": "choice_stairwell_4_1",
+          "choice": "1. 保持镇定继续前行",
+          "effect": "你保持镇定，继续在灯光下前行。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "stairwell_complete"
+        },
+        {
+          "id": "choice_stairwell_4_2",
+          "choice": "2. 短暂躲避后继续",
+          "effect": "你短暂躲避后，继续前行。",
+          "status_update": "暴露度70% 羞耻感60% 兴奋度75%",
+          "next_branch": "stairwell_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "stairwell_complete",
+      "chapter": "楼道挑战完成",
+      "scene_detail": "你成功完成了深夜楼道极限挑战，这种极限的暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开大楼。",
+      "choices": [
+        {
+          "id": "choice_stairwell_complete_1",
+          "choice": "1. 继续挑战其他深夜场景",
+          "effect": "选择其他深夜暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "night_scenes"
+        },
+        {
+          "id": "choice_stairwell_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "late_night_internet_cafe_detailed",
+      "chapter": "深夜网吧任务 - 游戏中的详细暴露",
+      "scene_detail": "深夜网吧任务的详细挑战，包含10个具体任务步骤：\n\n1. 选择深夜时段，人流量较少的网吧\n2. 穿着宽松运动裤，里面真空状态\n3. 选择靠近过道的位置，便于被他人看到\n4. 开始玩游戏，设定游戏失败惩罚规则\n5. 游戏失败后，按照规则进行暴露惩罚\n6. 在游戏过程中，调整姿势增加暴露\n7. 与其他玩家互动，享受被发现的快感\n8. 在卫生间附近走动，增加被发现的机会\n9. 完成所有游戏后，记录感受\n10. 整理衣物，带着刺激感离开网吧",
+      "choices": [
+        {
+          "id": "choice_internet_cafe_1",
+          "choice": "1. 开始深夜网吧挑战",
+          "effect": "你进入网吧，开始按照10个步骤进行游戏暴露挑战。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "internet_cafe_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "internet_cafe_step2",
+      "chapter": "网吧挑战 - 步骤2：选择位置",
+      "scene_detail": "你选择靠近过道的位置，这里最容易被其他玩家和网管看到。网吧内灯光昏暗，游戏声音此起彼伏。",
+      "choices": [
+        {
+          "id": "choice_internet_cafe_2_1",
+          "choice": "1. 选择过道位置",
+          "effect": "你选择了过道位置，这里最容易被发现。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "internet_cafe_step3"
+        },
+        {
+          "id": "choice_internet_cafe_2_2",
+          "choice": "2. 选择角落位置",
+          "effect": "你选择了角落位置，这里相对隐蔽但仍有被发现的机会。",
+          "status_update": "暴露度35% 羞耻感30% 兴奋度40%",
+          "next_branch": "internet_cafe_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "internet_cafe_step3",
+      "chapter": "网吧挑战 - 步骤3：开始游戏",
+      "scene_detail": "你开始玩游戏，设定游戏失败惩罚规则。宽松运动裤下的鸡巴在兴奋中微微发硬，你期待着游戏失败后的惩罚。",
+      "choices": [
+        {
+          "id": "choice_internet_cafe_3_1",
+          "choice": "1. 玩竞技游戏",
+          "effect": "你选择竞技游戏，失败概率较高。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度50%",
+          "next_branch": "internet_cafe_step4"
+        },
+        {
+          "id": "choice_internet_cafe_3_2",
+          "choice": "2. 玩休闲游戏",
+          "effect": "你选择休闲游戏，失败概率较低。",
+          "status_update": "暴露度40% 羞耻感30% 兴奋度45%",
+          "next_branch": "internet_cafe_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "internet_cafe_step4",
+      "chapter": "网吧挑战 - 步骤4：游戏失败惩罚",
+      "scene_detail": "游戏失败后，你按照规则进行暴露惩罚。网吧内有人注意到了你的异常，他们的目光让你感到既羞耻又兴奋。",
+      "choices": [
+        {
+          "id": "choice_internet_cafe_4_1",
+          "choice": "1. 轻微惩罚",
+          "effect": "你进行轻微惩罚，暴露程度适中。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "internet_cafe_complete"
+        },
+        {
+          "id": "choice_internet_cafe_4_2",
+          "choice": "2. 重度惩罚",
+          "effect": "你进行重度惩罚，追求更强烈的刺激。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "internet_cafe_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "internet_cafe_complete",
+      "chapter": "网吧挑战完成",
+      "scene_detail": "你成功完成了深夜网吧挑战，这种游戏化的暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开网吧。",
+      "choices": [
+        {
+          "id": "choice_internet_cafe_complete_1",
+          "choice": "1. 继续挑战其他深夜场景",
+          "effect": "选择其他深夜暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "night_scenes"
+        },
+        {
+          "id": "choice_internet_cafe_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "night_small_tasks_detailed",
+      "chapter": "夜晚暴露小任务 - 简化的夜间详细冒险",
+      "scene_detail": "夜晚暴露小任务的详细挑战，包含8个具体任务步骤：\n\n1. 选择夜晚时段，人流量较少的街道\n2. 穿着普通休闲裤，里面真空状态\n3. 选择相对隐蔽的位置进行暴露\n4. 简单调整姿势，让鸡巴轮廓稍微明显\n5. 在街道上短暂停留\n6. 观察周围环境，确保安全\n7. 记录感受，准备离开\n8. 整理衣物，安全离开街道",
+      "choices": [
+        {
+          "id": "choice_night_small_1",
+          "choice": "1. 开始夜晚小任务挑战",
+          "effect": "你进入夜晚街道，开始按照8个步骤进行简化暴露挑战。",
+          "status_update": "暴露度15% 羞耻感10% 兴奋度20%",
+          "next_branch": "night_small_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "night_small_step2",
+      "chapter": "夜晚小任务 - 步骤2：选择位置",
+      "scene_detail": "你选择相对隐蔽的位置，这里人流量较少，适合初学者进行暴露体验。夜晚街道环境安静，让你感到相对安全。",
+      "choices": [
+        {
+          "id": "choice_night_small_2_1",
+          "choice": "1. 选择小巷位置",
+          "effect": "你选择了小巷位置，这里相对隐蔽。",
+          "status_update": "暴露度20% 羞耻感15% 兴奋度25%",
+          "next_branch": "night_small_step3"
+        },
+        {
+          "id": "choice_night_small_2_2",
+          "choice": "2. 选择公园附近",
+          "effect": "你选择了公园附近，这里相对安静。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "night_small_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "night_small_step3",
+      "chapter": "夜晚小任务 - 步骤3：开始暴露",
+      "scene_detail": "你在选择的位置开始简单暴露，休闲裤下的鸡巴在兴奋中微微发硬。你保持低调，确保安全。",
+      "choices": [
+        {
+          "id": "choice_night_small_3_1",
+          "choice": "1. 轻微调整姿势",
+          "effect": "你轻微调整姿势，让暴露程度适中。",
+          "status_update": "暴露度35% 羞耻感25% 兴奋度40%",
+          "next_branch": "night_small_complete"
+        },
+        {
+          "id": "choice_night_small_3_2",
+          "choice": "2. 保持正常姿势",
+          "effect": "你保持正常姿势，体验简单的暴露感。",
+          "status_update": "暴露度30% 羞耻感20% 兴奋度35%",
+          "next_branch": "night_small_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "night_small_complete",
+      "chapter": "夜晚小任务完成",
+      "scene_detail": "你成功完成了夜晚暴露小任务，这种初级的暴露体验让你既兴奋又安全。整理好衣物后，你带着这种刺激感离开街道。",
+      "choices": [
+        {
+          "id": "choice_night_small_complete_1",
+          "choice": "1. 继续挑战其他深夜场景",
+          "effect": "选择其他深夜暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "night_scenes"
+        },
+        {
+          "id": "choice_night_small_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "night_home_window_detailed",
+      "chapter": "夜晚家中窗口露出 - 家中的详细冒险",
+      "scene_detail": "夜晚家中窗口露出的详细挑战，包含10个具体任务步骤：\n\n1. 选择夜晚时段，确保邻居较少活动\n2. 完全赤裸状态，不携带任何衣物\n3. 选择面向街道的窗口，便于被他人看到\n4. 在窗口前站立，调整姿势增加暴露\n5. 观察街道上的行人反应\n6. 在窗口前停留一段时间，享受暴露快感\n7. 听到声音时，适当躲避或继续暴露\n8. 完成暴露后，记录感受\n9. 安全离开窗口，整理衣物\n10. 准备下一次更高级的挑战",
+      "choices": [
+        {
+          "id": "choice_home_window_1",
+          "choice": "1. 开始家中窗口挑战",
+          "effect": "你站在窗口前，开始按照10个步骤进行窗口暴露挑战。",
+          "status_update": "暴露度20% 羞耻感15% 兴奋度25%",
+          "next_branch": "home_window_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "home_window_step2",
+      "chapter": "窗口挑战 - 步骤2：选择窗口",
+      "scene_detail": "你选择面向街道的窗口，这里最容易被行人看到。夜晚街道灯光昏暗，你的赤裸身体在灯光下格外显眼。",
+      "choices": [
+        {
+          "id": "choice_home_window_2_1",
+          "choice": "1. 选择主卧窗口",
+          "effect": "你选择了主卧窗口，这里视野较好。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "home_window_step3"
+        },
+        {
+          "id": "choice_home_window_2_2",
+          "choice": "2. 选择客厅窗口",
+          "effect": "你选择了客厅窗口，这里相对隐蔽。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "home_window_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "home_window_step3",
+      "chapter": "窗口挑战 - 步骤3：开始暴露",
+      "scene_detail": "你在窗口前站立，赤裸的身体在灯光下显得格外显眼。你保持镇定，继续暴露。",
+      "choices": [
+        {
+          "id": "choice_home_window_3_1",
+          "choice": "1. 正常站立",
+          "effect": "你保持正常站立，体验暴露的快感。",
+          "status_update": "暴露度40% 羞耻感30% 兴奋度45%",
+          "next_branch": "home_window_step4"
+        },
+        {
+          "id": "choice_home_window_3_2",
+          "choice": "2. 调整姿势增加暴露",
+          "effect": "你调整姿势，让暴露更加明显。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度50%",
+          "next_branch": "home_window_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "home_window_step4",
+      "chapter": "窗口挑战 - 步骤4：观察反应",
+      "scene_detail": "你观察街道上的行人反应，赤裸的身体在灯光下更加明显。你保持镇定，继续暴露。",
+      "choices": [
+        {
+          "id": "choice_home_window_4_1",
+          "choice": "1. 保持暴露继续观察",
+          "effect": "你保持暴露，继续观察行人反应。",
+          "status_update": "暴露度55% 羞耻感45% 兴奋度60%",
+          "next_branch": "home_window_complete"
+        },
+        {
+          "id": "choice_home_window_4_2",
+          "choice": "2. 短暂躲避后继续",
+          "effect": "你短暂躲避后，继续暴露。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "home_window_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "home_window_complete",
+      "chapter": "窗口挑战完成",
+      "scene_detail": "你成功完成了夜晚家中窗口挑战，这种在安全环境中的暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开窗口。",
+      "choices": [
+        {
+          "id": "choice_home_window_complete_1",
+          "choice": "1. 继续挑战其他深夜场景",
+          "effect": "选择其他深夜暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "night_scenes"
+        },
+        {
+          "id": "choice_home_window_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "early_morning_extreme_detailed",
+      "chapter": "凌晨极限行动任务 - 凌晨的详细冒险",
+      "scene_detail": "凌晨极限行动任务的详细挑战，包含12个具体任务步骤：\n\n1. 选择凌晨3-5点时段，街道几乎无人\n2. 完全赤裸状态，不携带任何衣物\n3. 选择空旷的街道或广场进行暴露\n4. 在街道上正常行走，体验极限快感\n5. 遇到灯光时，保持镇定继续前行\n6. 听到声音时，适当躲避或继续前进\n7. 在空旷区域停留片刻，观察环境\n8. 完成所有行动后，记录感受\n9. 在安全地点停留，享受极限快感\n10. 安全离开街道，整理衣物\n11. 准备下一次更高级的挑战\n12. 确保安全第一，避免危险情况",
+      "choices": [
+        {
+          "id": "choice_early_morning_1",
+          "choice": "1. 开始凌晨极限挑战",
+          "effect": "你进入凌晨街道，开始按照12个步骤进行极限暴露挑战。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "early_morning_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "early_morning_step2",
+      "chapter": "凌晨挑战 - 步骤2：选择区域",
+      "scene_detail": "你选择空旷的街道或广场，这里几乎无人，适合进行极限暴露。凌晨时分寂静无声，你的心跳开始加速。",
+      "choices": [
+        {
+          "id": "choice_early_morning_2_1",
+          "choice": "1. 选择空旷广场",
+          "effect": "你选择了空旷广场，这里视野开阔。",
+          "status_update": "暴露度35% 羞耻感30% 兴奋度40%",
+          "next_branch": "early_morning_step3"
+        },
+        {
+          "id": "choice_early_morning_2_2",
+          "choice": "2. 选择安静街道",
+          "effect": "你选择了安静街道，这里相对隐蔽。",
+          "status_update": "暴露度40% 羞耻感35% 兴奋度45%",
+          "next_branch": "early_morning_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "early_morning_step3",
+      "chapter": "凌晨挑战 - 步骤3：开始行走",
+      "scene_detail": "你开始在街道上行走，赤裸的身体在凌晨的寂静中显得格外显眼。你保持镇定，继续前行。",
+      "choices": [
+        {
+          "id": "choice_early_morning_3_1",
+          "choice": "1. 正常速度行走",
+          "effect": "你保持正常速度行走，体验暴露的快感。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "early_morning_step4"
+        },
+        {
+          "id": "choice_early_morning_3_2",
+          "choice": "2. 快速行走",
+          "effect": "你快速行走，追求更强烈的刺激。",
+          "status_update": "暴露度55% 羞耻感45% 兴奋度60%",
+          "next_branch": "early_morning_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "early_morning_step4",
+      "chapter": "凌晨挑战 - 步骤4：遇到灯光",
+      "scene_detail": "街道中遇到灯光，你的赤裸身体在灯光下更加明显。你保持镇定，继续前行。",
+      "choices": [
+        {
+          "id": "choice_early_morning_4_1",
+          "choice": "1. 保持镇定继续前行",
+          "effect": "你保持镇定，继续在灯光下前行。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "early_morning_complete"
+        },
+        {
+          "id": "choice_early_morning_4_2",
+          "choice": "2. 短暂躲避后继续",
+          "effect": "你短暂躲避后，继续前行。",
+          "status_update": "暴露度70% 羞耻感60% 兴奋度75%",
+          "next_branch": "early_morning_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "early_morning_complete",
+      "chapter": "凌晨挑战完成",
+      "scene_detail": "你成功完成了凌晨极限行动挑战，这种极限的暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开街道。",
+      "choices": [
+        {
+          "id": "choice_early_morning_complete_1",
+          "choice": "1. 继续挑战其他深夜场景",
+          "effect": "选择其他深夜暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "night_scenes"
+        },
+        {
+          "id": "choice_early_morning_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "hallway_poker_detailed",
+      "chapter": "楼道扑克牌任务 - 扑克牌的详细游戏",
+      "scene_detail": "楼道扑克牌任务的详细挑战，包含10个具体任务步骤：\n\n1. 选择深夜时段，楼道几乎无人\n2. 穿着宽松运动裤，里面真空状态\n3. 准备一副扑克牌，用于游戏规则\n4. 选择楼道中间位置，便于观察环境\n5. 抽一张扑克牌决定暴露程度\n6. 根据抽到的牌面，调整暴露姿势\n7. 每隔一段时间抽牌调整暴露程度\n8. 观察楼道环境，享受游戏快感\n9. 完成所有游戏后，记录感受\n10. 整理衣物，带着刺激感离开楼道",
+      "choices": [
+        {
+          "id": "choice_hallway_poker_1",
+          "choice": "1. 开始楼道扑克牌挑战",
+          "effect": "你进入楼道，开始按照10个步骤进行扑克牌暴露游戏。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "hallway_poker_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "hallway_poker_step2",
+      "chapter": "楼道扑克牌挑战 - 步骤2：抽牌决定",
+      "scene_detail": "你抽一张扑克牌，根据牌面决定暴露程度。楼道内灯光昏暗，寂静无声，你的心跳开始加速。",
+      "choices": [
+        {
+          "id": "choice_hallway_poker_2_1",
+          "choice": "1. 抽到红心牌 - 轻度暴露",
+          "effect": "你抽到红心牌，进行轻度暴露。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "hallway_poker_step3"
+        },
+        {
+          "id": "choice_hallway_poker_2_2",
+          "choice": "2. 抽到黑桃牌 - 中度暴露",
+          "effect": "你抽到黑桃牌，进行中度暴露。",
+          "status_update": "暴露度35% 羞耻感30% 兴奋度40%",
+          "next_branch": "hallway_poker_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "hallway_poker_step3",
+      "chapter": "楼道扑克牌挑战 - 步骤3：调整姿势",
+      "scene_detail": "你根据抽到的牌面调整姿势，宽松运动裤下的鸡巴在兴奋中微微发硬。楼道内有人注意到了你的异常。",
+      "choices": [
+        {
+          "id": "choice_hallway_poker_3_1",
+          "choice": "1. 轻微调整姿势",
+          "effect": "你轻微调整姿势，让暴露程度适中。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度50%",
+          "next_branch": "hallway_poker_step4"
+        },
+        {
+          "id": "choice_hallway_poker_3_2",
+          "choice": "2. 明显调整姿势",
+          "effect": "你明显调整姿势，追求更强烈的刺激。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "hallway_poker_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "hallway_poker_step4",
+      "chapter": "楼道扑克牌挑战 - 步骤4：再次抽牌",
+      "scene_detail": "你在楼道中再次抽牌调整暴露程度。这种随机性的游戏让你感到既紧张又兴奋。",
+      "choices": [
+        {
+          "id": "choice_hallway_poker_4_1",
+          "choice": "1. 抽到方块牌 - 保持现状",
+          "effect": "你抽到方块牌，保持现有暴露程度。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "hallway_poker_complete"
+        },
+        {
+          "id": "choice_hallway_poker_4_2",
+          "choice": "2. 抽到梅花牌 - 增加暴露",
+          "effect": "你抽到梅花牌，增加暴露程度。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "hallway_poker_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "hallway_poker_complete",
+      "chapter": "楼道扑克牌挑战完成",
+      "scene_detail": "你成功完成了楼道扑克牌挑战，这种随机性的暴露游戏让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开楼道。",
+      "choices": [
+        {
+          "id": "choice_hallway_poker_complete_1",
+          "choice": "1. 继续挑战其他深夜场景",
+          "effect": "选择其他深夜暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "night_scenes"
+        },
+        {
+          "id": "choice_hallway_poker_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "staircase_detailed",
+      "chapter": "楼梯间任务 - 楼梯间的详细冒险",
+      "scene_detail": "楼梯间任务的详细挑战，包含10个具体任务步骤：\n\n1. 选择深夜时段，楼梯间几乎无人\n2. 穿着宽松运动裤，里面真空状态\n3. 选择楼梯间中间位置，便于观察环境\n4. 在楼梯间站立，调整姿势增加暴露\n5. 上下楼梯走动，体验暴露快感\n6. 在楼梯转角处停留片刻，观察环境\n7. 听到声音时，适当躲避或继续暴露\n8. 完成所有行动后，记录感受\n9. 安全离开楼梯间，整理衣物\n10. 准备下一次更高级的挑战",
+      "choices": [
+        {
+          "id": "choice_staircase_1",
+          "choice": "1. 开始楼梯间挑战",
+          "effect": "你进入楼梯间，开始按照10个步骤进行暴露挑战。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "staircase_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "staircase_step2",
+      "chapter": "楼梯间挑战 - 步骤2：选择位置",
+      "scene_detail": "你选择楼梯间中间位置，这里便于观察上下环境。楼梯间内灯光昏暗，寂静无声，你的心跳开始加速。",
+      "choices": [
+        {
+          "id": "choice_staircase_2_1",
+          "choice": "1. 选择中间位置",
+          "effect": "你选择了中间位置，这里视野较好。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "staircase_step3"
+        },
+        {
+          "id": "choice_staircase_2_2",
+          "choice": "2. 选择转角位置",
+          "effect": "你选择了转角位置，这里相对隐蔽。",
+          "status_update": "暴露度35% 羞耻感30% 兴奋度40%",
+          "next_branch": "staircase_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "staircase_step3",
+      "chapter": "楼梯间挑战 - 步骤3：开始暴露",
+      "scene_detail": "你在楼梯间站立，宽松运动裤下的鸡巴在兴奋中微微发硬。你开始上下楼梯走动，体验暴露的快感。",
+      "choices": [
+        {
+          "id": "choice_staircase_3_1",
+          "choice": "1. 正常速度走动",
+          "effect": "你保持正常速度走动，体验暴露的快感。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度50%",
+          "next_branch": "staircase_step4"
+        },
+        {
+          "id": "choice_staircase_3_2",
+          "choice": "2. 快速走动",
+          "effect": "你快速走动，追求更强烈的刺激。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "staircase_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "staircase_step4",
+      "chapter": "楼梯间挑战 - 步骤4：转角停留",
+      "scene_detail": "你在楼梯转角处停留片刻，观察上下环境。楼梯间内有人注意到了你的异常，他们的目光让你感到既羞耻又兴奋。",
+      "choices": [
+        {
+          "id": "choice_staircase_4_1",
+          "choice": "1. 短暂停留",
+          "effect": "你短暂停留，观察环境变化。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "staircase_complete"
+        },
+        {
+          "id": "choice_staircase_4_2",
+          "choice": "2. 延长停留时间",
+          "effect": "你延长停留时间，追求更强烈的刺激。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "staircase_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "staircase_complete",
+      "chapter": "楼梯间挑战完成",
+      "scene_detail": "你成功完成了楼梯间挑战，这种在楼梯环境中的暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开楼梯间。",
+      "choices": [
+        {
+          "id": "choice_staircase_complete_1",
+          "choice": "1. 继续挑战其他深夜场景",
+          "effect": "选择其他深夜暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "night_scenes"
+        },
+        {
+          "id": "choice_staircase_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "hallway_poker_complete",
+      "chapter": "楼道扑克牌挑战完成",
+      "scene_detail": "你成功完成了楼道扑克牌挑战，这种在楼道环境中的扑克暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开。",
+      "choices": [
+        {
+          "id": "choice_hallway_poker_complete_1",
+          "choice": "1. 继续挑战其他深夜场景",
+          "effect": "选择其他深夜暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "night_scenes"
+        },
+        {
+          "id": "choice_hallway_poker_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "staircase_detailed",
+      "chapter": "楼梯间任务 - 楼梯间的详细冒险",
+      "scene_detail": "楼梯间任务的详细挑战，包含10个具体任务步骤：\n\n1. 选择深夜时段，楼梯间几乎无人\n2. 穿着宽松运动裤，里面真空状态\n3. 选择楼梯间中间位置，便于观察环境\n4. 在楼梯间站立，调整姿势增加暴露\n5. 上下楼梯走动，体验暴露快感\n6. 在楼梯转角处停留，观察环境\n7. 听到声音时，适当躲避或继续暴露\n8. 完成所有行动后，记录感受\n9. 安全离开楼梯间，整理衣物\n10. 准备下一次更高级的挑战",
+      "choices": [
+        {
+          "id": "choice_staircase_1",
+          "choice": "1. 开始楼梯间挑战",
+          "effect": "你进入楼梯间，开始按照10个步骤进行暴露挑战。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "staircase_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "staircase_step2",
+      "chapter": "楼梯间挑战 - 步骤2：选择位置",
+      "scene_detail": "你选择楼梯间中间位置，这里视野较好，便于观察环境。楼梯间内灯光昏暗，寂静无声。",
+      "choices": [
+        {
+          "id": "choice_staircase_2_1",
+          "choice": "1. 选择中间位置",
+          "effect": "你选择了中间位置，这里视野较好。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "staircase_step3"
+        },
+        {
+          "id": "choice_staircase_2_2",
+          "choice": "2. 选择角落位置",
+          "effect": "你选择了角落位置，这里相对隐蔽。",
+          "status_update": "暴露度35% 羞耻感30% 兴奋度40%",
+          "next_branch": "staircase_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "staircase_step3",
+      "chapter": "楼梯间挑战 - 步骤3：开始暴露",
+      "scene_detail": "你在楼梯间站立，宽松运动裤下的鸡巴在兴奋中微微发硬。你保持镇定，继续暴露。",
+      "choices": [
+        {
+          "id": "choice_staircase_3_1",
+          "choice": "1. 正常站立",
+          "effect": "你保持正常站立，体验暴露的快感。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度50%",
+          "next_branch": "staircase_step4"
+        },
+        {
+          "id": "choice_staircase_3_2",
+          "choice": "2. 调整姿势增加暴露",
+          "effect": "你调整姿势，让暴露更加明显。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "staircase_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "staircase_step4",
+      "chapter": "楼梯间挑战 - 步骤4：上下楼梯",
+      "scene_detail": "你上下楼梯走动，体验暴露快感。楼梯间内有人注意到了你的异常，他们的目光让你感到既羞耻又兴奋。",
+      "choices": [
+        {
+          "id": "choice_staircase_4_1",
+          "choice": "1. 正常速度行走",
+          "effect": "你保持正常速度行走，体验暴露的快感。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "staircase_complete"
+        },
+        {
+          "id": "choice_staircase_4_2",
+          "choice": "2. 快速行走",
+          "effect": "你快速行走，追求更强烈的刺激。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "staircase_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "staircase_complete",
+      "chapter": "楼梯间挑战完成",
+      "scene_detail": "你成功完成了楼梯间挑战，这种在特殊环境中的暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开楼梯间。",
+      "choices": [
+        {
+          "id": "choice_staircase_complete_1",
+          "choice": "1. 继续挑战其他深夜场景",
+          "effect": "选择其他深夜暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "night_scenes"
+        },
+        {
+          "id": "choice_staircase_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "wilderness_main",
+      "chapter": "野外任务 - 商业楼楼梯的冒险",
+      "scene_detail": "野外任务的详细挑战，包含12个具体任务步骤：\n\n1. 选择商业楼楼梯处，二楼或三楼位置\n2. 穿着飞马加短裤，上半身穿黑色短袖\n3. 拍摄任务地点和穿着衣服的全身照\n4. 脱掉所有衣物，只剩鞋子\n5. 拍摄全身照，确保清晰可见\n6. 往上走四到五层，拍摄五种姿势照片\n7. 继续往上走，完成游戏惩罚任务\n8. 拍摄从当前楼层到衣服所在楼层的过程\n9. 拿上内裤，前往六楼打飞机并射在内裤上\n10. 继续往上走到十楼或更高位置\n11. 嘴里叼着内裤深蹲二十下\n12. 将内裤藏好，全裸回到衣服所在楼层",
+      "choices": [
+        {
+          "id": "choice_wilderness_1",
+          "choice": "1. 开始野外任务挑战",
+          "effect": "你来到商业楼楼梯处，开始按照12个步骤进行野外暴露挑战。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "wilderness_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "wilderness_step2",
+      "chapter": "野外挑战 - 步骤2：准备拍照",
+      "scene_detail": "你穿着飞马加短裤，上半身穿黑色短袖，拍摄任务地点和穿着衣服的全身照。商业楼楼梯处相对安静，你的心跳开始加速。",
+      "choices": [
+        {
+          "id": "choice_wilderness_2_1",
+          "choice": "1. 拍摄任务地点照片",
+          "effect": "你拍摄任务地点照片，记录环境。",
+          "status_update": "暴露度35% 羞耻感30% 兴奋度40%",
+          "next_branch": "wilderness_step3"
+        },
+        {
+          "id": "choice_wilderness_2_2",
+          "choice": "2. 拍摄穿着衣服的全身照",
+          "effect": "你拍摄穿着衣服的全身照，为后续对比做准备。",
+          "status_update": "暴露度40% 羞耻感35% 兴奋度45%",
+          "next_branch": "wilderness_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "wilderness_step3",
+      "chapter": "野外挑战 - 步骤3：开始脱衣",
+      "scene_detail": "你脱掉所有衣物，只剩鞋子，拍摄全身照。赤裸的身体在商业楼楼梯处显得格外显眼，你感到既紧张又兴奋。",
+      "choices": [
+        {
+          "id": "choice_wilderness_3_1",
+          "choice": "1. 慢慢脱衣",
+          "effect": "你慢慢脱衣，享受这种渐进式的暴露。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "wilderness_step4"
+        },
+        {
+          "id": "choice_wilderness_3_2",
+          "choice": "2. 快速脱衣",
+          "effect": "你快速脱衣，追求更强烈的刺激。",
+          "status_update": "暴露度55% 羞耻感45% 兴奋度60%",
+          "next_branch": "wilderness_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "wilderness_step4",
+      "chapter": "野外挑战 - 步骤4：往上行走",
+      "scene_detail": "你往上走四到五层，拍摄五种姿势照片。赤裸的身体在楼梯间走动，鸡巴在兴奋中完全硬挺。",
+      "choices": [
+        {
+          "id": "choice_wilderness_4_1",
+          "choice": "1. 正常速度行走",
+          "effect": "你保持正常速度行走，体验暴露的快感。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "wilderness_complete"
+        },
+        {
+          "id": "choice_wilderness_4_2",
+          "choice": "2. 快速行走",
+          "effect": "你快速行走，追求更强烈的刺激。",
+          "status_update": "暴露度70% 羞耻感60% 兴奋度75%",
+          "next_branch": "wilderness_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "wilderness_complete",
+      "chapter": "野外挑战完成",
+      "scene_detail": "你成功完成了野外任务挑战，这种在商业楼环境中的极限暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开。",
+      "choices": [
+        {
+          "id": "choice_wilderness_complete_1",
+          "choice": "1. 继续挑战其他户外场景",
+          "effect": "选择其他户外暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "outdoor_scenes"
+        },
+        {
+          "id": "choice_wilderness_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "beach_exposure_main",
+      "chapter": "海边暴露小任务 - 海边的冒险",
+      "scene_detail": "海边暴露小任务的详细挑战，包含10个具体任务步骤：\n\n1. 选择人流量较少的海边，避开高峰时段\n2. 穿着泳裤或短裤，里面真空状态\n3. 选择相对隐蔽的海滩位置\n4. 在海边站立，调整姿势增加暴露\n5. 在海水中走动，体验暴露快感\n6. 在沙滩上停留片刻，观察环境\n7. 听到声音时，适当躲避或继续暴露\n8. 完成所有行动后，记录感受\n9. 安全离开海边，整理衣物\n10. 准备下一次更高级的挑战",
+      "choices": [
+        {
+          "id": "choice_beach_1",
+          "choice": "1. 开始海边暴露挑战",
+          "effect": "你来到海边，开始按照10个步骤进行海边暴露挑战。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "beach_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "beach_step2",
+      "chapter": "海边挑战 - 步骤2：选择位置",
+      "scene_detail": "你选择相对隐蔽的海滩位置，这里人流量较少，适合进行暴露体验。海边环境开阔，海风轻拂。",
+      "choices": [
+        {
+          "id": "choice_beach_2_1",
+          "choice": "1. 选择沙滩位置",
+          "effect": "你选择了沙滩位置，这里视野开阔。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "beach_step3"
+        },
+        {
+          "id": "choice_beach_2_2",
+          "choice": "2. 选择礁石位置",
+          "effect": "你选择了礁石位置，这里相对隐蔽。",
+          "status_update": "暴露度35% 羞耻感30% 兴奋度40%",
+          "next_branch": "beach_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "beach_step3",
+      "chapter": "海边挑战 - 步骤3：开始暴露",
+      "scene_detail": "你在海边站立，泳裤或短裤下的鸡巴在兴奋中微微发硬。海风轻拂着你的身体，你开始体验暴露的快感。",
+      "choices": [
+        {
+          "id": "choice_beach_3_1",
+          "choice": "1. 正常站立",
+          "effect": "你保持正常站立，体验暴露的快感。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度50%",
+          "next_branch": "beach_step4"
+        },
+        {
+          "id": "choice_beach_3_2",
+          "choice": "2. 调整姿势增加暴露",
+          "effect": "你调整姿势，让暴露更加明显。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "beach_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "beach_step4",
+      "chapter": "海边挑战 - 步骤4：海水中走动",
+      "scene_detail": "你在海水中走动，体验暴露快感。海边有人注意到了你的异常，他们的目光让你感到既羞耻又兴奋。",
+      "choices": [
+        {
+          "id": "choice_beach_4_1",
+          "choice": "1. 正常速度走动",
+          "effect": "你保持正常速度走动，体验暴露的快感。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "beach_complete"
+        },
+        {
+          "id": "choice_beach_4_2",
+          "choice": "2. 快速走动",
+          "effect": "你快速走动，追求更强烈的刺激。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "beach_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "beach_complete",
+      "chapter": "海边挑战完成",
+      "scene_detail": "你成功完成了海边暴露挑战，这种在海边环境中的暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开海边。",
+      "choices": [
+        {
+          "id": "choice_beach_complete_1",
+          "choice": "1. 继续挑战其他户外场景",
+          "effect": "选择其他户外暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "outdoor_scenes"
+        },
+        {
+          "id": "choice_beach_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "forest_main",
+      "chapter": "树林任务 - 树林中的冒险",
+      "scene_detail": "树林任务的详细挑战，包含12个具体任务步骤：\n\n1. 选择人流量较少的树林，避开高峰时段\n2. 穿着宽松运动裤，里面真空状态\n3. 选择树林深处位置，便于隐蔽暴露\n4. 在树林中站立，调整姿势增加暴露\n5. 在树林中走动，体验暴露快感\n6. 在树木间停留片刻，观察环境\n7. 听到声音时，适当躲避或继续暴露\n8. 完成所有行动后，记录感受\n9. 安全离开树林，整理衣物\n10. 准备下一次更高级的挑战\n11. 确保安全第一，避免危险情况\n12. 享受大自然中的暴露体验",
+      "choices": [
+        {
+          "id": "choice_forest_1",
+          "choice": "1. 开始树林任务挑战",
+          "effect": "你来到树林，开始按照12个步骤进行树林暴露挑战。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "forest_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "forest_step2",
+      "chapter": "树林挑战 - 步骤2：选择位置",
+      "scene_detail": "你选择树林深处位置，这里相对隐蔽，适合进行暴露体验。树林中鸟语花香，环境宁静。",
+      "choices": [
+        {
+          "id": "choice_forest_2_1",
+          "choice": "1. 选择开阔地",
+          "effect": "你选择了开阔地，这里视野较好。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "forest_step3"
+        },
+        {
+          "id": "choice_forest_2_2",
+          "choice": "2. 选择密林处",
+          "effect": "你选择了密林处，这里相对隐蔽。",
+          "status_update": "暴露度35% 羞耻感30% 兴奋度40%",
+          "next_branch": "forest_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "forest_step3",
+      "chapter": "树林挑战 - 步骤3：开始暴露",
+      "scene_detail": "你在树林中站立，宽松运动裤下的鸡巴在兴奋中微微发硬。树林中的自然气息让你感到既紧张又兴奋。",
+      "choices": [
+        {
+          "id": "choice_forest_3_1",
+          "choice": "1. 正常站立",
+          "effect": "你保持正常站立，体验暴露的快感。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度50%",
+          "next_branch": "forest_step4"
+        },
+        {
+          "id": "choice_forest_3_2",
+          "choice": "2. 调整姿势增加暴露",
+          "effect": "你调整姿势，让暴露更加明显。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "forest_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "forest_step4",
+      "chapter": "树林挑战 - 步骤4：树林中走动",
+      "scene_detail": "你在树林中走动，体验暴露快感。树林中有人注意到了你的异常，他们的目光让你感到既羞耻又兴奋。",
+      "choices": [
+        {
+          "id": "choice_forest_4_1",
+          "choice": "1. 正常速度走动",
+          "effect": "你保持正常速度走动，体验暴露的快感。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "forest_complete"
+        },
+        {
+          "id": "choice_forest_4_2",
+          "choice": "2. 快速走动",
+          "effect": "你快速走动，追求更强烈的刺激。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "forest_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "forest_complete",
+      "chapter": "树林挑战完成",
+      "scene_detail": "你成功完成了树林任务挑战，这种在大自然环境中的暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开树林。",
+      "choices": [
+        {
+          "id": "choice_forest_complete_1",
+          "choice": "1. 继续挑战其他户外场景",
+          "effect": "选择其他户外暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "outdoor_scenes"
+        },
+        {
+          "id": "choice_forest_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "rainy_outdoor_main",
+      "chapter": "雨天户外任务 - 雨天的冒险",
+      "scene_detail": "雨天户外任务的详细挑战，包含10个具体任务步骤：\n\n1. 选择下雨天气，人流量较少的户外区域\n2. 穿着雨衣或防水外套，里面真空状态\n3. 选择相对隐蔽的户外位置\n4. 在雨中站立，调整姿势增加暴露\n5. 在雨中走动，体验暴露快感\n6. 在避雨处停留片刻，观察环境\n7. 听到声音时，适当躲避或继续暴露\n8. 完成所有行动后，记录感受\n9. 安全离开户外区域，整理衣物\n10. 准备下一次更高级的挑战",
+      "choices": [
+        {
+          "id": "choice_rainy_1",
+          "choice": "1. 开始雨天户外挑战",
+          "effect": "你来到雨天户外，开始按照10个步骤进行雨天暴露挑战。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "rainy_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "rainy_step2",
+      "chapter": "雨天挑战 - 步骤2：选择位置",
+      "scene_detail": "你选择相对隐蔽的户外位置，这里人流量较少，适合进行雨天暴露体验。雨水滴落在你的雨衣上。",
+      "choices": [
+        {
+          "id": "choice_rainy_2_1",
+          "choice": "1. 选择公园位置",
+          "effect": "你选择了公园位置，这里视野开阔。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "rainy_step3"
+        },
+        {
+          "id": "choice_rainy_2_2",
+          "choice": "2. 选择小巷位置",
+          "effect": "你选择了小巷位置，这里相对隐蔽。",
+          "status_update": "暴露度35% 羞耻感30% 兴奋度40%",
+          "next_branch": "rainy_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "rainy_step3",
+      "chapter": "雨天挑战 - 步骤3：开始暴露",
+      "scene_detail": "你在雨中站立，雨衣下的鸡巴在兴奋中微微发硬。雨水滴落在你的身上，你开始体验雨天暴露的快感。",
+      "choices": [
+        {
+          "id": "choice_rainy_3_1",
+          "choice": "1. 正常站立",
+          "effect": "你保持正常站立，体验暴露的快感。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度50%",
+          "next_branch": "rainy_step4"
+        },
+        {
+          "id": "choice_rainy_3_2",
+          "choice": "2. 调整姿势增加暴露",
+          "effect": "你调整姿势，让暴露更加明显。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "rainy_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "rainy_step4",
+      "chapter": "雨天挑战 - 步骤4：雨中走动",
+      "scene_detail": "你在雨中走动，体验暴露快感。雨中有人注意到了你的异常，他们的目光让你感到既羞耻又兴奋。",
+      "choices": [
+        {
+          "id": "choice_rainy_4_1",
+          "choice": "1. 正常速度走动",
+          "effect": "你保持正常速度走动，体验暴露的快感。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "rainy_complete"
+        },
+        {
+          "id": "choice_rainy_4_2",
+          "choice": "2. 快速走动",
+          "effect": "你快速走动，追求更强烈的刺激。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "rainy_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "rainy_complete",
+      "chapter": "雨天挑战完成",
+      "scene_detail": "你成功完成了雨天户外挑战，这种在雨天环境中的暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开。",
+      "choices": [
+        {
+          "id": "choice_rainy_complete_1",
+          "choice": "1. 继续挑战其他户外场景",
+          "effect": "选择其他户外暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "outdoor_scenes"
+        },
+        {
+          "id": "choice_rainy_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "road_main",
+      "chapter": "马路任务 - 马路上的冒险",
+      "scene_detail": "马路任务的详细挑战，包含12个具体任务步骤：\n\n1. 选择深夜或凌晨时段，马路车辆较少\n2. 穿着宽松运动裤，里面真空状态\n3. 选择相对隐蔽的马路位置\n4. 在马路边站立，调整姿势增加暴露\n5. 在马路边缘走动，体验暴露快感\n6. 在路灯下停留片刻，观察环境\n7. 听到车辆声音时，适当躲避或继续暴露\n8. 完成所有行动后，记录感受\n9. 安全离开马路，整理衣物\n10. 准备下一次更高级的挑战\n11. 确保安全第一，避免危险情况\n12. 享受马路环境中的暴露体验",
+      "choices": [
+        {
+          "id": "choice_road_1",
+          "choice": "1. 开始马路任务挑战",
+          "effect": "你来到马路，开始按照12个步骤进行马路暴露挑战。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "road_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "road_step2",
+      "chapter": "马路挑战 - 步骤2：选择位置",
+      "scene_detail": "你选择相对隐蔽的马路位置，这里车辆较少，适合进行暴露体验。马路灯光昏暗，环境相对安静。",
+      "choices": [
+        {
+          "id": "choice_road_2_1",
+          "choice": "1. 选择路灯下位置",
+          "effect": "你选择了路灯下位置，这里光线较好。",
+          "status_update": "暴露度35% 羞耻感30% 兴奋度40%",
+          "next_branch": "road_step3"
+        },
+        {
+          "id": "choice_road_2_2",
+          "choice": "2. 选择阴影处位置",
+          "effect": "你选择了阴影处位置，这里相对隐蔽。",
+          "status_update": "暴露度40% 羞耻感35% 兴奋度45%",
+          "next_branch": "road_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "road_step3",
+      "chapter": "马路挑战 - 步骤3：开始暴露",
+      "scene_detail": "你在马路边站立，宽松运动裤下的鸡巴在兴奋中微微发硬。马路上的车辆偶尔经过，你开始体验马路暴露的快感。",
+      "choices": [
+        {
+          "id": "choice_road_3_1",
+          "choice": "1. 正常站立",
+          "effect": "你保持正常站立，体验暴露的快感。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "road_step4"
+        },
+        {
+          "id": "choice_road_3_2",
+          "choice": "2. 调整姿势增加暴露",
+          "effect": "你调整姿势，让暴露更加明显。",
+          "status_update": "暴露度55% 羞耻感45% 兴奋度60%",
+          "next_branch": "road_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "road_step4",
+      "chapter": "马路挑战 - 步骤4：马路边缘走动",
+      "scene_detail": "你在马路边缘走动，体验暴露快感。马路上的车辆注意到了你的异常，他们的目光让你感到既羞耻又兴奋。",
+      "choices": [
+        {
+          "id": "choice_road_4_1",
+          "choice": "1. 正常速度走动",
+          "effect": "你保持正常速度走动，体验暴露的快感。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "road_complete"
+        },
+        {
+          "id": "choice_road_4_2",
+          "choice": "2. 快速走动",
+          "effect": "你快速走动，追求更强烈的刺激。",
+          "status_update": "暴露度70% 羞耻感60% 兴奋度75%",
+          "next_branch": "road_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "road_complete",
+      "chapter": "马路挑战完成",
+      "scene_detail": "你成功完成了马路任务挑战，这种在马路环境中的暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开马路。",
+      "choices": [
+        {
+          "id": "choice_road_complete_1",
+          "choice": "1. 继续挑战其他户外场景",
+          "effect": "选择其他户外暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "outdoor_scenes"
+        },
+        {
+          "id": "choice_road_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "public_toilet_main",
+      "chapter": "公厕任务 - 公厕中的冒险",
+      "scene_detail": "公厕任务的详细挑战，包含12个具体任务步骤：\n\n1. 选择人流量较少的公厕，避开高峰时段\n2. 穿着普通休闲裤，里面真空状态\n3. 选择公厕中间位置，便于观察环境\n4. 在公厕中站立，调整姿势增加暴露\n5. 在公厕内走动，体验暴露快感\n6. 在洗手台前停留片刻，观察镜子\n7. 听到声音时，适当躲避或继续暴露\n8. 完成所有行动后，记录感受\n9. 安全离开公厕，整理衣物\n10. 准备下一次更高级的挑战\n11. 确保安全第一，避免危险情况\n12. 享受公厕环境中的暴露体验",
+      "choices": [
+        {
+          "id": "choice_toilet_1",
+          "choice": "1. 开始公厕任务挑战",
+          "effect": "你来到公厕，开始按照12个步骤进行公厕暴露挑战。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "toilet_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "toilet_step2",
+      "chapter": "公厕挑战 - 步骤2：选择位置",
+      "scene_detail": "你选择公厕中间位置，这里便于观察进出人员。公厕内环境相对安静，你的心跳开始加速。",
+      "choices": [
+        {
+          "id": "choice_toilet_2_1",
+          "choice": "1. 选择洗手台前位置",
+          "effect": "你选择了洗手台前位置，这里视野较好。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "toilet_step3"
+        },
+        {
+          "id": "choice_toilet_2_2",
+          "choice": "2. 选择隔间门口位置",
+          "effect": "你选择了隔间门口位置，这里相对隐蔽。",
+          "status_update": "暴露度35% 羞耻感30% 兴奋度40%",
+          "next_branch": "toilet_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "toilet_step3",
+      "chapter": "公厕挑战 - 步骤3：开始暴露",
+      "scene_detail": "你在公厕中站立，休闲裤下的鸡巴在兴奋中微微发硬。公厕内有人进出，你开始体验公厕暴露的快感。",
+      "choices": [
+        {
+          "id": "choice_toilet_3_1",
+          "choice": "1. 正常站立",
+          "effect": "你保持正常站立，体验暴露的快感。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度50%",
+          "next_branch": "toilet_step4"
+        },
+        {
+          "id": "choice_toilet_3_2",
+          "choice": "2. 调整姿势增加暴露",
+          "effect": "你调整姿势，让暴露更加明显。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "toilet_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "toilet_step4",
+      "chapter": "公厕挑战 - 步骤4：公厕内走动",
+      "scene_detail": "你在公厕内走动，体验暴露快感。公厕内有人注意到了你的异常，他们的目光让你感到既羞耻又兴奋。",
+      "choices": [
+        {
+          "id": "choice_toilet_4_1",
+          "choice": "1. 正常速度走动",
+          "effect": "你保持正常速度走动，体验暴露的快感。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "toilet_complete"
+        },
+        {
+          "id": "choice_toilet_4_2",
+          "choice": "2. 快速走动",
+          "effect": "你快速走动，追求更强烈的刺激。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "toilet_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "toilet_complete",
+      "chapter": "公厕挑战完成",
+      "scene_detail": "你成功完成了公厕任务挑战，这种在公厕环境中的暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开公厕。",
+      "choices": [
+        {
+          "id": "choice_toilet_complete_1",
+          "choice": "1. 继续挑战其他户外场景",
+          "effect": "选择其他户外暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "outdoor_scenes"
+        },
+        {
+          "id": "choice_toilet_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "community_night_main",
+      "chapter": "小区半夜任务 - 半夜的冒险",
+      "scene_detail": "小区半夜任务的详细挑战，包含12个具体任务步骤：\n\n1. 选择深夜时段，小区几乎无人\n2. 穿着宽松运动裤，里面真空状态\n3. 选择小区相对隐蔽的位置\n4. 在小区中站立，调整姿势增加暴露\n5. 在小区内走动，体验暴露快感\n6. 在绿化带或楼梯口停留片刻，观察环境\n7. 听到声音时，适当躲避或继续暴露\n8. 完成所有行动后，记录感受\n9. 安全离开小区，整理衣物\n10. 准备下一次更高级的挑战\n11. 确保安全第一，避免危险情况\n12. 享受小区环境中的暴露体验",
+      "choices": [
+        {
+          "id": "choice_community_1",
+          "choice": "1. 开始小区半夜挑战",
+          "effect": "你来到小区，开始按照12个步骤进行半夜暴露挑战。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "community_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "community_step2",
+      "chapter": "小区挑战 - 步骤2：选择位置",
+      "scene_detail": "你选择小区相对隐蔽的位置，这里人流量较少，适合进行半夜暴露体验。小区内灯光昏暗，环境安静。",
+      "choices": [
+        {
+          "id": "choice_community_2_1",
+          "choice": "1. 选择绿化带位置",
+          "effect": "你选择了绿化带位置，这里视野较好。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "community_step3"
+        },
+        {
+          "id": "choice_community_2_2",
+          "choice": "2. 选择楼梯口位置",
+          "effect": "你选择了楼梯口位置，这里相对隐蔽。",
+          "status_update": "暴露度35% 羞耻感30% 兴奋度40%",
+          "next_branch": "community_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "community_step3",
+      "chapter": "小区挑战 - 步骤3：开始暴露",
+      "scene_detail": "你在小区中站立，宽松运动裤下的鸡巴在兴奋中微微发硬。小区内偶尔有人经过，你开始体验半夜暴露的快感。",
+      "choices": [
+        {
+          "id": "choice_community_3_1",
+          "choice": "1. 正常站立",
+          "effect": "你保持正常站立，体验暴露的快感。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度50%",
+          "next_branch": "community_step4"
+        },
+        {
+          "id": "choice_community_3_2",
+          "choice": "2. 调整姿势增加暴露",
+          "effect": "你调整姿势，让暴露更加明显。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "community_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "community_step4",
+      "chapter": "小区挑战 - 步骤4：小区内走动",
+      "scene_detail": "你在小区内走动，体验暴露快感。小区内有人注意到了你的异常，他们的目光让你感到既羞耻又兴奋。",
+      "choices": [
+        {
+          "id": "choice_community_4_1",
+          "choice": "1. 正常速度走动",
+          "effect": "你保持正常速度走动，体验暴露的快感。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "community_complete"
+        },
+        {
+          "id": "choice_community_4_2",
+          "choice": "2. 快速走动",
+          "effect": "你快速走动，追求更强烈的刺激。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "community_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "community_complete",
+      "chapter": "小区挑战完成",
+      "scene_detail": "你成功完成了小区半夜任务挑战，这种在小区环境中的暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开小区。",
+      "choices": [
+        {
+          "id": "choice_community_complete_1",
+          "choice": "1. 继续挑战其他日常生活场景",
+          "effect": "选择其他日常生活暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "daily_life_scenes"
+        },
+        {
+          "id": "choice_community_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "elevator_dice_main",
+      "chapter": "小区电梯骰子任务 - 电梯中的游戏",
+      "scene_detail": "小区电梯骰子任务的详细挑战，包含12个具体任务步骤：\n\n1. 选择小区电梯，避开高峰时段\n2. 穿着普通休闲裤，里面真空状态\n3. 准备一副骰子，用于游戏规则\n4. 选择电梯楼层，便于控制暴露程度\n5. 在电梯中站立，调整姿势增加暴露\n6. 投掷骰子决定暴露程度\n7. 根据骰子结果调整暴露姿势\n8. 听到电梯声音时，适当调整暴露\n9. 完成所有游戏后，记录感受\n10. 安全离开电梯，整理衣物\n11. 准备下一次更高级的挑战\n12. 享受电梯环境中的暴露游戏",
+      "choices": [
+        {
+          "id": "choice_elevator_1",
+          "choice": "1. 开始电梯骰子挑战",
+          "effect": "你进入小区电梯，开始按照12个步骤进行骰子暴露游戏。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "elevator_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "elevator_step2",
+      "chapter": "电梯挑战 - 步骤2：选择楼层",
+      "scene_detail": "你选择电梯楼层，这里便于控制暴露程度。电梯内环境相对封闭，你的心跳开始加速。",
+      "choices": [
+        {
+          "id": "choice_elevator_2_1",
+          "choice": "1. 选择高层楼层",
+          "effect": "你选择了高层楼层，这里相对安全。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "elevator_step3"
+        },
+        {
+          "id": "choice_elevator_2_2",
+          "choice": "2. 选择低层楼层",
+          "effect": "你选择了低层楼层，这里更容易被发现。",
+          "status_update": "暴露度35% 羞耻感30% 兴奋度40%",
+          "next_branch": "elevator_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "elevator_step3",
+      "chapter": "电梯挑战 - 步骤3：开始暴露",
+      "scene_detail": "你在电梯中站立，休闲裤下的鸡巴在兴奋中微微发硬。电梯内有人进出，你开始体验电梯暴露的快感。",
+      "choices": [
+        {
+          "id": "choice_elevator_3_1",
+          "choice": "1. 正常站立",
+          "effect": "你保持正常站立，体验暴露的快感。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度50%",
+          "next_branch": "elevator_step4"
+        },
+        {
+          "id": "choice_elevator_3_2",
+          "choice": "2. 调整姿势增加暴露",
+          "effect": "你调整姿势，让暴露更加明显。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "elevator_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "elevator_step4",
+      "chapter": "电梯挑战 - 步骤4：投掷骰子",
+      "scene_detail": "你投掷骰子决定暴露程度。电梯内有人注意到了你的异常，他们的目光让你感到既羞耻又兴奋。",
+      "choices": [
+        {
+          "id": "choice_elevator_4_1",
+          "choice": "1. 投掷骰子",
+          "effect": "你投掷骰子，根据结果调整暴露程度。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "elevator_complete"
+        },
+        {
+          "id": "choice_elevator_4_2",
+          "choice": "2. 故意调整暴露",
+          "effect": "你故意调整暴露，追求更强烈的刺激。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "elevator_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "elevator_complete",
+      "chapter": "电梯挑战完成",
+      "scene_detail": "你成功完成了小区电梯骰子任务挑战，这种在电梯环境中的暴露游戏让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开电梯。",
+      "choices": [
+        {
+          "id": "choice_elevator_complete_1",
+          "choice": "1. 继续挑战其他日常生活场景",
+          "effect": "选择其他日常生活暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "daily_life_scenes"
+        },
+        {
+          "id": "choice_elevator_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "workday_main",
+      "chapter": "社畜工作日的一日任务 - 工作日的冒险",
+      "scene_detail": "社畜工作日一日任务的详细挑战，包含12个具体任务步骤：\n\n1. 选择工作日，避开周末和节假日\n2. 穿着普通工作服，里面真空状态\n3. 选择办公室或工作场所\n4. 在工作场所站立，调整姿势增加暴露\n5. 在工作场所走动，体验暴露快感\n6. 在会议室或休息区停留片刻，观察环境\n7. 听到同事声音时，适当躲避或继续暴露\n8. 完成所有行动后，记录感受\n9. 安全离开工作场所，整理衣物\n10. 准备下一次更高级的挑战\n11. 确保安全第一，避免危险情况\n12. 享受工作环境中的暴露体验",
+      "choices": [
+        {
+          "id": "choice_workday_1",
+          "choice": "1. 开始工作日挑战",
+          "effect": "你来到工作场所，开始按照12个步骤进行工作日暴露挑战。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "workday_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "workday_step2",
+      "chapter": "工作日挑战 - 步骤2：选择位置",
+      "scene_detail": "你选择工作场所位置，这里便于控制暴露程度。工作场所内环境相对安静，你的心跳开始加速。",
+      "choices": [
+        {
+          "id": "choice_workday_2_1",
+          "choice": "1. 选择办公室位置",
+          "effect": "你选择了办公室位置，这里相对安全。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "workday_step3"
+        },
+        {
+          "id": "choice_workday_2_2",
+          "choice": "2. 选择会议室位置",
+          "effect": "你选择了会议室位置，这里更容易被发现。",
+          "status_update": "暴露度35% 羞耻感30% 兴奋度40%",
+          "next_branch": "workday_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "workday_step3",
+      "chapter": "工作日挑战 - 步骤3：开始暴露",
+      "scene_detail": "你在工作场所站立，工作服下的鸡巴在兴奋中微微发硬。工作场所有同事经过，你开始体验工作日暴露的快感。",
+      "choices": [
+        {
+          "id": "choice_workday_3_1",
+          "choice": "1. 正常站立",
+          "effect": "你保持正常站立，体验暴露的快感。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度50%",
+          "next_branch": "workday_step4"
+        },
+        {
+          "id": "choice_workday_3_2",
+          "choice": "2. 调整姿势增加暴露",
+          "effect": "你调整姿势，让暴露更加明显。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "workday_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "workday_step4",
+      "chapter": "工作日挑战 - 步骤4：工作场所走动",
+      "scene_detail": "你在工作场所走动，体验暴露快感。工作场所有同事注意到了你的异常，他们的目光让你感到既羞耻又兴奋。",
+      "choices": [
+        {
+          "id": "choice_workday_4_1",
+          "choice": "1. 正常速度走动",
+          "effect": "你保持正常速度走动，体验暴露的快感。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "workday_complete"
+        },
+        {
+          "id": "choice_workday_4_2",
+          "choice": "2. 快速走动",
+          "effect": "你快速走动，追求更强烈的刺激。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "workday_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "workday_complete",
+      "chapter": "工作日挑战完成",
+      "scene_detail": "你成功完成了社畜工作日的一日任务挑战，这种在工作环境中的暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感离开工作场所。",
+      "choices": [
+        {
+          "id": "choice_workday_complete_1",
+          "choice": "1. 继续挑战其他日常生活场景",
+          "effect": "选择其他日常生活暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "daily_life_scenes"
+        },
+        {
+          "id": "choice_workday_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "exposure_slave_day_main",
+      "chapter": "曝光奴的一日任务 - 一整天的冒险",
+      "scene_detail": "曝光奴一日任务的详细挑战，包含12个具体任务步骤：\n\n1. 选择一整天时间，从早到晚\n2. 穿着普通日常服装，里面真空状态\n3. 选择不同的公共场所进行暴露\n4. 在公共场所站立，调整姿势增加暴露\n5. 在公共场所走动，体验暴露快感\n6. 在不同场所停留片刻，观察环境\n7. 听到他人声音时，适当躲避或继续暴露\n8. 完成所有行动后，记录感受\n9. 安全离开公共场所，整理衣物\n10. 准备下一次更高级的挑战\n11. 确保安全第一，避免危险情况\n12. 享受一整天暴露的刺激体验",
+      "choices": [
+        {
+          "id": "choice_slave_1",
+          "choice": "1. 开始曝光奴一日挑战",
+          "effect": "你开始一整天的暴露冒险，按照12个步骤进行曝光奴挑战。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "slave_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "slave_step2",
+      "chapter": "曝光奴挑战 - 步骤2：选择场所",
+      "scene_detail": "你选择不同的公共场所，这里便于控制暴露程度。公共场所内环境相对复杂，你的心跳开始加速。",
+      "choices": [
+        {
+          "id": "choice_slave_2_1",
+          "choice": "1. 选择商场位置",
+          "effect": "你选择了商场位置，这里人流量大。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "slave_step3"
+        },
+        {
+          "id": "choice_slave_2_2",
+          "choice": "2. 选择公园位置",
+          "effect": "你选择了公园位置，这里相对隐蔽。",
+          "status_update": "暴露度35% 羞耻感30% 兴奋度40%",
+          "next_branch": "slave_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "slave_step3",
+      "chapter": "曝光奴挑战 - 步骤3：开始暴露",
+      "scene_detail": "你在公共场所站立，日常服装下的鸡巴在兴奋中微微发硬。公共场所有人经过，你开始体验曝光奴暴露的快感。",
+      "choices": [
+        {
+          "id": "choice_slave_3_1",
+          "choice": "1. 正常站立",
+          "effect": "你保持正常站立，体验暴露的快感。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度50%",
+          "next_branch": "slave_step4"
+        },
+        {
+          "id": "choice_slave_3_2",
+          "choice": "2. 调整姿势增加暴露",
+          "effect": "你调整姿势，让暴露更加明显。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "slave_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "slave_step4",
+      "chapter": "曝光奴挑战 - 步骤4：公共场所走动",
+      "scene_detail": "你在公共场所走动，体验暴露快感。公共场所有人注意到了你的异常，他们的目光让你感到既羞耻又兴奋。",
+      "choices": [
+        {
+          "id": "choice_slave_4_1",
+          "choice": "1. 正常速度走动",
+          "effect": "你保持正常速度走动，体验暴露的快感。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "slave_complete"
+        },
+        {
+          "id": "choice_slave_4_2",
+          "choice": "2. 快速走动",
+          "effect": "你快速走动，追求更强烈的刺激。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "slave_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "slave_complete",
+      "chapter": "曝光奴挑战完成",
+      "scene_detail": "你成功完成了曝光奴的一日任务挑战，这种在一整天的暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感结束了一天的冒险。",
+      "choices": [
+        {
+          "id": "choice_slave_complete_1",
+          "choice": "1. 继续挑战其他日常生活场景",
+          "effect": "选择其他日常生活暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "daily_life_scenes"
+        },
+        {
+          "id": "choice_slave_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "beginner_main",
+      "chapter": "入门级任务 - 初学者的冒险",
+      "scene_detail": "入门级任务的详细挑战，包含10个具体任务步骤：\n\n1. 选择相对安全的环境，避开人群\n2. 穿着宽松衣物，里面真空状态\n3. 选择相对隐蔽的位置\n4. 在安全环境中站立，调整姿势增加暴露\n5. 在安全环境中走动，体验暴露快感\n6. 在安全位置停留片刻，观察环境\n7. 听到声音时，适当躲避或继续暴露\n8. 完成所有行动后，记录感受\n9. 安全离开环境，整理衣物\n10. 准备进入更高级的挑战",
+      "choices": [
+        {
+          "id": "choice_beginner_1",
+          "choice": "1. 开始入门级挑战",
+          "effect": "你开始入门级暴露挑战，按照10个步骤进行安全暴露。",
+          "status_update": "暴露度20% 羞耻感15% 兴奋度25%",
+          "next_branch": "beginner_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "beginner_step2",
+      "chapter": "入门级挑战 - 步骤2：选择位置",
+      "scene_detail": "你选择相对安全的位置，这里便于控制暴露程度。环境相对安静，你的心跳开始加速。",
+      "choices": [
+        {
+          "id": "choice_beginner_2_1",
+          "choice": "1. 选择室内位置",
+          "effect": "你选择了室内位置，这里相对安全。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "beginner_step3"
+        },
+        {
+          "id": "choice_beginner_2_2",
+          "choice": "2. 选择室外位置",
+          "effect": "你选择了室外位置，这里更容易被发现。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "beginner_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "beginner_step3",
+      "chapter": "入门级挑战 - 步骤3：开始暴露",
+      "scene_detail": "你在安全环境中站立，宽松衣物下的鸡巴在兴奋中微微发硬。环境中偶尔有人经过，你开始体验入门级暴露的快感。",
+      "choices": [
+        {
+          "id": "choice_beginner_3_1",
+          "choice": "1. 正常站立",
+          "effect": "你保持正常站立，体验暴露的快感。",
+          "status_update": "暴露度35% 羞耻感30% 兴奋度40%",
+          "next_branch": "beginner_step4"
+        },
+        {
+          "id": "choice_beginner_3_2",
+          "choice": "2. 调整姿势增加暴露",
+          "effect": "你调整姿势，让暴露更加明显。",
+          "status_update": "暴露度40% 羞耻感35% 兴奋度45%",
+          "next_branch": "beginner_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "beginner_step4",
+      "chapter": "入门级挑战 - 步骤4：安全环境走动",
+      "scene_detail": "你在安全环境中走动，体验暴露快感。环境中有人注意到了你的异常，他们的目光让你感到既羞耻又兴奋。",
+      "choices": [
+        {
+          "id": "choice_beginner_4_1",
+          "choice": "1. 正常速度走动",
+          "effect": "你保持正常速度走动，体验暴露的快感。",
+          "status_update": "暴露度45% 羞耻感40% 兴奋度50%",
+          "next_branch": "beginner_complete"
+        },
+        {
+          "id": "choice_beginner_4_2",
+          "choice": "2. 快速走动",
+          "effect": "你快速走动，追求更强烈的刺激。",
+          "status_update": "暴露度50% 羞耻感45% 兴奋度55%",
+          "next_branch": "beginner_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "beginner_complete",
+      "chapter": "入门级挑战完成",
+      "scene_detail": "你成功完成了入门级任务挑战，这种在安全环境中的暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感准备进入更高级的挑战。",
+      "choices": [
+        {
+          "id": "choice_beginner_complete_1",
+          "choice": "1. 继续挑战其他日常生活场景",
+          "effect": "选择其他日常生活暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "daily_life_scenes"
+        },
+        {
+          "id": "choice_beginner_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "exposure_beginner_main",
+      "chapter": "露出任务(初级版) - 简化的暴露挑战",
+      "scene_detail": "露出任务初级版的详细挑战，包含8个具体任务步骤：\n\n1. 选择简化的暴露环境\n2. 穿着普通衣物，里面真空状态\n3. 选择相对安全的位置\n4. 在简化环境中站立，体验暴露快感\n5. 在简化环境中走动，感受暴露刺激\n6. 在安全位置停留片刻，观察环境\n7. 完成所有行动后，记录感受\n8. 安全离开环境，准备进阶挑战",
+      "choices": [
+        {
+          "id": "choice_exposure_beginner_1",
+          "choice": "1. 开始初级版露出挑战",
+          "effect": "你开始初级版露出挑战，按照8个步骤进行简化暴露。",
+          "status_update": "暴露度15% 羞耻感10% 兴奋度20%",
+          "next_branch": "exposure_beginner_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "exposure_beginner_step2",
+      "chapter": "初级版挑战 - 步骤2：选择位置",
+      "scene_detail": "你选择简化的暴露位置，这里便于控制暴露程度。环境相对安全，你的心跳开始加速。",
+      "choices": [
+        {
+          "id": "choice_exposure_beginner_2_1",
+          "choice": "1. 选择家庭环境",
+          "effect": "你选择了家庭环境，这里相对安全。",
+          "status_update": "暴露度20% 羞耻感15% 兴奋度25%",
+          "next_branch": "exposure_beginner_step3"
+        },
+        {
+          "id": "choice_exposure_beginner_2_2",
+          "choice": "2. 选择私人空间",
+          "effect": "你选择了私人空间，这里更容易控制。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "exposure_beginner_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "exposure_beginner_step3",
+      "chapter": "初级版挑战 - 步骤3：开始暴露",
+      "scene_detail": "你在简化环境中站立，普通衣物下的鸡巴在兴奋中微微发硬。环境中相对安全，你开始体验初级版暴露的快感。",
+      "choices": [
+        {
+          "id": "choice_exposure_beginner_3_1",
+          "choice": "1. 正常站立",
+          "effect": "你保持正常站立，体验暴露的快感。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "exposure_beginner_complete"
+        },
+        {
+          "id": "choice_exposure_beginner_3_2",
+          "choice": "2. 调整姿势增加暴露",
+          "effect": "你调整姿势，让暴露更加明显。",
+          "status_update": "暴露度35% 羞耻感30% 兴奋度40%",
+          "next_branch": "exposure_beginner_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "exposure_beginner_complete",
+      "chapter": "初级版挑战完成",
+      "scene_detail": "你成功完成了露出任务初级版挑战，这种在简化环境中的暴露体验让你初步体验到了暴露的快感。整理好衣物后，你准备进入更高级的挑战。",
+      "choices": [
+        {
+          "id": "choice_exposure_beginner_complete_1",
+          "choice": "1. 继续挑战其他日常生活场景",
+          "effect": "选择其他日常生活暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "daily_life_scenes"
+        },
+        {
+          "id": "choice_exposure_beginner_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "seduction_exposure_main",
+      "chapter": "勾引暴露 - 勾引中的冒险",
+      "scene_detail": "勾引暴露任务的详细挑战，包含12个具体任务步骤：\n\n1. 选择勾引对象，避开危险情况\n2. 穿着性感衣物，里面真空状态\n3. 选择相对隐蔽的位置\n4. 在对象面前站立，调整姿势增加暴露\n5. 在对象面前走动，体验暴露快感\n6. 在勾引过程中停留片刻，观察反应\n7. 听到对象声音时，适当调整暴露\n8. 完成所有勾引行动后，记录感受\n9. 安全离开现场，整理衣物\n10. 准备下一次更高级的挑战\n11. 确保安全第一，避免危险情况\n12. 享受勾引环境中的暴露体验",
+      "choices": [
+        {
+          "id": "choice_seduction_1",
+          "choice": "1. 开始勾引暴露挑战",
+          "effect": "你开始勾引暴露挑战，按照12个步骤进行勾引暴露。",
+          "status_update": "暴露度25% 羞耻感20% 兴奋度30%",
+          "next_branch": "seduction_step2"
+        }
+      ]
+    },
+    {
+      "branch_id": "seduction_step2",
+      "chapter": "勾引挑战 - 步骤2：选择对象",
+      "scene_detail": "你选择勾引对象，这里便于控制暴露程度。对象相对安全，你的心跳开始加速。",
+      "choices": [
+        {
+          "id": "choice_seduction_2_1",
+          "choice": "1. 选择熟悉对象",
+          "effect": "你选择了熟悉对象，这里相对安全。",
+          "status_update": "暴露度30% 羞耻感25% 兴奋度35%",
+          "next_branch": "seduction_step3"
+        },
+        {
+          "id": "choice_seduction_2_2",
+          "choice": "2. 选择陌生对象",
+          "effect": "你选择了陌生对象，这里更容易被发现。",
+          "status_update": "暴露度35% 羞耻感30% 兴奋度40%",
+          "next_branch": "seduction_step3"
+        }
+      ]
+    },
+    {
+      "branch_id": "seduction_step3",
+      "chapter": "勾引挑战 - 步骤3：开始暴露",
+      "scene_detail": "你在对象面前站立，性感衣物下的鸡巴在兴奋中微微发硬。对象注意到了你的异常，你开始体验勾引暴露的快感。",
+      "choices": [
+        {
+          "id": "choice_seduction_3_1",
+          "choice": "1. 正常站立",
+          "effect": "你保持正常站立，体验暴露的快感。",
+          "status_update": "暴露度45% 羞耻感35% 兴奋度50%",
+          "next_branch": "seduction_step4"
+        },
+        {
+          "id": "choice_seduction_3_2",
+          "choice": "2. 调整姿势增加暴露",
+          "effect": "你调整姿势，让暴露更加明显。",
+          "status_update": "暴露度50% 羞耻感40% 兴奋度55%",
+          "next_branch": "seduction_step4"
+        }
+      ]
+    },
+    {
+      "branch_id": "seduction_step4",
+      "chapter": "勾引挑战 - 步骤4：勾引过程",
+      "scene_detail": "你在对象面前走动，体验勾引快感。对象注意到了你的异常，他们的反应让你感到既羞耻又兴奋。",
+      "choices": [
+        {
+          "id": "choice_seduction_4_1",
+          "choice": "1. 正常速度走动",
+          "effect": "你保持正常速度走动，体验暴露的快感。",
+          "status_update": "暴露度60% 羞耻感50% 兴奋度65%",
+          "next_branch": "seduction_complete"
+        },
+        {
+          "id": "choice_seduction_4_2",
+          "choice": "2. 快速走动",
+          "effect": "你快速走动，追求更强烈的刺激。",
+          "status_update": "暴露度65% 羞耻感55% 兴奋度70%",
+          "next_branch": "seduction_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "seduction_complete",
+      "chapter": "勾引挑战完成",
+      "scene_detail": "你成功完成了勾引暴露任务挑战，这种在勾引环境中的暴露体验让你既兴奋又满足。整理好衣物后，你带着这种刺激感结束勾引冒险。",
+      "choices": [
+        {
+          "id": "choice_seduction_complete_1",
+          "choice": "1. 继续挑战其他日常生活场景",
+          "effect": "选择其他日常生活暴露挑战继续冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0% 任务完成数+1",
+          "next_branch": "daily_life_scenes"
+        },
+        {
+          "id": "choice_seduction_complete_2",
+          "choice": "2. 返回主菜单选择其他系列",
+          "effect": "浏览其他类型的暴露挑战。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "start"
+        }
+      ]
+    },
+    {
+      "branch_id": "random_public_scene",
+      "chapter": "🎲 随机公共场所场景 - 命运的人群冒险",
+      "scene_detail": "命运为你选择了一个公共场所场景！你的鸡巴在期待中微微发硬，空气中弥漫着人群的气息和暴露的诱惑。商场、影院、健身房，每一个公共场所都充满了被发现的快感，在人群中体验暴露的刺激。\n\n闭上眼睛，感受内心的悸动，让命运带你进入人群的暴露冒险吧！",
+      "choices": [
+        {
+          "id": "choice_random_public_1",
+          "choice": "🎲 随机选择：商场露出任务",
+          "effect": "命运选择了商场露出任务！在人群中体验暴露的快感，你的鸡巴在期待中不断发硬。",
+          "status_update": "暴露度+18% 羞耻感+12% 兴奋度+22%",
+          "next_branch": "mall_exposure_detailed"
+        },
+        {
+          "id": "choice_random_public_2",
+          "choice": "🎲 随机选择：影院暴露任务",
+          "effect": "命运选择了影院暴露任务！在黑暗的影院中体验暴露的刺激，鸡巴在兴奋中不断发硬。",
+          "status_update": "暴露度+20% 羞耻感+15% 兴奋度+25%",
+          "next_branch": "cinema_exposure_main"
+        },
+        {
+          "id": "choice_random_public_3",
+          "choice": "🎲 随机选择：健身房暴露任务",
+          "effect": "命运选择了健身房暴露任务！在健身环境中体验暴露的快感，鸡巴在运动中不断发硬。",
+          "status_update": "暴露度+22% 羞耻感+18% 兴奋度+28%",
+          "next_branch": "gym_exposure_main"
+        },
+        {
+          "id": "choice_random_public_4",
+          "choice": "🎲 再次随机选择公共场所场景",
+          "effect": "让命运再次为你选择一个公共场所场景，体验不同的暴露快感。",
+          "status_update": "暴露度+5% 羞耻感+5% 兴奋度+8%",
+          "next_branch": "random_public_scene"
+        },
+        {
+          "id": "choice_random_public_5",
+          "choice": "返回随机场景选择",
+          "effect": "回到随机场景选择界面，选择其他类型的随机冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "random_scene_challenge"
+        }
+      ]
+    },
+    {
+      "branch_id": "random_night_scene",
+      "chapter": "🎲 随机夜间冒险场景 - 命运的夜色冒险",
+      "scene_detail": "命运为你选择了一个夜间冒险场景！你的鸡巴在期待中微微发硬，空气中弥漫着夜色的神秘和暴露的诱惑。深夜的广场、楼道、便利店，每一个夜晚都充满了被发现的快感，在夜色中体验暴露的刺激。\n\n闭上眼睛，感受内心的悸动，让命运带你进入夜色的暴露冒险吧！",
+      "choices": [
+        {
+          "id": "choice_random_night_1",
+          "choice": "🎲 随机选择：午夜便利店任务",
+          "effect": "命运选择了午夜便利店任务！在深夜的便利店里体验暴露的刺激，你的鸡巴在期待中不断发硬。",
+          "status_update": "暴露度+20% 羞耻感+15% 兴奋度+25%",
+          "next_branch": "midnight_convenience_detailed"
+        },
+        {
+          "id": "choice_random_night_2",
+          "choice": "🎲 随机选择：深夜广场任务",
+          "effect": "命运选择了深夜广场任务！在空旷的广场上体验赤裸的快感，鸡巴在夜风中微微发硬。",
+          "status_update": "暴露度+22% 羞耻感+18% 兴奋度+28%",
+          "next_branch": "late_night_square_detailed"
+        },
+        {
+          "id": "choice_random_night_3",
+          "choice": "🎲 随机选择：深夜楼道任务",
+          "effect": "命运选择了深夜楼道任务！在楼道中体验暴露的刺激，鸡巴在兴奋中不断发硬。",
+          "status_update": "暴露度+24% 羞耻感+20% 兴奋度+30%",
+          "next_branch": "late_night_corridor_main"
+        },
+        {
+          "id": "choice_random_night_4",
+          "choice": "🎲 再次随机选择夜间冒险场景",
+          "effect": "让命运再次为你选择一个夜间冒险场景，体验不同的暴露快感。",
+          "status_update": "暴露度+5% 羞耻感+5% 兴奋度+8%",
+          "next_branch": "random_night_scene"
+        },
+        {
+          "id": "choice_random_night_5",
+          "choice": "返回随机场景选择",
+          "effect": "回到随机场景选择界面，选择其他类型的随机冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "random_scene_challenge"
+        }
+      ]
+    },
+    {
+      "branch_id": "random_special_scene",
+      "chapter": "🎲 随机特殊环境场景 - 命运的私密冒险",
+      "scene_detail": "命运为你选择了一个特殊环境场景！你的鸡巴在期待中微微发硬，空气中弥漫着私密空间的气息和暴露的诱惑。酒店、浴池、KTV，每一个特殊环境都充满了被发现的快感，在私密空间中体验暴露的刺激。\n\n闭上眼睛，感受内心的悸动，让命运带你进入私密空间的暴露冒险吧！",
+      "choices": [
+        {
+          "id": "choice_random_special_1",
+          "choice": "🎲 随机选择：酒店任务",
+          "effect": "命运选择了酒店任务！在私密的酒店环境中体验暴露的快感，你的鸡巴在期待中不断发硬。",
+          "status_update": "暴露度+18% 羞耻感+12% 兴奋度+22%",
+          "next_branch": "hotel_main"
+        },
+        {
+          "id": "choice_random_special_2",
+          "choice": "🎲 随机选择：浴池任务",
+          "effect": "命运选择了浴池任务！在浴池环境中体验暴露的刺激，鸡巴在兴奋中不断发硬。",
+          "status_update": "暴露度+20% 羞耻感+15% 兴奋度+25%",
+          "next_branch": "bathhouse_main"
+        },
+        {
+          "id": "choice_random_special_3",
+          "choice": "🎲 随机选择：KTV任务",
+          "effect": "命运选择了KTV任务！在KTV环境中体验暴露的快感，鸡巴在音乐中不断发硬。",
+          "status_update": "暴露度+22% 羞耻感+18% 兴奋度+28%",
+          "next_branch": "ktv_main"
+        },
+        {
+          "id": "choice_random_special_4",
+          "choice": "🎲 再次随机选择特殊环境场景",
+          "effect": "让命运再次为你选择一个特殊环境场景，体验不同的暴露快感。",
+          "status_update": "暴露度+5% 羞耻感+5% 兴奋度+8%",
+          "next_branch": "random_special_scene"
+        },
+        {
+          "id": "choice_random_special_5",
+          "choice": "返回随机场景选择",
+          "effect": "回到随机场景选择界面，选择其他类型的随机冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "random_scene_challenge"
+        }
+      ]
+    },
+    {
+      "branch_id": "random_outdoor_scene",
+      "chapter": "🎲 随机户外冒险场景 - 命运的自然冒险",
+      "scene_detail": "命运为你选择了一个户外冒险场景！你的鸡巴在期待中微微发硬，空气中弥漫着大自然的气息和暴露的诱惑。野外、海边、树林，每一个自然环境都充满了被发现的快感，在大自然中体验暴露的刺激。\n\n闭上眼睛，感受内心的悸动，让命运带你进入大自然的暴露冒险吧！",
+      "choices": [
+        {
+          "id": "choice_random_outdoor_1",
+          "choice": "🎲 随机选择：野外任务",
+          "effect": "命运选择了野外任务！在大自然中体验暴露的快感，你的鸡巴在期待中不断发硬。",
+          "status_update": "暴露度+20% 羞耻感+15% 兴奋度+25%",
+          "next_branch": "wilderness_main"
+        },
+        {
+          "id": "choice_random_outdoor_2",
+          "choice": "🎲 随机选择：海边暴露小任务",
+          "effect": "命运选择了海边暴露任务！在海边体验暴露的刺激，鸡巴在海风中微微发硬。",
+          "status_update": "暴露度+22% 羞耻感+18% 兴奋度+28%",
+          "next_branch": "beach_exposure_main"
+        },
+        {
+          "id": "choice_random_outdoor_3",
+          "choice": "🎲 随机选择：树林任务",
+          "effect": "命运选择了树林任务！在树林中体验暴露的快感，鸡巴在兴奋中不断发硬。",
+          "status_update": "暴露度+24% 羞耻感+20% 兴奋度+30%",
+          "next_branch": "forest_main"
+        },
+        {
+          "id": "choice_random_outdoor_4",
+          "choice": "🎲 再次随机选择户外冒险场景",
+          "effect": "让命运再次为你选择一个户外冒险场景，体验不同的暴露快感。",
+          "status_update": "暴露度+5% 羞耻感+5% 兴奋度+8%",
+          "next_branch": "random_outdoor_scene"
+        },
+        {
+          "id": "choice_random_outdoor_5",
+          "choice": "返回随机场景选择",
+          "effect": "回到随机场景选择界面，选择其他类型的随机冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "random_scene_challenge"
+        }
+      ]
+    },
+    {
+      "branch_id": "random_daily_scene",
+      "chapter": "🎲 随机日常生活场景 - 命运的日常冒险",
+      "scene_detail": "命运为你选择了一个日常生活场景！你的鸡巴在期待中微微发硬，空气中弥漫着日常生活的气息和暴露的诱惑。小区、家中、工作日，每一个日常环境都充满了被发现的快感，在日常生活中体验暴露的刺激。\n\n闭上眼睛，感受内心的悸动，让命运带你进入日常生活的暴露冒险吧！",
+      "choices": [
+        {
+          "id": "choice_random_daily_1",
+          "choice": "🎲 随机选择：小区半夜任务",
+          "effect": "命运选择了小区半夜任务！在半夜的小区中体验暴露的快感，你的鸡巴在期待中不断发硬。",
+          "status_update": "暴露度+18% 羞耻感+12% 兴奋度+22%",
+          "next_branch": "community_night_main"
+        },
+        {
+          "id": "choice_random_daily_2",
+          "choice": "🎲 随机选择：小区电梯骰子任务",
+          "effect": "命运选择了小区电梯骰子任务！在电梯中体验暴露的刺激，鸡巴在兴奋中不断发硬。",
+          "status_update": "暴露度+20% 羞耻感+15% 兴奋度+25%",
+          "next_branch": "elevator_dice_main"
+        },
+        {
+          "id": "choice_random_daily_3",
+          "choice": "🎲 随机选择：社畜工作日任务",
+          "effect": "命运选择了社畜工作日任务！在工作环境中体验暴露的快感，鸡巴在期待中不断发硬。",
+          "status_update": "暴露度+22% 羞耻感+18% 兴奋度+28%",
+          "next_branch": "workday_main"
+        },
+        {
+          "id": "choice_random_daily_4",
+          "choice": "🎲 再次随机选择日常生活场景",
+          "effect": "让命运再次为你选择一个日常生活场景，体验不同的暴露快感。",
+          "status_update": "暴露度+5% 羞耻感+5% 兴奋度+8%",
+          "next_branch": "random_daily_scene"
+        },
+        {
+          "id": "choice_random_daily_5",
+          "choice": "返回随机场景选择",
+          "effect": "回到随机场景选择界面，选择其他类型的随机冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "random_scene_challenge"
+        }
+      ]
+    },
+    {
+      "branch_id": "random_complete_scene",
+      "chapter": "🎲 完全随机场景 - 命运的终极冒险",
+      "scene_detail": "命运为你完全随机选择了一个场景！你的鸡巴在期待中剧烈发硬，空气中弥漫着未知的刺激气息。这是真正的命运冒险，从53个场景中随机选择，每一次都是全新的暴露体验。\n\n闭上眼睛，感受内心的剧烈悸动，让命运带你进入终极的暴露冒险吧！",
+      "choices": [
+        {
+          "id": "choice_random_complete_1",
+          "choice": "🎲 随机选择：校园类场景",
+          "effect": "命运选择了校园类场景！在知识的殿堂中体验暴露的快感，你的鸡巴在期待中不断发硬。",
+          "status_update": "暴露度+25% 羞耻感+20% 兴奋度+35%",
+          "next_branch": "random_campus_scene"
+        },
+        {
+          "id": "choice_random_complete_2",
+          "choice": "🎲 随机选择：公共场所类场景",
+          "effect": "命运选择了公共场所类场景！在人群中体验暴露的刺激，鸡巴在兴奋中不断发硬。",
+          "status_update": "暴露度+28% 羞耻感+22% 兴奋度+38%",
+          "next_branch": "random_public_scene"
+        },
+        {
+          "id": "choice_random_complete_3",
+          "choice": "🎲 随机选择：夜间冒险类场景",
+          "effect": "命运选择了夜间冒险类场景！在夜色中体验暴露的快感，鸡巴在期待中不断发硬。",
+          "status_update": "暴露度+30% 羞耻感+25% 兴奋度+40%",
+          "next_branch": "random_night_scene"
+        },
+        {
+          "id": "choice_random_complete_4",
+          "choice": "🎲 随机选择：特殊环境类场景",
+          "effect": "命运选择了特殊环境类场景！在私密空间中体验暴露的刺激，鸡巴在兴奋中不断发硬。",
+          "status_update": "暴露度+28% 羞耻感+22% 兴奋度+38%",
+          "next_branch": "random_special_scene"
+        },
+        {
+          "id": "choice_random_complete_5",
+          "choice": "🎲 随机选择：户外冒险类场景",
+          "effect": "命运选择了户外冒险类场景！在大自然中体验暴露的快感，鸡巴在期待中不断发硬。",
+          "status_update": "暴露度+32% 羞耻感+28% 兴奋度+42%",
+          "next_branch": "random_outdoor_scene"
+        },
+        {
+          "id": "choice_random_complete_6",
+          "choice": "🎲 随机选择：日常生活类场景",
+          "effect": "命运选择了日常生活类场景！在日常生活中体验暴露的刺激，鸡巴在兴奋中不断发硬。",
+          "status_update": "暴露度+25% 羞耻感+20% 兴奋度+35%",
+          "next_branch": "random_daily_scene"
+        },
+        {
+          "id": "choice_random_complete_7",
+          "choice": "🎲 再次完全随机选择",
+          "effect": "让命运再次为你完全随机选择一个场景，体验真正的未知冒险。",
+          "status_update": "暴露度+10% 羞耻感+8% 兴奋度+15%",
+          "next_branch": "random_complete_scene"
+        },
+        {
+          "id": "choice_random_complete_8",
+          "choice": "返回随机场景选择",
+          "effect": "回到随机场景选择界面，选择其他类型的随机冒险。",
+          "status_update": "暴露度+0% 羞耻感+0% 兴奋度+0%",
+          "next_branch": "random_scene_challenge"
+        }
+      ]
+    }
+  ]
+}

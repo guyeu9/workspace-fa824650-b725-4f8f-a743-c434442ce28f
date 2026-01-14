@@ -18,6 +18,7 @@ import {
   Clock,
   User,
   Database,
+  RefreshCw,
   Trash2,
   Settings,
   Filter,
@@ -27,7 +28,6 @@ import {
   X,
   Globe,
   Import,
-  RefreshCw,
   MessageSquare,
   ThumbsUp,
   ThumbsDown,
@@ -72,6 +72,7 @@ export default function GameLibraryPage() {
   const [communityLoading, setCommunityLoading] = useState(false);
   const [communityError, setCommunityError] = useState<string | null>(null);
   const [showBatchDeleteDialog, setShowBatchDeleteDialog] = useState(false);
+  const [gameProgresses, setGameProgresses] = useState<Record<string, boolean>>({});
 
   // 加载游戏列表
   const loadGames = useCallback(async () => {
@@ -112,7 +113,39 @@ export default function GameLibraryPage() {
         return sortOrder === 'asc' ? comparison : -comparison;
       });
       
+      // 如果所有游戏的优先级都是0，则根据更新时间自动分配优先级
+      const allPriorityZero = filteredGames.every(game => game.priority === 0);
+      if (allPriorityZero && filteredGames.length > 0) {
+        const sortedByTime = [...filteredGames].sort((a, b) => 
+          new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+        );
+        
+        for (let i = 0; i < sortedByTime.length; i++) {
+          const game = sortedByTime[i];
+          const newPriority = sortedByTime.length - 1 - i;
+          await gameStore.updateGame(game.id, { priority: newPriority });
+          filteredGames.find(g => g.id === game.id)!.priority = newPriority;
+        }
+        
+        // 重新按优先级排序
+        filteredGames.sort((a, b) => b.priority - a.priority);
+      }
+      
       setGames(filteredGames);
+      
+      // 检查每个游戏是否有存档
+      const progressChecks = await Promise.all(filteredGames.map(async (game) => {
+        const progress = await gameStore.getGameProgress(game.id);
+        return { gameId: game.id, hasProgress: progress !== null };
+      }));
+      
+      // 更新进度状态
+      const progressMap: Record<string, boolean> = {};
+      progressChecks.forEach(({ gameId, hasProgress }) => {
+        progressMap[gameId] = hasProgress;
+      });
+      setGameProgresses(progressMap);
+      
     } catch (error) {
       console.error('加载游戏列表失败:', error);
       toast.error('加载游戏列表失败');
@@ -141,6 +174,50 @@ export default function GameLibraryPage() {
     try {
       const result = await gameStore.getGame(game.id);
       if (result) {
+        sessionStorage.setItem('gameData', JSON.stringify(result.data.data));
+        window.location.href = '/';
+      } else {
+        toast.error('无法加载游戏数据');
+      }
+    } catch (error) {
+      console.error('加载游戏数据失败:', error);
+      toast.error('加载游戏数据失败');
+    }
+  };
+
+  // 继续游戏
+  const handleContinueGame = async (game: GameIndexItem) => {
+    try {
+      const progress = await gameStore.getGameProgress(game.id);
+      if (progress) {
+        const result = await gameStore.getGame(game.id);
+        if (result) {
+          // 保存进度数据到 sessionStorage
+          sessionStorage.setItem('gameProgress', JSON.stringify(progress));
+          sessionStorage.setItem('gameData', JSON.stringify(result.data.data));
+          window.location.href = '/';
+        } else {
+          toast.error('无法加载游戏数据');
+        }
+      } else {
+        toast.error('没有可用的存档');
+      }
+    } catch (error) {
+      console.error('加载游戏进度失败:', error);
+      toast.error('加载游戏进度失败');
+    }
+  };
+
+  // 新游戏
+  const handleNewGame = async (game: GameIndexItem) => {
+    try {
+      const result = await gameStore.getGame(game.id);
+      if (result) {
+        // 删除旧进度
+        await gameStore.deleteGameProgress(game.id);
+        
+        // 清除进度数据
+        sessionStorage.removeItem('gameProgress');
         sessionStorage.setItem('gameData', JSON.stringify(result.data.data));
         window.location.href = '/';
       } else {
@@ -280,7 +357,7 @@ export default function GameLibraryPage() {
             // 下移：优先级+1
             newPriority = action === 'up' ? Math.max(0, game.priority - 1) : game.priority + 1;
           }
-          await gameStore.updateGameMetadata(gameId, { ...game, priority: newPriority });
+          await gameStore.updateGame(gameId, { priority: newPriority });
         }
       }
       let actionText = '';
@@ -316,11 +393,19 @@ export default function GameLibraryPage() {
 
   // 获取优先级标签
   const getPriorityLabel = (priority: number) => {
-    // 调整优先级显示，从1开始
     const displayPriority = priority + 1;
-    return {
-      label: `优先级 ${displayPriority}`,
-      color: 'bg-blue-100 text-blue-800'
+    
+    const priorityConfig = {
+      1: { label: '优先级 1', color: 'bg-blue-100 text-blue-800' },
+      2: { label: '优先级 2', color: 'bg-green-100 text-green-800' },
+      3: { label: '优先级 3', color: 'bg-yellow-100 text-yellow-800' },
+      4: { label: '优先级 4', color: 'bg-orange-100 text-orange-800' },
+      5: { label: '优先级 5', color: 'bg-red-100 text-red-800' },
+    };
+    
+    return priorityConfig[displayPriority as keyof typeof priorityConfig] || { 
+      label: `优先级 ${displayPriority}`, 
+      color: 'bg-gray-100 text-gray-800' 
     };
   };
 
@@ -614,7 +699,7 @@ export default function GameLibraryPage() {
               return (
                 <Card 
                   key={game.id} 
-                  className={`transition-all duration-200 hover:shadow-2xl bg-white border-2 border-slate-300 ${
+                  className={`transition-all duration-200 hover:shadow-2xl bg-white border-2 border-slate-300 flex flex-col ${
                     isSelected ? 'ring-2 ring-blue-500' : ''
                   }`}
                 >
@@ -645,7 +730,7 @@ export default function GameLibraryPage() {
                     </div>
                   </CardHeader>
                   
-                  <CardContent>
+                  <CardContent className="flex-grow flex flex-col justify-end">
                     {game.description && (
                       <p className="text-sm text-gray-600 mb-4 line-clamp-2">
                         {game.description}
@@ -659,20 +744,46 @@ export default function GameLibraryPage() {
                       </div>
                       <div className="flex items-center gap-1">
                         <Star className="h-3 w-3" />
-                        {game.priority}
+                        {game.priority + 1}
                       </div>
                     </div>
                     
-                    <div className="flex gap-2">
-                      <Button
-                        size="sm"
-                        variant="default"
-                        onClick={() => handleGamePlay(game)}
-                        className="flex-1 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white transition-all duration-300"
-                      >
-                        <Play className="h-3 w-3 mr-1" />
-                        开始游戏
-                      </Button>
+                    <div className="grid grid-cols-2 gap-2">
+                      {gameProgresses[game.id] ? (
+                        <>
+                          <Button
+                            size="sm"
+                            variant="default"
+                            onClick={() => handleContinueGame(game)}
+                            className="flex-1 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white transition-all duration-300"
+                          >
+                            <Play className="h-3 w-3 mr-1" />
+                            继续游戏
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => handleNewGame(game)}
+                            className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white transition-all duration-300"
+                          >
+                            <RefreshCw className="h-3 w-3 mr-1" />
+                            新游戏
+                          </Button>
+                        </>
+                      ) : (
+                        <>
+                          <Button
+                            size="sm"
+                            variant="default"
+                            onClick={() => handleNewGame(game)}
+                            className="flex-1 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white transition-all duration-300"
+                          >
+                            <Play className="h-3 w-3 mr-1" />
+                            开始游戏
+                          </Button>
+                          <div></div>
+                        </>
+                      )}
                       
                       <Button
                         size="sm"
@@ -708,32 +819,37 @@ export default function GameLibraryPage() {
             </div>
             
             <div className="flex gap-2">
+              <input
+                type="file"
+                id="game-import-input"
+                accept=".json,.zip"
+                className="hidden"
+                onChange={async (e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    try {
+                      const result = await enhancedGameStore.importGamePack(file);
+                      if (result.success) {
+                        toast.success(`成功导入 ${result.count} 个游戏`);
+                        await loadGames();
+                      } else {
+                        toast.error('导入失败');
+                        if (result.errors.length > 0) {
+                          result.errors.forEach(error => toast.error(error));
+                        }
+                      }
+                    } catch (error) {
+                      toast.error(`导入错误: ${error instanceof Error ? error.message : '未知错误'}`);
+                    }
+                  }
+                  // 重置input以便重复选择同一文件
+                  e.target.value = '';
+                }}
+              />
               <Button
                 variant="default"
                 onClick={() => {
-                  const input = document.createElement('input');
-                  input.type = 'file';
-                  input.accept = '.json,.zip';
-                  input.onchange = async (e) => {
-                    const file = (e.target as HTMLInputElement).files?.[0];
-                    if (file) {
-                      try {
-                        const result = await enhancedGameStore.importGamePack(file);
-                        if (result.success) {
-                          toast.success(`成功导入 ${result.count} 个游戏`);
-                          await loadGames();
-                        } else {
-                          toast.error('导入失败');
-                          if (result.errors.length > 0) {
-                            result.errors.forEach(error => toast.error(error));
-                          }
-                        }
-                      } catch (error) {
-                        toast.error(`导入错误: ${error instanceof Error ? error.message : '未知错误'}`);
-                      }
-                    }
-                  };
-                  input.click();
+                  document.getElementById('game-import-input')?.click();
                 }}
                 className="bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white transition-all duration-300"
               >

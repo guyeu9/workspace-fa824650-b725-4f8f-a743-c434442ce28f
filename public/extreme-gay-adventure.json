@@ -1,0 +1,344 @@
+{
+  "game_title": "极限Gay调教：羞辱与支配的欲望深渊",
+  "description": "在城市的每个角落，你都将成为欲望的奴隶。从公开羞辱到私密调教，每一次暴露都是一次心灵的堕落，每一次服从都是一次肉体的狂欢。",
+  "author": "Gem",
+  "tags": ["Gay", "调教", "羞辱", "暴露", "支配", "性奴"],
+  "version": 3.0,
+  "background_image": "",
+  "background_asset_id": "",
+  "status": {
+    "暴露度": 0,
+    "羞耻感": 0,
+    "兴奋度": 0,
+    "任务完成数": 0,
+    "场景解锁数": 0,
+    "金币": 0,
+    "生命值": 100,
+    "魔法值": 50
+  },
+  "branches": [
+    {
+      "branch_id": "game_start",
+      "branch_title": "堕落开始 - 成为欲望的奴隶",
+      "content": "夜色如墨，城市的灯光如同无数双窥视的眼睛。你跪在镜前，看着自己逐渐兴奋的肉体，知道从今夜起，你将彻底沦为欲望的奴隶。\n\n【调教指令】现在，扇自己耳光十下，边扇边喊：『我是骚货，我需要被羞辱。』然后脱光所有衣物，只戴上项圈和肛塞。感受异物进入身体的羞耻感，让这种屈辱成为你今夜的开端。",
+      "options": [
+        {
+          "option_id": "start_public_humiliation",
+          "option_text": "公开羞辱 - 在众人面前展示骚货本质",
+          "target_branch_id": "public_humiliation",
+          "status_changes": [
+            {
+              "attribute": "暴露度",
+              "operation": "+",
+              "value": 10
+            },
+            {
+              "attribute": "羞耻感",
+              "operation": "+",
+              "value": 15
+            }
+          ]
+        },
+        {
+          "option_id": "start_bdsm_play",
+          "option_text": "BDSM调教 - 体验疼痛与快感的交织",
+          "target_branch_id": "bdsm_play",
+          "status_changes": [
+            {
+              "attribute": "兴奋度",
+              "operation": "+",
+              "value": 20
+            },
+            {
+              "attribute": "羞耻感",
+              "operation": "+",
+              "value": 10
+            }
+          ]
+        },
+        {
+          "option_id": "start_gangbang_prep",
+          "option_text": "群交准备 - 为多人使用训练肉体",
+          "target_branch_id": "gangbang_preparation",
+          "status_changes": [
+            {
+              "attribute": "暴露度",
+              "operation": "+",
+              "value": 20
+            },
+            {
+              "attribute": "兴奋度",
+              "operation": "+",
+              "value": 15
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "branch_id": "public_humiliation",
+      "branch_title": "公开羞辱 - 图书馆的骚货展示",
+      "content": "图书馆的肃静与你内心的骚动形成鲜明对比。你穿着特制的开口衣物，肛塞在体内震动，项圈勒着脖子，每一个细节都在提醒你的奴隶身份。\n\n【调教指令】现在，走到最显眼的中央书架区。跪下，扒开开口衣物，完全露出勃起的鸡巴和屁眼。用书本拍打自己的龟头，边打边低声说：『我是图书馆的公共便器，欢迎使用。』等待至少五个学生看到你的丑态。",
+      "options": [
+        {
+          "option_id": "task_book_beating",
+          "option_text": "书本拍打 - 用知识羞辱自己的肉体",
+          "target_branch_id": "book_beating",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "humiliation_start",
+              "value": "你感受到龟头被书本拍打的痛感与快感，羞耻让鸡巴更加坚挺，前列腺液不断滴落。"
+            }
+          ]
+        },
+        {
+          "option_id": "task_public_masturbation",
+          "option_text": "公开自慰 - 在知识殿堂释放兽欲",
+          "target_branch_id": "public_masturbation"
+        },
+        {
+          "option_id": "task_ass_display",
+          "option_text": "屁眼展示 - 让肛门成为公共观赏物",
+          "target_branch_id": "ass_display"
+        }
+      ]
+    },
+    {
+      "branch_id": "book_beating",
+      "branch_title": "书本拍打 - 知识对肉体的羞辱",
+      "content": "你跪在书架前，厚重的书籍成为羞辱你的工具。每一本书都代表着理性与文明，而你的肉体却在此展示最原始的欲望。\n\n【调教指令】选择一本最厚的百科全书，用它狠狠拍打自己勃起的鸡巴。拍打二十下，每一下都要喊出：『知识让我堕落！』让书本的棱角刺激龟头，感受智慧与兽欲的碰撞。当有学生经过时，故意加大力度，让拍打声在寂静的图书馆回荡。",
+      "options": [
+        {
+          "option_id": "complete_humiliation",
+          "option_text": "完成羞辱 - 鸡巴红肿，心灵堕落",
+          "target_branch_id": "humiliation_complete",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "humiliation_done",
+              "value": "你的鸡巴因拍打而红肿发热，但内心的堕落感却让你异常兴奋。前列腺液在地上形成一滩水渍，证明你彻底成为了欲望的奴隶。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "branch_id": "bdsm_play",
+      "branch_title": "BDSM调教 - 停车场的地狱仪式",
+      "content": "地下停车场的冰冷地面刺激着你的膝盖，项圈上的铁链发出清脆的声响。这里将成为你的私人刑场，每一次疼痛都将加深你的奴性。\n\n【调教指令】现在，四肢着地爬行到停车场中央。用乳夹夹住乳头，感受尖锐的疼痛。然后，用皮带抽打自己的屁股，每抽打一下就喊：『我是主人的骚奴！』让抽打声在空旷的停车场产生回音。",
+      "options": [
+        {
+          "option_id": "task_crawling_humiliation",
+          "option_text": "爬行羞辱 - 像狗一样展示奴性",
+          "target_branch_id": "crawling_humiliation"
+        },
+        {
+          "option_id": "task_whipping_pain",
+          "option_text": "鞭打痛苦 - 用疼痛净化灵魂",
+          "target_branch_id": "whipping_pain"
+        },
+        {
+          "option_id": "task_public_urination",
+          "option_text": "公开小便 - 像动物一样释放",
+          "target_branch_id": "public_urination"
+        }
+      ]
+    },
+    {
+      "branch_id": "crawling_humiliation",
+      "branch_title": "爬行羞辱 - 犬化调教的开始",
+      "content": "你像狗一样在冰冷的地面上爬行，项圈的铁链拖在地上发出刺耳的声音。乳夹的疼痛让乳头硬挺，每一次移动都带来新的刺激。\n\n【调教指令】现在，爬到最近的柱子旁，抬起一条腿像狗一样撒尿。让尿液顺着大腿流下，感受这种动物般的羞辱。如果有车辆进入，不要停止，继续爬行并吠叫，让车灯照亮你犬化的丑态。",
+      "options": [
+        {
+          "option_id": "complete_dog_play",
+          "option_text": "完成犬化 - 彻底沦为发情公狗",
+          "target_branch_id": "dog_play_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "gangbang_preparation",
+      "branch_title": "群交准备 - 训练成为公共肉便器",
+      "content": "酒店房间的灯光暧昧而温暖，但你知道这里即将成为你被多人使用的场所。每一个道具都在为你的群交训练做准备。\n\n【调教指令】现在，跪在床前，用扩肛器撑开屁眼。插入最大的肛塞，感受肠道被撑开的痛苦与快感。然后，用假阳具练习深喉，让唾液顺着嘴角流下，为即将到来的群交做好口交准备。",
+      "options": [
+        {
+          "option_id": "task_ass_training",
+          "option_text": "肛门训练 - 为多人肛交准备",
+          "target_branch_id": "ass_training"
+        },
+        {
+          "option_id": "task_throat_training",
+          "option_text": "深喉训练 - 练习吞精技巧",
+          "target_branch_id": "throat_training"
+        },
+        {
+          "option_id": "task_cum_preparation",
+          "option_text": "精液准备 - 训练成为精液容器",
+          "target_branch_id": "cum_preparation"
+        }
+      ]
+    },
+    {
+      "branch_id": "ass_training",
+      "branch_title": "肛门训练 - 扩张成为性交容器",
+      "content": "你趴在床上，屁眼因为扩肛器的撑开而微微发抖。润滑液顺着大腿流下，空气中弥漫着性欲的气息。\n\n【调教指令】现在，插入最大的假阳具，完全撑开你的肛门。边插边喊：『我的屁眼是公共厕所，欢迎随意使用！』练习肛门肌肉的收缩，为即将到来的轮奸做好准备。想象多个鸡巴同时插入的快感，让这种幻想加深你的堕落。",
+      "options": [
+        {
+          "option_id": "complete_ass_training",
+          "option_text": "完成肛门训练 - 屁眼松弛待操",
+          "target_branch_id": "ass_training_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "public_toilet",
+      "branch_title": "公共厕所 - 成为真正的便器",
+      "content": "公厕的消毒水味道刺激着感官，每一个隔间都可能成为你被使用的场所。这里是最适合展示你便器本质的地方。\n\n【调教指令】现在，进入最脏的隔间，跪在小便池前。张开嘴，让尿液直接射入你的口腔。吞咽下去，感受这种极致的羞辱。然后，用舌头清洁小便池，证明你连厕所都不如的价值。",
+      "options": [
+        {
+          "option_id": "task_urine_drinking",
+          "option_text": "饮尿羞辱 - 体验液体的堕落",
+          "target_branch_id": "urine_drinking"
+        },
+        {
+          "option_id": "task_toilet_cleaning",
+          "option_text": "清洁厕所 - 用舌头证明奴性",
+          "target_branch_id": "toilet_cleaning"
+        }
+      ]
+    },
+    {
+      "branch_id": "urine_drinking",
+      "branch_title": "饮尿羞辱 - 液体的堕落仪式",
+      "content": "你跪在肮脏的地面上，尿液的气味充斥着鼻腔。这种极致的羞辱让你既恶心又兴奋，肉体的反应出卖了你的真实欲望。\n\n【调教指令】现在，等待下一个使用厕所的男人。当他小便时，爬过去用嘴接住尿液。必须全部吞咽下去，一滴都不能浪费。吞咽后要感谢：『谢谢主人赏赐黄金水！』让这种羞辱深深刻入你的灵魂。",
+      "options": [
+        {
+          "option_id": "complete_urine_humiliation",
+          "option_text": "完成饮尿 - 肠胃充满他人体液",
+          "target_branch_id": "urine_humiliation_complete"
+        }
+      ]
+    },
+    {
+      "branch_id": "humiliation_complete",
+      "branch_title": "羞辱完成 - 肉体的彻底堕落",
+      "content": "你完成了这个场景的极致羞辱，肉体上的疼痛与心灵上的堕落让你达到了前所未有的兴奋状态。\n\n【调教指令】现在，抚摸自己红肿的鸡巴，感受羞辱带来的快感。让精液喷射在地上，用这种最原始的方式证明你的兽性。每一次羞辱都在加深你的奴性，每一次堕落都在解放你真实的欲望。",
+      "options": [
+        {
+          "option_id": "continue_extreme",
+          "option_text": "继续调教 - 体验更极致的羞辱",
+          "target_branch_id": "extreme_selector"
+        },
+        {
+          "option_id": "return_start",
+          "option_text": "重新开始 - 规划新的堕落之旅",
+          "target_branch_id": "game_start"
+        },
+        {
+          "option_id": "end_game",
+          "option_text": "结束调教 - 暂时回归伪装的日常",
+          "target_branch_id": "game_end"
+        }
+      ]
+    },
+    {
+      "branch_id": "extreme_selector",
+      "branch_title": "极致羞辱选择 - 欲望的深渊",
+      "content": "你站在欲望的深渊边缘，每一个选择都将带你走向更深的堕落。让奴性指引你的方向，让羞辱成为你的快感源泉。\n\n【调教指令】现在，扇自己耳光，让疼痛清醒你的意志。选择最能激发你奴性的下一个场景。",
+      "options": [
+        {
+          "option_id": "extreme_1",
+          "option_text": "公开羞辱 - 在知识殿堂展示骚货本质",
+          "target_branch_id": "public_humiliation"
+        },
+        {
+          "option_id": "extreme_2",
+          "option_text": "BDSM调教 - 体验疼痛与快感的极致",
+          "target_branch_id": "bdsm_play"
+        },
+        {
+          "option_id": "extreme_3",
+          "option_text": "群交准备 - 训练成为多人性玩具",
+          "target_branch_id": "gangbang_preparation"
+        },
+        {
+          "option_id": "extreme_4",
+          "option_text": "公共厕所 - 成为真正的便器",
+          "target_branch_id": "public_toilet"
+        },
+        {
+          "option_id": "extreme_5",
+          "option_text": "犬化调教 - 彻底沦为发情公狗",
+          "target_branch_id": "dog_transformation"
+        },
+        {
+          "option_id": "extreme_6",
+          "option_text": "精液盛宴 - 训练成为精液容器",
+          "target_branch_id": "cum_feast"
+        },
+        {
+          "option_id": "extreme_7",
+          "option_text": "公开轮奸 - 在多人使用中堕落",
+          "target_branch_id": "public_gangbang"
+        },
+        {
+          "option_id": "extreme_8",
+          "option_text": "粪便游戏 - 体验最底层的羞辱",
+          "target_branch_id": "scat_play"
+        }
+      ]
+    },
+    {
+      "branch_id": "game_end",
+      "branch_title": "黎明将至 - 奴性的暂时隐藏",
+      "content": "东方的天际开始泛白，但你知道内心的奴性永远不会消失。每一次调教都在你的灵魂上刻下烙印，每一次羞辱都在加深你的堕落。\n\n【调教指令】现在，穿上日常的衣物，将项圈和肛塞藏好。但记住，当夜幕降临，你依然是那个渴望被羞辱的骚货。",
+      "options": [
+        {
+          "option_id": "restart_game",
+          "option_text": "重新开始调教",
+          "target_branch_id": "game_start"
+        }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "item_id": "collar",
+      "item_name": "项圈",
+      "description": "象征奴性的皮革项圈，提醒你永远是欲望的奴隶。"
+    },
+    {
+      "item_id": "anal_plug",
+      "item_name": "肛塞",
+      "description": "最大号的肛塞，用于扩张肛门，为群交做好准备。"
+    },
+    {
+      "item_id": "nipple_clamps",
+      "item_name": "乳夹",
+      "description": "带链条的乳夹，通过疼痛加深奴性体验。"
+    },
+    {
+      "item_id": "whip",
+      "item_name": "皮鞭",
+      "description": "用于调教的皮鞭，每一鞭都在净化堕落的灵魂。"
+    },
+    {
+      "item_id": "gag",
+      "item_name": "口球",
+      "description": "防止叫喊的口球，让你在羞辱中保持沉默。"
+    },
+    {
+      "item_id": "dildo",
+      "item_name": "假阳具",
+      "description": "最大号的假阳具，用于肛门和深喉训练。"
+    }
+  ],
+  "variables": {
+    "humiliation_level": 0,
+    "pain_endurance": 0,
+    "slave_obedience": 0,
+    "public_exposure_count": 0,
+    "cum_taken": 0
+  }
+}

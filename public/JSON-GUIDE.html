@@ -9,7 +9,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
             color: #333;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 20px;
             background: #f8f9fa;
@@ -41,6 +41,12 @@
             margin-top: 30px;
         }
         
+        h4 {
+            color: #34495e;
+            margin-top: 25px;
+            font-weight: 600;
+        }
+        
         pre {
             background: #f8f9fa;
             border: 1px solid #e9ecef;
@@ -48,7 +54,9 @@
             padding: 15px;
             overflow-x: auto;
             font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-            font-size: 14px;
+            font-size: 13px;
+            max-height: 500px;
+            overflow-y: auto;
         }
         
         code {
@@ -85,52 +93,170 @@
         .back-link:hover {
             background: #2980b9;
         }
+        
+        .format-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .format-card h4 {
+            margin-top: 0;
+            color: #3498db;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .error {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .info {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .toc h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .toc li {
+            margin: 8px 0;
+        }
+        
+        .toc a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        .toc ul ul {
+            padding-left: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Text Engine JSON 游戏格式说明</h1>
 
-        <h2>概述</h2>
-        <p>这是一个完整的示例JSON故事文件，展示了Text Engine支持的所有功能。你可以使用此文件作为模板来创建自己的文本冒险游戏。</p>
+        <div class="toc">
+            <h3>目录</h3>
+            <ul>
+                <li><a href="#overview">概述</a></li>
+                <li><a href="#format-room">格式1: 房间式格式</a></li>
+                <li><a href="#format-branch">格式2: 分支式格式</a></li>
+                <li><a href="#format-v3">格式3: Text Engine v3格式</a></li>
+                <li><a href="#common-notes">通用注意事项</a></li>
+                <li><a href="#validation-rules">验证规则</a></li>
+                <li><a href="#troubleshooting">常见问题排查</a></li>
+            </ul>
+        </div>
 
-        <h2>JSON结构说明</h2>
+        <h2 id="overview">概述</h2>
+        <p>Text Engine支持三种不同的JSON游戏格式,每种格式适用于不同类型的游戏:</p>
+        
+        <div class="format-card">
+            <h4>格式1: 房间式格式</h4>
+            <p>传统的文本冒险游戏格式,玩家在房间之间移动,与物品和角色互动。</p>
+            <p><strong>适用场景:</strong> 探索类、解谜类、传统冒险游戏</p>
+            <p><strong>特点:</strong> 房间导航、物品系统、角色对话</p>
+        </div>
+        
+        <div class="format-card">
+            <h4>格式2: 分支式格式</h4>
+            <p>现代互动小说格式,通过选择推动剧情发展,支持多分支结局。</p>
+            <p><strong>适用场景:</strong> 视觉小说、互动故事、恋爱模拟</p>
+            <p><strong>特点:</strong> 选择分支、状态追踪、多结局</p>
+        </div>
+        
+        <div class="format-card">
+            <h4>格式3: Text Engine v3格式</h4>
+            <p>现代化游戏引擎格式,支持复杂的状态管理、效果系统和事件处理。</p>
+            <p><strong>适用场景:</strong> 复杂RPG、策略游戏、需要深度状态管理的游戏</p>
+            <p><strong>特点:</strong> 标志位系统、变量系统、效果系统、历史记录</p>
+        </div>
 
+        <div class="info">
+            <strong>格式选择建议:</strong> 如果您是新手,建议从房间式格式开始。如果您需要创建复杂的互动故事,建议使用分支式格式。如果您需要高级功能如状态管理和效果系统,建议使用Text Engine v3格式。
+        </div>
+
+        <h2 id="format-room">格式1: 房间式格式</h2>
+        
         <h3>基本属性</h3>
         <pre><code>{
   "playerName": "冒险者",     // 玩家角色名称
   "playerId": "start",        // 玩家起始房间ID
   "rooms": [...],            // 房间数组
-  "characters": [...]         // 角色数组（可选）
+  "characters": [...]         // 角色数组(可选)
 }</code></pre>
 
         <h3>房间 (Room)</h3>
         <pre><code>{
   "id": "start",             // 房间唯一标识符
   "name": "起始房间",        // 房间名称
-  "desc": [                  // 房间描述（数组会随机选择一行显示）
+  "desc": [                  // 房间描述(数组会随机选择一行显示)
     "这是第一行描述",
     "这是第二行描述"
   ],
-  "img": [                   // ASCII艺术图（可选）
+  "img": [                   // ASCII艺术图(可选)
     "┌─────────┐",
     "│   🚪    │",
     "└─────────┘"
   ],
-  "items": [...],            // 房间内物品数组（可选）
-  "exits": [...],            // 出口数组（可选）
-  "characters": [...],       // 房间内角色数组（可选）
-  "onEnter": [...]           // 进入房间时触发的事件（可选）
+  "items": [...],            // 房间内物品数组(可选)
+  "exits": [...],            // 出口数组(可选)
+  "characters": [...],       // 房间内角色数组(可选)
+  "onEnter": [...]           // 进入房间时触发的事件(可选)
 }</code></pre>
 
         <h3>物品 (Item)</h3>
         <pre><code>{
-  "name": ["钥匙", "key"],    // 物品名称（数组支持多个别名）
+  "name": ["钥匙", "key"],    // 物品名称(数组支持多个别名)
   "desc": "一把古老的钥匙",   // 物品描述
   "isTakeable": true,         // 是否可以被拾取
   "isHidden": false,          // 是否隐藏
-  "onTake": [...],           // 拾取时触发的事件（可选）
-  "onUse": [...]             // 使用时触发的事件（可选）
+  "onTake": [...],           // 拾取时触发的事件(可选)
+  "onUse": [...]             // 使用时触发的事件(可选)
 }</code></pre>
 
         <h3>角色 (Character)</h3>
@@ -149,14 +275,14 @@
 
         <h3>出口 (Exit)</h3>
         <pre><code>{
-  "dir": ["北", "north"],    // 方向（支持中英文）
+  "dir": ["北", "north"],    // 方向(支持中英文)
   "id": "north_room",        // 目标房间ID
-  "block": "门被锁住了",     // 阻塞描述（可选）
+  "block": "门被锁住了",     // 阻塞描述(可选)
   "isHidden": false,         // 是否隐藏出口
-  "onChoose": [...]          // 选择此出口时触发的事件（可选）
+  "onChoose": [...]          // 选择此出口时触发的事件(可选)
 }</code></pre>
 
-        <h2>完整示例</h2>
+        <h3>完整示例</h3>
         <pre><code>{
   "playerName": "冒险者",
   "playerId": "start",
@@ -166,7 +292,7 @@
       "name": "神秘房间",
       "desc": [
         "你发现自己站在一个充满神秘的房间里。",
-        "墙上挂着古老的画像，地板上铺着华丽的地毯。"
+        "墙上挂着古老的画像,地板上铺着华丽的地毯。"
       ],
       "items": [
         {
@@ -184,7 +310,7 @@
     {
       "id": "north_room", 
       "name": "密室",
-      "desc": ["这是一个隐藏的密室，墙壁上镶嵌着发光的水晶。"],
+      "desc": ["这是一个隐藏的密室,墙壁上镶嵌着发光的水晶。"],
       "exits": [
         {"dir": ["南", "south"], "id": "start"}
       ]
@@ -195,7 +321,7 @@
       "name": "神秘守护者",
       "id": "guardian",
       "roomId": "north_room",
-      "desc": "一个神秘的守护者，身穿古老的长袍。",
+      "desc": "一个神秘的守护者,身穿古老的长袍。",
       "topics": {
         "钥匙": {
           "option": "询问关于钥匙的事情",
@@ -206,8 +332,8 @@
   ]
 }</code></pre>
 
-        <h2>事件系统</h2>
-        <p>Text Engine支持多种事件触发器：</p>
+        <h3>事件系统</h3>
+        <p>房间式格式支持多种事件触发器:</p>
         <ul>
             <li><strong>onEnter</strong>: 玩家进入房间时触发</li>
             <li><strong>onTake</strong>: 玩家拾取物品时触发</li>
@@ -215,7 +341,7 @@
             <li><strong>onChoose</strong>: 玩家选择出口时触发</li>
         </ul>
 
-        <h2>支持的指令</h2>
+        <h3>支持的指令</h3>
         <ul>
             <li><strong>LOOK</strong> / <strong>观察</strong>: 查看当前房间</li>
             <li><strong>GO [方向]</strong> / <strong>去 [方向]</strong>: 移动到指定方向</li>
@@ -226,6 +352,463 @@
             <li><strong>ITEMS</strong> / <strong>物品</strong>: 查看当前房间物品</li>
             <li><strong>HELP</strong> / <strong>帮助</strong>: 显示帮助信息</li>
         </ul>
+
+        <div class="warning">
+            <strong>注意事项:</strong> 房间式格式中的所有ID必须唯一,包括房间ID、物品ID、角色ID等。确保所有出口引用的房间ID都存在。
+        </div>
+
+        <h2 id="format-branch">格式2: 分支式格式</h2>
+        
+        <h3>基本属性</h3>
+        <pre><code>{
+  "game_title": "游戏标题",     // 游戏标题(必填)
+  "description": "游戏描述",   // 游戏描述(可选)
+  "author": "作者名",         // 作者名(可选)
+  "tags": ["标签1", "标签2"], // 标签数组(可选)
+  "thumbnail": "缩略图URL",   // 缩略图URL(可选)
+  "status": {                 // 游戏状态(可选)
+    "sao_lang_jian": "骚0,浪0,贱0",
+    "body_outtrack": "0%",
+    "psy_outtrack": "0%"
+  },
+  "branches": [...]           // 分支数组(必填)
+}</code></pre>
+
+        <h3>分支 (Branch)</h3>
+        <pre><code>{
+  "branch_id": "start_home",       // 分支唯一标识符(必填)
+  "chapter": "第1章:章节标题",     // 章节标题(必填其一)
+  "scene_detail": "场景详细描述",  // 场景描述(必填其一)
+  "choices": [...]                  // 选择项数组(可选)
+}</code></pre>
+
+        <h3>选择 (Choice)</h3>
+        <pre><code>{
+  "id": "choice_1_1",                    // 选择项唯一标识符(可选)
+  "choice": "1. 选择文本",               // 选择文本(必填)
+  "effect": "选择后的效果描述",         // 效果描述(可选)
+  "status_update": "骚4,浪3,贱4 | 身体12% 心理15%",  // 状态更新(可选)
+  "next_branch": "next_branch_id",       // 下一分支ID(必填其一)
+  "end_game": true                       // 结束游戏(必填其一)
+}</code></pre>
+
+        <h3>完整示例</h3>
+        <pre><code>{
+  "game_title": "冒险故事",
+  "description": "一个关于勇气与选择的冒险故事",
+  "author": "游戏作者",
+  "tags": ["冒险", "选择", "互动"],
+  "branches": [
+    {
+      "branch_id": "start",
+      "chapter": "第1章: 起始",
+      "scene_detail": "你站在一个十字路口,前方有三条路可以选择。阳光透过树叶洒在地面上,空气中弥漫着花香。",
+      "choices": [
+        {
+          "id": "choice_1",
+          "choice": "1. 走向左边的森林小路",
+          "effect": "你踏上了通往森林的小路,鸟儿在枝头歌唱。",
+          "next_branch": "forest_path"
+        },
+        {
+          "id": "choice_2",
+          "choice": "2. 走向右边的山丘",
+          "effect": "你开始攀登山丘,视野逐渐开阔。",
+          "next_branch": "hill_path"
+        },
+        {
+          "id": "choice_3",
+          "choice": "3. 原地休息",
+          "effect": "你决定先休息一下,享受这宁静的时光。",
+          "end_game": true
+        }
+      ]
+    },
+    {
+      "branch_id": "forest_path",
+      "chapter": "第2章: 森林",
+      "scene_detail": "森林里光线昏暗,但充满了神秘的美感。你听到了远处传来的流水声。",
+      "choices": [
+        {
+          "choice": "1. 寻找水源",
+          "next_branch": "river"
+        },
+        {
+          "choice": "2. 继续深入森林",
+          "next_branch": "deep_forest"
+        }
+      ]
+    }
+  ]
+}</code></pre>
+
+        <h3>状态系统</h3>
+        <p>分支式格式支持状态追踪,可以记录玩家的选择和进度:</p>
+        <pre><code>{
+  "status": {
+    "sao_lang_jian": "骚0,浪0,贱0",    // 角色属性
+    "body_outtrack": "0%",              // 身体进度
+    "psy_outtrack": "0%"               // 心理进度
+  }
+}</code></pre>
+
+        <div class="warning">
+            <strong>注意事项:</strong> 
+            <ul>
+                <li>每个分支必须有唯一的branch_id</li>
+                <li>每个分支必须包含chapter或scene_detail至少一个</li>
+                <li>每个选择项必须包含next_branch或end_game至少一个</li>
+                <li>确保所有next_branch引用的branch_id都存在</li>
+                <li>分支ID不能重复,否则会导致验证失败</li>
+            </ul>
+        </div>
+
+        <h2 id="format-v3">格式3: Text Engine v3格式</h2>
+        
+        <h3>基本属性</h3>
+        <pre><code>{
+  "start": "scene_start",    // 起始场景ID(必填)
+  "scenes": {...},           // 场景对象(必填)
+  "meta": {                 // 元数据(可选)
+    "title": "游戏标题",
+    "version": "1.0.0",
+    "author": "作者名",
+    "description": "游戏描述"
+  }
+}</code></pre>
+
+        <h3>场景 (Scene)</h3>
+        <pre><code>{
+  "id": "scene_start",      // 场景唯一标识符(必填)
+  "name": "场景名称",       // 场景名称(可选)
+  "text": [                // 场景文本(必填)
+    "第一行文本",
+    "第二行文本"
+  ],
+  "choices": [...],         // 选择项数组(可选)
+  "condition": "flag_key",  // 进入条件(可选)
+  "onEnter": {...},         // 进入效果(可选)
+  "events": {...}           // 事件处理器(可选)
+}</code></pre>
+
+        <h3>选择 (Choice)</h3>
+        <pre><code>{
+  "id": "choice_id",        // 选择项唯一标识符(必填)
+  "text": "选择文本",       // 显示文本(必填)
+  "command": "command",     // 执行命令(可选)
+  "to": "target_scene",    // 目标场景(可选)
+  "condition": "flag_key",  // 显示条件(可选)
+  "effect": {...}           // 选择效果(可选)
+}</code></pre>
+
+        <h3>效果 (Effect)</h3>
+        <pre><code>{
+  "setFlags": {            // 设置标志位(可选)
+    "flag_key": true
+  },
+  "setVariables": {         // 设置变量(可选)
+    "var_name": 100
+  },
+  "addItems": ["item1"],   // 添加物品(可选)
+  "removeItems": ["item2"], // 移除物品(可选)
+  "emitEvents": ["event1"] // 触发事件(可选)
+}</code></pre>
+
+        <h3>完整示例</h3>
+        <pre><code>{
+  "start": "scene_start",
+  "scenes": {
+    "scene_start": {
+      "id": "scene_start",
+      "name": "起始场景",
+      "text": [
+        "欢迎来到Text Engine v3!",
+        "这是一个功能强大的游戏引擎。"
+      ],
+      "choices": [
+        {
+          "id": "choice_explore",
+          "text": "开始探索",
+          "to": "scene_explore"
+        },
+        {
+          "id": "choice_help",
+          "text": "查看帮助",
+          "to": "scene_help"
+        }
+      ]
+    },
+    "scene_explore": {
+      "id": "scene_explore",
+      "name": "探索",
+      "text": [
+        "你来到了一个神秘的地方。",
+        "这里充满了未知的可能性。"
+      ],
+      "onEnter": {
+        "setFlags": {
+          "visited_explore": true
+        }
+      },
+      "choices": [
+        {
+          "id": "choice_back",
+          "text": "返回",
+          "to": "scene_start",
+          "condition": "visited_explore"
+        }
+      ]
+    }
+  },
+  "meta": {
+    "title": "Text Engine v3 示例",
+    "version": "1.0.0",
+    "author": "游戏作者",
+    "description": "一个展示Text Engine v3功能的示例游戏"
+  }
+}</code></pre>
+
+        <h3>状态管理</h3>
+        <p>Text Engine v3支持复杂的状态管理:</p>
+        <ul>
+            <li><strong>标志位(Flags)</strong>: 布尔值,用于记录游戏状态</li>
+            <li><strong>变量(Variables)</strong>: 数字或字符串,用于存储数值和文本</li>
+            <li><strong>物品(Items)</strong>: 字符串数组,记录玩家拥有的物品</li>
+            <li><strong>历史(History)</strong>: 记录玩家的操作历史</li>
+        </ul>
+
+        <h3>事件系统</h3>
+        <p>Text Engine v3支持多种事件类型:</p>
+        <ul>
+            <li><strong>SCENE_CHANGE</strong>: 场景切换</li>
+            <li><strong>GAIN_ITEM</strong>: 获得物品</li>
+            <li><strong>LOSE_ITEM</strong>: 失去物品</li>
+            <li><strong>SET_FLAG</strong>: 设置标志位</li>
+            <li><strong>SET_VARIABLE</strong>: 设置变量</li>
+            <li><strong>GAME_END</strong>: 游戏结束</li>
+            <li><strong>CUSTOM</strong>: 自定义事件</li>
+        </ul>
+
+        <div class="warning">
+            <strong>注意事项:</strong> 
+            <ul>
+                <li>所有场景ID必须唯一</li>
+                <li>start字段必须引用一个存在的场景ID</li>
+                <li>确保所有to字段引用的场景ID都存在</li>
+                <li>条件(condition)必须是有效的标志位名称</li>
+                <li>效果(effect)中的所有字段都是可选的</li>
+            </ul>
+        </div>
+
+        <h2 id="common-notes">通用注意事项</h2>
+
+        <h3>图片URL验证</h3>
+        <div class="info">
+            <p>系统支持两种图片URL格式:</p>
+            <ul>
+                <li><strong>图床URL</strong>: 以http://或https://开头的完整URL</li>
+                <li><strong>本地引用</strong>: ZIP包内的相对路径</li>
+            </ul>
+            <p>支持的图片格式: JPG, JPEG, PNG, GIF, WebP, SVG</p>
+        </div>
+
+        <h3>分支连接性验证</h3>
+        <div class="warning">
+            <p>系统会自动验证分支/场景的连接性:</p>
+            <ul>
+                <li>检查所有引用的ID是否存在</li>
+                <li>检测孤立分支(无法到达的分支)</li>
+                <li>检测循环引用</li>
+                <li>验证起始点是否可达</li>
+            </ul>
+        </div>
+
+        <h3>ZIP包导入</h3>
+        <div class="info">
+            <p>支持导入ZIP包,包含:</p>
+            <ul>
+                <li><strong>JSON文件</strong>: 游戏数据文件</li>
+                <li><strong>图片文件</strong>: JPG, JPEG, PNG, GIF, WebP, SVG</li>
+                <li><strong>音频文件</strong>: MP3, WAV, OGG</li>
+            </ul>
+            <p>ZIP包可以包含多个游戏JSON文件,系统会自动识别并导入。</p>
+        </div>
+
+        <h3>图床URL支持</h3>
+        <div class="success">
+            <p>系统支持直接使用图床URL:</p>
+            <ul>
+                <li>支持HTTP和HTTPS协议</li>
+                <li>自动验证URL有效性</li>
+                <li>支持CDN加速</li>
+                <li>无需下载图片到本地</li>
+            </ul>
+        </div>
+
+        <h3>必填字段汇总</h3>
+        <div class="error">
+            <h4>房间式格式:</h4>
+            <ul>
+                <li>playerName, playerId, rooms</li>
+                <li>每个房间: id, name, desc</li>
+            </ul>
+            <h4>分支式格式:</h4>
+            <ul>
+                <li>game_title, branches</li>
+                <li>每个分支: branch_id, chapter或scene_detail</li>
+                <li>每个选择: choice, next_branch或end_game</li>
+            </ul>
+            <h4>Text Engine v3格式:</h4>
+            <ul>
+                <li>start, scenes</li>
+                <li>每个场景: id, text</li>
+                <li>每个选择: id, text</li>
+            </ul>
+        </div>
+
+        <h3>可选字段汇总</h3>
+        <div class="success">
+            <h4>房间式格式:</h4>
+            <ul>
+                <li>characters, items, exits, onEnter</li>
+                <li>房间: img, items, exits, characters, onEnter</li>
+                <li>物品: isTakeable, isHidden, onTake, onUse</li>
+                <li>出口: block, isHidden, onChoose</li>
+            </ul>
+            <h4>分支式格式:</h4>
+            <ul>
+                <li>description, author, tags, thumbnail, status</li>
+                <li>分支: choices, effect, status_update</li>
+                <li>选择: id, effect, status_update</li>
+            </ul>
+            <h4>Text Engine v3格式:</h4>
+            <ul>
+                <li>meta</li>
+                <li>场景: name, choices, condition, onEnter, events</li>
+                <li>选择: command, to, condition, effect</li>
+            </ul>
+        </div>
+
+        <h2 id="validation-rules">验证规则</h2>
+
+        <h3>数据完整性验证</h3>
+        <div class="warning">
+            <p>导入时会进行以下验证:</p>
+            <ul>
+                <li><strong>基本结构</strong>: 检查JSON格式是否正确</li>
+                <li><strong>必填字段</strong>: 验证所有必填字段是否存在</li>
+                <li><strong>ID唯一性</strong>: 确保所有ID唯一</li>
+                <li><strong>引用完整性</strong>: 验证所有引用的ID都存在</li>
+                <li><strong>数据类型</strong>: 检查字段类型是否正确</li>
+            </ul>
+        </div>
+
+        <h3>常见错误</h3>
+        <div class="error">
+            <h4>1. JSON格式错误</h4>
+            <p><strong>错误信息:</strong> JSON解析失败</p>
+            <p><strong>原因:</strong> JSON格式不正确,如缺少逗号、引号等</p>
+            <p><strong>解决方法:</strong> 使用JSON验证器检查格式</p>
+
+            <h4>2. 缺少必填字段</h4>
+            <p><strong>错误信息:</strong> 缺少游戏标题 / 缺少游戏分支或场景数据</p>
+            <p><strong>原因:</strong> 缺少必填字段</p>
+            <p><strong>解决方法:</strong> 检查并添加所有必填字段</p>
+
+            <h4>3. ID重复</h4>
+            <p><strong>错误信息:</strong> 分支ID重复 / 场景ID重复</p>
+            <p><strong>原因:</strong> 多个对象使用了相同的ID</p>
+            <p><strong>解决方法:</strong> 确保每个ID都是唯一的</p>
+
+            <h4>4. 引用不存在的ID</h4>
+            <p><strong>错误信息:</strong> 引用了不存在的分支 / 引用了不存在的场景</p>
+            <p><strong>原因:</strong> next_branch或to字段引用了不存在的ID</p>
+            <p><strong>解决方法:</strong> 确保所有引用的ID都存在</p>
+
+            <h4>5. 无效的图片URL</h4>
+            <p><strong>错误信息:</strong> 无效的图片URL</p>
+            <p><strong>原因:</strong> URL格式不正确或无法访问</p>
+            <p><strong>解决方法:</strong> 检查URL格式,确保使用http://或https://开头</p>
+        </div>
+
+        <h2 id="troubleshooting">常见问题排查</h2>
+
+        <h3>导入失败</h3>
+        <div class="error">
+            <p><strong>问题:</strong> 游戏导入失败</p>
+            <p><strong>排查步骤:</strong></p>
+            <ol>
+                <li>检查JSON格式是否正确</li>
+                <li>验证所有必填字段是否存在</li>
+                <li>确认所有ID都是唯一的</li>
+                <li>检查所有引用的ID都存在</li>
+                <li>查看错误信息中的具体提示</li>
+            </ol>
+        </div>
+
+        <h3>游戏无法开始</h3>
+        <div class="warning">
+            <p><strong>问题:</strong> 游戏导入成功但无法开始</p>
+            <p><strong>排查步骤:</strong></p>
+            <ol>
+                <li>检查起始ID是否正确</li>
+                <li>确认起始ID引用的场景/分支存在</li>
+                <li>验证场景/分支的数据完整性</li>
+                <li>检查是否有语法错误</li>
+            </ol>
+        </div>
+
+        <h3>选择项无效</h3>
+        <div class="warning">
+            <p><strong>问题:</strong> 点击选择项后无反应或报错</p>
+            <p><strong>排查步骤:</strong></p>
+            <ol>
+                <li>检查next_branch或to字段是否正确</li>
+                <li>确认引用的ID存在</li>
+                <li>验证条件(condition)是否满足</li>
+                <li>检查effect格式是否正确</li>
+            </ol>
+        </div>
+
+        <h3>图片无法显示</h3>
+        <div class="info">
+            <p><strong>问题:</strong> 游戏中的图片无法显示</p>
+            <p><strong>排查步骤:</strong></p>
+            <ol>
+                <li>检查图片URL格式是否正确</li>
+                <li>确认图片文件存在于ZIP包中</li>
+                <li>验证图片URL是否可以访问</li>
+                <li>检查图片格式是否支持</li>
+                <li>确认图片文件大小是否合理</li>
+            </ol>
+        </div>
+
+        <h3>性能问题</h3>
+        <div class="info">
+            <p><strong>问题:</strong> 游戏运行缓慢或卡顿</p>
+            <p><strong>优化建议:</strong></p>
+            <ul>
+                <li>减少单个场景的文本长度</li>
+                <li>压缩图片文件大小</li>
+                <li>避免过多的嵌套结构</li>
+                <li>使用CDN加速图片加载</li>
+                <li>考虑分批加载大型游戏</li>
+            </ul>
+        </div>
+
+        <div class="success">
+            <h3>最佳实践</h3>
+            <ul>
+                <li>使用有意义的ID命名,如"start", "forest_entrance"</li>
+                <li>保持JSON格式缩进一致,便于阅读和维护</li>
+                <li>添加注释说明复杂的逻辑</li>
+                <li>定期备份游戏数据</li>
+                <li>使用版本控制管理游戏文件</li>
+                <li>在导入前使用JSON验证器检查格式</li>
+                <li>测试所有分支和选择项</li>
+                <li>优化图片大小和格式</li>
+            </ul>
+        </div>
 
         <a href="index.html" class="back-link">← 返回游戏</a>
     </div>

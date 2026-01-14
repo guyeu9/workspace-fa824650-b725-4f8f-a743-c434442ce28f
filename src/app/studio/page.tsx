@@ -57,10 +57,19 @@ interface Branch {
   background_asset_id?: string
 }
 
+interface GameStateConfig {
+  name: string
+  initial_value: number
+  min?: number
+  max?: number
+  is_percentage?: boolean
+}
+
 interface GameData {
   game_title: string
   description: string
   status?: string
+  game_states?: GameStateConfig[]
   branches: Branch[]
 }
 
@@ -393,6 +402,101 @@ export default function TextEngineStudio() {
                   </SelectContent>
                 </Select>
               </div>
+            </div>
+            
+            <Separator className="my-2" />
+            
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center justify-between">
+                <Label className="text-sm font-semibold text-slate-700">游戏状态配置</Label>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    const newStates = [...(gameData.game_states || [])]
+                    newStates.push({
+                      name: `状态_${newStates.length + 1}`,
+                      initial_value: 0,
+                      is_percentage: false
+                    })
+                    handleUpdateGame({ game_states: newStates })
+                  }}
+                >
+                  <Plus className="h-3 w-3" />
+                  添加状态
+                </Button>
+              </div>
+              
+              {(gameData.game_states || []).map((state, index) => (
+                <div key={index} className="flex items-center gap-2 bg-white/50 border border-slate-200 rounded-lg p-2">
+                  <Input
+                    value={state.name}
+                    onChange={(e) => {
+                      const newStates = [...(gameData.game_states || [])]
+                      newStates[index] = { ...state, name: e.target.value }
+                      handleUpdateGame({ game_states: newStates })
+                    }}
+                    className="flex-1 h-8 px-2 text-sm"
+                    placeholder="状态名称"
+                  />
+                  <Input
+                    type="number"
+                    value={state.initial_value}
+                    onChange={(e) => {
+                      const newStates = [...(gameData.game_states || [])]
+                      newStates[index] = { ...state, initial_value: parseFloat(e.target.value) || 0 }
+                      handleUpdateGame({ game_states: newStates })
+                    }}
+                    className="w-24 h-8 px-2 text-sm"
+                    placeholder="初始值"
+                  />
+                  <Input
+                    type="number"
+                    value={state.min ?? ''}
+                    onChange={(e) => {
+                      const newStates = [...(gameData.game_states || [])]
+                      newStates[index] = { ...state, min: e.target.value ? parseFloat(e.target.value) : undefined }
+                      handleUpdateGame({ game_states: newStates })
+                    }}
+                    className="w-20 h-8 px-2 text-sm"
+                    placeholder="最小值"
+                  />
+                  <Input
+                    type="number"
+                    value={state.max ?? ''}
+                    onChange={(e) => {
+                      const newStates = [...(gameData.game_states || [])]
+                      newStates[index] = { ...state, max: e.target.value ? parseFloat(e.target.value) : undefined }
+                      handleUpdateGame({ game_states: newStates })
+                    }}
+                    className="w-20 h-8 px-2 text-sm"
+                    placeholder="最大值"
+                  />
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      const newStates = [...(gameData.game_states || [])]
+                      newStates[index] = { ...state, is_percentage: !state.is_percentage }
+                      handleUpdateGame({ game_states: newStates })
+                    }}
+                    className={state.is_percentage ? 'bg-indigo-100 border-indigo-300' : ''}
+                  >
+                    %
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      const newStates = [...(gameData.game_states || [])]
+                      newStates.splice(index, 1)
+                      handleUpdateGame({ game_states: newStates })
+                    }}
+                  >
+                    <Trash2 className="h-3 w-3 text-red-500" />
+                  </Button>
+                </div>
+              ))}
             </div>
           </div>
         </div>
