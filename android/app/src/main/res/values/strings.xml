@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">文字冒险游戏平台</string>
+    <string name="title_activity_main">文字冒险游戏平台</string>
+    <string name="package_name">com.textadventure.app</string>
+    <string name="custom_url_scheme">com.textadventure.app</string>
+</resources>
