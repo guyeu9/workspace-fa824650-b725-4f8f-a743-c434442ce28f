@@ -8,7 +8,8 @@ import {
   Plus, 
   Home,
   Menu,
-  X
+  X,
+  FileText
 } from 'lucide-react'
 import ResponsiveUserNav from './ResponsiveUserNav'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
@@ -21,6 +22,7 @@ export default function ResponsiveMainNav() {
     { href: '/', label: '首页', icon: Home },
     { href: '/game-library', label: '游戏库', icon: Library },
     { href: '/game-editor', label: '创建游戏', icon: Plus },
+    { href: 'https://simplefeedback.app/feedback/nDf7Lhk7Ohnw', label: '更新日志及反馈', icon: FileText, external: true },
   ]
 
   return (
@@ -42,6 +44,20 @@ export default function ResponsiveMainNav() {
           <div className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => {
               const Icon = item.icon
+              if (item.external) {
+                return (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-600 hover:text-gray-900 flex items-center gap-2 transition-colors"
+                  >
+                    <Icon className="h-4 w-4" />
+                    <span>{item.label}</span>
+                  </a>
+                )
+              }
               return (
                 <Link
                   key={item.href}
@@ -76,6 +92,21 @@ export default function ResponsiveMainNav() {
                 <div className="mt-6 space-y-2">
                   {navItems.map((item) => {
                     const Icon = item.icon
+                    if (item.external) {
+                      return (
+                        <a
+                          key={item.href}
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => setIsMenuOpen(false)}
+                          className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors text-gray-700 hover:text-gray-900"
+                        >
+                          <Icon className="h-5 w-5" />
+                          <span className="font-medium">{item.label}</span>
+                        </a>
+                      )
+                    }
                     return (
                       <Link
                         key={item.href}

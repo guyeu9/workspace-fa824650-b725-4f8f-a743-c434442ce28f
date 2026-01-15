@@ -65,12 +65,27 @@ const mergePairs = [
   { parent: 'construction_rope', child: 'construction_rope_walk', choiceId: 'choice_5_1' }
 ];
 
+function findReferencedBranches(branches) {
+  const referencedIds = new Set();
+  branches.forEach(branch => {
+    if (branch.choices) {
+      branch.choices.forEach(choice => {
+        if (choice.next_branch) {
+          referencedIds.add(choice.next_branch);
+        }
+      });
+    }
+  });
+  return referencedIds;
+}
+
 function mergeScenes(branches) {
   const branchMap = new Map();
   branches.forEach(branch => {
     branchMap.set(branch.branch_id, branch);
   });
   
+  const referencedIds = findReferencedBranches(branches);
   const mergedBranches = [];
   const removedIds = new Set();
   
@@ -95,7 +110,9 @@ function mergeScenes(branches) {
             return subChoice;
           });
         }
-        removedIds.add(child);
+        if (!referencedIds.has(child)) {
+          removedIds.add(child);
+        }
       }
     }
   });

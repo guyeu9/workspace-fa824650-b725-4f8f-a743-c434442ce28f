@@ -10,8 +10,6 @@
     "自我认同"
   ],
   "version": 1,
-  "background_image": "",
-  "background_asset_id": "",
   "branches": [
     {
       "branch_id": "chapter1_start",
@@ -21,26 +19,17 @@
         {
           "option_id": "opt_avoid_eye_contact",
           "option_text": "刻意避开目光，假装专注工作",
-          "target_branch_id": "chapter1_ending_a",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter1_ending_a"
         },
         {
           "option_id": "opt_ask_question",
           "option_text": "坦然回应，顺势请教工作问题",
-          "target_branch_id": "chapter1_ending_b",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter1_ending_b"
         },
         {
           "option_id": "opt_leave_early",
           "option_text": "借口身体不适，提前离开实验室",
-          "target_branch_id": "chapter1_ending_c",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter1_ending_c"
         }
       ]
     },
@@ -52,10 +41,7 @@
         {
           "option_id": "opt_to_chapter2",
           "option_text": "前往第2章：家族的关怀与压力",
-          "target_branch_id": "chapter2_start",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter2_start"
         }
       ]
     },
@@ -67,10 +53,7 @@
         {
           "option_id": "opt_to_chapter2",
           "option_text": "前往第2章：家族的关怀与压力",
-          "target_branch_id": "chapter2_start",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter2_start"
         }
       ]
     },
@@ -82,10 +65,7 @@
         {
           "option_id": "opt_to_chapter2",
           "option_text": "前往第2章：家族的关怀与压力",
-          "target_branch_id": "chapter2_start",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter2_start"
         }
       ]
     },
@@ -97,26 +77,17 @@
         {
           "option_id": "opt_agree_blind_date",
           "option_text": "勉强答应相亲",
-          "target_branch_id": "chapter2_ending_a",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter2_ending_a"
         },
         {
           "option_id": "opt_refuse_blind_date",
           "option_text": "直接拒绝，表明暂时不想结婚",
-          "target_branch_id": "chapter2_ending_b",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter2_ending_b"
         },
         {
           "option_id": "opt_change_topic",
           "option_text": "转移话题，说起工作上的成就",
-          "target_branch_id": "chapter2_ending_c",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter2_ending_c"
         }
       ]
     },
@@ -128,10 +99,7 @@
         {
           "option_id": "opt_to_chapter3",
           "option_text": "前往第3章：初恋的微光与幻灭",
-          "target_branch_id": "chapter3_start",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter3_start"
         }
       ]
     },
@@ -143,10 +111,7 @@
         {
           "option_id": "opt_to_chapter3",
           "option_text": "前往第3章：初恋的微光与幻灭",
-          "target_branch_id": "chapter3_start",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter3_start"
         }
       ]
     },
@@ -158,10 +123,7 @@
         {
           "option_id": "opt_to_chapter3",
           "option_text": "前往第3章：初恋的微光与幻灭",
-          "target_branch_id": "chapter3_start",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter3_start"
         }
       ]
     },
@@ -173,26 +135,17 @@
         {
           "option_id": "opt_sincere_blessing",
           "option_text": "真诚祝福，认真倾听",
-          "target_branch_id": "chapter3_ending_a",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter3_ending_a"
         },
         {
           "option_id": "opt_leave_early_cafe",
           "option_text": "借口有事，提前离开",
-          "target_branch_id": "chapter3_ending_b",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter3_ending_b"
         },
         {
           "option_id": "opt_ask_about_gay",
           "option_text": "试探性询问师兄对同性恋的看法",
-          "target_branch_id": "chapter3_ending_c",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter3_ending_c"
         }
       ]
     },
@@ -204,10 +157,7 @@
         {
           "option_id": "opt_to_chapter4",
           "option_text": "前往第4章：相亲局上的真相试探",
-          "target_branch_id": "chapter4_start",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter4_start"
         }
       ]
     },
@@ -219,10 +169,7 @@
         {
           "option_id": "opt_to_chapter4",
           "option_text": "前往第4章：相亲局上的真相试探",
-          "target_branch_id": "chapter4_start",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter4_start"
         }
       ]
     },
@@ -234,10 +181,7 @@
         {
           "option_id": "opt_to_chapter4",
           "option_text": "前往第4章：相亲局上的真相试探",
-          "target_branch_id": "chapter4_start",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter4_start"
         }
       ]
     },
@@ -249,26 +193,17 @@
         {
           "option_id": "opt_confess_truth",
           "option_text": "直接坦白自己的性取向",
-          "target_branch_id": "chapter4_ending_a",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter4_ending_a"
         },
         {
           "option_id": "opt_hide_truth",
           "option_text": "隐瞒真相，假装不合拍",
-          "target_branch_id": "chapter4_ending_b",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter4_ending_b"
         },
         {
           "option_id": "opt_ask_alans_opinion",
           "option_text": "询问阿兰对婚姻和性取向的看法",
-          "target_branch_id": "chapter4_ending_c",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter4_ending_c"
         }
       ]
     },
@@ -280,10 +215,7 @@
         {
           "option_id": "opt_to_chapter5",
           "option_text": "前往第5章：春节饭桌上的终极催婚",
-          "target_branch_id": "chapter5_start",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter5_start"
         }
       ]
     },
@@ -295,10 +227,7 @@
         {
           "option_id": "opt_to_chapter5",
           "option_text": "前往第5章：春节饭桌上的终极催婚",
-          "target_branch_id": "chapter5_start",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter5_start"
         }
       ]
     },
@@ -310,10 +239,7 @@
         {
           "option_id": "opt_to_chapter5",
           "option_text": "前往第5章：春节饭桌上的终极催婚",
-          "target_branch_id": "chapter5_start",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter5_start"
         }
       ]
     },
@@ -325,26 +251,17 @@
         {
           "option_id": "opt_compromise_marry",
           "option_text": "妥协答应结婚",
-          "target_branch_id": "branch_marry_deception",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "branch_marry_deception"
         },
         {
           "option_id": "opt_come_out",
           "option_text": "鼓起勇气出柜",
-          "target_branch_id": "chapter6_start",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter6_start"
         },
         {
           "option_id": "opt_run_away",
           "option_text": "崩溃逃离现场",
-          "target_branch_id": "chapter5_ending_c",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter5_ending_c"
         }
       ]
     },
@@ -356,10 +273,7 @@
         {
           "option_id": "opt_to_chapter6",
           "option_text": "前往第6章：出柜12杀——直面偏见的战场",
-          "target_branch_id": "chapter6_start",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter6_start"
         }
       ]
     },
@@ -371,10 +285,7 @@
         {
           "option_id": "opt_come_out_round1",
           "option_text": "开始出柜第1轮回应",
-          "target_branch_id": "chapter6_come_out_round1",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter6_come_out_round1"
         }
       ]
     },
@@ -386,34 +297,22 @@
         {
           "option_id": "opt_round1_a",
           "option_text": "是病又怎么样，我不想治",
-          "target_branch_id": "chapter6_come_out_result",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter6_come_out_result"
         },
         {
           "option_id": "opt_round1_b",
           "option_text": "同性恋不是病，世卫组织早就移除了",
-          "target_branch_id": "chapter6_come_out_round2",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter6_come_out_round2"
         },
         {
           "option_id": "opt_round1_c",
           "option_text": "我也不想这样，是天生的",
-          "target_branch_id": "chapter6_come_out_result",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter6_come_out_result"
         },
         {
           "option_id": "opt_round1_d",
           "option_text": "你们别管我",
-          "target_branch_id": "chapter6_come_out_result",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter6_come_out_result"
         }
       ]
     },
@@ -425,34 +324,22 @@
         {
           "option_id": "opt_round2_a",
           "option_text": "不孝就不孝，我不在乎",
-          "target_branch_id": "chapter6_come_out_result",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter6_come_out_result"
         },
         {
           "option_id": "opt_round2_b",
           "option_text": "结婚不是为了传宗接代，是为了幸福",
-          "target_branch_id": "chapter6_come_out_round3",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter6_come_out_round3"
         },
         {
           "option_id": "opt_round2_c",
           "option_text": "我可以领养孩子",
-          "target_branch_id": "chapter6_come_out_result",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter6_come_out_result"
         },
         {
           "option_id": "opt_round2_d",
           "option_text": "我会找个女人试试",
-          "target_branch_id": "chapter6_come_out_result",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter6_come_out_result"
         }
       ]
     },
@@ -464,34 +351,22 @@
         {
           "option_id": "opt_round3_a",
           "option_text": "真正让别人尊重的，是家人之间的包容",
-          "target_branch_id": "chapter6_come_out_result",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter6_come_out_result"
         },
         {
           "option_id": "opt_round3_b",
           "option_text": "那我就不回亲戚家了",
-          "target_branch_id": "chapter6_come_out_result",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter6_come_out_result"
         },
         {
           "option_id": "opt_round3_c",
           "option_text": "你们别管别人怎么想",
-          "target_branch_id": "chapter6_come_out_result",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter6_come_out_result"
         },
         {
           "option_id": "opt_round3_d",
           "option_text": "我也没办法",
-          "target_branch_id": "chapter6_come_out_result",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter6_come_out_result"
         }
       ]
     },
@@ -503,26 +378,17 @@
         {
           "option_id": "opt_high_identity",
           "option_text": "自我认同≥60分：家人态度松动",
-          "target_branch_id": "branch_positive_relationship",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "branch_positive_relationship"
         },
         {
           "option_id": "opt_medium_identity",
           "option_text": "30≤自我认同＜60分：家人强烈反对",
-          "target_branch_id": "branch_conversion_therapy",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "branch_conversion_therapy"
         },
         {
           "option_id": "opt_low_identity",
           "option_text": "自我认同＜30分：崩溃妥协",
-          "target_branch_id": "branch_marry_deception",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "branch_marry_deception"
         }
       ]
     },
@@ -534,18 +400,12 @@
         {
           "option_id": "opt_lele_conservative",
           "option_text": "乐乐（保守型）：选择忍气吞声",
-          "target_branch_id": "ending_marriage_wuxing",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "ending_marriage_wuxing"
         },
         {
           "option_id": "opt_lele_progressive",
           "option_text": "乐乐（平权型）：选择离婚维权",
-          "target_branch_id": "ending_marriage_po_sui",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "ending_marriage_po_sui"
         }
       ]
     },
@@ -557,10 +417,7 @@
         {
           "option_id": "opt_restart",
           "option_text": "重新开始游戏",
-          "target_branch_id": "chapter1_start",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter1_start"
         }
       ]
     },
@@ -572,10 +429,7 @@
         {
           "option_id": "opt_restart",
           "option_text": "重新开始游戏",
-          "target_branch_id": "chapter1_start",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter1_start"
         }
       ]
     },
@@ -587,10 +441,7 @@
         {
           "option_id": "opt_conversion_therapy_end",
           "option_text": "继续治疗",
-          "target_branch_id": "ending_conversion_therapy",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "ending_conversion_therapy"
         }
       ]
     },
@@ -602,10 +453,7 @@
         {
           "option_id": "opt_restart",
           "option_text": "重新开始游戏",
-          "target_branch_id": "chapter1_start",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter1_start"
         }
       ]
     },
@@ -617,26 +465,17 @@
         {
           "option_id": "opt_chenyu",
           "option_text": "选择辰宇：三甲医院感染科医生",
-          "target_branch_id": "subbranch_chenyu",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "subbranch_chenyu"
         },
         {
           "option_id": "opt_xiaolong",
           "option_text": "选择小龙：公益组织工作人员",
-          "target_branch_id": "subbranch_xiaolong",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "subbranch_xiaolong"
         },
         {
           "option_id": "opt_zhangchi",
           "option_text": "选择张弛：名媛",
-          "target_branch_id": "subbranch_zhangchi",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "subbranch_zhangchi"
         }
       ]
     },
@@ -648,26 +487,17 @@
         {
           "option_id": "opt_chenyu_marry",
           "option_text": "结局4：同性婚姻——相守一生",
-          "target_branch_id": "ending_chenyu_xiangshou",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "ending_chenyu_xiangshou"
         },
         {
           "option_id": "opt_chenyu_cohabit",
           "option_text": "结局5：星辰之爱——相伴不婚",
-          "target_branch_id": "ending_chenyu_xingchen",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "ending_chenyu_xingchen"
         },
         {
           "option_id": "opt_chenyu_breakup",
           "option_text": "结局6：错失幸福——理念分歧",
-          "target_branch_id": "ending_chenyu_cuoshi",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "ending_chenyu_cuoshi"
         }
       ]
     },
@@ -679,10 +509,7 @@
         {
           "option_id": "opt_restart",
           "option_text": "重新开始游戏",
-          "target_branch_id": "chapter1_start",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter1_start"
         }
       ]
     },
@@ -694,10 +521,7 @@
         {
           "option_id": "opt_restart",
           "option_text": "重新开始游戏",
-          "target_branch_id": "chapter1_start",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter1_start"
         }
       ]
     },
@@ -709,10 +533,7 @@
         {
           "option_id": "opt_restart",
           "option_text": "重新开始游戏",
-          "target_branch_id": "chapter1_start",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter1_start"
         }
       ]
     },
@@ -724,10 +545,7 @@
         {
           "option_id": "opt_xiaolong_end",
           "option_text": "结局7：永恒亲情——陪伴是长情",
-          "target_branch_id": "ending_xiaolong_peiban",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "ending_xiaolong_peiban"
         }
       ]
     },
@@ -739,10 +557,7 @@
         {
           "option_id": "opt_restart",
           "option_text": "重新开始游戏",
-          "target_branch_id": "chapter1_start",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter1_start"
         }
       ]
     },
@@ -754,18 +569,12 @@
         {
           "option_id": "opt_zhangchi_disappear",
           "option_text": "结局8：名媛失踪——曲终人散",
-          "target_branch_id": "ending_zhangchi_quzhong",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "ending_zhangchi_quzhong"
         },
         {
           "option_id": "opt_zhangchi_humble_love",
           "option_text": "结局9：卑微的爱——迷失自我",
-          "target_branch_id": "ending_zhangchi_mishi",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "ending_zhangchi_mishi"
         }
       ]
     },
@@ -777,10 +586,7 @@
         {
           "option_id": "opt_restart",
           "option_text": "重新开始游戏",
-          "target_branch_id": "chapter1_start",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter1_start"
         }
       ]
     },
@@ -792,10 +598,7 @@
         {
           "option_id": "opt_restart",
           "option_text": "重新开始游戏",
-          "target_branch_id": "chapter1_start",
-          "effect": "",
-          "status_update": "",
-          "status_changes": []
+          "target_branch_id": "chapter1_start"
         }
       ]
     }

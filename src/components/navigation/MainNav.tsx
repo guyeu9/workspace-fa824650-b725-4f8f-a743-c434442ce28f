@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Gamepad2, Library, Plus, Home, Menu, X } from 'lucide-react'
+import { Gamepad2, Library, Plus, Home, Menu, X, FileText } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import UserNav from './UserNav'
@@ -52,6 +52,15 @@ export default function MainNav() {
                 <Plus className="h-4 w-4" />
                 <span>创建游戏</span>
               </Link>
+            </Button>
+            <Button
+              asChild
+              className="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white transition-all duration-300"
+            >
+              <a href="https://simplefeedback.app/feedback/nDf7Lhk7Ohnw" target="_blank" className="flex items-center gap-2">
+                <FileText className="h-4 w-4" />
+                <span>更新日志及反馈</span>
+              </a>
             </Button>
           </div>
 
@@ -105,6 +114,14 @@ export default function MainNav() {
                       <Plus className="h-4 w-4" />
                       <span>创建游戏</span>
                     </Link>
+                    <a 
+                      href="https://simplefeedback.app/feedback/nDf7Lhk7Ohnw" 
+                      target="_blank" 
+                      className="flex items-center gap-2 py-2 px-3 rounded-md hover:bg-gray-100 transition-colors"
+                    >
+                      <FileText className="h-4 w-4" />
+                      <span>更新日志及反馈</span>
+                    </a>
                     
                     <div className="pt-4 border-t">
                       <div className="flex flex-col gap-2">

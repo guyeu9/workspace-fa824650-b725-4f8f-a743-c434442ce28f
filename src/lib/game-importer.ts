@@ -51,21 +51,21 @@ export class GameDataValidator {
           }
 
           // 验证分支内容
-          if (!branch.chapter) {
-            errors.push(`分支 ${branch.branch_id || index + 1} 缺少chapter字段`);
+          if (!branch.branch_title) {
+            errors.push(`分支 ${branch.branch_id || index + 1} 缺少branch_title字段`);
           }
-          if (!branch.scene_detail) {
-            errors.push(`分支 ${branch.branch_id || index + 1} 缺少scene_detail字段`);
+          if (!branch.content) {
+            errors.push(`分支 ${branch.branch_id || index + 1} 缺少content字段`);
           }
 
           // 验证选择项
-          if (Array.isArray(branch.choices)) {
-            branch.choices.forEach((choice: any, choiceIndex: number) => {
-              if (!choice.id) {
-                errors.push(`分支 ${branch.branch_id} 的选择项 ${choiceIndex + 1} 缺少id字段`);
+          if (Array.isArray(branch.options)) {
+            branch.options.forEach((choice: any, choiceIndex: number) => {
+              if (!choice.option_id) {
+                errors.push(`分支 ${branch.branch_id} 的选择项 ${choiceIndex + 1} 缺少option_id字段`);
               }
-              if (!choice.target) {
-                errors.push(`分支 ${branch.branch_id} 的选择项 ${choiceIndex + 1} 缺少target字段`);
+              if (!choice.target_branch_id) {
+                errors.push(`分支 ${branch.branch_id} 的选择项 ${choiceIndex + 1} 缺少target_branch_id字段`);
               }
             });
           }
@@ -108,10 +108,10 @@ export class GameDataValidator {
 
     // 收集所有被引用的分支
     branches.forEach(branch => {
-      if (branch.choices && Array.isArray(branch.choices)) {
-        branch.choices.forEach((choice: any) => {
-          if (choice.next_branch) {
-            referencedBranches.add(choice.next_branch);
+      if (branch.options && Array.isArray(branch.options)) {
+        branch.options.forEach((choice: any) => {
+          if (choice.target_branch_id) {
+            referencedBranches.add(choice.target_branch_id);
           }
         });
       }
