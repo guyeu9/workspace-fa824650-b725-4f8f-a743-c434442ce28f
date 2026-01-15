@@ -360,7 +360,7 @@ export default function TextEngineStudio() {
 
   return (
     <div className="h-screen w-full flex flex-col bg-gradient-to-br from-slate-100 via-sky-100 to-indigo-100 text-slate-900 overflow-hidden">
-      <header className="h-20 border-b bg-white/95 backdrop-blur-xl text-slate-900 flex items-center justify-between px-4 shrink-0 z-10 shadow-sm">
+      <header className="h-auto min-h-24 border-b bg-white/95 backdrop-blur-xl text-slate-900 flex items-start justify-between px-4 py-3 shrink-0 z-10 shadow-sm flex-wrap gap-4">
         <div className="flex items-start gap-3 flex-1 min-w-0">
           <div className="flex flex-col gap-2 flex-1 min-w-0">
             <h1
@@ -381,7 +381,7 @@ export default function TextEngineStudio() {
                 onChange={(e) =>
                   handleUpdateGame({ description: e.target.value })
                 }
-                className="field-sizing-content w-full h-12 min-h-0 resize-none px-3 py-2 text-xs md:text-sm leading-snug overflow-y-auto bg-white/80 border border-slate-200 text-slate-800 placeholder:text-slate-400 rounded-md shadow-xs"
+                className="field-sizing-content w-full h-12 min-h-0 resize-none px-3 py-2 text-xs md:text-sm leading-snug overflow-y-auto bg-white border-blue-300 focus:border-blue-500 focus:ring-blue-500/20 text-slate-800 placeholder:text-slate-400 rounded-md shadow-xs transition-all duration-200"
                 placeholder="简要描述这个游戏"
               />
               <div className="flex flex-col gap-1 shrink-0 w-[110px]">
@@ -392,10 +392,10 @@ export default function TextEngineStudio() {
                   value={gameData.status ?? "draft"}
                   onValueChange={(val) => handleUpdateGame({ status: val })}
                 >
-                  <SelectTrigger className="h-8 w-full px-2 text-[11px] bg-white border-slate-200 text-slate-800">
+                  <SelectTrigger className="h-8 w-full px-2 text-[11px] bg-white border-blue-300 focus:border-blue-500 focus:ring-blue-500/20 text-slate-800 transition-all duration-200">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="bg-white text-slate-900 border-slate-200 shadow-lg">
+                  <SelectContent className="bg-white text-slate-900 border-blue-300 shadow-lg">
                     <SelectItem value="draft">草稿</SelectItem>
                     <SelectItem value="published">已发布</SelectItem>
                     <SelectItem value="archived">归档</SelectItem>
@@ -406,12 +406,12 @@ export default function TextEngineStudio() {
             
             <Separator className="my-2" />
             
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 w-full">
               <div className="flex items-center justify-between">
                 <Label className="text-sm font-semibold text-slate-700">游戏状态配置</Label>
                 <Button
-                  variant="outline"
                   size="sm"
+                  className="bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white transition-all duration-300 shadow-sm"
                   onClick={() => {
                     const newStates = [...(gameData.game_states || [])]
                     newStates.push({
@@ -427,76 +427,79 @@ export default function TextEngineStudio() {
                 </Button>
               </div>
               
-              {(gameData.game_states || []).map((state, index) => (
-                <div key={index} className="flex items-center gap-2 bg-white/50 border border-slate-200 rounded-lg p-2">
-                  <Input
-                    value={state.name}
-                    onChange={(e) => {
-                      const newStates = [...(gameData.game_states || [])]
-                      newStates[index] = { ...state, name: e.target.value }
-                      handleUpdateGame({ game_states: newStates })
-                    }}
-                    className="flex-1 h-8 px-2 text-sm"
-                    placeholder="状态名称"
-                  />
-                  <Input
-                    type="number"
-                    value={state.initial_value}
-                    onChange={(e) => {
-                      const newStates = [...(gameData.game_states || [])]
-                      newStates[index] = { ...state, initial_value: parseFloat(e.target.value) || 0 }
-                      handleUpdateGame({ game_states: newStates })
-                    }}
-                    className="w-24 h-8 px-2 text-sm"
-                    placeholder="初始值"
-                  />
-                  <Input
-                    type="number"
-                    value={state.min ?? ''}
-                    onChange={(e) => {
-                      const newStates = [...(gameData.game_states || [])]
-                      newStates[index] = { ...state, min: e.target.value ? parseFloat(e.target.value) : undefined }
-                      handleUpdateGame({ game_states: newStates })
-                    }}
-                    className="w-20 h-8 px-2 text-sm"
-                    placeholder="最小值"
-                  />
-                  <Input
-                    type="number"
-                    value={state.max ?? ''}
-                    onChange={(e) => {
-                      const newStates = [...(gameData.game_states || [])]
-                      newStates[index] = { ...state, max: e.target.value ? parseFloat(e.target.value) : undefined }
-                      handleUpdateGame({ game_states: newStates })
-                    }}
-                    className="w-20 h-8 px-2 text-sm"
-                    placeholder="最大值"
-                  />
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => {
-                      const newStates = [...(gameData.game_states || [])]
-                      newStates[index] = { ...state, is_percentage: !state.is_percentage }
-                      handleUpdateGame({ game_states: newStates })
-                    }}
-                    className={state.is_percentage ? 'bg-indigo-100 border-indigo-300' : ''}
-                  >
-                    %
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => {
-                      const newStates = [...(gameData.game_states || [])]
-                      newStates.splice(index, 1)
-                      handleUpdateGame({ game_states: newStates })
-                    }}
-                  >
-                    <Trash2 className="h-3 w-3 text-red-500" />
-                  </Button>
-                </div>
-              ))}
+              <div className="flex flex-col gap-2 max-h-48 overflow-y-auto">
+                {(gameData.game_states || []).map((state, index) => (
+                  <div key={index} className="flex items-center gap-2 bg-white/50 border border-blue-200 rounded-lg p-2 transition-all duration-200 hover:border-blue-300">
+                    <Input
+                      value={state.name}
+                      onChange={(e) => {
+                        const newStates = [...(gameData.game_states || [])]
+                        newStates[index] = { ...state, name: e.target.value }
+                        handleUpdateGame({ game_states: newStates })
+                      }}
+                      className="flex-1 h-8 px-2 text-sm bg-white border-blue-300 focus:border-blue-500 focus:ring-blue-500/20 text-slate-800 placeholder:text-slate-400 transition-all duration-200"
+                      placeholder="状态名称"
+                    />
+                    <Input
+                      type="number"
+                      value={state.initial_value}
+                      onChange={(e) => {
+                        const newStates = [...(gameData.game_states || [])]
+                        newStates[index] = { ...state, initial_value: parseFloat(e.target.value) || 0 }
+                        handleUpdateGame({ game_states: newStates })
+                      }}
+                      className="w-20 h-8 px-2 text-sm bg-white border-blue-300 focus:border-blue-500 focus:ring-blue-500/20 text-slate-800 placeholder:text-slate-400 transition-all duration-200"
+                      placeholder="初始值"
+                    />
+                    <Input
+                      type="number"
+                      value={state.min ?? ''}
+                      onChange={(e) => {
+                        const newStates = [...(gameData.game_states || [])]
+                        newStates[index] = { ...state, min: e.target.value ? parseFloat(e.target.value) : undefined }
+                        handleUpdateGame({ game_states: newStates })
+                      }}
+                      className="w-16 h-8 px-2 text-sm bg-white border-blue-300 focus:border-blue-500 focus:ring-blue-500/20 text-slate-800 placeholder:text-slate-400 transition-all duration-200"
+                      placeholder="最小"
+                    />
+                    <Input
+                      type="number"
+                      value={state.max ?? ''}
+                      onChange={(e) => {
+                        const newStates = [...(gameData.game_states || [])]
+                        newStates[index] = { ...state, max: e.target.value ? parseFloat(e.target.value) : undefined }
+                        handleUpdateGame({ game_states: newStates })
+                      }}
+                      className="w-16 h-8 px-2 text-sm bg-white border-blue-300 focus:border-blue-500 focus:ring-blue-500/20 text-slate-800 placeholder:text-slate-400 transition-all duration-200"
+                      placeholder="最大"
+                    />
+                    <Button
+                      size="sm"
+                      onClick={() => {
+                        const newStates = [...(gameData.game_states || [])]
+                        newStates[index] = { ...state, is_percentage: !state.is_percentage }
+                        handleUpdateGame({ game_states: newStates })
+                      }}
+                      className={state.is_percentage 
+                        ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white transition-all duration-300' 
+                        : 'bg-white border-blue-300 text-blue-600 hover:bg-blue-50 transition-all duration-300'}
+                    >
+                      %
+                    </Button>
+                    <Button
+                      size="sm"
+                      className="bg-white border-red-300 text-red-500 hover:bg-red-50 transition-all duration-300"
+                      onClick={() => {
+                        const newStates = [...(gameData.game_states || [])]
+                        newStates.splice(index, 1)
+                        handleUpdateGame({ game_states: newStates })
+                      }}
+                    >
+                      <Trash2 className="h-3 w-3" />
+                    </Button>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -522,9 +525,8 @@ export default function TextEngineStudio() {
             }}
           />
           <Button
-            variant="outline"
             size="sm"
-            className="gap-1 bg-white border-slate-200 text-slate-800 hover:bg-slate-50"
+            className="gap-1 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white transition-all duration-300 shadow-sm"
             onClick={() => {
               // 直接触发文件选择对话框
               const input = document.getElementById('json-import') as HTMLInputElement
@@ -534,9 +536,8 @@ export default function TextEngineStudio() {
             <Upload className="h-4 w-4" /> 导入
           </Button>
           <Button
-            variant="outline"
             size="sm"
-            className="gap-2 bg-white border-slate-200 text-slate-800 hover:bg-slate-50"
+            className="gap-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white transition-all duration-300 shadow-sm"
             onClick={async () => {
               await handleExportJson()
             }}
@@ -544,9 +545,8 @@ export default function TextEngineStudio() {
             <Upload className="h-4 w-4 rotate-180" /> 导出
           </Button>
           <Button
-            variant="default"
             size="sm"
-            className="gap-2 bg-emerald-500 text-emerald-950 hover:bg-emerald-400 shadow-sm"
+            className="gap-2 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white transition-all duration-300 shadow-md"
             onClick={handleSaveToLibrary}
           >
             <Save className="h-4 w-4" /> 保存到游戏库
@@ -562,16 +562,17 @@ export default function TextEngineStudio() {
           className="bg-white/90 border-r border-slate-200 backdrop-blur-sm"
         >
           <div className="flex flex-col h-full">
-            <div className="p-3 border-b border-slate-200 space-y-3 bg-white/90">
+            <div className="p-3 border-b border-blue-200 space-y-3 bg-white/90">
               <div className="relative">
-                <Search className="absolute left-2 top-2.5 h-4 w-4 text-slate-400" />
+                <Search className="absolute left-2 top-2.5 h-4 w-4 text-blue-400" />
                 <Input
                           placeholder="搜索场景..."
-                          className="pl-8 h-9 bg-slate-100 border-slate-200 text-slate-800 placeholder:text-slate-400"
+                          className="pl-8 h-9 bg-white border-blue-300 focus:border-blue-500 focus:ring-blue-500/20 text-slate-800 placeholder:text-slate-400 transition-all duration-200"
                           value={search}
                           onChange={(e) => setSearch(e.target.value)}
                         />
               </div>
+              
               <div className="flex items-center justify-between text-xs text-slate-500 px-1">
                 <span>视图: 列表</span>
               </div>
@@ -641,8 +642,7 @@ export default function TextEngineStudio() {
                 </div>
 
                 <Button
-                  variant="ghost"
-                  className="w-full justify-start gap-2 text-muted-foreground hover:text-foreground"
+                  className="w-full justify-start gap-2 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white transition-all duration-300 shadow-sm"
                   onClick={handleAddBranch}
                 >
                   <Plus className="h-4 w-4" /> 新建场景
@@ -658,7 +658,7 @@ export default function TextEngineStudio() {
           <div className="h-full flex flex-col bg-slate-100">
             {selectedBranch ? (
               <>
-                <div className="p-4 border-b border-slate-200 flex items-start justify-between gap-4 bg-white/90 shadow-xs">
+                <div className="p-4 border-b border-blue-200 flex items-start justify-between gap-4 bg-white/90 shadow-xs">
                   <div className="flex-1 space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
@@ -667,7 +667,7 @@ export default function TextEngineStudio() {
                           id="branch-id"
                           value={selectedBranch.branch_id}
                           readOnly
-                          className="bg-slate-50 font-mono text-xs border-slate-200 text-slate-700"
+                          className="bg-slate-50 font-mono text-xs border-blue-300 text-slate-700"
                         />
                       </div>
                       <div className="space-y-2">
@@ -676,7 +676,7 @@ export default function TextEngineStudio() {
                           id="branch-name"
                           value={selectedBranch.chapter}
                           placeholder="输入场景名称"
-                          className="bg-white border-slate-200 text-slate-900 placeholder:text-slate-400"
+                          className="bg-white border-blue-300 focus:border-blue-500 focus:ring-blue-500/20 text-slate-900 placeholder:text-slate-400 transition-all duration-200"
                           onChange={(e) =>
                             handleUpdateBranch(selectedBranch.branch_id, {
                               chapter: e.target.value,
@@ -688,9 +688,8 @@ export default function TextEngineStudio() {
                   </div>
                   <div className="flex flex-col items-end gap-2">
                     <Button
-                      variant="ghost"
                       size="sm"
-                      className="text-xs text-red-400 hover:text-red-300 hover:bg-red-950/40"
+                      className="text-xs bg-gradient-to-r from-red-500 to-rose-500 hover:from-red-600 hover:to-rose-600 text-white transition-all duration-300 shadow-sm"
                       onClick={() => handleDeleteBranch(selectedBranch.branch_id)}
                     >
                       <Trash2 className="h-3 w-3 mr-1" />
@@ -732,9 +731,9 @@ export default function TextEngineStudio() {
                       <div className="flex items-center justify-between">
                         <Label>剧情描述</Label>
                       </div>
-                      <div className="border border-slate-200 rounded-lg bg-white p-2">
+                      <div className="border border-blue-200 rounded-lg bg-white p-2 transition-all duration-200 hover:border-blue-300">
                         <Textarea
-                          className="min-h-[200px] font-sans text-base leading-relaxed text-slate-900"
+                          className="min-h-[200px] font-sans text-base leading-relaxed text-slate-900 bg-white border-blue-300 focus:border-blue-500 focus:ring-blue-500/20 placeholder:text-slate-400 transition-all duration-200"
                           placeholder="在此输入剧情内容..."
                           value={selectedBranch.scene_detail}
                           onChange={(e) =>
@@ -748,14 +747,14 @@ export default function TextEngineStudio() {
 
                     <Separator />
 
-                    <div className="space-y-4 border border-slate-200 rounded-lg bg-white p-3 shadow-sm">
+                    <div className="space-y-4 border border-blue-200 rounded-lg bg-white p-3 shadow-sm transition-all duration-200 hover:border-blue-300">
                       <div className="flex items-center justify-between">
                         <Label className="text-base font-semibold">
                           分支选项
                         </Label>
                         <Button
                           size="sm"
-                          variant="outline"
+                          className="bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white transition-all duration-300 shadow-sm"
                           onClick={() =>
                             handleAddChoice(selectedBranch.branch_id)
                           }
@@ -768,12 +767,11 @@ export default function TextEngineStudio() {
                         {selectedBranch.choices.map((option, index) => (
                           <Card
                           key={option.id}
-                          className="relative group bg-slate-100 border-slate-200 shadow-sm"
+                          className="relative group bg-gradient-to-br from-blue-50/50 to-indigo-50/50 border-blue-200 shadow-sm transition-all duration-200 hover:shadow-md hover:border-blue-300"
                         >
                             <Button
-                              variant="ghost"
                               size="icon"
-                              className="absolute top-2 right-2 h-6 w-6 text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity hover:text-red-500"
+                              className="absolute top-2 right-2 h-6 w-6 bg-gradient-to-r from-red-400 to-rose-400 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 hover:from-red-500 hover:to-rose-500"
                               onClick={() =>
                                 handleDeleteChoice(
                                   selectedBranch.branch_id,
@@ -785,12 +783,12 @@ export default function TextEngineStudio() {
                             </Button>
                           <CardContent className="p-4 grid gap-4">
                             <div className="grid grid-cols-[auto_1fr] gap-4 items-center">
-                              <Badge className="h-6 w-6 flex items-center justify-center p-0 rounded-full bg-emerald-500 text-emerald-950">
+                              <Badge className="h-6 w-6 flex items-center justify-center p-0 rounded-full bg-gradient-to-r from-emerald-400 to-teal-400 text-emerald-950 shadow-sm">
                                 {index + 1}
                               </Badge>
                               <Input
                                 value={option.choice}
-                                className="bg-white border-slate-200 text-slate-900 placeholder:text-slate-400"
+                                className="bg-white border-blue-300 focus:border-blue-500 focus:ring-blue-500/20 text-slate-900 placeholder:text-slate-400 transition-all duration-200"
                                 onChange={(e) =>
                                   handleUpdateChoice(
                                     selectedBranch.branch_id,
@@ -824,10 +822,10 @@ export default function TextEngineStudio() {
                                       )
                                     }
                                   >
-                                    <SelectTrigger className="h-8 bg-white border-slate-200 text-slate-900">
+                                    <SelectTrigger className="h-8 bg-white border-blue-300 focus:border-blue-500 focus:ring-blue-500/20 text-slate-900 transition-all duration-200">
                                       <SelectValue placeholder="选择目标场景..." />
                                     </SelectTrigger>
-                                    <SelectContent className="bg-white text-slate-900 border-slate-200 shadow-lg">
+                                    <SelectContent className="bg-white text-slate-900 border-blue-300 shadow-lg">
                                       <SelectItem value={NO_JUMP_VALUE}>
                                         不跳转（停留当前场景）
                                       </SelectItem>
@@ -856,10 +854,10 @@ export default function TextEngineStudio() {
                                       )
                                     }
                                   >
-                                    <SelectTrigger className="h-8 bg-white border-slate-200 text-slate-900">
+                                    <SelectTrigger className="h-8 bg-white border-blue-300 focus:border-blue-500 focus:ring-blue-500/20 text-slate-900 transition-all duration-200">
                                       <SelectValue />
                                     </SelectTrigger>
-                                    <SelectContent className="bg-white text-slate-900 border-slate-200 shadow-lg">
+                                    <SelectContent className="bg-white text-slate-900 border-blue-300 shadow-lg">
                                       <SelectItem value="no">
                                         否（可继续游戏）
                                       </SelectItem>
@@ -877,7 +875,7 @@ export default function TextEngineStudio() {
                                 </Label>
                                 <Input
                                   value={option.status_update ?? ""}
-                                  className="bg-white border-slate-200 text-slate-900 placeholder:text-slate-400"
+                                  className="bg-white border-blue-300 focus:border-blue-500 focus:ring-blue-500/20 text-slate-900 placeholder:text-slate-400 transition-all duration-200"
                                   onChange={(e) =>
                                     handleUpdateChoice(
                                       selectedBranch.branch_id,
@@ -894,7 +892,7 @@ export default function TextEngineStudio() {
                                 </Label>
                                 <Input
                                   value={option.effect ?? ""}
-                                  className="bg-white border-slate-200 text-slate-900 placeholder:text-slate-400"
+                                  className="bg-white border-blue-300 focus:border-blue-500 focus:ring-blue-500/20 text-slate-900 placeholder:text-slate-400 transition-all duration-200"
                                   onChange={(e) =>
                                     handleUpdateChoice(
                                       selectedBranch.branch_id,

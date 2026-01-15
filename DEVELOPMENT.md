@@ -101,6 +101,10 @@
   - 团队协作
   - 版本控制
   - 发布管理
+  - **游戏状态配置**
+  - 支持添加、编辑、删除自定义状态
+  - 支持设置初始值、最小值、最大值
+  - 支持设置是否为百分比
 
 ### 2. 游戏库
 
@@ -123,6 +127,29 @@
   - 选项处理
   - 背景显示
   - 进度保存
+  - **数值累加系统**
+  - **动态状态管理**
+  - **实时状态显示**
+
+#### 数值累加系统
+- **路径**: `src/lib/game-store.ts`
+- **功能**: 游戏状态数值管理
+- **特性**:
+  - 支持任意自定义状态属性
+  - 支持五种运算符（加、减、乘、除、赋值）
+  - 支持数值限制（最小值、最大值）
+  - 百分比自动限制（0-100%）
+  - 边界情况处理（除零、无效数值）
+
+#### 状态管理系统（存档/读档）
+- **路径**: `src/lib/game-store.ts`
+- **功能**: 游戏进度管理
+- **特性**:
+  - 完整的存档/读档功能
+  - 每个游戏只保存一个最新进度
+  - 自动覆盖旧进度
+  - 支持游玩时长记录
+  - IndexedDB 持久化存储
 
 ### 4. 数据持久化
 
@@ -248,6 +275,7 @@ interface GameData {
   branches: Branch[];
   background_image?: string;
   background_asset_id?: string;
+  game_states?: GameStateConfig[];  // 游戏状态配置
 }
 
 interface Branch {
@@ -262,6 +290,38 @@ interface Option {
   option_text: string;
   target_branch_id: string;
   conditions?: Condition[];
+  effect?: string;  // 效果描述
+  status_update?: string;  // 状态更新描述
+  status_changes?: StatusChange[];  // 状态变更
+}
+
+interface GameStateConfig {
+  name: string;  // 状态名称
+  initial_value: number;  // 初始值
+  min?: number;  // 最小值
+  max?: number;  // 最大值
+  is_percentage?: boolean;  // 是否为百分比
+}
+
+interface StatusChange {
+  attribute: string;  // 属性名
+  operation: '+' | '-' | '*' | '/' | '=';  // 运算符
+  value: number;  // 数值
+  min?: number;  // 最小值限制
+  max?: number;  // 最大值限制
+}
+
+interface GameState {
+  [key: string]: number;  // 支持任意自定义属性
+}
+
+interface GameProgress {
+  id: string;  // 主键
+  gameId: string;  // 游戏ID
+  currentSceneId: string;  // 当前场景ID
+  gameState: GameState;  // 游戏状态
+  timestamp: string;  // 保存时间
+  playTime: number;  // 游玩时长（秒）
 }
 ```
 
@@ -551,6 +611,38 @@ npm run build:android  # 构建 APK
    - 检查浏览器兼容性
 
 ## 更新日志
+
+### v1.1.0 (2026-01-15)
+- 添加数值累加系统
+  - 支持任意自定义状态属性
+  - 支持五种运算符（加、减、乘、除、赋值）
+  - 支持数值限制（最小值、最大值）
+  - 百分比自动限制（0-100%）
+  - 边界情况处理（除零、无效数值）
+- 添加状态管理系统（存档/读档）
+  - 完整的存档/读档功能
+  - 每个游戏只保存一个最新进度
+  - 自动覆盖旧进度
+  - 支持游玩时长记录
+  - IndexedDB 持久化存储
+- 添加游戏编辑界面的状态配置功能
+  - 支持添加、编辑、删除自定义状态
+  - 支持设置初始值、最小值、最大值
+  - 支持设置是否为百分比
+- 修改游戏页面
+  - 根据游戏数据动态初始化游戏状态
+  - 只显示游戏中定义的状态
+  - 实时状态显示
+- 修复游戏数据格式不匹配问题
+  - 统一使用新字段名（branch_title、content、options）
+  - 支持向后兼容
+- 修复数据库操作错误
+  - 修复 GameProgress 接口缺少主键字段
+  - 修复 saveProgress 方法逻辑错误
+  - 修复 deleteGameProgress 方法使用错误的键
+- 修复游戏库页面的方法调用错误
+  - 修复 updateGameMetadata 不存在的问题
+  - 改为使用正确的 updateGame 方法
 
 ### v1.0.0 (2026-01-11)
 - 完成跨平台文件处理

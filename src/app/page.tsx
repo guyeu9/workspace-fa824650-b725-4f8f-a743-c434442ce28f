@@ -153,6 +153,9 @@ export default function Home() {
       }
     }
   })
+  
+  // 游戏状态配置
+  const [gameStatesConfig, setGameStatesConfig] = useState<any[]>([])
 
   // 修复 Hydration 错误：确保组件只在客户端渲染
   useEffect(() => {
@@ -234,6 +237,8 @@ export default function Home() {
                 data.game_states.forEach((stateConfig: any) => {
                   initialGameState[stateConfig.name] = stateConfig.initial_value
                 })
+                // 保存状态配置以便后续使用
+                setGameStatesConfig(data.game_states)
               }
               
               // 如果有存档，加载存档

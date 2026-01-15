@@ -26,7 +26,24 @@ interface Choice {
   next_branch: string
   effect?: string
   status_update?: string
+  status_changes?: StatusChange[]
   end_game?: boolean
+}
+
+interface StatusChange {
+  attribute: string
+  operation: '+' | '-' | '*' | '/' | '='
+  value: number
+  min?: number
+  max?: number
+}
+
+interface GameStateConfig {
+  name: string
+  initial_value: number
+  min?: number
+  max?: number
+  is_percentage?: boolean
 }
 
 interface Branch {
@@ -42,6 +59,7 @@ interface GameData {
   game_title: string
   description: string
   status?: string
+  game_states?: GameStateConfig[]
   branches: Branch[]
 }
 
@@ -607,6 +625,121 @@ export default function GameEditor() {
                       rows={4}
                       className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm sm:text-base resize-none"
                     />
+                  </div>
+                  
+                  <div className="mt-4 sm:mt-6">
+                    <div className="flex items-center justify-between mb-3 sm:mb-4">
+                      <h3 className="text-base sm:text-lg font-bold text-slate-800 flex items-center gap-2">
+                        <span>📊</span> 游戏状态配置
+                      </h3>
+                      <button
+                        onClick={() => {
+                          const newStates = [...(gameData.game_states || [])]
+                          newStates.push({
+                            name: `状态_${newStates.length + 1}`,
+                            initial_value: 0,
+                            is_percentage: false
+                          })
+                          const newData = { ...gameData, game_states: newStates }
+                          setGameData(newData)
+                          saveToHistory(newData)
+                        }}
+                        className="px-3 py-1.5 text-xs sm:text-sm font-medium bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white rounded-lg transition-all duration-300 shadow-sm hover:shadow-md active:scale-95"
+                      >
+                        + 添加状态
+                      </button>
+                    </div>
+                    
+                    {(gameData.game_states || []).map((state, index) => (
+                      <div key={index} className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-lg p-2 sm:p-3">
+                        <input
+                          type="text"
+                          value={state.name}
+                          onChange={(e) => {
+                            const newStates = [...(gameData.game_states || [])]
+                            newStates[index] = { ...state, name: e.target.value }
+                            const newData = { ...gameData, game_states: newStates }
+                            setGameData(newData)
+                            saveToHistory(newData)
+                          }}
+                          className="flex-1 px-2 py-1.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm sm:text-base"
+                          placeholder="状态名称"
+                        />
+                        <input
+                          type="number"
+                          value={state.initial_value}
+                          onChange={(e) => {
+                            const newStates = [...(gameData.game_states || [])]
+                            newStates[index] = { ...state, initial_value: parseFloat(e.target.value) || 0 }
+                            const newData = { ...gameData, game_states: newStates }
+                            setGameData(newData)
+                            saveToHistory(newData)
+                          }}
+                          className="w-24 px-2 py-1.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm sm:text-base"
+                          placeholder="初始值"
+                        />
+                        <input
+                          type="number"
+                          value={state.min ?? ''}
+                          onChange={(e) => {
+                            const newStates = [...(gameData.game_states || [])]
+                            newStates[index] = { ...state, min: e.target.value ? parseFloat(e.target.value) : undefined }
+                            const newData = { ...gameData, game_states: newStates }
+                            setGameData(newData)
+                            saveToHistory(newData)
+                          }}
+                          className="w-20 px-2 py-1.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm sm:text-base"
+                          placeholder="最小值"
+                        />
+                        <input
+                          type="number"
+                          value={state.max ?? ''}
+                          onChange={(e) => {
+                            const newStates = [...(gameData.game_states || [])]
+                            newStates[index] = { ...state, max: e.target.value ? parseFloat(e.target.value) : undefined }
+                            const newData = { ...gameData, game_states: newStates }
+                            setGameData(newData)
+                            saveToHistory(newData)
+                          }}
+                          className="w-20 px-2 py-1.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm sm:text-base"
+                          placeholder="最大值"
+                        />
+                        <button
+                          onClick={() => {
+                            const newStates = [...(gameData.game_states || [])]
+                            newStates[index] = { ...state, is_percentage: !state.is_percentage }
+                            const newData = { ...gameData, game_states: newStates }
+                            setGameData(newData)
+                            saveToHistory(newData)
+                          }}
+                          className={`px-2 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+                            state.is_percentage
+                              ? 'bg-indigo-100 border-indigo-300 text-indigo-700'
+                              : 'bg-slate-100 border-slate-300 text-slate-600 hover:bg-slate-200'
+                          }`}
+                        >
+                          %
+                        </button>
+                        <button
+                          onClick={() => {
+                            const newStates = [...(gameData.game_states || [])]
+                            newStates.splice(index, 1)
+                            const newData = { ...gameData, game_states: newStates }
+                            setGameData(newData)
+                            saveToHistory(newData)
+                          }}
+                          className="px-2 py-1.5 rounded-lg text-sm font-medium bg-red-100 border-red-300 text-red-600 hover:bg-red-200 transition-all duration-200"
+                        >
+                          🗑
+                        </button>
+                      </div>
+                    ))}
+                    
+                    {(gameData.game_states || []).length === 0 && (
+                      <div className="text-center py-8 text-slate-500 text-sm">
+                        暂无游戏状态，点击上方"添加状态"按钮添加
+                      </div>
+                    )}
                   </div>
                 </div>
 
