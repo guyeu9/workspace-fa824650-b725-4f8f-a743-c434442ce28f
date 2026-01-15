@@ -827,18 +827,26 @@ export default function GameLibraryPage() {
                 onChange={async (e) => {
                   const file = e.target.files?.[0];
                   if (file) {
+                    console.log('开始导入文件:', file.name);
                     try {
+                      console.log('调用 enhancedGameStore.importGamePack...');
                       const result = await enhancedGameStore.importGamePack(file);
+                      console.log('导入结果:', result);
                       if (result.success) {
                         toast.success(`成功导入 ${result.count} 个游戏`);
                         await loadGames();
                       } else {
+                        console.error('导入失败，返回结果:', result);
                         toast.error('导入失败');
                         if (result.errors.length > 0) {
-                          result.errors.forEach(error => toast.error(error));
+                          result.errors.forEach(error => {
+                            console.error('导入错误:', error);
+                            toast.error(error);
+                          });
                         }
                       }
                     } catch (error) {
+                      console.error('导入过程发生异常:', error);
                       toast.error(`导入错误: ${error instanceof Error ? error.message : '未知错误'}`);
                     }
                   }

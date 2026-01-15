@@ -50,18 +50,22 @@ export class GameDataValidator {
             branchIds.add(branch.branch_id);
           }
 
-          if (!branch.chapter && !branch.scene_detail) {
-            errors.push(`分支 ${branch.branch_id || index + 1} 缺少章节标题或场景描述`);
+          // 验证分支内容
+          if (!branch.chapter) {
+            errors.push(`分支 ${branch.branch_id || index + 1} 缺少chapter字段`);
+          }
+          if (!branch.scene_detail) {
+            errors.push(`分支 ${branch.branch_id || index + 1} 缺少scene_detail字段`);
           }
 
           // 验证选择项
-          if (branch.choices && Array.isArray(branch.choices)) {
+          if (Array.isArray(branch.choices)) {
             branch.choices.forEach((choice: any, choiceIndex: number) => {
-              if (!choice.choice) {
-                errors.push(`分支 ${branch.branch_id} 的选择项 ${choiceIndex + 1} 缺少choice字段`);
+              if (!choice.id) {
+                errors.push(`分支 ${branch.branch_id} 的选择项 ${choiceIndex + 1} 缺少id字段`);
               }
-              if (!choice.next_branch && !choice.end_game) {
-                errors.push(`分支 ${branch.branch_id} 的选择项 ${choice.choice || choiceIndex + 1} 缺少next_branch或end_game`);
+              if (!choice.target) {
+                errors.push(`分支 ${branch.branch_id} 的选择项 ${choiceIndex + 1} 缺少target字段`);
               }
             });
           }

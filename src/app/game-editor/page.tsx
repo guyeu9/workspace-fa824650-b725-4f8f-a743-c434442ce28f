@@ -242,13 +242,17 @@ export default function GameEditor() {
       if (data.game_title && data.branches && Array.isArray(data.branches)) {
         const processedData = {
           ...data,
-          branches: data.branches.map((branch: any) => ({
-            ...branch,
-            choices: branch.choices.map((choice: any) => ({
-              ...choice,
-              id: choice.id || `choice_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
-            }))
-          }))
+          branches: data.branches.map((branch: any) => {
+            // 支持 choices 或 options 字段
+            const choiceField = branch.choices || branch.options || [];
+            return {
+              ...branch,
+              choices: Array.isArray(choiceField) ? choiceField.map((choice: any) => ({
+                ...choice,
+                id: choice.id || choice.option_id || `choice_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+              })) : []
+            };
+          })
         }
         setGameData(processedData)
         if (processedData.background_image) {

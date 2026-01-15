@@ -68,7 +68,6 @@ interface GameStateConfig {
 interface GameData {
   game_title: string
   description: string
-  status?: string
   game_states?: GameStateConfig[]
   branches: Branch[]
 }
@@ -76,9 +75,6 @@ interface GameData {
 const NO_JUMP_VALUE = "__NO_JUMP__"
 
 function normalizeGameData(raw: any): GameData {
-  const statusValue =
-    typeof raw?.status === "string" ? raw.status : "draft"
-
   const branches: Branch[] = Array.isArray(raw?.branches)
     ? raw.branches.map((b: any, branchIndex: number) => {
         const choices: Choice[] = Array.isArray(b?.choices)
@@ -107,7 +103,6 @@ function normalizeGameData(raw: any): GameData {
   return {
     game_title: raw?.game_title ?? raw?.title ?? "未命名游戏",
     description: raw?.description ?? "",
-    status: statusValue,
     branches,
   }
 }
@@ -115,7 +110,6 @@ function normalizeGameData(raw: any): GameData {
 const initialGameData: GameData = {
   game_title: "黑暗森林",
   description: "在这片阴森的森林中，你的每一次选择都将改变命运。",
-  status: "draft",
   branches: [
     {
       branch_id: "start",
@@ -364,7 +358,7 @@ export default function TextEngineStudio() {
         <div className="flex items-start gap-3 flex-1 min-w-0">
           <div className="flex flex-col gap-2 flex-1 min-w-0">
             <h1
-              className="text-base md:text-xl font-extrabold max-w-full text-left bg-gradient-to-r from-emerald-500 via-sky-500 to-indigo-500 bg-clip-text text-transparent drop-shadow-sm leading-tight outline-none border border-transparent rounded-md px-2 py-1 hover:border-indigo-200 focus-visible:border-indigo-400 focus-visible:ring-2 focus-visible:ring-indigo-200 focus-visible:ring-offset-1 focus-visible:ring-offset-white"
+              className="text-base md:text-xl font-extrabold max-w-full text-left bg-white border-2 border-blue-300 focus:border-2 focus:border-blue-500 focus:ring-blue-500/20 text-slate-800 placeholder:text-slate-400 transition-all duration-200 rounded-md px-3 py-2 leading-tight outline-none"
               contentEditable
               suppressContentEditableWarning
               onBlur={(e) =>
@@ -384,24 +378,6 @@ export default function TextEngineStudio() {
                 className="field-sizing-content w-full h-12 min-h-0 resize-none px-3 py-2 text-xs md:text-sm leading-snug overflow-y-auto bg-white border-blue-300 focus:border-blue-500 focus:ring-blue-500/20 text-slate-800 placeholder:text-slate-400 rounded-md shadow-xs transition-all duration-200"
                 placeholder="简要描述这个游戏"
               />
-              <div className="flex flex-col gap-1 shrink-0 w-[110px]">
-                <Label className="text-[11px] text-slate-500">
-                  状态
-                </Label>
-                <Select
-                  value={gameData.status ?? "draft"}
-                  onValueChange={(val) => handleUpdateGame({ status: val })}
-                >
-                  <SelectTrigger className="h-8 w-full px-2 text-[11px] bg-white border-blue-300 focus:border-blue-500 focus:ring-blue-500/20 text-slate-800 transition-all duration-200">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white text-slate-900 border-blue-300 shadow-lg">
-                    <SelectItem value="draft">草稿</SelectItem>
-                    <SelectItem value="published">已发布</SelectItem>
-                    <SelectItem value="archived">归档</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
             </div>
             
             <Separator className="my-2" />
@@ -660,7 +636,7 @@ export default function TextEngineStudio() {
               <>
                 <div className="p-4 border-b border-blue-200 flex items-start justify-between gap-4 bg-white/90 shadow-xs">
                   <div className="flex-1 space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-[1fr_3fr] gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="branch-id">场景 ID</Label>
                         <Input
@@ -672,29 +648,29 @@ export default function TextEngineStudio() {
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="branch-name">场景名称</Label>
-                        <Input
-                          id="branch-name"
-                          value={selectedBranch.chapter}
-                          placeholder="输入场景名称"
-                          className="bg-white border-blue-300 focus:border-blue-500 focus:ring-blue-500/20 text-slate-900 placeholder:text-slate-400 transition-all duration-200"
-                          onChange={(e) =>
-                            handleUpdateBranch(selectedBranch.branch_id, {
-                              chapter: e.target.value,
-                            })
-                          }
-                        />
+                        <div className="flex items-center gap-2">
+                          <Input
+                            id="branch-name"
+                            value={selectedBranch.chapter}
+                            placeholder="输入场景名称"
+                            className="flex-1 bg-white border-blue-300 focus:border-blue-500 focus:ring-blue-500/20 text-slate-900 placeholder:text-slate-400 transition-all duration-200"
+                            onChange={(e) =>
+                              handleUpdateBranch(selectedBranch.branch_id, {
+                                chapter: e.target.value,
+                              })
+                            }
+                          />
+                          <Button
+                            size="sm"
+                            className="text-xs bg-gradient-to-r from-red-500 to-rose-500 hover:from-red-600 hover:to-rose-600 text-white transition-all duration-300 shadow-sm"
+                            onClick={() => handleDeleteBranch(selectedBranch.branch_id)}
+                          >
+                            <Trash2 className="h-3 w-3 mr-1" />
+                            删除场景
+                          </Button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="flex flex-col items-end gap-2">
-                    <Button
-                      size="sm"
-                      className="text-xs bg-gradient-to-r from-red-500 to-rose-500 hover:from-red-600 hover:to-rose-600 text-white transition-all duration-300 shadow-sm"
-                      onClick={() => handleDeleteBranch(selectedBranch.branch_id)}
-                    >
-                      <Trash2 className="h-3 w-3 mr-1" />
-                      删除场景
-                    </Button>
                   </div>
                 </div>
 

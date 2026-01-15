@@ -1,0 +1,681 @@
+{
+  "game_title": "一个Gay的生活",
+  "description": "讲述了名校生物博士凌浩在自我认知、家庭压力和感情选择中的挣扎与成长故事。",
+  "author": "Unknown",
+  "tags": ["情感", "成长", "LGBTQ+", "家庭", "自我认同"],
+  "version": 1.0,
+  "background_image": "",
+  "background_asset_id": "",
+  "branches": [
+    {
+      "branch_id": "chapter1_start",
+      "branch_title": "第1章：无声的心动 - 实验室傍晚",
+      "content": "夕阳透过实验室的玻璃窗，在操作台上映出金色的光斑。凌浩盯着显微镜下的细胞切片，指尖却不自觉地颤抖——脑海里反复回放着中午和同组师兄并肩吃饭的画面，师兄笑着递给他一瓶酸奶时，温热的指尖触碰到他手背的瞬间，心跳骤然失控。\n\n\"凌浩，今天的数据整理完了吗？\"师兄的声音从身后传来，带着刚运动完的喘息。\n\n凌浩猛地回头，脸颊发烫：\"快、快好了，还差最后一组数据核对。\"\n\n师兄走过来，俯身查看他的电脑屏幕，身上淡淡的洗衣液香味萦绕在凌浩鼻尖。凌浩的目光不受控制地落在师兄线条流畅的下颌线上，喉结不自觉地滚动了一下。",
+      "options": [
+        {
+          "option_id": "opt_avoid_eye_contact",
+          "option_text": "刻意避开目光，假装专注工作",
+          "target_branch_id": "chapter1_ending_a",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "self_identity_down",
+              "value": "我怎么会有这种想法？太不正常了……\n（自我认同-5分）"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_ask_question",
+          "option_text": "坦然回应，顺势请教工作问题",
+          "target_branch_id": "chapter1_ending_b",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "self_identity_up",
+              "value": "师兄，这里的数据分析方法我不太确定，你能再指导一下吗？\n（自我认同+5分）"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_leave_early",
+          "option_text": "借口身体不适，提前离开实验室",
+          "target_branch_id": "chapter1_ending_c",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "self_identity_same",
+              "value": "我有点头晕，想先回去休息，数据明天一早补交给你。\n（自我认同不变）"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "branch_id": "chapter1_ending_a",
+      "branch_title": "第1章结局A - 自我怀疑",
+      "content": "凌浩刻意避开师兄的目光，假装专注于电脑屏幕，心脏却仍在狂跳。师兄指导了他几句后便离开了，凌浩独自留在实验室，脑海中不断回想着刚才的画面，充满了自我怀疑。",
+      "options": [
+        {
+          "option_id": "opt_to_chapter2",
+          "option_text": "前往第2章：家族的关怀与压力",
+          "target_branch_id": "chapter2_start"
+        }
+      ]
+    },
+    {
+      "branch_id": "chapter1_ending_b",
+      "branch_title": "第1章结局B - 拉近关系",
+      "content": "凌浩坦然请教师兄，师兄耐心地指导他数据分析方法。两人的距离很近，凌浩能感受到师兄的呼吸，但他努力保持镇定。这次交流让凌浩对师兄产生了更多的好感，也让他开始思考自己的感情。",
+      "options": [
+        {
+          "option_id": "opt_to_chapter2",
+          "option_text": "前往第2章：家族的关怀与压力",
+          "target_branch_id": "chapter2_start"
+        }
+      ]
+    },
+    {
+      "branch_id": "chapter1_ending_c",
+      "branch_title": "第1章结局C - 逃避现实",
+      "content": "凌浩借口身体不适提前离开实验室，回到家中后，他试图通过看电影、打游戏来分散注意力，但脑海中仍不断浮现师兄的身影。他感到困惑和不安，不知道该如何面对自己的感情。",
+      "options": [
+        {
+          "option_id": "opt_to_chapter2",
+          "option_text": "前往第2章：家族的关怀与压力",
+          "target_branch_id": "chapter2_start"
+        }
+      ]
+    },
+    {
+      "branch_id": "chapter2_start",
+      "branch_title": "第2章：家族的关怀与压力 - 家中周末午餐",
+      "content": "餐桌上摆满了凌浩爱吃的菜，凌母却全程盯着他的筷子，欲言又止。凌父放下酒杯，清了清嗓子：\"浩浩，你姑姑昨天又来问了，说她单位有个小姑娘，也是名牌大学毕业的，性格温顺，想让你们见一面。\"\n\n凌浩握着筷子的手一紧，低头扒了一口饭：\"爸，我现在工作太忙了，没时间谈恋爱。\"\n\n\"忙不是借口！\"姑姑的声音突然从门口传来，她拎着一袋水果走进来，\"浩浩，你都28了，同龄人孩子都能打酱油了！你是家里的长孙，传宗接代的事儿可不能耽误。\"\n\n凌母连忙附和：\"是啊儿子，姑姑也是为你好。那小姑娘我见过，长得白净，性格也好，你们见一面，不合适也没关系。\"",
+      "options": [
+        {
+          "option_id": "opt_agree_blind_date",
+          "option_text": "勉强答应相亲",
+          "target_branch_id": "chapter2_ending_a",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "self_identity_down",
+              "value": "……那好吧，就见一面。\n（自我认同-10分）"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_refuse_blind_date",
+          "option_text": "直接拒绝，表明暂时不想结婚",
+          "target_branch_id": "chapter2_ending_b",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "self_identity_up",
+              "value": "我真的不想相亲，也暂时没有结婚的打算，你们别再逼我了。\n（自我认同+10分）"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_change_topic",
+          "option_text": "转移话题，说起工作上的成就",
+          "target_branch_id": "chapter2_ending_c",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "self_identity_same",
+              "value": "对了爸，我最近负责的项目有了新进展，可能会申请专利。\n（自我认同不变）"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "branch_id": "chapter2_ending_a",
+      "branch_title": "第2章结局A - 妥协的开始",
+      "content": "凌浩勉强答应了相亲，家人都露出了满意的笑容。但凌浩心里却充满了无奈和压抑，他不知道该如何面对这场注定没有结果的相亲。",
+      "options": [
+        {
+          "option_id": "opt_to_chapter3",
+          "option_text": "前往第3章：初恋的微光与幻灭",
+          "target_branch_id": "chapter3_start"
+        }
+      ]
+    },
+    {
+      "branch_id": "chapter2_ending_b",
+      "branch_title": "第2章结局B - 勇敢拒绝",
+      "content": "凌浩直接拒绝了相亲，家人都愣住了。姑姑有些生气，凌父母则露出担忧的神情。凌浩回到房间后，感到一种前所未有的轻松，同时也开始上网查询同性恋相关知识。\n\n科普：1990年，世界卫生组织已将同性恋从精神疾病名册中移除；2001年，中国《中国精神障碍分类与诊断标准》第三版也将其剔除。性取向是自然存在的多元状态，并非疾病或错误。（解锁词条【同性恋去病化】）",
+      "options": [
+        {
+          "option_id": "opt_to_chapter3",
+          "option_text": "前往第3章：初恋的微光与幻灭",
+          "target_branch_id": "chapter3_start"
+        }
+      ]
+    },
+    {
+      "branch_id": "chapter2_ending_c",
+      "branch_title": "第2章结局C - 暂时逃避",
+      "content": "凌浩成功转移了话题，家人开始讨论他的工作成就，暂时忘记了相亲的事情。但凌浩知道，这只是暂时的逃避，家人的催婚压力始终存在。",
+      "options": [
+        {
+          "option_id": "opt_to_chapter3",
+          "option_text": "前往第3章：初恋的微光与幻灭",
+          "target_branch_id": "chapter3_start"
+        }
+      ]
+    },
+    {
+      "branch_id": "chapter3_start",
+      "branch_title": "第3章：初恋的微光与幻灭 - 咖啡馆周末下午",
+      "content": "凌浩应师兄之约来到咖啡馆，师兄坐在靠窗的位置，面前放着两杯拿铁。\"谢谢你上次指导我数据分析，这杯我请。\"凌浩把拿铁推到师兄面前。\n\n师兄笑着接过：\"小事而已。对了，凌浩，我有件事想跟你说。\"他顿了顿，眼神有些羞涩，\"我交女朋友了，下周打算带她见家长。\"\n\n凌浩的心瞬间沉了下去，指尖冰凉，脸上却要强装镇定：\"恭喜你啊，师兄。\"\n\n\"谢谢。\"师兄没察觉到他的异常，兴奋地分享着和女友的相处细节，凌浩听着，每一个字都像针一样扎在心上。他低头抿了一口拿铁，苦涩的味道蔓延整个口腔。",
+      "options": [
+        {
+          "option_id": "opt_sincere_blessing",
+          "option_text": "真诚祝福，认真倾听",
+          "target_branch_id": "chapter3_ending_a",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "self_identity_up",
+              "value": "她听起来很优秀，你们很般配。\n（自我认同+5分）"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_leave_early_cafe",
+          "option_text": "借口有事，提前离开",
+          "target_branch_id": "chapter3_ending_b",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "self_identity_down",
+              "value": "抱歉师兄，我突然想起还有工作要处理，先走了。\n（自我认同-5分）"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_ask_about_gay",
+          "option_text": "试探性询问师兄对同性恋的看法",
+          "target_branch_id": "chapter3_ending_c",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "self_identity_up",
+              "value": "师兄，你对同性恋怎么看？我身边有这样的朋友，他总是很自卑。\n（自我认同+10分）"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "branch_id": "chapter3_ending_a",
+      "branch_title": "第3章结局A - 成熟祝福",
+      "content": "凌浩真诚地祝福师兄，认真倾听他分享和女友的故事。虽然心里有些失落，但凌浩也明白，师兄的幸福是最重要的。这次经历让凌浩更加成熟，也让他开始思考自己的未来。",
+      "options": [
+        {
+          "option_id": "opt_to_chapter4",
+          "option_text": "前往第4章：相亲局上的真相试探",
+          "target_branch_id": "chapter4_start"
+        }
+      ]
+    },
+    {
+      "branch_id": "chapter3_ending_b",
+      "branch_title": "第3章结局B - 心碎逃离",
+      "content": "凌浩借口有事提前离开咖啡馆，独自走在街头，心中充满了痛苦和绝望。他意识到自己对师兄的感情永远不会有结果，这种单恋让他感到无比的孤独和无助。\n\n内心独白：原来我的心动，从一开始就是错的……（解锁词条【被压抑的同性恋】）",
+      "options": [
+        {
+          "option_id": "opt_to_chapter4",
+          "option_text": "前往第4章：相亲局上的真相试探",
+          "target_branch_id": "chapter4_start"
+        }
+      ]
+    },
+    {
+      "branch_id": "chapter3_ending_c",
+      "branch_title": "第3章结局C - 获得支持",
+      "content": "凌浩试探性地询问师兄对同性恋的看法，师兄笑着回答：\"我觉得没什么啊，每个人都有选择爱的权利。只要不伤害别人，喜欢谁都是自由的。\"\n\n凌浩听了这话，心中感到一阵温暖，自我认同也得到了提升。\n\n（自我认同+5分）",
+      "options": [
+        {
+          "option_id": "opt_to_chapter4",
+          "option_text": "前往第4章：相亲局上的真相试探",
+          "target_branch_id": "chapter4_start"
+        }
+      ]
+    },
+    {
+      "branch_id": "chapter4_start",
+      "branch_title": "第4章：相亲局上的真相试探 - 餐厅周末晚上",
+      "content": "凌浩按姑姑的安排来到餐厅，阿兰已经坐在座位上等候。她穿着浅粉色连衣裙，看到凌浩进来，礼貌地站起身：\"你好，我是阿兰。\"\n\n\"你好，凌浩。\"凌浩在她对面坐下，气氛有些尴尬。服务员递上菜单，阿兰让凌浩先点，凌浩随便点了两个菜，便沉默地看着桌面。\n\n阿兰察觉到他的疏离，主动开口：\"凌博士，我听姑姑说你很优秀，在科研院所工作。\"\n\n\"还好。\"凌浩的回应很简短。他看着阿兰温柔的脸庞，心里充满愧疚——他知道自己无法回应这份期待，却又不得不来赴约。",
+      "options": [
+        {
+          "option_id": "opt_confess_truth",
+          "option_text": "直接坦白自己的性取向",
+          "target_branch_id": "chapter4_ending_a",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "self_identity_up",
+              "value": "阿兰，对不起，我必须跟你说实话。我是同性恋，无法和异性建立恋爱关系，这次相亲是我家人逼我的，真的很抱歉。\n（自我认同+20分）"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_hide_truth",
+          "option_text": "隐瞒真相，假装不合拍",
+          "target_branch_id": "chapter4_ending_b",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "self_identity_down",
+              "value": "我性格比较孤僻，不擅长与人相处，可能不太适合你。\n（自我认同-15分）"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_ask_alans_opinion",
+          "option_text": "询问阿兰对婚姻和性取向的看法",
+          "target_branch_id": "chapter4_ending_c",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "self_identity_up",
+              "value": "阿兰，你对婚姻有什么期待吗？如果你的朋友是同性恋，你会怎么看待他？\n（自我认同+5分）"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "branch_id": "chapter4_ending_a",
+      "branch_title": "第4章结局A - 坦诚解脱",
+      "content": "凌浩向阿兰坦白了自己的性取向，阿兰愣了愣，随后平静地说：\"谢谢你告诉我真相，我能理解。其实我也对相亲比较抵触，只是不想让家人失望。\"\n\n两人达成共识，阿兰主动向姑姑说明\"不合拍\"，凌浩的压力得到了缓解。这次坦诚相对让凌浩感到了解脱，也让他更加坚定了做自己的决心。",
+      "options": [
+        {
+          "option_id": "opt_to_chapter5",
+          "option_text": "前往第5章：春节饭桌上的终极催婚",
+          "target_branch_id": "chapter5_start"
+        }
+      ]
+    },
+    {
+      "branch_id": "chapter4_ending_b",
+      "branch_title": "第4章结局B - 内心愧疚",
+      "content": "凌浩隐瞒了真相，假装自己性格孤僻，不适合阿兰。阿兰察觉到他的敷衍，饭后主动说\"我们可能确实不合适\"。凌浩虽然避免了直接冲突，但内心的愧疚却越来越深，自我认同也进一步降低。\n\n（自我认同再-5分）",
+      "options": [
+        {
+          "option_id": "opt_to_chapter5",
+          "option_text": "前往第5章：春节饭桌上的终极催婚",
+          "target_branch_id": "chapter5_start"
+        }
+      ]
+    },
+    {
+      "branch_id": "chapter4_ending_c",
+      "branch_title": "第4章结局C - 互相理解",
+      "content": "凌浩询问阿兰对婚姻和性取向的看法，阿兰认真思考后回答：\"婚姻应该建立在爱情的基础上，而不是为了完成任务。对于同性恋者，我觉得他们和异性恋者一样，都有追求幸福的权利。\"\n\n这番话让凌浩感到很欣慰，也让他对阿兰产生了好感。虽然两人无法成为恋人，但却成为了互相理解的朋友。",
+      "options": [
+        {
+          "option_id": "opt_to_chapter5",
+          "option_text": "前往第5章：春节饭桌上的终极催婚",
+          "target_branch_id": "chapter5_start"
+        }
+      ]
+    },
+    {
+      "branch_id": "chapter5_start",
+      "branch_title": "第5章：春节饭桌上的终极催婚 - 除夕夜家中",
+      "content": "除夕夜的饭桌上，灯火通明。全家人围坐在一起，姑姑突然提起相亲的事：\"浩浩，上次跟阿兰相亲怎么样了？我听阿兰说你们没成，是不是你太挑剔了？\"\n\n叔叔放下酒杯，附和道：\"就是啊浩浩，男人就该早点成家立业，传宗接代是本分。你看你表弟，比你小两岁，孩子都一岁了。\"\n\n凌父叹了口气：\"浩浩，我们不是逼你，只是担心你老了没人照顾。你要是不喜欢阿兰，我们再给你介绍别的姑娘。\"\n\n凌母眼眶泛红：\"儿子，你就听我们一次吧，找个姑娘结婚，安安稳稳过日子，我们才能放心啊。\"\n\n全家人的目光都聚焦在凌浩身上，他感觉自己像被架在火上烤。窗外的烟花绽放，屋内却压抑得让人喘不过气。",
+      "options": [
+        {
+          "option_id": "opt_compromise_marry",
+          "option_text": "妥协答应结婚",
+          "target_branch_id": "branch_marry_deception",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "self_identity_down",
+              "value": "……我知道了，我会再考虑相亲结婚的事。\n（自我认同-30分，进入骗婚线）"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_come_out",
+          "option_text": "鼓起勇气出柜",
+          "target_branch_id": "chapter6_start",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "self_identity_up",
+              "value": "你们别再逼我了！我喜欢的是男人，我是同性恋！我不可能和女人结婚！\n（自我认同+20分，进入出柜12杀剧情）"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_run_away",
+          "option_text": "崩溃逃离现场",
+          "target_branch_id": "chapter5_ending_c",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "self_identity_down",
+              "value": "我受不了了！\n（自我认同-20分）"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "branch_id": "chapter5_ending_c",
+      "branch_title": "第5章结局C - 崩溃逃离",
+      "content": "凌浩无法承受家人的压力，崩溃逃离了现场。他独自一人走在除夕夜的街头，看着家家户户团聚的景象，心中充满了孤独和绝望。凌浩不知道该去哪里，也不知道该如何面对家人，只能在街头漫无目的地走着。",
+      "options": [
+        {
+          "option_id": "opt_to_chapter6",
+          "option_text": "前往第6章：出柜12杀——直面偏见的战场",
+          "target_branch_id": "chapter6_start"
+        }
+      ]
+    },
+    {
+      "branch_id": "chapter6_start",
+      "branch_title": "第6章：出柜12杀——直面偏见的战场 - 除夕夜家中",
+      "content": "凌浩的话音刚落，屋内瞬间陷入死寂。姑姑猛地站起来，指着他的鼻子：\"你说什么胡话！同性恋？那是病！你是不是被什么人带坏了？\"\n\n叔叔气得拍桌子：\"简直胡闹！我们凌家怎么会出你这样的人？传宗接代怎么办？你让我们在亲戚面前怎么抬头？\"\n\n凌母捂着脸哭起来：\"浩浩，你一定是搞错了！是不是工作压力太大了？我们带你去看医生，一定能治好的！\"\n\n凌父脸色铁青，一言不发，眼神里充满了失望和愤怒。此时表弟凌晓（刚上大学）从房间里出来，看到这一幕，悄悄站在门口观望。\n\n现在，凌浩需要面对家人的质问，每轮20秒倒计时，选择正确回应+5分，错误-10分。",
+      "options": [
+        {
+          "option_id": "opt_come_out_round1",
+          "option_text": "开始出柜第1轮回应",
+          "target_branch_id": "chapter6_come_out_round1"
+        }
+      ]
+    },
+    {
+      "branch_id": "chapter6_come_out_round1",
+      "branch_title": "出柜第1轮 - 姑姑的质问",
+      "content": "姑姑：同性恋就是病！电视上都说要治！",
+      "options": [
+        {
+          "option_id": "opt_round1_a",
+          "option_text": "是病又怎么样，我不想治",
+          "target_branch_id": "chapter6_come_out_result",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "self_identity_down",
+              "value": "错误回应！\n（自我认同-10分）"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_round1_b",
+          "option_text": "同性恋不是病，世卫组织早就移除了",
+          "target_branch_id": "chapter6_come_out_result",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "self_identity_up",
+              "value": "正确回应！1990年世卫组织就把同性恋移出精神疾病名册了，2001年中国也剔除了，它不是病，是正常的性取向！\n（自我认同+5分）"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_round1_c",
+          "option_text": "我也不想这样，是天生的",
+          "target_branch_id": "chapter6_come_out_result",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "self_identity_down",
+              "value": "错误回应！\n（自我认同-10分）"
+            }
+          ]
+        },
+        {
+          "option_id": "opt_round1_d",
+          "option_text": "你们别管我",
+          "target_branch_id": "chapter6_come_out_result",
+          "consequences": [
+            {
+              "type": "show_message",
+              "key": "self_identity_down",
+              "value": "错误回应！\n（自我认同-10分）"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "branch_id": "chapter6_come_out_result",
+      "branch_title": "出柜结果判定",
+      "content": "经过出柜的考验，凌浩需要根据自己的自我认同分数来决定后续的发展。",
+      "options": [
+        {
+          "option_id": "opt_high_identity",
+          "option_text": "自我认同≥60分：家人态度松动",
+          "target_branch_id": "branch_positive_relationship"
+        },
+        {
+          "option_id": "opt_medium_identity",
+          "option_text": "30≤自我认同＜60分：家人强烈反对",
+          "target_branch_id": "branch_conversion_therapy"
+        },
+        {
+          "option_id": "opt_low_identity",
+          "option_text": "自我认同＜30分：崩溃妥协",
+          "target_branch_id": "branch_marry_deception"
+        }
+      ]
+    },
+    {
+      "branch_id": "branch_marry_deception",
+      "branch_title": "分支：骗婚线 - 婚后1年",
+      "content": "凌浩与乐乐结婚一年，两人分房睡，没有任何亲密接触。乐乐每天精心打理家务，却始终感觉不到丈夫的温度。这天晚上，乐乐在凌浩的书房发现了一本关于同性恋的书，里面夹着凌浩写的日记：\"我对不起乐乐，但我无法欺骗自己的内心……\"\n\n乐乐拿着日记找到凌浩，眼眶泛红：\"你是不是有什么事瞒着我？\"\n\n凌浩沉默良久，终于坦白：\"对不起，乐乐，我是同性恋。我当初不该答应结婚，伤害了你。\"",
+      "options": [
+        {
+          "option_id": "opt_lele_conservative",
+          "option_text": "乐乐（保守型）：选择忍气吞声",
+          "target_branch_id": "ending_marriage_无性婚姻"
+        },
+        {
+          "option_id": "opt_lele_progressive",
+          "option_text": "乐乐（平权型）：选择离婚维权",
+          "target_branch_id": "ending_marriage_破碎婚姻"
+        }
+      ]
+    },
+    {
+      "branch_id": "ending_marriage_无性婚姻",
+      "branch_title": "结局1：无性婚姻",
+      "content": "乐乐哭着说：\"我知道了……只要你不离婚，不对外说出去，我们就这样过吧。\"\n\n从此两人陷入无性婚姻的僵局，凌浩每天活在愧疚中，乐乐则在孤独和压抑中度过，逢年过节还要在家人面前扮演\"恩爱夫妻\"。",
+      "options": [
+        {
+          "option_id": "opt_restart",
+          "option_text": "重新开始游戏",
+          "target_branch_id": "chapter1_start"
+        }
+      ]
+    },
+    {
+      "branch_id": "ending_marriage_破碎婚姻",
+      "branch_title": "结局2：破碎婚姻",
+      "content": "乐乐冷静下来：\"凌浩，我能理解你的处境，但我不能接受这样的婚姻。我们离婚吧，我希望你能勇敢做自己，也希望我能重新寻找自己的幸福。\"\n\n离婚时，乐乐发现自己怀孕，最终选择生下孩子交给凌浩抚养，自己净身出户，重新开始生活。",
+      "options": [
+        {
+          "option_id": "opt_restart",
+          "option_text": "重新开始游戏",
+          "target_branch_id": "chapter1_start"
+        }
+      ]
+    },
+    {
+      "branch_id": "branch_conversion_therapy",
+      "branch_title": "分支：扭转治疗线 - 治疗中心",
+      "content": "凌浩被家人送到杨博士的\"扭转治疗中心\"，这里的环境压抑封闭。杨博士拿着电击治疗仪，对凌浩说：\"同性恋是精神疾病，只要通过电击刺激，就能让你恢复正常。\"\n\n治疗过程中，凌浩被强迫观看异性恋亲密画面，一旦表现出抗拒就会遭受电击。他的意识逐渐模糊，自我认同被彻底摧毁。\"我错了……我不是同性恋……\"凌浩在痛苦中嘶吼。\n\n（视角切换为杨博士）杨博士在病历本上写下：\"治疗有效，患者已初步认识到错误。\"但他没看到，凌浩眼中的光正在一点点熄灭。",
+      "options": [
+        {
+          "option_id": "opt_conversion_therapy_end",
+          "option_text": "继续治疗",
+          "target_branch_id": "ending_conversion_therapy"
+        }
+      ]
+    },
+    {
+      "branch_id": "ending_conversion_therapy",
+      "branch_title": "结局3：扭转治疗——遁入空门",
+      "content": "经过三个月的治疗，凌浩对性彻底失去兴趣，也无法再感受到任何情感。他从治疗中心出来后，拒绝与家人和任何人交流。某天清晨，他留下一封信：\"我已看破红尘，从此青灯古佛，了此残生。\"随后前往寺庙出家，家人得知后悲痛欲绝，却再也无法挽回。\n\n科普：所谓'扭转治疗'是伪科学，会对同性恋者造成严重的身心伤害，包括抑郁、焦虑、自杀倾向等。目前全球已有多个国家和地区禁止此类治疗。（解锁词条【弗洛伊德的来信】：弗洛伊德曾明确表示，无法改变同性恋者的性取向，强迫治疗毫无意义）",
+      "options": [
+        {
+          "option_id": "opt_restart",
+          "option_text": "重新开始游戏",
+          "target_branch_id": "chapter1_start"
+        }
+      ]
+    },
+    {
+      "branch_id": "branch_positive_relationship",
+      "branch_title": "分支：正向关系线 - 选择伴侣",
+      "content": "凌浩成功出柜，自我认同≥60分，家人同意暂时不逼婚。现在，凌浩可以选择自己的感情发展方向。",
+      "options": [
+        {
+          "option_id": "opt_chenyu",
+          "option_text": "选择辰宇：三甲医院感染科医生",
+          "target_branch_id": "subbranch_chenyu"
+        },
+        {
+          "option_id": "opt_xiaolong",
+          "option_text": "选择小龙：公益组织工作人员",
+          "target_branch_id": "subbranch_xiaolong"
+        },
+        {
+          "option_id": "opt_zhangchi",
+          "option_text": "选择张弛：名媛",
+          "target_branch_id": "subbranch_zhangchi"
+        }
+      ]
+    },
+    {
+      "branch_id": "subbranch_chenyu",
+      "branch_title": "子分支：辰宇线 - 艾滋病科普活动现场",
+      "content": "凌浩为了了解更多LGBTQ+群体相关知识，参加了一场艾滋病科普活动。活动现场，辰宇正在讲解艾滋病预防知识，他的声音温和有力，眼神坚定。\"艾滋病的传播途径是血液、母婴和性接触，日常接触不会传染。我们应该尊重每一个人，包括同性恋者。\"\n\n活动结束后，凌浩主动上前与辰宇交流：\"你好，我是凌浩。你的讲解很精彩，我受益匪浅。\"\n\n辰宇笑着回应：\"谢谢。我是辰宇，三甲医院感染科医生。很高兴能和你交流。\"\n\n两人因共同的理念逐渐走近，辰宇支持凌浩向家人进一步沟通，凌浩也鼓励辰宇开展更多科普活动。",
+      "options": [
+        {
+          "option_id": "opt_chenyu_marry",
+          "option_text": "结局4：同性婚姻——相守一生",
+          "target_branch_id": "ending_chenyu_相守一生"
+        },
+        {
+          "option_id": "opt_chenyu_cohabit",
+          "option_text": "结局5：星辰之爱——相伴不婚",
+          "target_branch_id": "ending_chenyu_相伴不婚"
+        },
+        {
+          "option_id": "opt_chenyu_breakup",
+          "option_text": "结局6：错失幸福——理念分歧",
+          "target_branch_id": "ending_chenyu_错失幸福"
+        }
+      ]
+    },
+    {
+      "branch_id": "ending_chenyu_相守一生",
+      "branch_title": "结局4：同性婚姻——相守一生",
+      "content": "凌浩在辰宇的陪伴下，再次与家人沟通，这次他带着详细的科普资料和两人的相处日常。家人看到凌浩的幸福和坚定，逐渐放下偏见，选择接纳。一年后，两人前往国外登记结婚，婚礼上，表弟凌晓作为伴郎送上祝福。婚后，他们一起参与LGBTQ+群体公益活动，过上了安稳幸福的生活。",
+      "options": [
+        {
+          "option_id": "opt_restart",
+          "option_text": "重新开始游戏",
+          "target_branch_id": "chapter1_start"
+        }
+      ]
+    },
+    {
+      "branch_id": "ending_chenyu_相伴不婚",
+      "branch_title": "结局5：星辰之爱——相伴不婚",
+      "content": "凌浩和辰宇感情稳定，但都认为婚姻不是爱情的唯一归宿。他们选择同居，一起打造温馨的小家，闲暇时一起旅行、做公益。家人虽然希望他们\"名正言顺\"，但看到两人幸福的状态，也不再反对。凌浩的自我认同达到100分，真正接纳了自己的身份。",
+      "options": [
+        {
+          "option_id": "opt_restart",
+          "option_text": "重新开始游戏",
+          "target_branch_id": "chapter1_start"
+        }
+      ]
+    },
+    {
+      "branch_id": "ending_chenyu_错失幸福",
+      "branch_title": "结局6：错失幸福——理念分歧",
+      "content": "在是否公开恋情的问题上，两人产生分歧。辰宇希望公开，推动平权；凌浩则担心影响家人和工作，选择低调。多次争吵后，两人都感到疲惫。\"对不起，凌浩，我们对未来的期待不一样。\"辰宇无奈地说。最终两人和平分手，凌浩虽然自我认同较高，但内心留下了遗憾。",
+      "options": [
+        {
+          "option_id": "opt_restart",
+          "option_text": "重新开始游戏",
+          "target_branch_id": "chapter1_start"
+        }
+      ]
+    },
+    {
+      "branch_id": "subbranch_xiaolong",
+      "branch_title": "子分支：小龙线 - LGBTQ+群体权益保护公益活动现场",
+      "content": "凌浩参加公益活动时，遇到了活泼开朗的小龙。小龙是公益组织的工作人员，正在组织\"反歧视签名活动\"。\"你好！麻烦签个名支持一下吧！我们希望通过这样的活动，让更多人了解和接纳LGBTQ+群体。\"小龙递过笔和签名板，笑容阳光。\n\n凌浩签下自己的名字：\"我很支持你们的工作。\"\n\n\"太好了！我是小龙！\"两人相谈甚欢，小龙邀请凌浩加入志愿者团队。",
+      "options": [
+        {
+          "option_id": "opt_xiaolong_end",
+          "option_text": "结局7：永恒亲情——陪伴是长情",
+          "target_branch_id": "ending_xiaolong_陪伴是长情"
+        }
+      ]
+    },
+    {
+      "branch_id": "ending_xiaolong_陪伴是长情",
+      "branch_title": "结局7：永恒亲情——陪伴是长情",
+      "content": "凌浩加入志愿者团队后，和小龙一起组织了多场公益活动。小龙性格开朗，总能化解凌浩的焦虑。两人虽然没有发展成恋爱关系，但成为了最好的朋友。凌浩在小龙的帮助下，与家人的关系逐渐缓和，家人虽然没有完全接纳他的性取向，但不再逼婚，而是尊重他的选择。凌浩明白，幸福不止有爱情一种形式，亲情和友情同样能带来温暖。",
+      "options": [
+        {
+          "option_id": "opt_restart",
+          "option_text": "重新开始游戏",
+          "target_branch_id": "chapter1_start"
+        }
+      ]
+    },
+    {
+      "branch_id": "subbranch_zhangchi",
+      "branch_title": "子分支：名媛线 - LGBTQ+群体社交派对",
+      "content": "凌浩被朋友带去参加社交派对，派对上，名媛张弛穿着时尚，谈吐自信，成为全场焦点。\"你是凌浩吧？我听朋友提起过你，名校博士，很厉害。\"张弛主动上前与凌浩搭讪。\n\n凌浩有些拘谨：\"你好，我是凌浩。你太客气了。\"\n\n张弛笑着说：\"别紧张，这里都是自己人。我是张弛，做进出口生意的。\"\n\n两人开始交往，张弛带着凌浩进入更广阔的社交圈，但凌浩逐渐发现，张弛的感情态度过于开放，且过于注重物质和表面光鲜。",
+      "options": [
+        {
+          "option_id": "opt_zhangchi_disappear",
+          "option_text": "结局8：名媛失踪——曲终人散",
+          "target_branch_id": "ending_zhangchi_曲终人散"
+        },
+        {
+          "option_id": "opt_zhangchi_humble_love",
+          "option_text": "结局9：卑微的爱——迷失自我",
+          "target_branch_id": "ending_zhangchi_迷失自我"
+        }
+      ]
+    },
+    {
+      "branch_id": "ending_zhangchi_曲终人散",
+      "branch_title": "结局8：名媛失踪——曲终人散",
+      "content": "张弛的生意遭遇重大挫折，从光鲜亮丽的名媛沦为普通人。凌浩因与张弛好感度未满，且没有主动联系他，最终失去了张弛的消息。后来从朋友处得知，张弛离开了这座城市，去了国外重新开始。凌浩心里有些失落，但也明白，两人本就不是同一路人。",
+      "options": [
+        {
+          "option_id": "opt_restart",
+          "option_text": "重新开始游戏",
+          "target_branch_id": "chapter1_start"
+        }
+      ]
+    },
+    {
+      "branch_id": "ending_zhangchi_迷失自我",
+      "branch_title": "结局9：卑微的爱——迷失自我",
+      "content": "张弛生意失败后，变得颓废消沉。凌浩因对张弛好感度满，主动找到他，照顾他的生活。但张弛却把所有的不如意都发泄在凌浩身上，对他呼来喝去。凌浩为了维持这段关系，不断妥协退让，自我认同逐渐降低。最终，凌浩在这段卑微的感情中迷失了自己，每天过得痛苦又压抑。",
+      "options": [
+        {
+          "option_id": "opt_restart",
+          "option_text": "重新开始游戏",
+          "target_branch_id": "chapter1_start"
+        }
+      ]
+    }
+  ]
+}

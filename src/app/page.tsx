@@ -257,7 +257,7 @@ export default function Home() {
                       desc: savedBranch.content || '',
                       exits: savedBranch.options?.map((option: any) => ({
                         text: option.option_text,
-                        target: option.target_branch_id,
+                        target_branch_id: option.target_branch_id,
                         effect: option.effect,
                         status_update: option.status_update,
                         status_changes: option.status_changes,
@@ -293,7 +293,7 @@ export default function Home() {
                   desc: startBranch.content || '',
                   exits: startBranch.options?.map((option: any) => ({
                     text: option.option_text,
-                    target: option.target_branch_id,
+                    target_branch_id: option.target_branch_id,
                     effect: option.effect,
                     status_update: option.status_update,
                     status_changes: option.status_changes,
@@ -322,7 +322,7 @@ export default function Home() {
                     desc: branch.content || '',
                     exits: branch.options?.map((option: any) => ({
                       text: option.option_text,
-                      target: option.target_branch_id,
+                      target_branch_id: option.target_branch_id,
                       effect: option.effect,
                       status_update: option.status_update,
                       status_changes: option.status_changes,
@@ -1272,7 +1272,7 @@ export default function Home() {
                           desc: startBranch.content || '',
                           exits: startBranch.options?.map((option: any) => ({
                             text: option.option_text,
-                            target: option.target_branch_id,
+                            target_branch_id: option.target_branch_id,
                             effect: option.effect,
                             status_update: option.status_update,
                             status_changes: option.status_changes,
@@ -1300,7 +1300,7 @@ export default function Home() {
                               desc: branch.content || '',
                               exits: branch.options?.map((option: any) => ({
                                 text: option.option_text,
-                                target: option.target_branch_id,
+                                target_branch_id: option.target_branch_id,
                                 effect: option.effect,
                                 status_update: option.status_update,
                                 status_changes: option.status_changes,
@@ -1378,6 +1378,13 @@ export default function Home() {
               >
                 🎯 增强验证器
               </button>
+              <a
+                href="https://simplefeedback.app/feedback/nDf7Lhk7Ohnw"
+                target="_blank"
+                className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-3 sm:px-4 py-2.5 sm:py-3 lg:py-4 rounded-xl shadow-sm hover:shadow-md active:scale-95"
+              >
+                📋 更新日志及反馈
+              </a>
             </div>
 
             <div className="bg-gradient-to-r from-indigo-50/80 via-purple-50/80 to-pink-50/80 backdrop-blur-xl rounded-2xl p-4 sm:p-5 lg:p-6 border border-white/50 shadow-lg shadow-indigo-500/5">
@@ -1399,88 +1406,6 @@ export default function Home() {
       {!showWelcome && !showEditor && (
         <div className="flex flex-col min-h-screen w-full bg-gradient-to-br from-slate-50 via-indigo-50/20 to-purple-50/20 relative overflow-hidden" suppressHydrationWarning>
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-400/5 via-purple-400/5 to-pink-400/5 backdrop-blur-sm"></div>
-          <div className="bg-white/90 backdrop-blur-xl border-b border-white/50 sticky top-0 z-10 shadow-lg shadow-indigo-500/5 relative pt-[env(safe-area-inset-top)]" suppressHydrationWarning>
-            <div className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 lg:py-4">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-2 lg:gap-4">
-                <h1 className="text-sm sm:text-lg lg:text-2xl font-extrabold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent tracking-tight flex items-center gap-1 sm:gap-1.5 whitespace-nowrap" suppressHydrationWarning>
-                  <span className="text-sm sm:text-xl lg:text-3xl">🎮</span>
-                  <span className="hidden xs:inline">文本引擎</span>
-                </h1>
-                
-                <div className="w-full lg:w-auto overflow-x-auto lg:overflow-visible scrollbar-hide" suppressHydrationWarning>
-                  <div className="flex items-center gap-1.5 sm:gap-2 lg:gap-3 min-w-max lg:min-w-0 justify-center lg:justify-end" suppressHydrationWarning>
-                    <div className="relative shrink-0">
-                      <label className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-4 py-3 rounded-lg text-sm flex items-center gap-2 cursor-pointer shadow-sm hover:shadow-md active:scale-95 justify-center whitespace-nowrap">
-                        <span className="text-base">📤</span>
-                        <span className="inline">导入</span>
-                      </label>
-                      <input
-                        type="file"
-                        accept=".json,application/json"
-                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                          const file = event.target.files?.[0]
-                          if (!file) return
-                          importJson(file)
-                        }}
-                        className="absolute inset-0 opacity-0 cursor-pointer"
-                      />
-                    </div>
-                    
-                    <button
-                      onClick={() => {
-                        addNotification('正在导出游戏数据...', 'info')
-                        const data = storyData
-                        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
-                        const url = URL.createObjectURL(blob)
-                        const a = document.createElement('a')
-                        a.href = url
-                        a.download = 'game-data.json'
-                        a.click()
-                        URL.revokeObjectURL(url)
-                        addNotification('游戏数据导出成功！', 'success')
-                      }}
-                      className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-4 py-3 rounded-lg text-sm flex items-center gap-2 shadow-sm hover:shadow-md active:scale-95 justify-center whitespace-nowrap"
-                    >
-                      <span className="text-base">📥</span>
-                      <span className="inline">导出JSON</span>
-                    </button>
-                    
-                    <a
-                      href="https://simplefeedback.app/feedback/nDf7Lhk7Ohnw"
-                      target="_blank"
-                      className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-4 py-3 rounded-lg text-sm flex items-center gap-2 shadow-sm hover:shadow-md active:scale-95 justify-center whitespace-nowrap"
-                      suppressHydrationWarning
-                    >
-                      <IconFeedback className="w-5 h-5" />
-                      <span className="inline">反馈</span>
-                    </a>
-                    
-                    <button
-                      onClick={navigateToValidator}
-                      className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-4 py-3 rounded-lg text-sm flex items-center gap-2 shadow-sm hover:shadow-md active:scale-95 justify-center whitespace-nowrap"
-                      suppressHydrationWarning
-                    >
-                      <span className="text-base">✓</span>
-                      <span className="inline">验证JSON</span>
-                    </button>
-                    
-                    <button
-                      onClick={() => {
-                        setShowWelcome(true)
-                        setOutputHistory([])
-                        setCurrentScene(null)
-                        setChoices([])
-                      }}
-                      className="bg-transparent text-purple-600 hover:text-purple-700 border-2 border-purple-600 hover:border-purple-700 transition-all duration-300 font-bold px-4 py-3 rounded-lg text-sm flex items-center gap-2 shadow-sm hover:shadow-md active:scale-95 justify-center whitespace-nowrap"
-                    >
-                      <span className="text-base">🏠</span>
-                      <span className="inline">返回主菜单</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
 
           {/* 输出区域 */}
           <div className="flex-grow overflow-y-auto p-3 sm:p-4 lg:p-6 space-y-2 sm:space-y-3 lg:space-y-4 font-sans text-slate-800 relative z-10" suppressHydrationWarning>
@@ -1553,10 +1478,10 @@ export default function Home() {
             <div className="flex flex-wrap justify-center gap-2 sm:gap-3 lg:gap-4 max-w-4xl mx-auto" suppressHydrationWarning>
               {choices.length > 0 ? (
                 choices.map((choice: any, idx) => {
-                  const directionName = Array.isArray(choice.dir) ? choice.dir[0] : choice.dir
-                  const choiceText = choice.text || directionName
+                  const directionName = choice.text || '未知选项'
+                  const choiceText = directionName
                   const directionChinese = choiceText ? (directionToChinese[choiceText.toLowerCase()] || choiceText) : '未知'
-                  const targetSceneId = choice.target || choice.id
+                  const targetSceneId = choice.target_branch_id || ''
                   return (
                     <button
                       key={idx}
@@ -1567,15 +1492,15 @@ export default function Home() {
                         
                         // 处理choice的effect、status_update和status_changes字段
                         const outputUpdates: any[] = []
-                        if (choice.effect) {
+                        if (choice.effect && choice.effect.trim()) {
                           outputUpdates.push({ type: 'system', content: choice.effect, fullContent: choice.effect })
                         }
-                        if (choice.status_update) {
+                        if (choice.status_update && choice.status_update.trim()) {
                           outputUpdates.push({ type: 'system', content: choice.status_update, fullContent: choice.status_update })
                         }
                         
                         // 处理status_changes：应用数值变更
-                        if (choice.status_changes && Array.isArray(choice.status_changes)) {
+                        if (choice.status_changes && Array.isArray(choice.status_changes) && choice.status_changes.length > 0) {
                           const newGameState = gameStore.applyStatusChanges(gameState, choice.status_changes)
                           setGameState(newGameState)
                           
@@ -1623,18 +1548,6 @@ export default function Home() {
                   )
                 })
               ) : null}
-            </div>
-          </div>
-
-          {/* 游戏状态显示 */}
-          <div className="p-2.5 sm:p-4 lg:p-5 bg-gradient-to-br from-white/90 to-indigo-50/50 backdrop-blur-xl border-t border-b border-indigo-100" suppressHydrationWarning>
-            <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2.5 lg:gap-3 max-w-4xl mx-auto" suppressHydrationWarning>
-              {Object.entries(gameState).map(([key, value]) => (
-                <div key={key} className="bg-white/80 backdrop-blur-sm border border-indigo-200 rounded-lg px-3 py-2 flex items-center gap-2 shadow-sm" suppressHydrationWarning>
-                  <span className="text-xs sm:text-sm font-semibold text-indigo-600">{key}</span>
-                  <span className="text-sm sm:text-base font-bold text-slate-800">{value}</span>
-                </div>
-              ))}
             </div>
           </div>
 
