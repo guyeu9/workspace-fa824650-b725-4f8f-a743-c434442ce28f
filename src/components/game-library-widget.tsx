@@ -91,7 +91,8 @@ export function GameLibraryWidget({
     } else {
       // 默认行为：加载游戏数据并跳转到编辑器
       gameStore.getGame(game.id).then(result => {
-        if (result) {
+        if (result && result.data && result.data.data) {
+          console.log('加载游戏数据:', result.data.data);
           sessionStorage.setItem('gameData', JSON.stringify(result.data.data));
           window.location.href = '/studio';
         } else {

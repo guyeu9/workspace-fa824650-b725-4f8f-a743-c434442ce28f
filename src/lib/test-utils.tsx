@@ -100,19 +100,26 @@ export const TestDataFactory = {
 
   // 创建测试游戏
   createGame(overrides = {}) {
+    const baseData = {
+      game_title: 'Test Game',
+      branches: [],
+    }
     return {
       id: 'test-game-1',
       title: 'Test Game',
       description: 'A test game',
       data: {
         metadata: {
-          game_title: 'Test Game',
-          branches: [],
+          title: 'Test Game',
+          description: 'A test game',
+          author: 'Unknown',
+          tags: [],
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          version: 1,
+          priority: 0,
         },
-        data: {
-          game_title: 'Test Game',
-          branches: [],
-        },
+        data: baseData,
       },
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),

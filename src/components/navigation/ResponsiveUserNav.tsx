@@ -12,7 +12,8 @@ import {
   Library,
   Plus,
   Menu,
-  X
+  X,
+  FileText
 } from 'lucide-react'
 import {
   DropdownMenu,
@@ -134,6 +135,12 @@ export default function ResponsiveUserNav({ className = '' }: UserNavProps) {
             <span>创建游戏</span>
           </DropdownMenuItem>
         </Link>
+        <a href="https://simplefeedback.app/feedback/nDf7Lhk7Ohnw" target="_blank" rel="noopener noreferrer">
+          <DropdownMenuItem>
+            <FileText className="mr-2 h-4 w-4" />
+            <span>更新日志及反馈</span>
+          </DropdownMenuItem>
+        </a>
         
         {(session.user?.role === 'ADMIN' || session.user?.role === 'SUPER_ADMIN') && (
           <>
@@ -205,6 +212,12 @@ export default function ResponsiveUserNav({ className = '' }: UserNavProps) {
                   创建游戏
                 </Button>
               </Link>
+              <a href="https://simplefeedback.app/feedback/nDf7Lhk7Ohnw" target="_blank" rel="noopener noreferrer" onClick={() => setIsMenuOpen(false)}>
+                <Button variant="ghost" className="w-full justify-start">
+                  <FileText className="mr-2 h-4 w-4" />
+                  更新日志及反馈
+                </Button>
+              </a>
               
               {(session.user?.role === 'ADMIN' || session.user?.role === 'SUPER_ADMIN') && (
                 <Link href="/admin" onClick={() => setIsMenuOpen(false)}>

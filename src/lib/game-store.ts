@@ -427,7 +427,9 @@ export class GameStore {
               {
                 description: data.description,
                 author: data.author,
-                tags: data.tags || []
+                tags: data.tags || [],
+                thumbnailAssetId: data.thumbnail,
+                backgroundAssetId: data.background_image || data.background_asset_id
               }
             );
 
@@ -469,7 +471,9 @@ export class GameStore {
           {
             description: data.description,
             author: data.author,
-            tags: data.tags || []
+            tags: data.tags || [],
+            thumbnailAssetId: data.thumbnail,
+            backgroundAssetId: data.background_image || data.background_asset_id
           }
         );
 

@@ -152,7 +152,7 @@ export default function GameLibraryPage() {
     } finally {
       setIsLoading(false);
     }
-  }, [searchTerm, sortBy, sortOrder, filterPriority]);
+  }, []);
 
   useEffect(() => {
     loadGames();
@@ -175,7 +175,7 @@ export default function GameLibraryPage() {
       const result = await gameStore.getGame(game.id);
       if (result) {
         sessionStorage.setItem('gameData', JSON.stringify(result.data.data));
-        window.location.href = '/';
+        router.push('/');
       } else {
         toast.error('无法加载游戏数据');
       }
@@ -195,7 +195,7 @@ export default function GameLibraryPage() {
           // 保存进度数据到 sessionStorage
           sessionStorage.setItem('gameProgress', JSON.stringify(progress));
           sessionStorage.setItem('gameData', JSON.stringify(result.data.data));
-          window.location.href = '/';
+          router.push('/');
         } else {
           toast.error('无法加载游戏数据');
         }
@@ -218,8 +218,12 @@ export default function GameLibraryPage() {
         
         // 清除进度数据
         sessionStorage.removeItem('gameProgress');
+        
+        // 保存游戏数据到 sessionStorage
         sessionStorage.setItem('gameData', JSON.stringify(result.data.data));
-        window.location.href = '/';
+        
+        // 使用 router.push 而不是 window.location.href，避免请求被中止
+        router.push('/studio');
       } else {
         toast.error('无法加载游戏数据');
       }
@@ -233,7 +237,8 @@ export default function GameLibraryPage() {
   const handleGameEdit = async (game: GameIndexItem) => {
     try {
       const result = await gameStore.getGame(game.id);
-      if (result) {
+      if (result && result.data && result.data.data) {
+        console.log('加载游戏数据:', result.data.data);
         sessionStorage.setItem('gameData', JSON.stringify(result.data.data));
         window.location.href = '/studio';
       } else {
@@ -683,7 +688,7 @@ export default function GameLibraryPage() {
             <h3 className="text-xl font-semibold text-slate-800 mb-2">还没有任何游戏</h3>
             <p className="text-slate-600 mb-6">开始创建您的第一个游戏吧！</p>
             <Button
-                onClick={() => window.location.href = '/studio'}
+                onClick={() => router.push('/studio')}
                 className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white transition-all duration-300"
               >
                 <Plus className="h-4 w-4 mr-2" />
@@ -855,7 +860,6 @@ export default function GameLibraryPage() {
                 }}
               />
               <Button
-                variant="default"
                 onClick={() => {
                   document.getElementById('game-import-input')?.click();
                 }}
@@ -866,7 +870,7 @@ export default function GameLibraryPage() {
               </Button>
               
               <Button
-                onClick={() => window.location.href = '/studio'}
+                onClick={() => router.push('/studio')}
                 className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white transition-all duration-300"
               >
                 <Plus className="h-4 w-4 mr-2" />

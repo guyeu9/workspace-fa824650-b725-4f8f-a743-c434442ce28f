@@ -40,33 +40,34 @@ import { gameStore } from "@/lib/game-store"
 import { toast } from "sonner"
 
 interface Choice {
-  id: string
-  choice: string
-  next_branch: string
+  option_id: string
+  option_text: string
+  target_branch_id: string
   effect?: string
-  status_update?: string
+  status_changes?: any[]
   end_game?: boolean
 }
 
 interface Branch {
   branch_id: string
-  chapter: string
-  scene_detail: string
-  choices: Choice[]
+  branch_title: string
+  content: string
+  options: Choice[]
   background_image?: string
   background_asset_id?: string
 }
 
 interface GameStateConfig {
+  state_id: string
   name: string
   initial_value: number
   min?: number
   max?: number
-  is_percentage?: boolean
+  display_format?: 'integer' | 'percentage'
 }
 
 interface GameData {
-  game_title: string
+  title: string
   description: string
   game_states?: GameStateConfig[]
   branches: Branch[]
@@ -77,58 +78,57 @@ const NO_JUMP_VALUE = "__NO_JUMP__"
 function normalizeGameData(raw: any): GameData {
   const branches: Branch[] = Array.isArray(raw?.branches)
     ? raw.branches.map((b: any, branchIndex: number) => {
-        const choices: Choice[] = Array.isArray(b?.choices)
-          ? b.choices.map((c: any, choiceIndex: number) => ({
-              id:
-                c?.id ||
-                `choice_${branchIndex}_${choiceIndex}_${Date.now()}`,
-              choice: c?.choice ?? "",
-              next_branch: c?.next_branch ?? "",
+        const options: Choice[] = Array.isArray(b?.options)
+          ? b.options.map((c: any, choiceIndex: number) => ({
+              option_id:
+                c?.option_id ||
+                  `choice_${branchIndex}_${choiceIndex}_${Date.now()}`,
+              option_text: c?.option_text ?? "",
+              target_branch_id: c?.target_branch_id ?? "",
               effect: c?.effect,
-              status_update: c?.status_update,
+              status_changes: c?.status_changes,
               end_game: !!c?.end_game,
             }))
           : []
         return {
           branch_id: b?.branch_id ?? `branch_${branchIndex}`,
-          chapter: b?.chapter ?? "",
-          scene_detail: b?.scene_detail ?? "",
-          choices,
+          branch_title: b?.branch_title ?? "",
+          content: b?.content ?? "",
+          options,
           background_image: b?.background_image,
           background_asset_id: b?.background_asset_id,
         }
       })
     : []
-
   return {
-    game_title: raw?.game_title ?? raw?.title ?? "未命名游戏",
+    title: raw?.title ?? raw?.game_title ?? "未命名游戏",
     description: raw?.description ?? "",
     branches,
   }
 }
 
 const initialGameData: GameData = {
-  game_title: "黑暗森林",
+  title: "黑暗森林",
   description: "在这片阴森的森林中，你的每一次选择都将改变命运。",
   branches: [
     {
       branch_id: "start",
-      chapter: "森林入口",
-      scene_detail: "你站在一片阴森的森林入口。空气中弥漫着潮湿泥土的气味，远处的树木在迷雾中若隐若现。",
-      choices: [
+      branch_title: "森林入口",
+      content: "你站在一片阴森的森林入口。空气中弥漫着潮湿泥土的气味，远处的树木在迷雾中若隐若现。",
+      options: [
         {
-          id: "choice_1",
-          choice: "走进森林",
-          next_branch: "",
+          option_id: "choice_1",
+          option_text: "走进森林",
+          target_branch_id: "",
           effect: "",
-          status_update: "",
+          status_changes: [],
         },
         {
-          id: "choice_2",
-          choice: "转身离开",
-          next_branch: "",
+          option_id: "choice_2",
+          option_text: "转身离开",
+          target_branch_id: "",
           effect: "",
-          status_update: "",
+          status_changes: [],
           end_game: true,
         },
       ],
@@ -139,8 +139,8 @@ const initialGameData: GameData = {
 function BranchIcon(props: { branch: Branch; index: number }) {
   const { branch, index } = props
   const isStart = index === 0
-  const hasChoices = branch.choices && branch.choices.length > 0
-  const isEnd = !hasChoices || branch.choices.some((c) => c.end_game)
+  const hasChoices = branch.options && branch.options.length > 0
+  const isEnd = !hasChoices || branch.options.some((c) => c.end_game)
 
   if (isStart) {
     return <Star className="h-4 w-4 text-yellow-500" />
@@ -166,7 +166,7 @@ export default function TextEngineStudio() {
       const stored = window.sessionStorage.getItem("gameData")
       if (stored) {
         const raw = JSON.parse(stored)
-        if (raw.game_title && Array.isArray(raw.branches)) {
+        if (raw.title && Array.isArray(raw.branches)) {
           const data = normalizeGameData(raw)
           setGameData(data)
           setSelectedBranchId(data.branches[0]?.branch_id ?? "")
@@ -185,7 +185,7 @@ export default function TextEngineStudio() {
     if (!search.trim()) return gameData.branches
     const keyword = search.trim().toLowerCase()
     return gameData.branches.filter((b) => {
-      const text = `${b.branch_id} ${b.chapter} ${b.scene_detail}`.toLowerCase()
+      const text = `${b.branch_id} ${b.branch_title} ${b.content}`.toLowerCase()
       return text.includes(keyword)
     })
   }, [gameData.branches, search])
@@ -249,7 +249,7 @@ export default function TextEngineStudio() {
       ...prev,
       branches: prev.branches.map((b) =>
         b.branch_id === branchId
-          ? { ...b, choices: [...b.choices, newChoice] }
+          ? { ...b, choices: [...b.options, newChoice] }
           : b,
       ),
     }))
@@ -287,7 +287,7 @@ export default function TextEngineStudio() {
   }, [])
 
   const handleSaveToLibrary = async () => {
-    if (!gameData.game_title.trim()) {
+    if (!gameData.title.trim()) {
       toast.error("请先填写游戏标题")
       return
     }
@@ -575,10 +575,10 @@ export default function TextEngineStudio() {
                         <div className="flex items-center gap-2 w-full">
                           <BranchIcon branch={branch} index={index} />
                           <span className="font-semibold flex-1 text-left text-slate-900 line-clamp-2">
-                            {branch.chapter || branch.branch_id}
+                            {branch.branch_title || branch.branch_id}
                           </span>
                           <span className="text-[10px] text-slate-500 whitespace-nowrap">
-                            {branch.choices.length} 选项
+                            {branch.options.length} 选项
                           </span>
                         </div>
                         <div className="mt-0.5 ml-6 w-[calc(100%-1.5rem)] text-[10px] text-slate-400 truncate">
@@ -588,7 +588,7 @@ export default function TextEngineStudio() {
                           <div className="flex flex-col mt-1 ml-6 w-[calc(100%-1.5rem)] border-l-2 border-slate-200 pl-2 gap-1">
                             {branch.choices.map((choice) => {
                               const target = gameData.branches.find(
-                                (b) => b.branch_id === choice.next_branch,
+                                (b) => b.branch_id === choice.target_branch_id,
                               )
                               return (
                                 <div
@@ -602,7 +602,7 @@ export default function TextEngineStudio() {
                                 >
                                   <CornerDownRight className="h-3 w-3 shrink-0" />
                                   <span className="truncate">
-                                    {choice.choice}
+                                    {choice.option_text}
                                     {target
                                       ? ` → ${target.chapter || target.branch_id}`
                                       : ""}
@@ -651,7 +651,7 @@ export default function TextEngineStudio() {
                         <div className="flex items-center gap-2">
                           <Input
                             id="branch-name"
-                            value={selectedBranch.chapter}
+                            value={selectedBranch.branch_title}
                             placeholder="输入场景名称"
                             className="flex-1 bg-white border-blue-300 focus:border-blue-500 focus:ring-blue-500/20 text-slate-900 placeholder:text-slate-400 transition-all duration-200"
                             onChange={(e) =>
@@ -711,7 +711,7 @@ export default function TextEngineStudio() {
                         <Textarea
                           className="min-h-[200px] font-sans text-base leading-relaxed text-slate-900 bg-white border-blue-300 focus:border-blue-500 focus:ring-blue-500/20 placeholder:text-slate-400 transition-all duration-200"
                           placeholder="在此输入剧情内容..."
-                          value={selectedBranch.scene_detail}
+                          value={selectedBranch.content}
                           onChange={(e) =>
                             handleUpdateBranch(selectedBranch.branch_id, {
                               scene_detail: e.target.value,
@@ -740,7 +740,7 @@ export default function TextEngineStudio() {
                       </div>
 
                       <div className="space-y-3">
-                        {selectedBranch.choices.map((option, index) => (
+                        {selectedBranch.options.map((option, index) => (
                           <Card
                           key={option.id}
                           className="relative group bg-gradient-to-br from-blue-50/50 to-indigo-50/50 border-blue-200 shadow-sm transition-all duration-200 hover:shadow-md hover:border-blue-300"
@@ -810,7 +810,7 @@ export default function TextEngineStudio() {
                                           key={b.branch_id}
                                           value={b.branch_id}
                                         >
-                                          {b.chapter || b.branch_id}
+                                          {b.branch_title || b.branch_id}
                                         </SelectItem>
                                       ))}
                                     </SelectContent>

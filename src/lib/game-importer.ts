@@ -192,13 +192,17 @@ export class GameDataValidator {
     author: string;
     tags: string[];
     thumbnail?: string;
+    background_image?: string;
+    background_asset_id?: string;
   } {
     return {
       title: data.game_title || data.title || '未命名游戏',
       description: data.description || data.game_description || '',
       author: data.author || data.creator || 'Unknown',
       tags: data.tags || data.categories || [],
-      thumbnail: this.extractThumbnail(data)
+      thumbnail: this.extractThumbnail(data),
+      background_image: data.background_image,
+      background_asset_id: data.background_asset_id
     };
   }
 }
@@ -234,7 +238,9 @@ export class GamePackImporter {
         {
           description: metadata.description,
           author: metadata.author,
-          tags: metadata.tags
+          tags: metadata.tags,
+          thumbnailAssetId: metadata.thumbnail,
+          backgroundAssetId: metadata.background_image || metadata.background_asset_id
         }
       );
 
@@ -296,6 +302,7 @@ export class GamePackImporter {
           let thumbnailAssetId: string | undefined;
           let backgroundAssetId: string | undefined;
 
+          // 处理缩略图
           if (metadata.thumbnail) {
             // 检查是否是图床URL
             if (typeof metadata.thumbnail === 'string' && 
@@ -317,6 +324,31 @@ export class GamePackImporter {
             }
           }
 
+          // 处理背景图片
+          if (metadata.background_image) {
+            // 检查是否是图床URL
+            if (typeof metadata.background_image === 'string' && 
+                (metadata.background_image.startsWith('http://') || metadata.background_image.startsWith('https://'))) {
+              // 直接使用图床URL
+              backgroundAssetId = metadata.background_image;
+            } else {
+              // 查找对应的资产文件
+              const assetFile = assetFiles.get(metadata.background_image) || 
+                               Array.from(assetFiles.values()).find(f => 
+                                 f.name.includes(metadata.background_image!) || 
+                                 metadata.background_image!.includes(f.name)
+                               );
+              
+              if (assetFile) {
+                const blob = await assetFile.async('blob');
+                backgroundAssetId = await gameStore.storeAsset(blob, assetFile.name, 'image');
+              }
+            }
+          } else if (metadata.background_asset_id) {
+            // 直接使用已提供的 assetId
+            backgroundAssetId = metadata.background_asset_id;
+          }
+
           // 创建游戏
           await gameStore.createGame(
             metadata.title,
@@ -325,7 +357,8 @@ export class GamePackImporter {
               description: metadata.description,
               author: metadata.author,
               tags: metadata.tags,
-              thumbnailAssetId
+              thumbnailAssetId,
+              backgroundAssetId
             }
           );
 

@@ -1,1 +1,0 @@
-﻿Ran all test suites matching src/__tests__/community-interaction.test.tsx.

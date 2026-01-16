@@ -10,7 +10,8 @@ import {
   Shield,
   Gamepad2,
   Library,
-  Plus
+  Plus,
+  FileText
 } from 'lucide-react'
 import {
   DropdownMenu,
@@ -98,6 +99,12 @@ export default function UserNav() {
             <span>创建游戏</span>
           </DropdownMenuItem>
         </Link>
+        <a href="https://simplefeedback.app/feedback/nDf7Lhk7Ohnw" target="_blank" rel="noopener noreferrer">
+          <DropdownMenuItem>
+            <FileText className="mr-2 h-4 w-4" />
+            <span>更新日志及反馈</span>
+          </DropdownMenuItem>
+        </a>
         
         {(session.user?.role === 'ADMIN' || session.user?.role === 'SUPER_ADMIN') && (
           <>
