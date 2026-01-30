@@ -107,6 +107,6 @@ export function getFileConfig(type: keyof typeof FILE_TYPE_CONFIGS): FileTypeCon
   return FILE_TYPE_CONFIGS[type]
 }
 
-export function getMaxFileSize(type: keyof typeof FILE_TYPE_LIMITS): number {
+export function getMaxFileSize(type: keyof typeof FILE_SIZE_LIMITS): number {
   return FILE_SIZE_LIMITS[type]
 }

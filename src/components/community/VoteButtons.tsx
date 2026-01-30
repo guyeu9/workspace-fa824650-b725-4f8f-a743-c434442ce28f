@@ -24,7 +24,7 @@ export default function VoteButtons({
   const { toast } = useToast()
   const [upvotes, setUpvotes] = useState(initialUpvotes)
   const [downvotes, setDownvotes] = useState(initialDownvotes)
-  const [userVote, setUserVote] = useState<'UP' | 'DOWN' | null>(initialUserVote)
+  const [userVote, setUserVote] = useState<'UP' | 'DOWN' | null>(initialUserVote ?? null)
   const [isVoting, setIsVoting] = useState(false)
 
   const handleVote = async (voteType: 'UP' | 'DOWN') => {

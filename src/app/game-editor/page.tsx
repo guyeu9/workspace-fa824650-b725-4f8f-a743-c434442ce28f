@@ -5,9 +5,11 @@ import { IconSave, IconLoad, IconDelete, IconClose, IconHome, IconBox } from '..
 import { gameStore } from '@/lib/game-store'
 import { toast } from 'sonner'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { LayoutTemplate } from 'lucide-react'
 import { PlatformFileDownloader } from '@/lib/platform-file-download'
 import { PlatformFileUploader } from '@/lib/platform-file-upload'
+import { normalizeGameData } from '@/lib/utils'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -64,6 +66,7 @@ interface GameData {
 }
 
 export default function GameEditor() {
+  const router = useRouter()
   const [gameData, setGameData] = useState<GameData>({
     game_title: '我的故事',
     description: '这是一个精彩的故事...',
@@ -239,28 +242,11 @@ export default function GameEditor() {
       const text = await file.text()
       const data = JSON.parse(text)
       
-      if (data.game_title && data.branches && Array.isArray(data.branches)) {
-        const processedData = {
-          ...data,
-          branches: data.branches.map((branch: any) => {
-            // 支持 choices 或 options 字段
-            const choiceField = branch.choices || branch.options || [];
-            return {
-              ...branch,
-              choices: Array.isArray(choiceField) ? choiceField.map((choice: any) => ({
-                ...choice,
-                id: choice.id || choice.option_id || `choice_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
-              })) : []
-            };
-          })
-        }
+      if ((data.game_title || data.title) && data.branches && Array.isArray(data.branches)) {
+        const processedData = normalizeGameData(data)
         setGameData(processedData)
-        if (processedData.background_image) {
-          setBackgroundImageUrl(processedData.background_image)
-        }
-        if (processedData.background_asset_id) {
-          setBackgroundAssetId(processedData.background_asset_id)
-        }
+        if (processedData.background_image) setBackgroundImageUrl(processedData.background_image)
+        if (processedData.background_asset_id) setBackgroundAssetId(processedData.background_asset_id)
         saveToHistory(processedData)
         toast.success('导入成功！')
       } else {
@@ -272,31 +258,37 @@ export default function GameEditor() {
     }
   }
 
-  const startGame = () => {
-    // 保存游戏到IndexedDB
-    if (gameData.game_title && gameData.game_title !== '我的故事') {
-      gameStore.createGame(gameData.game_title, {
-        ...gameData,
-        background_image: backgroundImageUrl,
-        background_asset_id: backgroundAssetId
-      }, {
-        description: gameData.description,
-        author: 'Unknown'
-      }).then(() => {
+  const startGame = async () => {
+    const normalized = normalizeGameData({
+      ...gameData,
+      background_image: backgroundImageUrl,
+      background_asset_id: backgroundAssetId,
+    })
+
+    let createdGameId: string | null = null
+
+    if (normalized.game_title && normalized.game_title !== '我的故事') {
+      try {
+        const created = await gameStore.createGame(normalized.game_title, normalized, {
+          description: normalized.description,
+          author: 'Unknown'
+        })
+        createdGameId = created.id
         toast.success('游戏已保存到游戏库！')
-      }).catch(error => {
+      } catch (error) {
         console.error('保存游戏失败:', error)
-      })
+      }
     }
     
     // 设置游戏数据并跳转
-    const gameDataWithBg = {
-      ...gameData,
-      background_image: backgroundImageUrl,
-      background_asset_id: backgroundAssetId
+    if (createdGameId) {
+      sessionStorage.setItem('currentGameId', createdGameId)
+      localStorage.setItem('lastPlayedGameId', createdGameId)
+    } else {
+      sessionStorage.removeItem('currentGameId')
     }
-    sessionStorage.setItem('gameData', JSON.stringify(gameDataWithBg))
-    window.location.href = '/'
+    sessionStorage.setItem('gameData', JSON.stringify(normalized))
+    router.push('/')
   }
 
   const selectedBranch = gameData.branches.find(b => b.branch_id === selectedBranchId)
@@ -512,12 +504,13 @@ export default function GameEditor() {
                   onClick={async () => {
                     if (gameData.game_title && gameData.game_title !== '我的故事') {
                       try {
-                        await gameStore.createGame(gameData.game_title, {
+                        const normalized = normalizeGameData({
                           ...gameData,
                           background_image: backgroundImageUrl,
-                          background_asset_id: backgroundAssetId
-                        }, {
-                          description: gameData.description,
+                          background_asset_id: backgroundAssetId,
+                        })
+                        await gameStore.createGame(normalized.game_title, normalized, {
+                          description: normalized.description,
                         })
                         toast.success(`${gameData.game_title}`, {
                           description: '已成功保存到游戏库',

@@ -1,7 +1,9 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import { gameStore, GameIndexItem } from '@/lib/game-store';
+import { normalizeGameData } from '@/lib/utils';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -34,6 +36,7 @@ export function GameLibraryWidget({
   onGameEdit,
   className = ""
 }: GameLibraryWidgetProps) {
+  const router = useRouter();
   const [games, setGames] = useState<GameIndexItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showAll, setShowAll] = useState(false);
@@ -72,8 +75,10 @@ export function GameLibraryWidget({
       // 默认行为：加载游戏数据并跳转到游戏页面
       gameStore.getGame(game.id).then(result => {
         if (result) {
-          sessionStorage.setItem('gameData', JSON.stringify(result.data.data));
-          window.location.href = '/';
+          sessionStorage.setItem('currentGameId', game.id);
+          localStorage.setItem('lastPlayedGameId', game.id);
+          sessionStorage.setItem('gameData', JSON.stringify(normalizeGameData(result.data.data)));
+          router.push('/');
         } else {
           toast.error('无法加载游戏数据');
         }
@@ -93,8 +98,8 @@ export function GameLibraryWidget({
       gameStore.getGame(game.id).then(result => {
         if (result && result.data && result.data.data) {
           console.log('加载游戏数据:', result.data.data);
-          sessionStorage.setItem('gameData', JSON.stringify(result.data.data));
-          window.location.href = '/studio';
+          sessionStorage.setItem('gameData', JSON.stringify(normalizeGameData(result.data.data)));
+          router.push('/studio');
         } else {
           toast.error('无法加载游戏数据');
         }
@@ -171,7 +176,7 @@ export function GameLibraryWidget({
             </div>
             <Button 
             size="sm" 
-            onClick={() => window.location.href = '/studio'}
+            onClick={() => router.push('/studio')}
           >
             <Plus className="h-4 w-4 mr-2" />
             创建第一个游戏
@@ -223,7 +228,7 @@ export function GameLibraryWidget({
                     
                     <div className="flex items-center gap-1 ml-2 opacity-0 group-hover:opacity-100 transition-opacity">
                       <Button
-                        size="xs"
+                        size="icon"
                         variant="ghost"
                         onClick={(e) => {
                           e.stopPropagation();
@@ -235,7 +240,7 @@ export function GameLibraryWidget({
                       </Button>
                       
                       <Button
-                        size="xs"
+                        size="icon"
                         variant="ghost"
                         onClick={(e) => {
                           e.stopPropagation();
@@ -267,7 +272,7 @@ export function GameLibraryWidget({
               <Button
                 size="sm"
                 variant="outline"
-                onClick={() => window.location.href = '/studio'}
+                onClick={() => router.push('/studio')}
                 className="flex-1"
               >
                 <Plus className="h-4 w-4 mr-2" />

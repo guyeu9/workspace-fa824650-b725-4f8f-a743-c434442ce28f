@@ -43,10 +43,10 @@ export default function CommentsSection({ gameId }: CommentsSectionProps) {
   const fetchComments = async () => {
     try {
       setIsLoading(true)
-      const result = await apiClient.get(`/games/${gameId}/comments`)
+      const result = await apiClient.get<{ items?: Comment[] }>(`/games/${gameId}/comments`)
       
       if (result.success) {
-        setComments(result.data.items || [])
+        setComments(result.data?.items || [])
       } else {
         throw new Error(result.error?.message || '获取评论失败')
       }
@@ -87,12 +87,14 @@ export default function CommentsSection({ gameId }: CommentsSectionProps) {
     setIsSubmitting(true)
 
     try {
-      const result = await apiClient.post(`/games/${gameId}/comments`, {
+      const result = await apiClient.post<Comment>(`/games/${gameId}/comments`, {
         content: newComment.trim(),
       })
 
       if (result.success) {
-        setComments([result.data, ...comments])
+        if (result.data) {
+          setComments([result.data, ...comments])
+        }
         setNewComment('')
 
         toast({
@@ -122,7 +124,7 @@ export default function CommentsSection({ gameId }: CommentsSectionProps) {
     })
   }
 
-  const getInitials = (name: string | null) => {
+  const getInitials = (name: string | null | undefined) => {
     if (!name) return 'U'
     return name.charAt(0).toUpperCase()
   }

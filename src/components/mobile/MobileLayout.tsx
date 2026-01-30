@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { MobileStatusBar, MobileNavigation } from '@/components/mobile/MobileComponents'
 import { useMobileDevice } from '@/hooks/use-mobile'
 import { mobileNative } from '@/lib/mobile-native'
@@ -21,6 +21,7 @@ interface MobileLayoutProps {
 
 export default function MobileLayout({ children }: MobileLayoutProps) {
   const pathname = usePathname()
+  const router = useRouter()
   const device = useMobileDevice()
 
   useEffect(() => {
@@ -66,32 +67,32 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
       icon: Home,
       label: '首页',
       active: pathname === '/',
-      onClick: () => window.location.href = '/'
+      onClick: () => router.push('/')
     },
     {
       icon: Gamepad2,
       label: '游戏',
       active: pathname.startsWith('/games'),
-      onClick: () => window.location.href = '/games'
+      onClick: () => router.push('/games')
     },
     {
       icon: Plus,
       label: '创建',
       active: pathname === '/game-editor',
-      onClick: () => window.location.href = '/game-editor',
+      onClick: () => router.push('/game-editor'),
       isPrimary: true
     },
     {
       icon: Library,
       label: '库',
       active: pathname === '/game-library',
-      onClick: () => window.location.href = '/game-library'
+      onClick: () => router.push('/game-library')
     },
     {
       icon: Users,
       label: '社区',
       active: pathname === '/community',
-      onClick: () => window.location.href = '/community'
+      onClick: () => router.push('/community')
     }
   ]
 

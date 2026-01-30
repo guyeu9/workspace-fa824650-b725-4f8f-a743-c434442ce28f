@@ -1,5 +1,5 @@
 import JSZip from 'jszip';
-import { gameStore, ImportResult, ValidationResult } from './game-store';
+import { gameStore, GameDataItem, GameIndexItem, ImportResult, ValidationResult } from './game-store';
 import { ImageUrlValidator } from './image-url-validator';
 
 // 游戏数据验证器
@@ -200,7 +200,7 @@ export class GameDataValidator {
       description: data.description || data.game_description || '',
       author: data.author || data.creator || 'Unknown',
       tags: data.tags || data.categories || [],
-      thumbnail: this.extractThumbnail(data),
+      thumbnail: this.extractThumbnail(data) || undefined,
       background_image: data.background_image,
       background_asset_id: data.background_asset_id
     };
@@ -394,11 +394,28 @@ export class GamePackImporter {
   }
 }
 
+export async function createGamePack(
+  games: Array<{ index: GameIndexItem; data: GameDataItem }>
+): Promise<Blob> {
+  const zip = new JSZip();
+
+  for (const game of games) {
+    const safeTitle = (game.index.title || 'game')
+      .replace(/[\\/:*?"<>|]/g, '_')
+      .slice(0, 120);
+    const fileName = `${safeTitle}.json`;
+    zip.file(fileName, JSON.stringify(game.data.data, null, 2));
+  }
+
+  return await zip.generateAsync({ type: 'blob' });
+}
+
 // 导出增强的导入功能
 export const enhancedGameStore = {
   ...gameStore,
   createGame: gameStore.createGame.bind(gameStore),
   importGamePack: GamePackImporter.importGamePack.bind(GamePackImporter),
+  createGamePack: createGamePack,
   validateGameData: GameDataValidator.validateGameData.bind(GameDataValidator),
   extractMetadata: GameDataValidator.extractMetadata.bind(GameDataValidator),
   getAllGamesForBackup: gameStore.getAllGamesForBackup.bind(gameStore)

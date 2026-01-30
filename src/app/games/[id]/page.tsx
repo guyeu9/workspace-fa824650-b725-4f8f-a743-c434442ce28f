@@ -22,6 +22,7 @@ import { formatDistanceToNow } from 'date-fns'
 import { zhCN } from 'date-fns/locale'
 import VoteButtons from '@/components/community/VoteButtons'
 import CommentsSection from '@/components/community/CommentsSection'
+import { normalizeGameData } from '@/lib/utils'
 
 interface GameDetail {
   id: string
@@ -120,7 +121,7 @@ export default function GameDetailPage() {
     if (!game) return
 
     // 将游戏数据存储到sessionStorage
-    sessionStorage.setItem('gameData', JSON.stringify(game.jsonData))
+    sessionStorage.setItem('gameData', JSON.stringify(normalizeGameData(game.jsonData)))
     router.push('/')
   }
 

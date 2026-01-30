@@ -145,9 +145,9 @@ export class PlatformFileDownloader {
 
     try {
       return await this.downloadWeb(options)
-    } catch (webError) {
+    } catch (webError: any) {
       console.warn('Web download failed, trying alternative:', webError)
-      errors.push(webError)
+      errors.push(webError instanceof Error ? webError : new Error(String(webError)))
 
       if (this.isMobileBrowser()) {
         try {
@@ -168,9 +168,9 @@ export class PlatformFileDownloader {
             success: true,
             uri: 'shared'
           }
-        } catch (shareError) {
+        } catch (shareError: any) {
           console.warn('Share failed:', shareError)
-          errors.push(shareError)
+          errors.push(shareError instanceof Error ? shareError : new Error(String(shareError)))
         }
       }
 
@@ -182,16 +182,17 @@ export class PlatformFileDownloader {
                 type: options.mimeType || 'application/octet-stream'
               })
 
-        if (window.navigator.msSaveOrOpenBlob) {
-          window.navigator.msSaveOrOpenBlob(blob, options.fileName)
+        const nav = window.navigator as any;
+        if (nav.msSaveOrOpenBlob) {
+          nav.msSaveOrOpenBlob(blob, options.fileName)
           return {
             success: true,
             uri: 'ms-blob'
           }
         }
-      } catch (msError) {
+      } catch (msError: any) {
         console.warn('MS Blob save failed:', msError)
-        errors.push(msError)
+        errors.push(msError instanceof Error ? msError : new Error(String(msError)))
       }
 
       throw new Error(

@@ -22,6 +22,7 @@ import { enhancedGameStore } from '@/lib/game-importer';
 import { toast } from 'sonner';
 import { formatDistanceToNow } from 'date-fns';
 import { zhCN } from 'date-fns/locale';
+import { normalizeGameData } from '@/lib/utils';
 
 export default function EnhancedHomePage() {
   const router = useRouter();
@@ -60,7 +61,7 @@ export default function EnhancedHomePage() {
     // 获取完整游戏数据
     gameStore.getGame(game.id).then(result => {
       if (result) {
-        sessionStorage.setItem('gameData', JSON.stringify(result.data.data));
+        sessionStorage.setItem('gameData', JSON.stringify(normalizeGameData(result.data.data)));
         router.push('/');
       } else {
         toast.error('无法加载游戏数据');
@@ -75,7 +76,7 @@ export default function EnhancedHomePage() {
   const handleGameEdit = useCallback((game: GameIndexItem) => {
     gameStore.getGame(game.id).then(result => {
       if (result) {
-        sessionStorage.setItem('gameData', JSON.stringify(result.data.data));
+        sessionStorage.setItem('gameData', JSON.stringify(normalizeGameData(result.data.data)));
         router.push('/game-editor');
       } else {
         toast.error('无法加载游戏数据');

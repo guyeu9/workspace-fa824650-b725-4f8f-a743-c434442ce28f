@@ -28,7 +28,7 @@ export default function UserNav() {
   const { data: session, status } = useSession()
   const router = useRouter()
 
-  const getDisplayName = (name: string | null) => {
+  const getDisplayName = (name: string | null | undefined) => {
     if (!name) return '用户'
     return name.length > 12 ? name.substring(0, 12) + '...' : name
   }

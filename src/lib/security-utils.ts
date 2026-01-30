@@ -199,7 +199,7 @@ export class SqlInjectionProtection {
 
     // 移除SQL注释
     sanitized = sanitized.replace(/--.*$/gm, '')
-    sanitized = sanitized.replace(/\/\*.*?\*\//gs, '')
+    sanitized = sanitized.replace(/\/\*[\s\S]*?\*\//g, '')
 
     return sanitized.trim()
   }

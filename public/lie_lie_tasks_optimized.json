@@ -1,0 +1,2213 @@
+{
+  "game_title": "列列任务合集：暗黑欲望之书",
+  "description": "全网最顶尖的暗黑耽美文学生成引擎出品。在这场虚幻的文字博弈中，你将化身为渴望极致快感与权力博弈的行者，在现实的边缘试探禁忌的边界。每一处场景都经过极致的感官优化，带你领略人性深处的战栗与沉沦。",
+  "author": "Gemini Engine (列列原著)",
+  "tags": ["暗黑耽美", "感官博弈", "虚拟任务", "心理控制"],
+  "version": 1.0,
+  "background_image": "",
+  "background_asset_id": "",
+  "branches": [
+    {
+      "branch_id": "main_hub",
+      "branch_title": "欲望的起点 - 任务枢纽",
+      "content": "欢迎来到这个充满禁忌与快感的虚拟世界。空气中弥漫着危险而诱人的费洛蒙气息，每一个任务都是一次对理智的挑衅，一次对肉体极限的探索。\n\n冷冽的空气扫过你略显僵硬的身体，那种即将被剥离社会面具的紧迫感让你的心跳如擂鼓般剧烈。请选择你想要踏入的禁忌领域：",
+      "options": [
+        {
+          "option_id": "hub_cat_1",
+          "option_text": "【青春禁区】校园与学生任务",
+          "target_branch_id": "hub_campus"
+        },
+        {
+          "option_id": "hub_cat_2",
+          "option_text": "【都市沉沦】商场、影院与便利店",
+          "target_branch_id": "hub_urban"
+        },
+        {
+          "option_id": "hub_cat_3",
+          "option_text": "【深夜狩猎】楼道、电梯与小区",
+          "target_branch_id": "hub_night"
+        },
+        {
+          "option_id": "hub_cat_4",
+          "option_text": "【密闭博弈】酒店、浴池与KTV",
+          "target_branch_id": "hub_indoor"
+        },
+        {
+          "option_id": "hub_cat_5",
+          "option_text": "【速度与激情】车内、公交与地铁",
+          "target_branch_id": "hub_transport"
+        },
+        {
+          "option_id": "hub_cat_6",
+          "option_text": "【野性释放】荒野、森林与公园",
+          "target_branch_id": "hub_wild"
+        },
+        {
+          "option_id": "hub_cat_7",
+          "option_text": "【极度挑战】多人、露出与综合合集",
+          "target_branch_id": "hub_extreme"
+        }
+      ]
+    },
+    {
+      "branch_id": "hub_campus",
+      "branch_title": "青春禁区 - 校园任务",
+      "content": "象牙塔内的理智正在崩塌。那些充满雄性汗水味的球场、寂静的书架间、甚至是充满尿液气息的公厕，都将成为你堕落的温床。",
+      "options": [
+        { "option_id": "opt_c1", "option_text": "一、大学校园（综合挑战）", "target_branch_id": "cat_1_start" },
+        { "option_id": "opt_c11", "option_text": "十一、学校公厕（深度扩张）", "target_branch_id": "cat_11_start" },
+        { "option_id": "opt_c16", "option_text": "十六、校园综合（全景博弈）", "target_branch_id": "cat_16_start" },
+        { "option_id": "opt_c17", "option_text": "十七、宿舍楼道（邻里危机）", "target_branch_id": "cat_17_start" },
+        { "option_id": "opt_c18", "option_text": "十八、宿舍内景（室友监视）", "target_branch_id": "cat_18_start" },
+        { "option_id": "opt_c28", "option_text": "二十八、大学生基础暴露", "target_branch_id": "cat_28_start" },
+        { "option_id": "opt_c44", "option_text": "四十四、图书馆禁区（静谧之辱）", "target_branch_id": "cat_44_start" },
+        { "option_id": "opt_c48", "option_text": "返回主枢纽", "target_branch_id": "main_hub" }
+      ]
+    },
+    {
+      "branch_id": "hub_urban",
+      "branch_title": "都市沉沦 - 繁华背后的阴影",
+      "content": "在人潮汹涌的商场，或者昏暗的电影院后排，你的肉体正经受着众目睽睽下的洗礼。这种随时被揭穿的恐惧，是否让你更加兴奋？",
+      "options": [
+        { "option_id": "opt_c2", "option_text": "二、午夜便利店（店员视线）", "target_branch_id": "cat_2_start" },
+        { "option_id": "opt_c10", "option_text": "十、商场露出（镜前诱惑）", "target_branch_id": "cat_10_start" },
+        { "option_id": "opt_c30", "option_text": "三十、超市暴露（货架交锋）", "target_branch_id": "cat_30_start" },
+        { "option_id": "opt_c31", "option_text": "三十一、影院惊魂（后排暗涌）", "target_branch_id": "cat_31_start" },
+        { "option_id": "opt_c43", "option_text": "四十三、超市货架（真空选购）", "target_branch_id": "cat_43_start" },
+        { "option_id": "opt_c47", "option_text": "四十七、商场简单任务", "target_branch_id": "cat_47_start" },
+        { "option_id": "opt_c49", "option_text": "四十九、电影院扑克牌任务", "target_branch_id": "cat_49_start" },
+        { "option_id": "opt_back_urban", "option_text": "返回主枢纽", "target_branch_id": "main_hub" }
+      ]
+    },
+    {
+      "branch_id": "hub_night",
+      "branch_title": "深夜狩猎 - 阴暗处的喘息",
+      "content": "月光照不进的楼道，感应灯熄灭的瞬间，你在这座钢铁森林的缝隙中寻找着极致的战栗。",
+      "options": [
+        { "option_id": "opt_c4", "option_text": "四、深夜广场（空旷之惧）", "target_branch_id": "cat_4_start" },
+        { "option_id": "opt_c7", "option_text": "七、深夜楼道（开门杀）", "target_branch_id": "cat_7_start" },
+        { "option_id": "opt_c9", "option_text": "九、小区半夜（草丛伏击）", "target_branch_id": "cat_9_start" },
+        { "option_id": "opt_c24", "option_text": "二十四、楼梯间任务（回声羞辱）", "target_branch_id": "cat_24_start" },
+        { "option_id": "opt_c29", "option_text": "二十九、凌晨极限行动", "target_branch_id": "cat_29_start" },
+        { "option_id": "opt_c52", "option_text": "五十二、天台晚风（高空俯瞰）", "target_branch_id": "cat_52_start" },
+        { "option_id": "opt_c53", "option_text": "五十三、夜晚暴露小任务", "target_branch_id": "cat_53_start" },
+        { "option_id": "opt_back_night", "option_text": "返回主枢纽", "target_branch_id": "main_hub" }
+      ]
+    },
+    {
+      "branch_id": "hub_indoor",
+      "branch_title": "密闭博弈 - 狭窄空间的交锋",
+      "content": "在酒店洁白的床单上，或者浴池氤氲的水汽中，权力的天平正在倾斜。你是猎人，还是被调教的猎物？",
+      "options": [
+        { "option_id": "opt_c5", "option_text": "五、酒店任务（客房服务）", "target_branch_id": "cat_5_start" },
+        { "option_id": "opt_c6", "option_text": "六、浴池任务（水下摸索）", "target_branch_id": "cat_6_start" },
+        { "option_id": "opt_c15", "option_text": "十五、KTV包厢（麦克风羞辱）", "target_branch_id": "cat_15_start" },
+        { "option_id": "opt_c19", "option_text": "十九、公厕综合（隔板之后）", "target_branch_id": "cat_19_start" },
+        { "option_id": "opt_c26", "option_text": "二十六、情趣店打卡（道具实测）", "target_branch_id": "cat_26_start" },
+        { "option_id": "opt_c42", "option_text": "四十二、更衣室秘事（布料磨蹭）", "target_branch_id": "cat_42_start" },
+        { "option_id": "opt_c51", "option_text": "五十一、试衣间勾引", "target_branch_id": "cat_51_start" },
+        { "option_id": "opt_back_indoor", "option_text": "返回主枢纽", "target_branch_id": "main_hub" }
+      ]
+    },
+    {
+      "branch_id": "hub_transport",
+      "branch_title": "速度与激情 - 移动的禁忌",
+      "content": "在摇晃的公交车后排，或者飞速行驶的私家车内。速度带来的不仅仅是推背感，还有那随时可能溢出的快感。",
+      "options": [
+        { "option_id": "opt_c3", "option_text": "三、停车场（车位博弈）", "target_branch_id": "cat_3_start" },
+        { "option_id": "opt_c8", "option_text": "八、滴滴任务（司机视角）", "target_branch_id": "cat_8_start" },
+        { "option_id": "opt_c34", "option_text": "三十四、机场云端（高空战栗）", "target_branch_id": "cat_34_start" },
+        { "option_id": "opt_c35", "option_text": "三十五、公交摇晃（后排真空）", "target_branch_id": "cat_35_start" },
+        { "option_id": "opt_c36", "option_text": "三十六、地铁隧道（极速暴露）", "target_branch_id": "cat_36_start" },
+        { "option_id": "opt_c41", "option_text": "四十一、地下车库（骰子游戏）", "target_branch_id": "cat_41_start" },
+        { "option_id": "opt_c45", "option_text": "四十五、露出驾驶（速度诱惑）", "target_branch_id": "cat_45_start" },
+        { "option_id": "opt_back_trans", "option_text": "返回主枢纽", "target_branch_id": "main_hub" }
+      ]
+    },
+    {
+      "branch_id": "hub_wild",
+      "branch_title": "野性释放 - 大自然的馈赠",
+      "content": "回归原始。在草木葱茏的荒野，或者充满泥土气息的公园，让你的费洛蒙在空气中肆意扩散。",
+      "options": [
+        { "option_id": "opt_c13", "option_text": "十三、荒野丛林（原始本能）", "target_branch_id": "cat_13_start" },
+        { "option_id": "opt_c14", "option_text": "十四、野外露出（天幕之下）", "target_branch_id": "cat_14_start" },
+        { "option_id": "opt_c27", "option_text": "二十七、雨天户外（湿身诱惑）", "target_branch_id": "cat_27_start" },
+        { "option_id": "opt_c37", "option_text": "三十七、公园漫步（晨跑真空）", "target_branch_id": "cat_37_start" },
+        { "option_id": "opt_c46", "option_text": "四十六、泳池暗流（水下扩张）", "target_branch_id": "cat_46_start" },
+        { "option_id": "opt_c48_w", "option_text": "四十八、学校后山任务", "target_branch_id": "cat_48_start" },
+        { "option_id": "opt_back_wild", "option_text": "返回主枢纽", "target_branch_id": "main_hub" }
+      ]
+    },
+    {
+      "branch_id": "hub_extreme",
+      "branch_title": "极度挑战 - 欲望的巅峰",
+      "content": "当你不再满足于一个人的游戏。这里有最硬核的挑战、最危险的博弈，以及关于“人性的终极剥离”。",
+      "options": [
+        { "option_id": "opt_c21", "option_text": "二十一、进阶难度合集", "target_branch_id": "cat_21_start" },
+        { "option_id": "opt_c23", "option_text": "二十三、曝光奴的一日", "target_branch_id": "cat_23_start" },
+        { "option_id": "opt_c25", "option_text": "二十五、羞辱类合集", "target_branch_id": "cat_25_start" },
+        { "option_id": "opt_c39", "option_text": "三十九、医院迷踪（医患博弈）", "target_branch_id": "cat_39_start" },
+        { "option_id": "opt_c40", "option_text": "四十、禁忌巅峰（终极洗礼）", "target_branch_id": "cat_40_start" },
+        { "option_id": "opt_c49_e", "option_text": "四十九、露出挑战（初级版）", "target_branch_id": "cat_49_start" },
+        { "option_id": "opt_c50", "option_text": "五十、看牙任务（深度羞辱）", "target_branch_id": "cat_50_start" },
+        { "option_id": "opt_c51_e", "option_text": "五十二、多人集体任务", "target_branch_id": "cat_52_start" },
+        { "option_id": "opt_back_extreme", "option_text": "返回主枢纽", "target_branch_id": "main_hub" }
+      ]
+    },
+    {
+      "branch_id": "cat_1_start",
+      "branch_title": "大学校园 - 任务整备",
+      "content": "校园的象牙塔内，理智与禁忌并存。你站在宿舍的穿衣镜前，最后检查你的“战袍”。\n\n**【装备准备】**：\n- 一件两侧开口、露出腰际肌肉线条的上衣（你甚至能感受到皮肤在布料下不安地颤栗）。\n- 一件宽大的外套，用来暂时掩盖你那可悲又诱人的秘密。\n- 紧身短裤，以及那个能遮住你半张脸、只露出迷离双眼的口罩。\n\n你感受到内里的真空状态了吗？每一次呼吸，布料摩擦过敏感点的触感都让你指尖发麻。",
+      "options": [
+        {
+          "option_id": "opt_c1_t1",
+          "option_text": "前往图书馆（书架间的快感）",
+          "target_branch_id": "cat_1_task_1"
+        },
+        {
+          "option_id": "opt_c1_t2",
+          "option_text": "夜探湖边（内裤与影子的博弈）",
+          "target_branch_id": "cat_1_task_2"
+        },
+        {
+          "option_id": "opt_c1_t3",
+          "option_text": "教学楼洗手间（课堂间的穿行）",
+          "target_branch_id": "cat_1_task_3"
+        },
+        {
+          "option_id": "opt_back_hub",
+          "option_text": "返回主枢纽",
+          "target_branch_id": "main_hub"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_1_task_1",
+      "branch_title": "图书馆书架旁的自渎者",
+      "content": "图书馆的灯光昏黄而压抑。你穿梭在密集的书架间，空气中弥漫着旧书纸张的霉味。你找到了那一层人迹罕至的楼层，大约十来个人在远处埋头苦读。\n\n你来到打水或上洗手间必经的书架旁，心跳声在寂静的走廊里显得格外刺耳。你缓缓脱下外套挂在书架上，露出了那件两侧大开的背心。你感受到凉意瞬间席卷了你赤裸的侧腹。\n\n你拿起一本厚重的文献假装翻阅，实则手指已经不由自主地摩挲着自己。你盯着每一个走近的身影，直到三位同学从你身边经过，那种濒临崩溃的羞耻感让你指尖发麻。你甚至产生了一个疯狂的念头：将写有你私人联系方式的小号卡片，偷偷塞进面前的书页里。",
+      "options": [
+        {
+          "option_id": "opt_c1_t1_stay",
+          "option_text": "【深入禁区】前往湖边寻回照片",
+          "target_branch_id": "cat_1_task_2",
+          "consequences": [
+            { "type": "update_status", "key": "shame", "value": 20 },
+            { "type": "show_message", "key": "lib_success", "value": "你带着满身的燥热离开图书馆，夜风在湖边等待着你。" }
+          ]
+        },
+        {
+          "option_id": "opt_c1_t1_hub",
+          "option_text": "【阶段结束】返回校园分类菜单",
+          "target_branch_id": "hub_campus"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_2_start",
+      "branch_title": "午夜便利店 - 颤栗之行",
+      "content": "凌晨12:30，整座城市都在沉睡，唯有你的欲望在苏醒。你灌下了一大杯冰水，感受着液体在胃袋里的沉重感。\n\n你换上了那套充满雄性气息的篮球球衣，宽大的衣摆下是令人脸红心跳的真空。你将一颗嗡鸣着的跳蛋塞入后穴，那种冰冷而坚硬的质感瞬间让你的内壁紧缩。你开启了中等档位，每一次呼吸，那种频率都在搅动着你的理智。\n\n你推门而出，午夜的凉风瞬间钻进球衣，吹在你赤裸的胯下，那种极致的冷热交替让你不由自主地蜷缩了脚趾。",
+      "options": [
+        {
+          "option_id": "opt_c2_store",
+          "option_text": "步入24小时便利店",
+          "target_branch_id": "cat_2_task_1"
+        },
+        {
+          "option_id": "opt_back_hub_2",
+          "option_text": "返回主枢纽",
+          "target_branch_id": "main_hub"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_2_task_1",
+      "branch_title": "便利店货架前的心理博弈",
+      "content": "便利店的白炽灯亮得晃眼。你慢慢地挪动着步子，生怕那颗跳蛋因为动作过大而滑落，或者发出更响亮的震动声。售货员正低头玩着手机，你嗅到了关东煮散发出的咸香气息。\n\n你蹲在货架前，一手假装挑选食品，另一手却伸向裆部，感受着那里的湿润与滚烫。你在摄像头的死角处，将指尖沾染的湿润抹在选好的面包包装袋上。\n\n你走到收银台，跳蛋被你调到了最大档位，那种剧烈的震动让你的声音都带上了一丝变调的沙哑。你看着售货员那张年轻的脸，心里疯狂地呐喊：『快看我啊，看我这个在深夜里发情的怪物。』",
+      "options": [
+        {
+          "option_id": "opt_c2_talk",
+          "option_text": "【深入长夜】开启赤裸洗礼",
+          "target_branch_id": "cat_2_task_2",
+          "consequences": [
+            { "type": "update_status", "key": "excitement", "value": 30 },
+            { "type": "show_message", "key": "store_complete", "value": "你带着未竟的战栗走出便利店，融入了那片属于你的黑暗。" }
+          ]
+        },
+        {
+          "option_id": "opt_c2_t1_hub",
+          "option_text": "【阶段结束】返回都市分类菜单",
+          "target_branch_id": "hub_urban"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_1_task_2",
+      "branch_title": "深夜湖边的猎物与影子",
+      "content": "月光下的校湖泛着粼粼波光，像是一面冰冷的镜子。你戴着口罩，手里攥着那张让自己羞愧欲死的裸照。四周寂静得只能听到偶尔的虫鸣和你的心跳。\n\n你确认了周围只有零星的几个影子在晃动。你走到离他们十几米远的地方，深吸一口气，颤抖着解开了裤扣。布料滑落的瞬间，夜风无情地舔舐着你赤裸的大腿。你的任务是：在这场危险的博弈中，赤裸着找回你丢弃的“尊严”（裸照），然后全身而退。",
+      "options": [
+        {
+          "option_id": "opt_c1_t2_go",
+          "option_text": "【深入禁区】前往教学楼走廊",
+          "target_branch_id": "cat_1_task_3",
+          "consequences": [
+            { "type": "update_status", "key": "excitement", "value": 20 },
+            { "type": "show_message", "key": "lake_success", "value": "你在极度的恐惧与兴奋中找回了照片，皮肤上还残留着湖边草丛的刺痛感，接下来是更危险的挑战。" }
+          ]
+        },
+        {
+          "option_id": "opt_c1_t2_hub",
+          "option_text": "【阶段结束】返回校园分类菜单",
+          "target_branch_id": "hub_campus"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_1_task_3",
+      "branch_title": "教学楼走廊的真空行者",
+      "content": "上课铃声已经响过，走廊里空荡荡的，回荡着远处老师讲课的模糊声音。你以肚子疼为由躲进了洗手间。\n\n你反锁上隔间的门，听着外面死一般的寂静。你一件件脱掉衣服、鞋子，甚至连袜子也一并褪下，直到皮肤彻底暴露在微凉的空气中。你感受到那股禁忌的冲动：如果现在推门走出去，在空无一人的走廊里赤裸行走，那种随时可能被下课的人潮撞破的恐惧，是否会让你攀上顶峰？\n\n你听到了下课铃声骤然响起，走廊里瞬间变得嘈杂。你死死锁住隔间门，想象着门外熙熙攘攘的人群，而你正一丝不挂地蜷缩在这狭窄的空间里，录制着这段足以让你社会性自杀的影像。",
+      "options": [
+        {
+          "option_id": "opt_c1_t3_walk",
+          "option_text": "【极致挑战】赤裸在洗手间徘徊（心跳博弈）",
+          "target_branch_id": "hub_urban",
+          "consequences": [
+            { "type": "update_status", "key": "risk", "value": 40 },
+            { "type": "show_message", "key": "campus_complete", "value": "校园的规则已被你彻底践踏，现在，将目光投向更广阔的都市森林。" }
+          ]
+        },
+        {
+          "option_id": "opt_c1_t3_hub",
+          "option_text": "【阶段结束】返回校园分类菜单",
+          "target_branch_id": "hub_campus"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_2_start",
+      "branch_title": "午夜便利店 - 费洛蒙的深夜逆袭",
+      "content": "凌晨12:30，整座城市都在沉睡，唯有你的欲望在苏醒。你灌下了一大杯冰水，感受着液体在胃袋里的沉重感。你换上了那套宽大的篮球球衣，宽大的衣摆下是令人脸红心跳的真空，连内裤都未着。你将一颗嗡鸣着的跳蛋塞入后穴，那种冰冷而坚硬的质感瞬间让你的内壁紧缩。你开启了中等档位，每一次呼吸，那种频率都在搅动着你的理智。\n\n你推门而出，午夜的凉风瞬间钻进球衣，吹在你赤裸的胯下，那种极致的冷热交替让你不由自主地蜷缩了脚趾。你走向楼下那间24小时营业的便利店。",
+      "options": [
+        {
+          "option_id": "opt_c2_store",
+          "option_text": "步入便利店开启挑战",
+          "target_branch_id": "cat_2_task_1"
+        },
+        {
+          "option_id": "opt_back_hub_2",
+          "option_text": "返回主枢纽",
+          "target_branch_id": "main_hub"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_2_task_1",
+      "branch_title": "便利店货架前的羞耻博弈",
+      "content": "便利店的白炽灯亮得晃眼。你慢慢地挪动着步子，生怕那颗跳蛋因为动作过大而滑落，或者发出更响亮的震动声。售货员正低头玩着手机。你蹲在货架前，一手假装挑选食品，另一手却伸向裆部，感受着那里的湿润与滚烫。你在摄像头的注视下，将指尖沾染的粘腻前列腺液，不动声色地抹在了选好的面包包装袋上。\n\n你走到收银台，将那袋沾着你体液的面包递给售货员。跳蛋被你调到了最大档位，那种剧烈的震动让你的声音都带上了一丝变调的沙哑。你看着售货员那张年轻的脸，故意和他讨论起了人生理想，心里却疯狂地呐喊：『快看我啊，看我这个在深夜里发情的怪物。』",
+      "options": [
+        {
+          "option_id": "opt_c2_talk",
+          "option_text": "【深入长夜】赤裸步行洗礼",
+          "target_branch_id": "cat_2_task_2",
+          "consequences": [
+            { "type": "update_status", "key": "excitement", "value": 30 },
+            { "type": "show_message", "key": "store_complete", "value": "你带着未竟的战栗走出便利店，融入了那片属于你的黑暗。" }
+          ]
+        },
+        {
+          "option_id": "opt_c2_t1_hub",
+          "option_text": "【阶段结束】返回都市分类菜单",
+          "target_branch_id": "hub_urban"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_2_task_2",
+      "branch_title": "午夜长街的赤裸洗礼",
+      "content": "你走出了便利店，身后是售货员疑惑的目光。胯间的跳蛋依然在疯狂肆虐，前列腺液的湿冷感让你清醒又沉沦。往家走的路途上，街道空无一人，唯有路灯将你的影子拉得很长。\n\n你产生了一个疯狂的念头：脱掉这身仅有的伪装，将自己彻底交给这寂静的黑夜。你颤抖着脱掉球衣，那一瞬间，你全身一丝不挂地站在大街上步行。每一寸皮肤都在感受着风的流向，那是自由的味道，也是堕落的深渊。这种赤裸步行的状态，你必须坚持整整五分钟。",
+      "options": [
+        {
+          "option_id": "opt_c2_t2_run",
+          "option_text": "【深入长夜】挑战小区门卫目击",
+          "target_branch_id": "cat_2_task_3",
+          "consequences": [
+            { "type": "update_status", "key": "shame", "value": 50 },
+            { "type": "show_message", "key": "street_naked", "value": "晚风如刀割般划过皮肤，你感到前所未有的自由与堕落。" }
+          ]
+        },
+        {
+          "option_id": "opt_c2_t2_hub",
+          "option_text": "【阶段结束】返回都市分类菜单",
+          "target_branch_id": "hub_urban"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_2_task_3",
+      "branch_title": "最后的挑衅：值班室的目击",
+      "content": "小区门口的灯光近在咫尺，值班室的保安正昏昏欲睡。你重新套上球衣，但内里依然赤裸。在穿过小区大门的瞬间，你猛地撩起上衣，甚至脱下裤子，让自己的下半身彻底暴露在摄像头的视野里。你看到了保安目瞪口呆的表情，那种被陌生人直视隐私的快感让你几乎窒息。\n\n你飞快地跑进楼道，不再乘坐电梯，而是选择了那条充满未知的楼梯。在上楼的过程中，你随便找了一家门口蹲下，脱去球衣，正对门上的猫眼开始排泄。那种身为“熊孩子”的报复快感，伴随着体内跳蛋的疯狂震动，让你达到了极致。",
+      "options": [
+        {
+          "option_id": "opt_c2_t3_next",
+          "option_text": "【任务达成】开启深夜楼道挑战",
+          "target_branch_id": "cat_7_start",
+          "consequences": [
+            { "type": "update_status", "key": "excitement", "value": 40 },
+            { "type": "show_message", "key": "urban_complete", "value": "都市的喧嚣已无法满足你，黑暗的楼道正在向你招手。" }
+          ]
+        },
+        {
+          "option_id": "opt_c2_t3_hub",
+          "option_text": "【阶段结束】返回都市分类菜单",
+          "target_branch_id": "hub_urban"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_3_start",
+      "branch_title": "地下停车场 - 剥离的十字路口",
+      "content": "地下停车场，一个充斥着汽油味、橡胶味和死寂的地方。回声在水泥柱间游荡，像是某种野兽的低吟。\n\n你穿着整齐，但内里只穿着内裤和袜子，这种微妙的束缚感让你在行走间感受到一种异样的兴奋。你环顾四周，停车场的车辆大约停放了三分之一，这是最适宜进行博弈的时机。\n\n你必须先确认停车场的四个角落，那是你即将进行肉体剥离的祭坛。你感受到心跳在胸腔内剧烈撞击，每一次呼吸都带着潮湿的尘土气息。",
+      "options": [
+        {
+          "option_id": "opt_c3_confirm",
+          "option_text": "【确认坐标】寻找停车场的四个角",
+          "target_branch_id": "cat_3_task_1"
+        },
+        {
+          "option_id": "opt_back_hub_3",
+          "option_text": "返回主枢纽",
+          "target_branch_id": "main_hub"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_3_task_1",
+      "branch_title": "角落的剥离：四个坐标的洗礼",
+      "content": "你来到了第一个角落。在这里，你缓缓解开上衣，任由冰冷的空气舔拭你赤裸的胸膛。你感觉到乳尖在寒意中不安地挺立。\n\n你走向第二个角落。每一步跨出，裤料摩擦着你那已经因为兴奋而变得灼热的禁区。在这个角落，你脱掉了外面的长裤，只剩下一条紧绷的内裤和一双白袜，脚下的水泥地冰冷而粗糙。\n\n第三个角落，那是羞耻感爆发的顶点。你颤抖着褪下了最后的内裤和袜子，将它们整齐地叠放在角落。现在，你全身赤裸，只有那双球鞋还穿在脚上，作为你最后的“社会面具”。\n\n当你到达第四个角落时，你已经彻底变成了一具暴露在黑暗中的祭品。你嗅着空气中浓烈的荷尔蒙味道，等待着命运（骰子）的裁决。",
+      "options": [
+        {
+          "option_id": "opt_c3_dice",
+          "option_text": "【命运裁决】掷出骰子决定走向",
+          "target_branch_id": "cat_3_task_2",
+          "consequences": [
+            { "type": "update_status", "key": "shame", "value": 30 },
+            { "type": "show_message", "key": "parking_dice", "value": "你赤裸地站在黑暗中，掷出了决定你下一步行动的骰子。" }
+          ]
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_3_task_2",
+      "branch_title": "数字的诅咒：寻找对应的标记",
+      "content": "你低头看着手机屏幕上跳动的数字，或者是手中旋转的骰子。\n\n如果数字是 **1/2/3**，你需要跨越这段死寂的距离，前往对应的一号、二号或三号角落。你必须在这些点位再次掷骰子，直到掷出 **5/6** 才能穿上该位置的衣物。那种在空旷的停车场里赤裸穿行的恐惧，让你的每根神经都处于断裂边缘。\n\n如果数字是 **4/5/6**，你必须在这个巨大的水泥迷宫中，寻找车牌尾号对应数字的车辆。你赤裸着站在车头，让远处的灯光勾勒出你紧致的肌肉线条，并与之合影。那种随时可能被车主撞破的战栗，让你体内的前列腺液不由自主地流出，顺着大腿根部滑落。",
+      "options": [
+        {
+          "option_id": "opt_c3_complete",
+          "option_text": "【任务达成】穿上衣服离开现场",
+          "target_branch_id": "hub_transport",
+          "consequences": [
+            { "type": "update_status", "key": "risk", "value": 30 },
+            { "type": "show_message", "key": "parking_complete", "value": "你带着满身的冷汗与快感，重新穿回了文明的外衣。" }
+          ]
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_3_task_1",
+      "branch_title": "角落的剥离：四个坐标的洗礼",
+      "content": "你来到了第一个角落。在这里，你缓缓解开上衣，任由冰冷的空气舔拭你赤裸的胸膛。你感觉到乳尖在寒意中不安地挺立。\n\n你走向第二个角落。每一步跨出，裤料摩擦着你那已经因为兴奋而变得灼热的禁区。在这个角落，你脱掉了外面的长裤，只剩下一条紧绷的内裤和一双白袜，脚下的水泥地冰冷而粗糙。\n\n第三个角落，那是羞耻感爆发的顶点。你颤抖着褪下了最后的内裤和袜子，将它们整齐地叠放在角落。现在，你全身赤裸，只有那双球鞋还穿在脚上，作为你最后的“社会面具”。\n\n当你到达第四个角落时，你已经彻底变成了一具暴露在黑暗中的祭品。你嗅着空气中浓烈的荷尔蒙味道，等待着命运（骰子）的裁决。",
+      "options": [
+        {
+          "option_id": "opt_c3_dice",
+          "option_text": "【命运裁决】掷出骰子决定走向",
+          "target_branch_id": "cat_3_task_2",
+          "consequences": [
+            { "type": "update_status", "key": "shame", "value": 30 },
+            { "type": "show_message", "key": "parking_dice", "value": "你赤裸地站在黑暗中，掷出了决定你下一步行动的骰子。" }
+          ]
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_3_task_2",
+      "branch_title": "数字的诅咒：寻找对应的标记",
+      "content": "你低头看着手机屏幕上跳动的数字，或者是手中旋转的骰子。\n\n如果数字是 **1/2/3**，你需要跨越这段死寂的距离，前往对应的一号、二号或三号角落。你必须在这些点位再次掷骰子，直到掷出 **5/6** 才能穿上该位置的衣物。那种在空旷的停车场里赤裸穿行的恐惧，让你的每根神经都处于断裂边缘。\n\n如果数字是 **4/5/6**，你必须在这个巨大的水泥迷宫中，寻找车牌尾号对应数字的车辆。你赤裸着站在车头，让远处的灯光勾勒出你紧致的肌肉线条，并与之合影。那种随时可能被车主撞破的战栗，让你体内的前列腺液不由自主地流出，顺着大腿根部滑落。",
+      "options": [
+        {
+          "option_id": "opt_c3_complete",
+          "option_text": "【任务达成】穿上衣服离开现场",
+          "target_branch_id": "hub_transport",
+          "consequences": [
+            { "type": "update_status", "key": "risk", "value": 30 },
+            { "type": "show_message", "key": "parking_complete", "value": "你带着满身的冷汗与快感，重新穿回了文明的外衣。" }
+          ]
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_4_start",
+      "branch_title": "深夜广场 - 虚无的领地",
+      "content": "凌晨三点的城市广场，空旷得让人心慌。风在巨大的纪念碑间穿行，发出凄厉的啸叫。\n\n你骑着小型电动车停在广场边缘，身上套着一件宽大的长外套，但外套下只有一件中长款衬衫和内裤。你感觉到风从衣摆下钻入，带起阵阵凉意。\n\n你取出了那个带有细金属链的项圈，冰冷的质感贴合在你的脖颈上。你必须推着电动车绕广场内侧行走，每走150米，就脱下一件衣服装入塑料袋丢向不同的方向。当你全身脱光后，你将推车朝广场中心前进100米，将最后的球衣丢出。",
+      "options": [
+        {
+          "option_id": "opt_c4_t1",
+          "option_text": "【开启洗礼】戴上项圈开始推车行走",
+          "target_branch_id": "cat_4_task_1"
+        },
+        {
+          "option_id": "opt_back_hub_4",
+          "option_text": "返回主枢纽",
+          "target_branch_id": "main_hub"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_4_task_1",
+      "branch_title": "广场公厕的计时祭坛",
+      "content": "你全身赤裸，只有项圈的金属链在胸前晃动。你推着电动车停在广场中心，那种被黑夜包围的虚无感让你几乎窒息。\n\n你走向广场公厕，进入隔间却不关门。你盯着手机上的秒表，闭上双眼开始60秒的静止倒计时。外面的风声、偶尔传来的虫鸣，都在无限放大你的羞耻感。\n\n如果计时不足60秒，你必须在广场寻找三棵树，借着树干的遮挡面朝马路，打开闪光灯进行三次自拍。那种瞬间的亮如白昼，像是将你的秘密公之于众。",
+      "options": [
+        {
+          "option_id": "opt_c4_bench",
+          "option_text": "【终极展示】前往中心休息椅",
+          "target_branch_id": "cat_4_task_2",
+          "consequences": [
+            { "type": "update_status", "key": "excitement", "value": 40 },
+            { "type": "show_message", "key": "square_toilet", "value": "你在黑暗的隔间里完成了静谧的告解，现在去迎接最后的暴露。" }
+          ]
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_4_task_2",
+      "branch_title": "休息椅上的大开大合",
+      "content": "你坐在广场中心最近的休息椅上，双腿大张，正对着远处灯火最亮的方向。五分钟的时间，你像是一尊淫靡的雕塑，任由过往车辆的余光扫过你赤裸的肉体。\n\n你将电动车钥匙留在椅子底下，开始在黑暗中寻找你刚才丢掉的四件衣服。每找到一件都要放回车筐，直到找齐后才能取回钥匙，解下项圈。\n\n这种在极度危险中寻回自我的过程，让你的身体在穿回衣服的瞬间，爆发出了前所未有的剧烈高潮。",
+      "options": [
+        {
+          "option_id": "opt_c4_complete",
+          "option_text": "【任务达成】骑车离开广场",
+          "target_branch_id": "hub_night",
+          "consequences": [
+            { "type": "update_status", "key": "risk", "value": 40 },
+            { "type": "show_message", "key": "square_finish", "value": "广场的夜风见证了你的堕落，你带着未竟的战栗融入黑暗。" }
+          ]
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_5_start",
+      "branch_title": "酒店长廊 - 移动的曝光祭坛",
+      "content": "晚上九点半，酒店走廊里的地毯吸收了所有的脚步声。你穿着一件勉强遮住臀部的宽大长T恤，内里只穿了一件亮色的情趣内裤。房卡被你藏在房门口的地毯下，那是你最后的退路。\n\n你走出房门，感受着走廊里冷气掠过大腿的寒意。这里或许有监控，或者随时会有住客推门而出。你感受到心脏在胸腔里疯狂跳动，那种即将被社会性处刑的快感让你的呼吸变得湿润而急促。",
+      "options": [
+        {
+          "option_id": "opt_c5_t1",
+          "option_text": "【开启洗礼】在走廊进行肉体剥离",
+          "target_branch_id": "cat_5_task_1"
+        },
+        {
+          "option_id": "opt_back_hub_酒店",
+          "option_text": "返回主枢纽",
+          "target_branch_id": "main_hub"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_5_task_1",
+      "branch_title": "走廊尽头的羞耻瞬间",
+      "content": "你缓缓将T恤从下摆拉起，一直翻折到脖子后面固定，双手不得不时刻维持这个姿势。接着，你颤抖着将内裤褪至膝盖位置，让那具因为恐惧和兴奋而挺立的肉体彻底暴露在空气中。你迈开步子，内裤束缚着你的双腿，让你只能迈着细碎而扭曲的步子前行。\n\n你盯着两旁的房间号码：1201...1203...每经过一扇门，你都幻想着门后的人会突然推门而出。当你走到走廊尽头，你迅速将手机靠在墙边，设置三秒延时。你转过身，背对镜头，将T恤拉高遮住脸，拍下了那张极度淫靡的背影照。如果中途有任何响动，你必须在最近的房间门口进行三连拍，记录下你落荒而逃的丑态。",
+      "options": [
+        {
+          "option_id": "opt_c5_t2",
+          "option_text": "【深度沦陷】前往洗衣房清洗“战利品”",
+          "target_branch_id": "cat_5_task_2"
+        },
+        {
+          "option_id": "opt_c5_t1_hub",
+          "option_text": "【阶段结束】返回密闭分类菜单",
+          "target_branch_id": "hub_indoor"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_5_task_2",
+      "branch_title": "洗衣房的湿冷余温",
+      "content": "深夜的酒店洗衣房空无一人，滚筒洗衣机的轰鸣声掩盖了你的喘息。你脱下那条被前列腺液打湿的内裤，投入洗衣机中。你赤裸着下半身站在冰冷的金属台旁，感受着T恤下摆偶尔擦过大腿的战栗。\n\n当内裤洗净烘干，你必须立刻穿上它，感受那股带着热气的、洁净的布料包裹住你依旧泥泞的禁区。最后，你回到房间门口，在进入房间前的最后一秒，对着紧闭的房门再次掀起衣摆，留下最后一张属于这间酒店的羞耻记忆。",
+      "options": [
+        {
+          "option_id": "opt_c5_t2_ktv",
+          "option_text": "【场景转换】前往KTV包厢博弈",
+          "target_branch_id": "cat_15_start",
+          "consequences": [
+            { "type": "update_status", "key": "excitement", "value": 30 },
+            { "type": "show_message", "key": "hotel_to_ktv", "value": "酒店的余温尚未散去，去那喧嚣的包厢中继续沉沦。" }
+          ]
+        },
+        {
+          "option_id": "opt_c5_t2_hub",
+          "option_text": "【阶段结束】返回主枢纽",
+          "target_branch_id": "main_hub"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_6_start",
+      "branch_title": "公共浴池 - 众目睽睽下的剥离",
+      "content": "你步入这家热气腾腾的公共浴池休息室。按照计划，你今天在长裤内穿了一件极其羞耻的亮色情趣内裤。你并未急着脱衣，而是找了个长椅坐下，在人来人往的嘈杂中，你听着更衣柜开合的砰砰声，感受着细窄布料勒入臀缝的异物感。你注意到附近正有几个男人在穿脱衣服，这是你开启“洗礼”的最佳时机。\n\n你开始慢条斯理地褪下外裤，动作幅度故意放得很大，甚至带着一丝挑逗。那一抹刺眼的亮色在灰扑扑的更衣室里瞬间炸开，你清晰地感觉到旁边几人的目光扫向了你的胯间。你并未停手，反而拿出一双白袜，在众人的注视下，当众将其中一只白袜套在自己那已经因为极度羞耻而微微昂首的性器上，然后再套上另一只袜子。这种将阳刚白袜转化为淫靡道具的行为，让你内心的野兽开始疯狂咆哮。",
+      "options": [
+        {
+          "option_id": "opt_c6_t1",
+          "option_text": "【深入禁区】带着“袜子套”步入浴池",
+          "target_branch_id": "cat_6_task_1"
+        },
+        {
+          "option_id": "opt_back_hub_bath",
+          "option_text": "返回公共空间分类",
+          "target_branch_id": "hub_public"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_6_task_1",
+      "branch_title": "池中的硬起与师傅的清理",
+      "content": "你全身赤裸地站在淋浴喷头下，胯间正扣着一个冰冷的金属锁精环，白袜套已在更衣室褪去，取而代之的是更加赤裸的禁锢。你任由温热的水流冲刷着胸膛，手却不自觉地在众人的余光中撸动着那根被束缚的肉柱。直到它在锁环的压迫下涨大到极限，呈现出一种近乎痛苦的紫红色，你才步入大浴池。\n\n池水没过腰际，水压对那根硬挺肉棒的挤压让你兴奋到几乎窒息。你甚至故意走到那个正在搓澡的师傅面前，坦然地展示着那具淫乱的肉体，并要求他为你“好好清理一下大腿根部”。当粗糙的搓澡巾磨过你那被锁死的性器边缘时，那种痛与快的交织让你发出了压抑的呻吟。现在，那个更狭窄、更灼热的桑拿房正在向你招手。",
+      "options": [
+        {
+          "option_id": "opt_c6_t2",
+          "option_text": "【禁忌热力】进入桑拿间极限挺立",
+          "target_branch_id": "cat_6_task_2"
+        },
+        {
+          "option_id": "opt_c6_t1_hub",
+          "option_text": "【阶段结束】返回公共空间分类",
+          "target_branch_id": "hub_public"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_6_task_2",
+      "branch_title": "桑拿展示与休息室的终极剥离",
+      "content": "桑拿房内的热浪几乎将你融化。你用湿毛巾蒙住脸，只露出口鼻，任由高温逼出每一滴汗珠。在那窄小的木椅上，你胯下的阴茎因为极致的热度而愈发挺立，锁精环深深勒进皮肉。你听着进出的人的呼吸声，在黑暗中肆无忌惮地展示着自己这副淫乱的躯壳。\n\n洗漱完毕回到休息室，你半硬着胯部，两腿大开地躺在按摩床上，不遮盖任何东西，当着过往路人的面拍下三张角度极其露骨的照片。穿衣服时，你将刚才那只带在鞋里的白袜再次套在半硬的性器上，然后再穿上那件情趣内裤。你故意放慢了动作，让周围的人尽情欣赏这一场关于“剥离与禁锢”的最后谢幕。",
+      "options": [
+        {
+          "option_id": "opt_c6_t2_gym",
+          "option_text": "【任务达成】离开浴池",
+          "target_branch_id": "main_hub",
+          "consequences": [
+            { "type": "update_status", "key": "shame", "value": 45 },
+            { "type": "update_status", "key": "excitement", "value": 50 },
+            { "type": "show_message", "key": "bath_complete", "value": "浴池的湿润还留在皮肤上，你带着那只特殊的袜子，消失在更衣室的尽头。" }
+          ]
+        },
+        {
+          "option_id": "opt_back_hub_bath_2",
+          "option_text": "【阶段结束】返回公共空间分类",
+          "target_branch_id": "hub_public"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_7_start",
+      "branch_title": "深夜楼道 - 顶层的剥离",
+      "content": "夜深人静，十层以上的高层住宅楼道里，感应灯熄灭后的黑暗如同潮水般将你淹没。你站在顶层的防火门后，听着自己如擂鼓般的心跳声。\n\n你缓缓解开了衣扣，将所有的衣物一件件褪下，整齐地堆放在楼梯转角。你赤裸着全身，感受着微弱的穿堂风掠过皮肤的战栗感。从这一刻起，你彻底抛弃了文明的伪装，成为这栋建筑里最原始、最淫靡的幽灵。",
+      "options": [
+        {
+          "option_id": "opt_c7_t1",
+          "option_text": "【逐层下降】开启全裸巡航",
+          "target_branch_id": "cat_7_task_1"
+        },
+        {
+          "option_id": "opt_back_hub_night",
+          "option_text": "返回主枢纽",
+          "target_branch_id": "main_hub"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_7_task_1",
+      "branch_title": "感应灯下的肉体博弈",
+      "content": "你赤裸着双足，无声地走在冰冷的水泥阶梯上。每下降两层，你都会停在邻居家的门外。在感应灯亮起的瞬间，你变换着各种羞耻的姿势，用手机记录下这令人窒息的一幕。你幻想着门后的邻居正透过猫眼，惊恐而又贪婪地注视着你这副淫乱的躯壳。\n\n当你走到这一层的防火门前时，你停下了脚步。你需要在这一层做出最终的博弈：是继续挑战未知的楼层，还是直接步入电梯，迎接那场关于“楼层停靠”的随机审判？",
+      "options": [
+        {
+          "option_id": "opt_c7_t2",
+          "option_text": "【电梯迷狂】进入封闭空间挑战",
+          "target_branch_id": "cat_7_task_2"
+        },
+        {
+          "option_id": "opt_c7_t1_hub",
+          "option_text": "【阶段结束】返回主枢纽",
+          "target_branch_id": "main_hub"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_7_task_2",
+      "branch_title": "电梯内的密闭博弈",
+      "content": "电梯门缓缓合拢，将你这具全裸的肉体彻底禁锢在这个狭窄的金属盒子里。你按下了顶层的按钮，感受着失重感带来的战栗。根据刚才巡航的楼层，你必须在这趟上行的旅途中，随机停靠在数个楼层。\n\n每当电梯门开启的瞬间，你都会以最卑微、最淫荡的姿态——或是维持犬姿，将屁股正对着门口；或是戴上眼罩，在未知的黑暗中等待可能出现的住客。电梯的运行声与你剧烈的喘息声交织在一起，这是一场关于概率与羞耻的终极博弈。",
+      "options": [
+        {
+          "option_id": "opt_c7_t2_hub",
+          "option_text": "【洗礼完成】返回顶层穿衣并结束",
+          "target_branch_id": "main_hub",
+          "consequences": [
+            { "type": "update_status", "key": "shame", "value": 40 },
+            { "type": "show_message", "key": "stair_finish", "value": "楼道的寒意已刻入骨髓，你已完成了这场高空之下的肉体巡礼。" }
+          ]
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_8_start",
+      "branch_title": "滴滴快车 - 后座的暗涌",
+      "content": "凌晨的快车上，你坐在司机斜后方的视觉盲区。你内里穿着一件紧身的情趣丁字裤，那种细窄的布料勒进臀缝的触感让你心神不宁。你拿出手机，在黑暗中偷偷拍下一张极具挑逗性的内裤特写。\n\n你开始与司机搭讪，确认他是否是个“安全”的博弈对象。在交谈的掩护下，你缓缓褪下了外面的运动裤，直到它堆叠在膝盖处。你准备好在接下来的旅途中，挑战这个移动封闭空间里的欲望极限吗？",
+      "options": [
+        {
+          "option_id": "opt_c8_t1",
+          "option_text": "在司机的视野边缘进行“内裤献祭”",
+          "target_branch_id": "cat_8_task_1"
+        },
+        {
+          "option_id": "opt_back_hub_trans",
+          "option_text": "返回主枢纽",
+          "target_branch_id": "main_hub"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_8_task_1",
+      "branch_title": "窗外的夜色与掌心的温热",
+      "content": "你甚至将那件刚刚褪下的、还带着体温和湿润气息的内裤举到了车窗位置，让它与窗外疾驰而过的城市霓虹合影。那种在司机的注视下、在秩序的街道上展示私密物的快感，让你体内的血液彻底沸腾。\n\n在快到终点的前五分钟，你做出了最疯狂的举动：你将内裤塞进了口罩里，然后想办法让司机回头。你在他的注视下，若无其事地戴上那个藏着你体液味道的口罩。最后，你将内裤叠整齐放回包里，在司机疑惑的目光中优雅地下车。这是一场关于嗅觉与视觉的双重亵渎。",
+      "options": [
+        {
+          "option_id": "opt_c8_t1_hub",
+          "option_text": "【博弈结束】消失在夜色中",
+          "target_branch_id": "main_hub",
+          "consequences": [
+            { "type": "update_status", "key": "risk", "value": 35 },
+            { "type": "show_message", "key": "didi_finish", "value": "车厢内的余温尚未散去，你已在司机的眼皮底下完成了这场完美的谢幕。" }
+          ]
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_9_start",
+      "branch_title": "半夜小区 - 垃圾桶旁的献祭",
+      "content": "凌晨三点的小区，除了偶尔传来的蝉鸣，一切都陷入了死寂。你只穿着一件单薄的外套，内里完全真空，拎着一袋沉甸甸的垃圾走向楼下的回收点。凉爽的夜风掠过你的私密部位，那种被大自然窥视的快感让你心跳加速。\n\n你站在那排散发着异味的垃圾桶旁，感受着理智与欲望的博弈。你准备好在这片熟悉的领地里，开启一场关于“寻找与被发现”的危险游戏吗？",
+      "options": [
+        {
+          "option_id": "opt_c9_t1",
+          "option_text": "【丛林法则】开启绿化带寻宝",
+          "target_branch_id": "cat_9_task_1"
+        },
+        {
+          "option_id": "opt_back_hub_night_2",
+          "option_text": "返回主枢纽",
+          "target_branch_id": "main_hub"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_9_task_1",
+      "branch_title": "绿化带里的秘密地图",
+      "content": "你的同伴早已将你的贴身衣物、袜子，甚至是一件带着体温的情趣用具，藏在了小区那些阴暗的角落：冬青树丛的深处、废弃的滑梯下方、或者是健身器材的缝隙里。你手里握着那张粗糙的简易地形图，那是你今晚唯一的指南。\n\n你全裸地穿梭在绿化带之间，茂密的叶片偶尔擦过你敏感的乳头和大腿。每找到一件衣物，你都会将其贴在鼻尖深吸一口气，感受那种被他人掌控的快感。你在月光下像一只寻找归宿的野兽，不断在草丛中匍匐前进，直到找齐所有的“战利品”。",
+      "options": [
+        {
+          "option_id": "opt_c9_t1_hub",
+          "option_text": "【归巢之旅】穿好衣物返回家中",
+          "target_branch_id": "main_hub",
+          "consequences": [
+            { "type": "update_status", "key": "excitement", "value": 30 },
+            { "type": "show_message", "key": "complex_finish", "value": "小区的每个角落都留下了你的喘息，这场捉迷藏游戏是你最淫靡的勋章。" }
+          ]
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_10_start",
+      "branch_title": "深夜商场 - 镜面中的曝光",
+      "content": "商场已经打烊，只有零星的保洁人员在走动。你穿梭在空旷的服装区，玻璃橱窗映照出你那近乎赤裸的倒影。\n\n你穿着长款外套和浅色薄长裤，内里只有一双白袜和运动鞋。你在公厕内脱掉上衣，整理好裤子，让胯间那处完全勃起，不安分地在薄面料下顶起明显的轮廓。你需要在随行人员的偷拍镜头下，完成这场关于“视觉侵略”的表演。",
+      "options": [
+        {
+          "option_id": "opt_c10_t1",
+          "option_text": "进入鞋店进行“开裆试穿”",
+          "target_branch_id": "cat_10_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_10_task_1",
+      "branch_title": "鞋店里的多维处刑",
+      "content": "你找了一家没锁的鞋店，大摇大摆地坐在试鞋凳上。你故意面对着不远处的一名男性路人，缓缓弯腰假装试穿。你那条被特意撕开裆部的浅色长裤因为动作而彻底敞开，露出里面涨得通红、不断跳动的器物。\n\n你一边感受着冷空气对敏感处的刺激，一边故意张开双腿，让那一幕在灯光下无所遁形。随行人员在不远处稳稳地端着相机，捕捉着你脸上那混合了极度羞耻与扭曲快感的表情，以及路人偶尔扫过时那震惊而厌恶的视线。你盯着镜头，仿佛在向全世界宣告你的堕落。",
+      "options": [
+        {
+          "option_id": "opt_c10_t1_shop",
+          "option_text": "【超市诱惑】前往深夜超市挑战",
+          "target_branch_id": "cat_30_start",
+          "consequences": [
+            { "type": "update_status", "key": "excitement", "value": 30 },
+            { "type": "show_message", "key": "mall_to_market", "value": "商场的灯光已足够刺眼，去往那货架林立的超市继续沉沦。" }
+          ]
+        },
+        {
+          "option_id": "opt_c10_t1_hub",
+          "option_text": "【阶段结束】返回都市分类菜单",
+          "target_branch_id": "hub_urban"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_11_start",
+      "branch_title": "校园公厕 - 隔板间的洗礼",
+      "content": "公厕里弥漫着刺鼻的氨水味。你站在镜子前，确认四下无人后，颤抖着锁上了厕所大门。你一件件脱掉衣服，将内裤和白袜分别藏在不同的隔间里，而其他的衣物则被你塞进了最深处的角落。\n\n你赤裸着在冰冷的瓷砖地上跪下，手机支架正对着你那具因为恐惧而不断颤栗的肉体。你按照那羞辱性的指令，先将自己完全撸硬，然后挺直腰背，准备迎接这场关于“肉体惩罚”的仪式。",
+      "options": [
+        {
+          "option_id": "opt_c11_t1",
+          "option_text": "开启“体训与自虐”模式",
+          "target_branch_id": "cat_11_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_11_task_1",
+      "branch_title": "公厕里的体训博弈",
+      "content": "你用手掌狠狠地扇在自己的脆弱处。清脆的击打声在空旷的厕所里激起阵阵回响，你一边忍受着痛楚，一边大声报数。紧接着是二十个全方位的深蹲，你双手抱头，任由那处在重力下疯狂甩动，拍打在你的腹部。\n\n最后，你大着胆子，将一只脚踩在洗漱台上，对着镜子里的自己发出了那些平日里绝不敢宣之于口的、淫靡而卑微的呻吟。当你终于穿上那双被揉皱的袜子，走出公厕时，你感觉到大腿内侧还残留着被击打后的火辣感，提醒着你刚才的淫乱。",
+      "options": [
+        {
+          "option_id": "opt_c11_t1_dorm",
+          "option_text": "【深入寝室】前往宿舍楼道博弈",
+          "target_branch_id": "cat_17_start",
+          "consequences": [
+            { "type": "update_status", "key": "shame", "value": 25 },
+            { "type": "show_message", "key": "toilet_to_dorm", "value": "公厕的博弈已告一段落，去往那充满生活气息的楼道继续展示。" }
+          ]
+        },
+        {
+          "option_id": "opt_c11_t1_hub",
+          "option_text": "【阶段结束】返回校园分类菜单",
+          "target_branch_id": "hub_campus"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_12_start",
+      "branch_title": "深夜网吧 - 屏幕后的竞技惩罚",
+      "content": "网吧里充满了键盘的敲击声。你和同伴正在进行一场紧张的游戏博弈，而输掉的人将面临最羞辱的惩罚。耳机里激烈的游戏音效掩盖了桌底下的一切动静。\n\n你输了。按照约定，你脱掉了裤子，只穿着一件长款上衣遮掩。你需要在接下来的对局中，一边忍受着憋尿的痛苦，一边在桌底下进行自我安抚。同伴戏谑的目光让你感到如坐针毡。",
+      "options": [
+        {
+          "option_id": "opt_c12_t1",
+          "option_text": "在桌底接受“竞技惩罚”",
+          "target_branch_id": "cat_12_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_12_task_1",
+      "branch_title": "屏幕光影下的失禁边缘",
+      "content": "你缓缓蜷起腿，感受着长款上衣下摆掠过赤裸腿根的凉意。你必须在游戏激战正酣时，用手握住那已经涨得生疼的脆弱处，并在同伴的注视下进行机械的撸动。你的呼吸因为极度压抑而变得紊乱，每一次敲击键盘都伴随着下体传来的阵阵电流。\n\n那种在众目睽睽之下、在电子光影的掩护里进行的淫靡行为，让你感到了前所未有的崩溃感。当你终于在游戏结束的瞬间，因为无法承受的刺激而彻底瘫软在椅子上时，你发现自己的腿间已经湿透了一大片。那种在网吧里的失禁快感，彻底击碎了你的尊严。",
+      "options": [
+        {
+          "option_id": "opt_c12_t1_cinema",
+          "option_text": "【影院惊魂】前往电影院角落",
+          "target_branch_id": "cat_31_start",
+          "consequences": [
+            { "type": "update_status", "key": "excitement", "value": 35 },
+            { "type": "show_message", "key": "netbar_to_cinema", "value": "网吧的喧嚣已成为背景，去往那更幽暗的影院深处吧。" }
+          ]
+        },
+        {
+          "option_id": "opt_c12_t1_hub",
+          "option_text": "【阶段结束】返回密闭分类菜单",
+          "target_branch_id": "hub_indoor"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_13_start",
+      "branch_title": "荒野丛林 - 原始的体训",
+      "content": "这里是远离城市的郊外，只有风声和偶尔的虫鸣。你赤裸着全身，感受着微凉的空气舔舐着你每一寸敏感的皮肤。你脚下是松软的泥土和扎人的枯叶，这种粗粝的触感让你体内的野性在悄然苏醒。\n\n你按照指令，需要在这片寂静的森林里完成一场关于“服从与肉体挑战”的祭礼。你需要在这些参天大树的注视下，将自尊彻底践踏在泥土里。",
+      "options": [
+        {
+          "option_id": "opt_c13_t1",
+          "option_text": "在树林间开启“野性体训”",
+          "target_branch_id": "cat_13_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_13_task_1",
+      "branch_title": "森林深处的自虐祭礼",
+      "content": "你缓缓靠在粗糙的松树干上，任由树皮磨蹭着你那因为兴奋而不断颤栗的背肌。你按照要求，先在泥地上完成了五十个标准的俯卧撑，每一次胸膛贴近地面，都能闻到泥土那股潮湿而腥咸的气息。你的汗水滴落在枯叶上，像是某种淫靡的印记。\n\n紧接着，你分开双腿，背靠树干滑下，保持着深蹲的姿势。你用手狠狠地扇在自己的臀瓣上，清脆的响声在空旷的林间激起阵阵回响。你大声报数，声音因为极度的羞耻而变得嘶哑。最后，你张开双腿，任由那一处在冷风中彻底暴露，对着虚无的森林发出了最卑微的乞怜。你在这一刻彻底沦为这片荒野的祭品。",
+      "options": [
+        {
+          "option_id": "opt_c13_t1_mountain",
+          "option_text": "【攀登巅峰】前往荒山进行极限展示",
+          "target_branch_id": "cat_14_start",
+          "consequences": [
+            { "type": "update_status", "key": "excitement", "value": 30 },
+            { "type": "show_message", "key": "forest_to_mountain", "value": "森林的洗礼已完成，现在，去挑战那凛冽的山巅。" }
+          ]
+        },
+        {
+          "option_id": "opt_c13_t1_hub",
+          "option_text": "【阶段结束】返回野性分类菜单",
+          "target_branch_id": "hub_wild"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_14_start",
+      "branch_title": "荒山野岭 - 原始的狩猎场",
+      "content": "这里是远离文明的深山，荆棘密布，空气中带着泥土的腥气。你赤裸着全身，皮肤被粗糙的树皮划破，留下淡淡的红痕，却让你感到一种自虐般的快感。\n\n你听到了远处溪水流动的声音，那是你下一个目标。你需要在山林间像野兽一样穿行，并按照指令在每一处选中的树木旁，完成一次关于“肉体极限”的献祭。",
+      "options": [
+        {
+          "option_id": "opt_c14_t1",
+          "option_text": "在山脊线上进行“极限展示”",
+          "target_branch_id": "cat_14_task_1"
+        },
+        {
+          "option_id": "opt_back_hub_6",
+          "option_text": "返回主枢纽",
+          "target_branch_id": "main_hub"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_14_task_1",
+      "branch_title": "山巅之上的绝对献祭",
+      "content": "你站在凛冽的山脊线上，狂风如刀割般刮过你赤裸的皮肤，激起一层层细密的栗粒。脚下是万丈深渊，远处的城市灯火微弱得如同萤火。你张开双腿，任由重力拉扯着你的身体向边缘倾斜，那种随时可能坠落的恐惧转化成了体内疯狂炸裂的快感。\n\n你盯着脚下那片深不见底的黑暗，发出一声被风撕碎的呻吟。你按照指令，在山巅的寒风中疯狂地撸动着那一处，感受着它被冻得彻骨的质感与你掌心灼热的剧烈冲突。在那一刻，你觉得自己已经不再是人类，而是这片荒山孕育出的、最淫靡、最卑微的野兽。你在风中剧烈痉挛，将所有的羞耻与精华都抛向了那无尽的虚无。",
+      "options": [
+        {
+          "option_id": "opt_c14_t1_residence",
+          "option_text": "【回归都市】前往小区子夜挑战",
+          "target_branch_id": "cat_9_start",
+          "consequences": [
+            { "type": "update_status", "key": "risk", "value": 35 },
+            { "type": "show_message", "key": "mountain_to_residence", "value": "山巅的狂风已洗礼你的灵魂，现在，去那幽暗的小区灌木丛中继续你的沉沦。" }
+          ]
+        },
+        {
+          "option_id": "opt_c14_t1_hub",
+          "option_text": "【阶段结束】返回野性分类菜单",
+          "target_branch_id": "hub_wild"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_15_start",
+      "branch_title": "森林公园 - 拾荒者的背德登山",
+      "content": "你站在森林公园的山脚下，午后的阳光透过树叶缝隙洒在你身上。你穿着宽松的休闲装，但内里却未着片缕。你的任务是登上这座小山的最高处，并在这一路上完成关于“束缚与解脱”的洗礼。\n\n你听着周围游客的谈笑声，感受着山风吹过裤管带来的凉意。每走一段距离，你都需要停下来，假装系鞋带，实则是为了在弯腰的瞬间，向身后可能存在的目光展示那抹被掩盖的春色。",
+      "options": [
+        {
+          "option_id": "opt_c15_t1",
+          "option_text": "【登山洗礼】开启最高点挑战",
+          "target_branch_id": "cat_15_task_1"
+        },
+        {
+          "option_id": "opt_back_hub_park",
+          "option_text": "返回校园分类菜单",
+          "target_branch_id": "hub_campus"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_15_task_1",
+      "branch_title": "山巅之上的野性放逐",
+      "content": "你终于登上了公园的最高处，这里有一片茂密的树林。你确认四周暂时无人，迅速褪下所有衣物，将它们塞进随身的塑料袋，藏在一个隐秘的灌木丛中。你赤裸着全身，感受着森林里潮湿而清新的空气，皮肤上泛起一阵阵细小的疙瘩。\n\n你开始向背离衣物的方向走去，每一步都走得小心翼翼，枯枝败叶在脚底发出的碎裂声让你心惊胆战。当你走够一百步，回头望去，那种彻底失去遮蔽、随时可能被登山者撞见的极度恐惧，转化为滚烫的浆液在体内沸腾。你张开双臂，仰起头，任由阳光透过树影斑驳地照在你赤裸的肉体上。在那一声被鸟鸣声遮掩的低吼中，你完成了这场关于“自然与欲望”的极致献祭。",
+      "options": [
+        {
+          "option_id": "opt_c15_t1_lake",
+          "option_text": "【湖边魅影】前往幽暗湖畔挑战",
+          "target_branch_id": "cat_17_start",
+          "consequences": [
+            { "type": "update_status", "key": "excitement", "value": 35 },
+            { "type": "show_message", "key": "park_to_lake", "value": "森林的洗礼已让你疯狂，去往那幽深的湖畔继续你的沉沦。" }
+          ]
+        },
+        {
+          "option_id": "opt_c15_t1_hub",
+          "option_text": "【阶段结束】返回校园分类菜单",
+          "target_branch_id": "hub_campus"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_16_start",
+      "branch_title": "篮球场公厕 - 紧身裤下的禁忌热身",
+      "content": "你步入篮球场旁的公厕，空气中弥漫着属于雄性的汗水味。你穿着整套的篮球队服，内里是一条紧贴皮肤的速干紧身裤，没有任何遮掩。你听着外面运球的撞击声和队友的呐喊，感受到一种莫名的亢奋。\n\n你决定在这里完成一场关于“力量与服从”的洗礼。你解开了球裤，露出了那条勾勒出每一寸肌肉轮廓的紧身裤。你准备好在这些充满阳刚气息的队友随时可能闯入的领域，开启你的狂欢吗？",
+      "options": [
+        {
+          "option_id": "opt_c16_t1",
+          "option_text": "【紧身裤热身】开启深蹲开合跳挑战",
+          "target_branch_id": "cat_16_task_1"
+        },
+        {
+          "option_id": "opt_back_hub_court",
+          "option_text": "返回校园分类菜单",
+          "target_branch_id": "hub_campus"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_16_task_1",
+      "branch_title": "厕所中央的赤裸律动",
+      "content": "你褪去了球裤和紧身裤，全身只剩下一双洁白的运动袜和球鞋。你跪在潮湿的瓷砖地面上，双手撑地，做出最卑微的姿态。你听到了外面传来的脚步声，可能是刚才训练完的队员。你迅速将一只袜子脱下塞进嘴里，另一只则残忍地绑在已经挺立的胯下，任由那种被束缚的痛楚转化为粘稠的快感。\n\n你在厕所中央疯狂地进行着开合跳，汗水顺着赤裸的脊背滑落，滴在冰冷的地面上。每一次跳跃，你都故意发出沉重的声响，幻想着门外的队友会因为这诡异的声音而推门而入。当你最终被三名晚归的学弟撞见你这副淫靡模样时，那种理智彻底崩溃的羞耻感，让你在他们的注视下发出了无声的高潮呐喊。你现在是这片赛场下最卑贱的肉体，正贪婪地呼吸着空气中浓烈的男性费洛蒙。",
+      "options": [
+        {
+          "option_id": "opt_c16_t1_toilet",
+          "option_text": "【公厕巡礼】前往校园公厕隔间",
+          "target_branch_id": "cat_11_start",
+          "consequences": [
+            { "type": "update_status", "key": "shame", "value": 40 },
+            { "type": "show_message", "key": "court_to_toilet", "value": "赛场的汗水已让你沸腾，去往那阴暗的公厕继续你的交换。" }
+          ]
+        },
+        {
+          "option_id": "opt_c16_t1_hub",
+          "option_text": "【阶段结束】返回校园分类菜单",
+          "target_branch_id": "hub_campus"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_17_start",
+      "branch_title": "幽暗湖畔 - 月色下的失守博弈",
+      "content": "深夜的校园湖边，没有灯光，只有月光在水面上泛起粼粼波光。你穿着简单的上衣和短裤，内里空无一物。你手里紧紧攥着一张自己不露脸的果照，这是你今晚唯一的“筹码”。\n\n你确认湖边只有零星几个人。你深吸一口气，在离其中一人约十余米的地方，迅速将那张果照（或你的内裤）丢在路边。你需要在不被察觉的情况下，赤裸着下半身绕湖一周，再重新取回它。准备好开启这场关于“夺回尊严”的秘密赛跑吗？",
+      "options": [
+        {
+          "option_id": "opt_c17_t1",
+          "option_text": "【湖畔挑战】开启月下赤裸夺回",
+          "target_branch_id": "cat_17_task_1"
+        },
+        {
+          "option_id": "opt_back_hub_lake",
+          "option_text": "返回校园分类菜单",
+          "target_branch_id": "hub_campus"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_17_task_1",
+      "branch_title": "波光里的赤裸潜行",
+      "content": "你迅速褪下了短裤，将它丢在远处的长椅下。你现在全身赤裸，只有一件单薄的上衣遮掩。你弯下腰，尽量让自己隐没在垂柳的阴影中，赤裸的脚掌踩在湿漉漉的草地上，那种冰凉而粘腻的触感让你体内的欲望疯狂叫嚣。\n\n你听到了远处传来的低声交谈，似乎是一对散步的小情侣。你的心跳如擂鼓般剧烈，那种随时可能被撞破、被那张果照彻底定罪的恐惧，转化为一种病态的兴奋。你故意在经过那对情侣附近时挺起胸膛，任由湖风吹开你那毫无遮拦的上衣。在那一声被蛙鸣掩盖的闷哼中，你终于在对方发现之前夺回了那张照片，也完成了这场关于“湖边魅影”的极致献祭。",
+      "options": [
+        {
+          "option_id": "opt_c17_t1_study",
+          "option_text": "【书架魅影】前往图书馆自习室",
+          "target_branch_id": "cat_18_start",
+          "consequences": [
+            { "type": "update_status", "key": "risk", "value": 30 },
+            { "type": "show_message", "key": "lake_to_study", "value": "湖畔的清冷已让你战栗，去往那静谧的自习室进行更隐秘的博弈。" }
+          ]
+        },
+        {
+          "option_id": "opt_c17_t1_hub",
+          "option_text": "【阶段结束】返回校园分类菜单",
+          "target_branch_id": "hub_campus"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_18_start",
+      "branch_title": "图书馆自习室 - 书架间的静默献祭",
+      "content": "图书馆的灯光明亮而冰冷，空气中弥漫着旧书的墨香和纸张的干燥味。你穿着一件两侧开口的特制上衣，披着外套，内里真空。你来到了一个人数不多的楼层，穿梭在那些高大的书架之间。\n\n你听着不远处同学翻书的沙沙声，心跳不由自主地加快。你来到了打水处必经的书架旁，将外套脱下放在架子上，露出了那件两侧开叉的禁忌上衣。你随手拿起一本书假装在看，实则在等待着那个能让你彻底失守的瞬间。准备好开启这场关于“知识与欲望”的博弈吗？",
+      "options": [
+        {
+          "option_id": "opt_c18_t1",
+          "option_text": "【书架博弈】开启静默展示挑战",
+          "target_branch_id": "cat_18_task_1"
+        },
+        {
+          "option_id": "opt_back_hub_study",
+          "option_text": "返回校园分类菜单",
+          "target_branch_id": "hub_campus"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_18_task_1",
+      "branch_title": "墨香里的赤裸洗礼",
+      "content": "你靠在书架上，任由那件开叉上衣在你的动作下若隐若现地露出侧腰和胸膛的轮廓。你听到了脚步声，一个同学正拿着水杯向这边走来。你没有躲避，反而故意侧过身，假装在寻找高处的书籍，让那件上衣的开口彻底暴露在对方的视线中。\n\n对方似乎愣了一下，脚步声停顿了片刻，随即仓促离去。那种被陌生人目击、被作为“淫靡物件”审视的快感，让你体内的欲望如潮水般涌动。你甚至产生了一个更大胆的念头：将写有自己小号的卡片夹进那本《社会心理学》中，作为这场静默献祭的祭品。在那一声被远方闭馆铃声掩盖的轻叹中，你完成了这场关于“文明外衣下”的极致沉沦。",
+      "options": [
+        {
+          "option_id": "opt_c18_t1_toilet",
+          "option_text": "【公厕洗礼】前往校园公厕进行全裸回寝挑战",
+          "target_branch_id": "cat_19_start",
+          "consequences": [
+            { "type": "update_status", "key": "shame", "value": 35 },
+            { "type": "show_message", "key": "study_to_toilet", "value": "自习室的静默已让你疯狂，去那充满费洛蒙的公厕继续你的沉沦。" }
+          ]
+        },
+        {
+          "option_id": "opt_c18_t1_hub",
+          "option_text": "【阶段结束】返回校园分类菜单",
+          "target_branch_id": "hub_campus"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_19_start",
+      "branch_title": "公厕回寝挑战 - 剥离文明的狂奔",
+      "content": "深夜的公厕，昏黄的灯光下，你做出了一个疯狂的决定。你不仅要在这里展示，还要以最原始的姿态挑战这段回寝之路。你将所有的衣物一件件褪下，整齐地码在隔板后的水箱上，只留下一双纯白的袜子和一双运动鞋。\n\n你推开隔板门，赤裸的肌肤瞬间感受到了走廊里微弱的凉意。这种极度的不安全感让你的乳头和胯下都因为兴奋而微微挺立。你手里紧紧攥着寝室钥匙，准备开启这段关于“绝对暴露”的校园巡礼。",
+      "options": [
+        {
+          "option_id": "opt_c19_t1",
+          "option_text": "【全裸回寝】开启校园小径赤裸行走",
+          "target_branch_id": "cat_19_task_1"
+        },
+        {
+          "option_id": "opt_back_hub_toilet",
+          "option_text": "返回校园分类菜单",
+          "target_branch_id": "hub_campus"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_19_task_1",
+      "branch_title": "校园小径的肉体巡礼",
+      "content": "你推开公厕的大门，彻底步入了月色下的校园。除了脚下的白袜和运动鞋，你全身赤裸，没有任何遮蔽。你没有躲进阴影，而是选择走在月光最明亮的小径上，挺直腰背，任由胯下那处在走动中疯狂地甩动，反复拍打在大腿内侧。\n\n远处传来了模糊的谈笑声，可能是晚归的同学。你的心跳瞬间飙升，那种随时可能被撞破的恐惧感转化为粘稠的快感，让你的呼吸变得异常粗重。你没有加快脚步，反而更加大胆地展示着这具在夜色中闪烁着淫靡光泽的肉体。当你最终插进寝室钥匙的那一刻，那种死里逃生般的巨大高潮感几乎让你瘫软在门边。",
+      "options": [
+        {
+          "option_id": "opt_c19_t1_street",
+          "option_text": "【午夜马路】前往霓虹下孤狼展示",
+          "target_branch_id": "cat_20_start",
+          "consequences": [
+            { "type": "update_status", "key": "risk", "value": 30 },
+            { "type": "update_status", "key": "shame", "value": 40 },
+            { "type": "show_message", "key": "toilet_to_street", "value": "回寝的快感已让你战栗，去往那霓虹闪烁的长街继续你的狂欢。" }
+          ]
+        },
+        {
+          "option_id": "opt_c19_t1_hub",
+          "option_text": "【阶段结束】返回校园分类菜单",
+          "target_branch_id": "hub_campus"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_20_start",
+      "branch_title": "午夜马路 - 霓虹下的孤狼",
+      "content": "长长的马路延伸向黑暗的尽头，偶尔有车辆疾驰而过，留下震耳欲聋的轰鸣。你站在路边的电线杆下，影子被灯光拉得很长。\n\n你解开了外套，露出了内里那件充满挑逗意义的紧身衣。你感受着路人车辆投射过来的灯光，那一瞬间的亮如白昼让你感到一种被强暴般的快感。你需要在下一辆车经过时，完成那个关于“绝对领域”的展示。",
+      "options": [
+        {
+          "option_id": "opt_c20_t1",
+          "option_text": "在红绿灯下进行“读秒展示”",
+          "target_branch_id": "cat_20_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_20_task_1",
+      "branch_title": "红绿灯下的读秒洗礼",
+      "content": "你站在斑马线中央，看着红灯倒计时在夜空中闪烁。远处传来的引擎声越来越近，两道雪亮的灯光将你的影子死死钉在地面上。你解开了那件遮掩一切的黑色风衣，任由内里那件充满羞辱意味的皮革项圈和紧身衣，暴露在路人惊愕的目光中。\n\n你听到了路边传来的口哨声和手机拍照的快门声。你没有低头，反而挺起胸膛，让那些光影肆意地在你赤裸的皮肤上跳跃。在绿灯亮起、车辆启动的瞬间，你发出一声压抑已久的闷哼，将所有的尊严都碾碎在这一场关于“全城目击”的极致博弈中。你现在是这片霓虹森林里最放荡的野兽，正贪婪地吞噬着每一道射向你的目光。",
+      "options": [
+        {
+          "option_id": "opt_c20_t1_bridge",
+          "option_text": "【凌晨极限】前往大桥中央呐喊",
+          "target_branch_id": "cat_29_start",
+          "consequences": [
+            { "type": "update_status", "key": "excitement", "value": 35 },
+            { "type": "show_message", "key": "street_to_bridge", "value": "长街的目光已让你沸腾，去往那孤独的大桥中央完成最后的献祭。" }
+          ]
+        },
+        {
+          "option_id": "opt_c20_t1_hub",
+          "option_text": "【阶段结束】返回深夜分类菜单",
+          "target_branch_id": "hub_night"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_21_start",
+      "branch_title": "进阶博弈 - 权力的游戏",
+      "content": "这里不再是简单的暴露，而是灵魂与肉体的双重博弈。你将面临三种不同难度的挑战：『羞耻初试』、『欲望中转』、『堕落终点』。\n\n每一个难度都代表着你对底线的进一步突破。你感受到那种被无形枷锁束缚的快感了吗？每一次选择，都是在向深渊迈进。",
+      "options": [
+        {
+          "option_id": "opt_c21_t1",
+          "option_text": "挑战『堕落终点』（最高难度）",
+          "target_branch_id": "cat_21_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_21_task_1",
+      "branch_title": "堕落终点的绝对掌控",
+      "content": "你跪在那冰冷的金属王座前，双手被粗大的铁链反扣在身后，皮肤被冰凉的金属勒出道道红痕。空气中弥漫着浓烈的皮革气味和某种催情香料的甜腻。你感觉到那个自称为‘主’的男人，正用他那粗砺的手指捏住你的下巴，强迫你仰起头看着他那充满侵略性的眼神。\n\n你听到了皮鞭在大气中划过的爆鸣声，紧接着是一阵火辣辣的剧痛在胸膛炸开。那种痛楚瞬间转化为一种扭曲的、几乎要将你理智焚烧殆尽的快感。你发出一声破碎的吟叫，身体因为极度的兴奋而剧烈痉挛。在那一刻，你彻底放弃了作为‘人’的所有自尊，只剩下一具渴求被蹂躏、被填满的原始肉体。你看着他缓缓解开腰带，在极度的恐惧与期待中，迎接着属于你的、最后的堕落。",
+      "options": [
+        {
+          "option_id": "opt_c21_t1_shame",
+          "option_text": "【公开处刑】前往全网公开处刑挑战",
+          "target_branch_id": "cat_25_start",
+          "consequences": [
+            { "type": "update_status", "key": "shame", "value": 40 },
+            { "type": "show_message", "key": "game_to_execution", "value": "私密的调教已无法填满你的空虚，去往那万众瞩目的刑场吧。" }
+          ]
+        },
+        {
+          "option_id": "opt_c21_t1_hub",
+          "option_text": "【阶段结束】返回博弈分类菜单",
+          "target_branch_id": "hub_game"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_22_start",
+      "branch_title": "入门级任务 - 觉醒的序曲",
+      "content": "对于新手来说，这里是最好的试炼场。不需要过于激进的动作，只需要你在平凡的生活中，寻找那一丝不平凡的刺激。\n\n你穿着整齐的西装，但内里却穿着一整套紧身的情趣内衣。你走在熙熙攘攘的商业街，感受着那种只有你自己知道的、紧绷的快感。",
+      "options": [
+        {
+          "option_id": "opt_c22_t1",
+          "option_text": "在人潮中进行“秘密行走”",
+          "target_branch_id": "cat_22_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_22_task_1",
+      "branch_title": "商业街的秘密沉沦",
+      "content": "你走在熙熙攘攘的商业街，周围是成双成对的情侣和步履匆匆的上班族。西装下，那一整套蕾丝情趣内衣紧紧勒在你的肌肉上，每一次跨步都带来一阵细微而致命的摩擦。你感觉到胸前的金属乳夹正随着你的呼吸而微微颤动，那种若有若无的刺痛感让你挺直了脊背，神情肃穆得像是一位正在朝圣的信徒。\n\n你停在了一家咖啡店的落地窗前，透过玻璃的反光，你看着那个衣冠楚楚却内里放荡的自己。一个背着书包的大学生从你身边擦过，他那好奇的一瞥让你瞬间感到血液涌向了面部。你故意在大庭广众之下整理了一下领带，实则是为了更深地按压那枚隐藏在衬衫下的跳蛋。在那一声被车鸣声掩盖的轻叹中，你完成了这场关于“文明外衣下”的极致博弈。",
+      "options": [
+        {
+          "option_id": "opt_c22_t1_office",
+          "option_text": "【职场禁忌】前往办公室落地窗挑战",
+          "target_branch_id": "cat_38_start",
+          "consequences": [
+            { "type": "update_status", "key": "risk", "value": 30 },
+            { "type": "show_message", "key": "street_to_office", "value": "街头的刺激已是序曲，现在，去那高楼之上的办公室继续你的表演。" }
+          ]
+        },
+        {
+          "option_id": "opt_c22_t1_hub",
+          "option_text": "【阶段结束】返回博弈分类菜单",
+          "target_branch_id": "hub_game"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_23_start",
+      "branch_title": "曝光奴的一日 - 24小时的沉沦",
+      "content": "从睁眼的那一刻起，你就注定要成为欲望的奴隶。你的全天行程都被精心安排，每一个地点、每一个动作，都是为了满足那颗渴望被注视的心。\n\n早晨的阳台、中午的食堂、下午的图书馆、深夜的长街。你的一整天，都将浸泡在费洛蒙与羞耻感中。",
+      "options": [
+        {
+          "option_id": "opt_c23_t1",
+          "option_text": "开启“一日沉沦”计划",
+          "target_branch_id": "cat_23_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_23_task_1",
+      "branch_title": "24小时的绝对剥离",
+      "content": "当时钟指向深夜 11 点，你站在自家的阳台上，俯瞰着整座城市的灯火阑珊。你全身赤裸，皮肤上布满了这一整天在各个地点留下的、深浅不一的勒痕和红肿。那是属于图书馆的墨香、食堂的油烟、以及商业街冷风的共同馈赠。你感受到一种前所未有的疲惫，但在疲惫之下，是几乎要将你灵魂点燃的狂喜。\n\n你听到了隔壁阳台传来的说话声，你没有躲避，反而大胆地跨上护栏，将自己彻底暴露在星空和邻居的视线死角。你张开双臂，仰起头，任由夜风吹过你那已经因为过度刺激而变得麻木的肉体。在那一声被远方警笛声撕碎的呻吟中，你完成了这一场长达 24 小时的堕落马拉松。你现在是一具彻底被欲望掏空的躯壳，却又在这一片虚无中，找到了属于你的永恒。",
+      "options": [
+        {
+          "option_id": "opt_c23_t1_morning",
+          "option_text": "【新的一天】前往凌晨极限行动",
+          "target_branch_id": "cat_29_start",
+          "consequences": [
+            { "type": "update_status", "key": "excitement", "value": 35 },
+            { "type": "show_message", "key": "day_to_night", "value": "一天的沉沦已是终点，也是新的一场狂欢的起点。" }
+          ]
+        },
+        {
+          "option_id": "opt_c23_t1_hub",
+          "option_text": "【阶段结束】返回博弈分类菜单",
+          "target_branch_id": "hub_game"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_24_start",
+      "branch_title": "阴暗楼梯间 - 垂直的禁区",
+      "content": "防火门后，是另一个世界。昏暗的灯光、潮湿的墙壁、以及偶尔传来的脚步回声。你站在两层楼的交界处，听着上方传来的谈话声。\n\n你解开了皮带，让重力将你的裤子带向地面。你赤裸着下半身，靠在冰冷的扶手上，等待着那个可能出现的、打破寂静的人。",
+      "options": [
+        {
+          "option_id": "opt_c24_t1",
+          "option_text": "在阶梯上进行“垂直展示”",
+          "target_branch_id": "cat_24_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_24_task_1",
+      "branch_title": "防火门后的垂直祭坛",
+      "content": "你靠在冰冷的水泥墙面上，防火门外传来的说话声像是来自另一个次元。你将长风衣挂在扶手上，赤裸的脊背感受着墙壁的粗糙与寒意。你张开双腿，任由那股从楼道深处卷起的穿堂风吹过你那已经因为兴奋而剧烈颤抖的肉体。你听到了上方几层楼传来的清脆高跟鞋声，正一步步向你逼近。\n\n你没有躲进阴影，反而故意站在了感应灯的正下方。在脚步声停在门外的瞬间，你发出一声变调的闷哼，手指在禁区疯狂地搅动。你看着那扇微微颤动的防火门，幻想着它突然被推开，幻想着那些体面的邻居看到你这副淫靡模样的反应。在那一声感应灯熄灭前的清响中，你将这一场关于“垂直空间”的背德挑战推向了巅峰。你现在是这栋大楼阴影里最肮脏的秘密，正随着电梯的起落而律动。",
+      "options": [
+        {
+          "option_id": "opt_c24_t1_parking",
+          "option_text": "【地下潜行】前往地下车库继续挑战",
+          "target_branch_id": "cat_41_start",
+          "consequences": [
+            { "type": "update_status", "key": "risk", "value": 30 },
+            { "type": "show_message", "key": "stair_to_garage", "value": "楼道的幽闭已满足不了你，去往那引擎轰鸣的地下车库继续你的沉沦。" }
+          ]
+        },
+        {
+          "option_id": "opt_c24_t1_hub",
+          "option_text": "【阶段结束】返回博弈分类菜单",
+          "target_branch_id": "hub_game"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_25_start",
+      "branch_title": "羞辱类合集 - 尊严的崩塌",
+      "content": "这里是专门为那些渴望被践踏、被羞辱的人准备的。你会发现自己处于各种极度尴尬的境地：在公共场合被强迫露出、在陌生人面前承认自己的淫荡、或者在众目睽睽之下模仿某种卑微的生物。\n\n每一次尊严的崩塌，都是一次快感的爆发。你准备好放弃作为‘人’的最后一点底线了吗？",
+      "options": [
+        {
+          "option_id": "opt_c25_t1",
+          "option_text": "接受“全网公开处刑”任务",
+          "target_branch_id": "cat_25_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_25_task_1",
+      "branch_title": "全网公开处刑的极致崩塌",
+      "content": "你赤裸着全身，被推到了那座位于市中心繁华广场的巨大电子屏正下方。你的双手被紧紧捆绑在背后的金属柱上，双腿被强迫叉开，露出了所有最私密、最丑陋的细节。广场上的扩音器正循环播放着你刚才在暗室里求饶、自认是“母狗”的录音，每一个字都像是一记响亮的耳光，狠狠扇在你的自尊上。\n\n你看着周围聚集的、指指点点的人群，看着无数台对准你的手机摄像头，看着电子屏上正实时直播着你此时此刻颤抖、痉挛的特写。那种尊严被彻底碾碎、被千万人围观羞辱的快感，让你体内的前列腺液如泉涌般喷发。在那一声绝望而又极度兴奋的尖叫中，你彻底放弃了作为“人”的所有防线。你现在是一件全城共赏的淫靡祭品，正随着众人的嘲笑声，攀向那毁灭的高潮。",
+      "options": [
+        {
+          "option_id": "opt_c25_t1_shame_2",
+          "option_text": "【禁忌巅峰】前往最高权力门前献祭",
+          "target_branch_id": "cat_40_start",
+          "consequences": [
+            { "type": "update_status", "key": "shame", "value": 50 },
+            { "type": "show_message", "key": "execution_to_peak", "value": "广场的羞辱已是前菜，现在，去往那庄严的巅峰完成最后的毁灭吧。" }
+          ]
+        },
+        {
+          "option_id": "opt_c25_t1_hub",
+          "option_text": "【阶段结束】返回博弈分类菜单",
+          "target_branch_id": "hub_game"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_26_start",
+      "branch_title": "情趣店打卡 - 欲望的朝圣",
+      "content": "情趣店的橱窗里展示着各种夸张的道具。你走了进去，店员用一种了然的眼神看着你。空气中弥漫着硅胶和润滑剂的气味。\n\n你拿起了一个巨大的、冰冷的金属扩充器。你需要在试用区，在店员若有若无的注视下，将它塞入你那已经迫不及待的肉体。",
+      "options": [
+        {
+          "option_id": "opt_c26_t1",
+          "option_text": "在店内进行“即兴试用”",
+          "target_branch_id": "cat_26_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_26_task_1",
+      "branch_title": "情趣店试用区的极限扩张",
+      "content": "你站在试用区那面巨大的穿衣镜前，手中握着那根冰冷的、带有颗粒感的金属扩充器。帘子外，店员那意味深长的目光仿佛能穿透布料，直接钉在你那颤抖的背影上。空气中弥漫着润滑液那种粘腻而甜香的气味。你缓缓蹲下身，张开双腿，看着镜子里那个眼神迷离、正笨拙地试图容纳巨物的自己。\n\n当那截冰冷的金属终于突破阻碍，彻底没入你那灼热的内壁时，你感到一阵几乎要将灵魂撕裂的胀痛感。那种痛楚瞬间转化为一种极致的快感，让你不由自主地仰起头，喉咙里挤出一声变调的轻喘。你听到了帘子外传来的脚步声和顾客的谈笑声，那种随时可能被揭开帘子的恐惧，让你的身体以前所未有的频率颤抖。在那一声清脆的撞击声中，你将这一场关于“感官圣殿”的朝圣推向了高潮。你现在是一具彻底被欲望填满的器皿，正随着店内循环播放的暧昧音乐而律动。",
+      "options": [
+        {
+          "option_id": "opt_c26_t1_fitting",
+          "option_text": "【试衣风云】前往西装店试衣间继续",
+          "target_branch_id": "cat_51_start",
+          "consequences": [
+            { "type": "update_status", "key": "excitement", "value": 35 },
+            { "type": "show_message", "key": "shop_to_fitting", "value": "店内的扩充已让你充盈，去往那更窄小的试衣间进行更极致的挤压。" }
+          ]
+        },
+        {
+          "option_id": "opt_c26_t1_hub",
+          "option_text": "【阶段结束】返回博弈分类菜单",
+          "target_branch_id": "hub_game"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_27_start",
+      "branch_title": "雨夜户外 - 湿润的洗礼",
+      "content": "雨水打在你的脸上，打湿了你单薄的衣衫。布料紧紧地贴在你的皮肤上，勾勒出你那充满爆发力的肌肉线条。你的球鞋里灌满了水，每走一步都发出沉闷的响声。\n\n你来到了一个废弃的公交站台。你需要在瓢泼大雨中，撕开你那最后的一层伪装，让冰冷的雨水彻底洗刷你那肮脏而又美丽的灵魂。",
+      "options": [
+        {
+          "option_id": "opt_c27_t1",
+          "option_text": "在雨中进行“全身洗礼”",
+          "target_branch_id": "cat_27_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_27_task_1",
+      "branch_title": "雨夜站台的全身洗礼",
+      "content": "冰冷的雨水瓢泼而下，瞬间将你身上那件薄薄的白T恤打湿，紧紧地贴在你那布满汗珠和雨水的胸膛上。你站在空旷的公交站台下，路灯昏黄的光影在积水中破碎。你听到了远处传来的车辆疾驰声。你缓缓解开了运动裤，让它无力地滑落在脚踝处，任由那股刺骨的寒意侵袭你那已经因为兴奋而滚烫的禁区。\n\n你张开双臂，仰起头，任由雨水冲刷着你失神的脸庞。当一辆远光灯雪亮的私家车疾驰而过的瞬间，你故意挺起胯部，将自己最丑陋也最真实的一面，彻底暴露在那一秒钟的亮如白昼下。那种在冰冷与灼热、黑暗与光明边缘疯狂试探的快感，让你在雨幕中剧烈颤抖，喉咙里挤出一声被雷鸣声掩盖的呻吟。你现在是这片雨夜里最淫靡的孤魂，正随着每一滴雨水的落下而沉沦。",
+      "options": [
+        {
+          "option_id": "opt_c27_t1_roof",
+          "option_text": "【天台晚风】前往摩天大楼天台挑战",
+          "target_branch_id": "cat_52_start",
+          "consequences": [
+            { "type": "update_status", "key": "risk", "value": 35 },
+            { "type": "show_message", "key": "rain_to_roof", "value": "雨水的洗礼已让你湿透，去往那高耸入云的天台迎接更猛烈的狂风吧。" }
+          ]
+        },
+        {
+          "option_id": "opt_c27_t1_hub",
+          "option_text": "【阶段结束】返回博弈分类菜单",
+          "target_branch_id": "hub_game"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_28_start",
+      "branch_title": "大学生基础暴露 - 青春的禁果",
+      "content": "身为一名大学生，你本该在课堂上汲取知识，但此刻你却在空旷的阶梯教室里，进行着一场关于肉体的教学。\n\n你坐在最后一排，桌子底下是你赤裸的双腿。你听着讲台上老师枯燥的讲解，手指却在书本的掩盖下，探索着那片属于青春的、充满生机的禁区。",
+      "options": [
+        {
+          "option_id": "opt_c28_t1",
+          "option_text": "在课堂上进行“桌底授课”",
+          "target_branch_id": "cat_28_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_28_task_1",
+      "branch_title": "阶梯教室的桌底授课",
+      "content": "你坐在阶梯教室最后排的死角，周围是正在认真记笔记的同学。桌面上，你正襟危坐，翻阅着厚重的哲学书籍；桌底下，你已经彻底失守，双腿张开，任由那股名为“知性与淫欲”的冲突在体内横冲直撞。你听到了讲台上老师粉笔划过黑板的沙沙声，那种枯燥的学术氛围反而成了你欲望最好的催化剂。\n\n你悄悄褪下了那只发黄的白袜，脚尖在冰冷的水泥地上不安地蜷缩。你看着前排那个男生宽阔的背影，幻想着他突然转过头，看到你此时此刻正满面潮红、手指在课桌阴影下肆意妄为的模样。在那一声下课铃响起的瞬间，你在这一方窄小的课桌下彻底崩塌，无声地将青春的精华献祭给了这片圣洁的知识殿堂。你现在是一具被文字与快感共同雕琢的淫靡肉体，正随着散场的人群而颤栗。",
+      "options": [
+        {
+          "option_id": "opt_c28_t1_library",
+          "option_text": "【图书馆禁区】前往古籍室深处挑战",
+          "target_branch_id": "cat_44_start",
+          "consequences": [
+            { "type": "update_status", "key": "shame", "value": 30 },
+            { "type": "show_message", "key": "class_to_library", "value": "课堂的刺激已是前戏，现在，去往那更沉静的图书馆古籍室吧。" }
+          ]
+        },
+        {
+          "option_id": "opt_c28_t1_hub",
+          "option_text": "【阶段结束】返回校园分类菜单",
+          "target_branch_id": "hub_campus"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_29_start",
+      "branch_title": "凌晨极限行动 - 2:00AM的狂欢",
+      "content": "这是属于疯子的时间。你驾驶着摩托车，风在耳边呼啸。你全身赤裸，只在外面套了一件长长的黑色风衣。\n\n你来到了市中心的跨江大桥。你需要在桥中央停下，脱掉风衣，对着滚滚江水和远处稀疏的灯光，发出属于你的、被欲望扭曲的呐喊。",
+      "options": [
+        {
+          "option_id": "opt_c29_t1",
+          "option_text": "在大桥中央开启“极限风暴”",
+          "target_branch_id": "cat_29_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_29_task_1",
+      "branch_title": "跨江大桥的极限呐喊",
+      "content": "大桥中央，狂风如野兽般撕扯着你那件漆黑的风衣。脚下是奔流不息的江水，远处是明灭可见的霓虹。你缓缓解开了风衣的扣子，任由布料在风中剧烈翻飞，露出你那赤裸、紧致、在寒风中微微颤栗的肉体。你听到了远处巡逻车若有若无的笛声，那种在城市命脉上进行极致亵渎的快感，让你体内的热度达到了沸点。\n\n你翻过护栏，双脚悬空，只靠双手死死抓着冰冷的金属。你张开嘴，对着空旷的江面发出了一声变调的、充满了毁灭欲望的呐喊。在那一刻，你觉得自己已经与这座城市的阴影融为一体，每一个细胞都在欢呼雀跃。在那一声被风瞬间吞噬的呜咽中，你完成了这一场关于“高度与孤独”的自我献祭。你现在是这片凌晨夜空下最疯狂的祭品，正随着江水的节奏而颤栗。",
+      "options": [
+        {
+          "option_id": "opt_c29_t1_market",
+          "option_text": "【深夜超市】前往货架间挑战",
+          "target_branch_id": "cat_30_start",
+          "consequences": [
+            { "type": "update_status", "key": "risk", "value": 35 },
+            { "type": "show_message", "key": "bridge_to_market", "value": "大桥的呐喊已让你空虚，去往那充满烟火气的超市继续你的沉沦。" }
+          ]
+        },
+        {
+          "option_id": "opt_c29_t1_hub",
+          "option_text": "【阶段结束】返回深夜分类菜单",
+          "target_branch_id": "hub_night"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_30_start",
+      "branch_title": "超市挑战 - 薄裤下的轮廓",
+      "content": "你步入这家深夜超市时，身上只穿着一条极薄的浅色运动裤，内里空无一物。那种若隐若现的轮廓，在超市明亮的冷光灯下显得格外扎眼。你推着购物车，能清晰地感受到布料磨蹭过顶端的战栗。\n\n你来到了饮料区，这里是人流相对密集的区域。你假装在挑选饮料，实则在寻找那个能让你彻底失守的契机。你准备好在众目睽睽之下，利用这些冰冷的瓶罐完成那场关于“摩擦”的博弈吗？",
+      "options": [
+        {
+          "option_id": "opt_c30_t1",
+          "option_text": "【饮料区摩擦】利用冷柜边缘进行展示",
+          "target_branch_id": "cat_30_task_1"
+        },
+        {
+          "option_id": "opt_back_hub_market",
+          "option_text": "返回深夜分类菜单",
+          "target_branch_id": "hub_night"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_30_task_1",
+      "branch_title": "冷柜前的背德博弈",
+      "content": "你站在冷柜前，假意挑选着冰镇可乐。你故意压低身体，让薄裤将那处挺立的轮廓紧紧绷出。你利用冷柜边缘的坚硬边缘，在弯腰取物时进行隐秘而大胆的摩擦。那种极致的冰冷与体内的燥热产生的剧烈冲突，让你几乎要失声呻吟。\n\n你注意到旁边一个正在理货的男员工，他的余光正死死盯着你那处。你没有收敛，反而更加放肆地变换姿势，甚至故意让薄裤因为动作而下滑，露出一截布满汗珠的腰线。在那一声被冷柜电机轰鸣声掩盖的轻叹中，你完成了这一场关于“冰与火”的感官洗礼。你现在是这片烟火气里最淫靡的秘密，正随着冷气的律动而沉沦。",
+      "options": [
+        {
+          "option_id": "opt_c30_t1_market_2",
+          "option_text": "【超市诱惑】前往镜头下的挑逗挑战",
+          "target_branch_id": "cat_43_start",
+          "consequences": [
+            { "type": "update_status", "key": "risk", "value": 30 },
+            { "type": "update_status", "key": "shame", "value": 35 },
+            { "type": "show_message", "key": "freezer_to_camera", "value": "冷柜的刺激已是序曲，现在，去那监控正下方继续你的表演。" }
+          ]
+        },
+        {
+          "option_id": "opt_c30_t1_hub",
+          "option_text": "【阶段结束】返回深夜分类菜单",
+          "target_branch_id": "hub_night"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_31_start",
+      "branch_title": "小区电梯 - 骰子决定的剥离",
+      "content": "你踏入电梯，手里握着一颗决定命运的骰子。这是一个封闭而未知的空间。规则很简单：每停靠一个楼层，你便掷一次骰子。点数将决定你必须脱掉的衣物数量，或者展示的羞耻程度。\n\n电梯启动了，随着楼层数字的跳动，你的心跳也达到了极限。第一个楼层到了，门缓缓开启。你掷出了手中的骰子，准备迎接这场关于“随机暴露”的终极审判。",
+      "options": [
+        {
+          "option_id": "opt_c31_t1",
+          "option_text": "【点数博弈】开启逐层剥离挑战",
+          "target_branch_id": "cat_31_task_1"
+        },
+        {
+          "option_id": "opt_back_hub_elevator",
+          "option_text": "返回密闭分类菜单",
+          "target_branch_id": "hub_indoor"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_31_task_1",
+      "branch_title": "封闭空间的点数洗礼",
+      "content": "骰子在冰冷的金属地面上翻滚，最后停在了“5”点。这意味着你必须脱掉包括内裤在内的所有下身衣物。你战栗着照做了，当你赤裸的下半身完全暴露在电梯的监控探头和可能随时开启的门扉前时，那种极致的羞耻感让你几乎窒息。\n\n电梯再次停靠，一个提着垃圾的邻居正站在门口。在那门开的一瞬，你迅速背过身，将赤裸的臀部 and 因为极度兴奋而颤抖的肉体展示在感应灯下。邻居似乎愣住了，而你则在电梯门关上的那一刻，发出了无声的呐喊。在那一声被机械运行声掩盖的低吼中，你将这一场关于“随机与窥视”的秘密博弈推向了巅峰。你现在是这片光影森林里最淫靡的祭品。",
+      "options": [
+        {
+          "option_id": "opt_c31_t1_cinema_2",
+          "option_text": "【影院暗角】前往荧幕后沉沦挑战",
+          "target_branch_id": "cat_49_start",
+          "consequences": [
+            { "type": "update_status", "key": "excitement", "value": 35 },
+            { "type": "update_status", "key": "shame", "value": 40 },
+            { "type": "show_message", "key": "theatre_to_corner", "value": "电梯的窥视已让你沸腾，去往那更隐秘的角落迎接更极致的沉沦吧。" }
+          ]
+        },
+        {
+          "option_id": "opt_c31_t1_hub",
+          "option_text": "【阶段结束】返回密闭分类菜单",
+          "target_branch_id": "hub_indoor"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_32_start",
+      "branch_title": "健身房律动 - 肌肉的交响",
+      "content": "健身房里充满了荷尔蒙的气息和金属撞击的声音。你正在跑步机上挥汗如雨，紧身的运动服勾勒出你那充满力量感的线条。\n\n你来到了更衣室，这里挤满了赤裸着上身的体育生。你嗅到了那种浓烈的、属于雄性的汗味。你需要在众目睽睽之下，完成那场关于“肥皂与肌肉”的极致挑逗。",
+      "options": [
+        {
+          "option_id": "opt_c32_t1",
+          "option_text": "在深蹲区进行“崩裂挑战”",
+          "target_branch_id": "cat_32_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_32_task_1",
+      "branch_title": "深蹲区肌肉的崩裂",
+      "content": "你在深蹲架下，沉重的杠铃压在你宽阔的肩胛骨上，肌肉因为充血而高高隆起，皮肤上布满了晶莹的汗珠。每一次下蹲，你都能感受到紧身运动裤因为极度拉伸而发出的细微紧绷声。你听到了周围体育生们粗重的呼吸声和金属撞击的清响。那种在力量极限边缘游走的快感，让你体内的费洛蒙以前所未有的速度炸裂。\n\n你注意到身后那个负责“保护”你的男教练，他那双宽大的手正稳稳地托住你的腰际。你故意在最深蹲的位置停留，任由他那炽热的体温隔着薄薄的布料传导进你的皮肤。在那一声力竭的闷哼中，你感觉到自己那已经湿透的内里在众人的注视下彻底崩塌。在那一刻，你觉得自己已经不再是那个健身房里的精英，而是一具彻底被力量和汗水征服的淫靡肉体。你在杠铃的压迫下剧烈痉挛，将所有的自尊都化作了这一场关于“肌肉与服从”的极致祭礼。",
+      "options": [
+        {
+          "option_id": "opt_c32_t1_gym_2",
+          "option_text": "【力量碰撞】前往龙门架力竭挑战",
+          "target_branch_id": "cat_50_start",
+          "consequences": [
+            { "type": "update_status", "key": "shame", "value": 30 },
+            { "type": "show_message", "key": "squat_to_cable", "value": "深蹲的压迫已让你沉醉，现在，去那龙门架下迎接更极致的力量博弈吧。" }
+          ]
+        },
+        {
+          "option_id": "opt_c32_t1_hub",
+          "option_text": "【阶段结束】返回密闭分类菜单",
+          "target_branch_id": "hub_indoor"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_33_start",
+      "branch_title": "酒吧微醺 - 舞池中的狂欢",
+      "content": "酒精在血液中燃烧，舞池里的节奏让你感到一阵眩晕。你被无数个温热的肉体挤压着，那种极致的触碰让你感到前所未有的兴奋。\n\n你来到了吧台，点了一杯烈酒。你需要在酒保转头调酒的瞬间，完成那场关于“台面下”的秘密博弈。",
+      "options": [
+        {
+          "option_id": "opt_c33_t1",
+          "option_text": "在卡座暗影中进行“酒精洗礼”",
+          "target_branch_id": "cat_33_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_33_task_1",
+      "branch_title": "卡座暗影的酒精洗礼",
+      "content": "你在喧嚣的舞池边缘，酒精在血液中疯狂燃烧，五彩斑斓的镭射光在你赤裸的背肌上跳跃。你坐在偏僻的卡座里，膝盖上盖着一件黑色的西装外套。外套下，你的手指正伴随着重低音的节奏，在阴影中肆意妄为。你听到了周围男女肆意的笑声和酒杯碰撞的清响。那种在众人眼皮底下进行的秘密博弈，让你感到了前所未有的兴奋。\n\n你注意到酒保投来的好奇目光，他正一边摇晃着调酒壶，一边有意无意地打量着你那张因为极度忍耐而面色潮红的脸。你故意在外套边缘露出你那已经因为兴奋而剧烈颤抖的脚踝。在那一声被音乐推向最高潮的瞬间，你在阴影中彻底爆发，无声地将这一场关于“酒精与欲望”的献祭推向了巅峰。你现在是这片喧嚣森林里最淫靡的野兽，正随着节奏的起伏而沉沦。",
+      "options": [
+        {
+          "option_id": "opt_c33_t1_transport",
+          "option_text": "【公共交通】前往拥挤公交挑战",
+          "target_branch_id": "cat_35_start",
+          "consequences": [
+            { "type": "update_status", "key": "excitement", "value": 30 },
+            { "type": "show_message", "key": "bar_to_bus", "value": "酒吧的狂欢已告一段落，去往那川流不息的公交车上继续你的沉沦吧。" }
+          ]
+        },
+        {
+          "option_id": "opt_c33_t1_hub",
+          "option_text": "【阶段结束】返回密闭分类菜单",
+          "target_branch_id": "hub_indoor"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_34_start",
+      "branch_title": "机场云端 - 30000英尺的堕落",
+      "content": "狭小的飞机洗手间里，发动机的轰鸣声在耳边回荡。你看着镜子里那个因为缺氧而面色潮红的自己。你感受到气压的变化让你的身体变得异常敏感。\n\n你需要在空姐敲门的瞬间，完成那场关于“高空禁区”的极致挑战。你准备好在云端之上，献祭你那颤栗的肉体了吗？",
+      "options": [
+        {
+          "option_id": "opt_c34_t1",
+          "option_text": "在洗手间开启“高空模式”",
+          "target_branch_id": "cat_34_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_34_task_1",
+      "branch_title": "云端之上的高空祭礼",
+      "content": "狭小的飞机洗手间里，发动机的轰鸣声在耳边回荡，将你所有的羞耻都封锁在这几平方英尺的金属空间里。你看着镜子里那个因为高空缺氧而面色潮红、眼神涣散的自己。你感受到气压的变化让你的身体变得异常敏感，每一寸皮肤都像是在渴望着某种极致的入侵。\n\n你听到了外面传来的空姐轻柔的询问声和餐车经过的摩擦音。那种在三万英尺高空、在无数乘客眼皮底下进行的秘密献祭，让你感到了前所未有的战栗。你缓缓解开了运动裤，任由那枚高频震动的跳蛋在体内疯狂搅动。在那一声被发动机轰鸣声彻底掩盖的低吼中，你将这一场关于“云端与禁忌”的极致博弈推向了巅峰。你现在是这片苍穹下最淫靡的祭品，正随着飞机的起伏而沉沦。",
+      "options": [
+        {
+          "option_id": "opt_c34_t1_transport",
+          "option_text": "【地下潜行】前往地铁车厢挑战",
+          "target_branch_id": "cat_36_start",
+          "consequences": [
+            { "type": "update_status", "key": "risk", "value": 35 },
+            { "type": "show_message", "key": "plane_to_subway", "value": "高空的刺激已让你沸腾，去往那深邃的地下隧道继续你的沉沦吧。" }
+          ]
+        },
+        {
+          "option_id": "opt_c34_t1_hub",
+          "option_text": "【阶段结束】返回速度与激情菜单",
+          "target_branch_id": "hub_transport"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_35_start",
+      "branch_title": "公交摇晃 - 拥挤中的隐秘触碰",
+      "content": "晚高峰的公交车，拥挤得让人无法呼吸。你抓着拉环，身体随着车辆的起伏而摇晃。一个结实的背影紧贴在你的胸前，你嗅到了他身上淡淡的洗衣粉味。\n\n每一次刹车，你们的身体都会产生剧烈的碰撞。你需要在众人的视线死角，完成那场关于“布料之下”的侵略博弈。",
+      "options": [
+        {
+          "option_id": "opt_c35_t1",
+          "option_text": "在人群拥挤处进行“深度贴合”",
+          "target_branch_id": "cat_35_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_35_task_1",
+      "branch_title": "公交拥挤处的深度贴合",
+      "content": "晚高峰的公交车，每一个急刹车都让无数温热的肉体产生剧烈的挤压。你抓着拉环，身体随着车辆的起伏而摇晃。一个结实的、散发着淡淡汗味的背影紧贴在你的胸前。你感受到他那宽阔的肩胛骨正顶着你的锁骨，那种原始而直接的触碰，让你体内的费洛蒙以前所未有的速度炸裂。\n\n你故意在车辆颠簸时，让下半身与对方产生更深层次的摩擦。你听到了周围乘客的抱怨声和手机视频的背景音。那种在众目睽睽之下进行的隐秘侵略，让你感到了前所未有的征服快感。在那一声被公交报站声掩盖的轻喘中，你完成了这一场关于“布料之下”的博弈。你现在是这辆钢铁巨兽里最淫靡的乘客，正随着每一次刹车而沉沦。",
+      "options": [
+        {
+          "option_id": "opt_c35_t1_taxi",
+          "option_text": "【后座密谋】前往滴滴快车挑战",
+          "target_branch_id": "cat_8_start",
+          "consequences": [
+            { "type": "update_status", "key": "excitement", "value": 30 },
+            { "type": "show_message", "key": "bus_to_car", "value": "公交的拥挤已满足不了你，去往那更私密的快车后座继续你的表演。" }
+          ]
+        },
+        {
+          "option_id": "opt_c35_t1_hub",
+          "option_text": "【阶段结束】返回速度与激情菜单",
+          "target_branch_id": "hub_transport"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_36_start",
+      "branch_title": "地铁隧道 - 快速移动的禁室",
+      "content": "地铁在漆黑的隧道里疾驰，玻璃映照出车厢内每个人的面孔。你坐在长椅上，膝盖上放着一个黑色的背包。背包下，你的手指正在不安地探索着。\n\n你看着对面坐着的那个清纯的大学生。你需要在到站广播响起的瞬间，完成那场关于“目光对峙”的极致挑战。",
+      "options": [
+        {
+          "option_id": "opt_c36_t1",
+          "option_text": "在玻璃映照下进行“双重展示”",
+          "target_branch_id": "cat_36_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_36_task_1",
+      "branch_title": "地铁车厢的双重展示",
+      "content": "地铁在漆黑的隧道里疾驰，玻璃映照出车厢内每个人的面孔，也映照出你那张因为极度忍耐而面色潮红的脸。你坐在长椅上，膝盖上放着一个黑色的背包。背包下，你的手指正在那片名为“禁忌”的土地上疯狂探索。你看着对面坐着的那个大学生，他的目光正有意无意地落在你那双微微打颤的腿上。\n\n你故意在地铁进站、灯光闪烁的瞬间，将背包微微抬起。那种在快速移动的封闭空间里、在陌生人眼皮底下进行的双重展示，让你感到了前所未有的战栗。在那一声到站广播响起的瞬间，你在阴影中彻底爆发，无声地将这一场关于“目光对峙”的极致挑战推向了巅峰。你现在是这列地下列车里最肮脏的乘客，正随着隧道的深邃而沉沦。",
+      "options": [
+        {
+          "option_id": "opt_c36_t1_airport",
+          "option_text": "【机场云端】前往云端之上挑战",
+          "target_branch_id": "cat_34_start",
+          "consequences": [
+            { "type": "update_status", "key": "risk", "value": 35 },
+            { "type": "show_message", "key": "subway_to_plane", "value": "地下的刺激已告一段落，去往那更高更远的云端继续你的沉沦吧。" }
+          ]
+        },
+        {
+          "option_id": "opt_c36_t1_hub",
+          "option_text": "【阶段结束】返回速度与激情菜单",
+          "target_branch_id": "hub_transport"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_37_start",
+      "branch_title": "公园漫步 - 树影间的猎杀",
+      "content": "深夜的公园，长椅上坐着几对窃窃私语的情侣。你穿梭在茂密的树影间，脚步轻盈得像是一只黑猫。你嗅到了泥土和花草的芬芳，以及空气中若有若无的费洛蒙气味。\n\n你来到了一个废弃的喷泉池旁。你需要在月光的直射下，完成那场关于“银色洗礼”的肉体献祭。",
+      "options": [
+        {
+          "option_id": "opt_c37_t1",
+          "option_text": "在月光草坪进行“全身绽放”",
+          "target_branch_id": "cat_37_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_37_task_1",
+      "branch_title": "喷泉池旁的银色洗礼",
+      "content": "深夜的公园，枯黄的落叶在脚下发出细微的碎裂声。你站在废弃的喷泉池中央，月光如冷冽的清泉倾泻而下，将你那赤裸而紧致的肉体勾勒出一圈银色的轮廓。你听到了远处情侣们压抑的笑声和草丛中虫鸣的合奏。那种在广阔而寂静的自然中、在随时可能被路人撞破的边缘游走的战栗感，让你体内的血液几乎要沸腾。\n\n你缓缓蹲下身，指尖划过冰冷而粗糙的石苔。你看着自己映在水洼里的倒影，那双充满了渴望与疯狂的眼睛让你感到一阵莫名的兴奋。你听到了远处保安手电筒光柱划过树梢的声音。在那光芒即将触及你皮肤的瞬间，你在月光下彻底爆发，双手死死扣住石台边缘，喉咙里挤出一声变调的轻吟。在那一声被晚风瞬间揉碎的呜咽中，你完成了这一场关于“荒野与自由”的极致祭礼。你现在是这片夜色下最肮脏也最纯粹的野兽，正随着树影的摇曳而沉沦。",
+      "options": [
+        {
+          "option_id": "opt_c37_t1_office",
+          "option_text": "【职场禁忌】前往摩天大楼挑战",
+          "target_branch_id": "cat_38_start",
+          "consequences": [
+            { "type": "update_status", "key": "shame", "value": 30 },
+            { "type": "show_message", "key": "park_to_office", "value": "荒野的狂欢已告一段落，去往那冰冷的摩天大楼继续你的沉沦吧。" }
+          ]
+        },
+        {
+          "option_id": "opt_c37_t1_hub",
+          "option_text": "【阶段结束】返回户外分类菜单",
+          "target_branch_id": "hub_outdoor"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_38_start",
+      "branch_title": "职场禁忌 - 摩天大楼的沉沦",
+      "content": "整洁的办公室里，只有你一个人在加班。窗外是繁华的城景。你穿着笔挺的衬衫，领带打得一丝不苟。但你的下半身却赤裸着，坐在冰冷的皮质办公椅上。\n\n你听到了电梯到达的声音。有人上来了。你需要在对方推门进入办公室的瞬间，完成那场关于“精英面具”下的堕落表演。",
+      "options": [
+        {
+          "option_id": "opt_c38_t1",
+          "option_text": "在落地窗前开启“高空视角”",
+          "target_branch_id": "cat_38_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_38_task_1",
+      "branch_title": "落地窗前的职场堕落",
+      "content": "深夜的摩天大楼，落地窗外是如同银河般璀璨的城景。你站在窗前，俯瞰着脚下的芸芸众生。你上身穿着剪裁得体的白衬衫，领带紧扣，维持着职场精英最后的尊严；而下半身却早已彻底沦陷，赤裸的皮肤贴在冰冷的玻璃上，激起阵阵颤栗。你听到了门外走廊传来的脚步声，那种规律的皮鞋扣地声，像是死神的倒计时，让你的心脏狂跳不已。\n\n你故意在脚步声停在门前的瞬间，转过身，张开双臂，任由整座城市的灯火见证你的肮脏。你幻想着那个推门而入的同事，在看到你这副“衣冠禽兽”的模样时，会露出怎样震惊而又贪婪的表情。在那门把手轻轻转动的瞬间，你在高空之上彻底崩塌，额头抵着冰冷的玻璃，发出一声压抑已久的低吼。在那一声被中央空调嗡鸣声掩盖的呜咽中，你完成了这一场关于“权力与羞耻”的极致博弈。你现在是这片钢铁森林里最淫靡的精英，正随着霓虹的明灭而沉沦。",
+      "options": [
+        {
+          "option_id": "opt_c38_t1_hospital",
+          "option_text": "【医院迷踪】前往消毒水味中挑战",
+          "target_branch_id": "cat_39_start",
+          "consequences": [
+            { "type": "update_status", "key": "risk", "value": 35 },
+            { "type": "show_message", "key": "office_to_hospital", "value": "职场的博弈已满足不了你，去往那更冰冷的医院长廊继续你的沉沦。" }
+          ]
+        },
+        {
+          "option_id": "opt_c38_t1_hub",
+          "option_text": "【阶段结束】返回职场分类菜单",
+          "target_branch_id": "hub_office"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_39_start",
+      "branch_title": "医院迷踪 - 消毒水中的虚弱感",
+      "content": "医院的长廊里，消毒水的味道刺鼻而冰冷。你穿着宽大的病号服，内里是彻底的真空。那种若有若无的虚弱感让你感到一种莫名的兴奋。\n\n你走进了无人的B超室。你看着那些冰冷的仪器，感受着那种被剥夺掌控权的快感。你需要在医生推开房门的瞬间，完成那场关于“病人自觉”的极致挑战。",
+      "options": [
+        {
+          "option_id": "opt_c39_t1",
+          "option_text": "在诊察床上进行“全面检查”",
+          "target_branch_id": "cat_39_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_39_task_1",
+      "branch_title": "诊察床上的感官剥夺",
+      "content": "寂静的B超室内，唯一的光源是显示器幽幽的蓝光。你躺在铺着一次性床单的诊察床上，宽大的病号服被随意撩起，露出你那因为常年缺乏阳光而显得病态苍白的腹部。你听到了走廊里传来的推车声和护士细碎的交谈。那种随时可能被作为“标本”展示的恐惧，让你体内的欲望以前所未有的速度滋生。\n\n你抓起一瓶冰冷的耦合剂，任由那粘稠而透明的液体在你温热的皮肤上缓缓流淌。你闭上眼，幻想着那枚冰冷的探头正在你体内肆意探索，将你所有的秘密都投影在那块巨大的屏幕上。在那脚步声停在门口的瞬间，你在病床上剧烈痉挛，脚趾死死扣住床沿，喉咙里挤出一声失神的呜咽。在那一声被仪器运转声掩盖的低吼中，你完成了这一场关于“虚弱与服从”的极致实验。你现在是这片白色禁地里最淫靡的病人，正随着消毒水的律动而沉沦。",
+      "options": [
+        {
+          "option_id": "opt_c39_t1_peak",
+          "option_text": "【禁忌巅峰】前往权力中心挑战",
+          "target_branch_id": "cat_40_start",
+          "consequences": [
+            { "type": "update_status", "key": "excitement", "value": 40 },
+            { "type": "show_message", "key": "hospital_to_peak", "value": "虚弱的快感已让你沸腾，去往那至高无上的权力之巅迎接最后的审判。" }
+          ]
+        },
+        {
+          "option_id": "opt_c39_t1_hub",
+          "option_text": "【阶段结束】返回特殊分类菜单",
+          "target_branch_id": "hub_special"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_40_start",
+      "branch_title": "禁忌巅峰 - 毁灭与新生的边缘",
+      "content": "你站在了这里，就在那座庄严而肃穆的建筑门前。权力、法律、道德，所有的枷锁都在向你施压。你感受到一种前所未有的、几乎要将你撕碎的毁灭感。\n\n这就是你一直追求的终点吗？你解开了最后一颗纽扣，将自己彻底暴露在权力的巅峰之下。在那一瞬间，你感受到了永恒。",
+      "options": [
+        {
+          "option_id": "opt_c40_t1",
+          "option_text": "在巅峰之上进行“最后的献祭”",
+          "target_branch_id": "cat_40_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_40_task_1",
+      "branch_title": "权力之巅的终极毁灭",
+      "content": "你站在那座庄严的大理石台阶上，面前是象征着绝对权力的厚重铜门。狂风吹乱了你的发丝，也撕扯着你那已经完全敞开的衣襟。你低头看着脚下忙碌的车流和如蝼蚁般的人群，一种近乎神性的狂喜在心头炸开。你听到了远处传来的警笛声，以及守卫人员紧凑的脚步声。那种在文明的制高点、在所有法律与道德的注视下进行的彻底自我毁灭，让你感到了前所未有的永恒。\n\n你缓缓跪下，膝盖抵着冰冷而坚硬的大理石，双手在权力的阴影下完成了最后的亵渎。在那一声足以刺穿灵魂的警报声响起的瞬间，你在巅峰之上彻底绽放，眼神失焦地望着那面象征着尊严的旗帜，喉咙里挤出一声如野兽般的嘶吼。在那一声被时代的巨响彻底吞噬的低吟中，你完成了这一场关于“毁灭与新生”的终极博弈。你现在是这个世界上最肮脏也最伟大的祭品，正随着权力的轰鸣而彻底沉沦。",
+      "options": [
+        {
+          "option_id": "opt_c40_t1_final",
+          "option_text": "【欲望终点】前往教堂进行最后的告解",
+          "target_branch_id": "cat_53_start",
+          "consequences": [
+            { "type": "update_status", "key": "risk", "value": 50 },
+            { "type": "show_message", "key": "peak_to_church", "value": "巅峰的毁灭已让你重塑，去往那灵魂的栖息地进行最后的告解吧。" }
+          ]
+        },
+        {
+          "option_id": "opt_c40_t1_hub",
+          "option_text": "【阶段结束】返回特殊分类菜单",
+          "target_branch_id": "hub_special"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_41_start",
+      "branch_title": "地下车库 - 引擎的热度",
+      "content": "地下二层的车库，空气中弥漫着尾气和灰尘的味道。昏暗的灯光下，那些整齐排列的豪车像是一头头沉睡的巨兽。你靠在一辆漆黑的超跑前，引擎盖还带着余温，那种滚烫的热度隔着衣物传导进你的皮肤。\n\n空旷的车库里偶尔传来远处的回响。你感受到一种被窥视的紧张感。你需要在保安巡逻车经过的瞬间，完成那场关于“金属与肉体”的极致博弈。",
+      "options": [
+        {
+          "option_id": "opt_c41_t1",
+          "option_text": "在温热引擎盖上开启“竞速模式”",
+          "target_branch_id": "cat_41_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_41_task_1",
+      "branch_title": "地下车库的竞速博弈",
+      "content": "昏暗的地下二层，空气沉闷而压抑，只有远处偶尔传来的滴水声打破死寂。你半靠在超跑漆黑的引擎盖上，那种尚未褪去的滚烫热度透过薄薄的布料，直接灼烧着你那已经变得异常敏感的皮肤。你听到了保安巡逻车由远及近的低鸣，轮胎摩擦地面的声音在空旷的空间里被无限放大。\n\n你缓缓拉低了运动裤的边缘，任由冰冷的空气与滚烫的金属在你身上交织出一场冰火洗礼。你看着后视镜里那个因为极度兴奋而眼神涣散的自己，那种在现代文明的钢铁废墟中、在随时可能被强光手电筒照亮的恐惧感，让你体内的费洛蒙彻底炸裂。在巡逻车灯划过你脊背的瞬间，你在引擎盖上剧烈痉挛，双手死死扣住金属边缘，喉咙里挤出一声压抑的低吼。在那一声被排气管轰鸣声瞬间掩盖的呜咽中，你完成了这一场关于“速度与禁忌”的极致献祭。你现在是这片阴影废墟里最淫靡的野兽，正随着引擎的余温而沉沦。",
+      "options": [
+        {
+          "option_id": "opt_c41_t1_locker",
+          "option_text": "【更衣室秘事】前往汗味森林挑战",
+          "target_branch_id": "cat_42_start",
+          "consequences": [
+            { "type": "update_status", "key": "excitement", "value": 30 },
+            { "type": "show_message", "key": "garage_to_locker", "value": "金属的燥热已告一段落，去往那充满雄性荷尔蒙的更衣室继续你的沉沦。" }
+          ]
+        },
+        {
+          "option_id": "opt_c41_t1_hub",
+          "option_text": "【阶段结束】返回户外分类菜单",
+          "target_branch_id": "hub_outdoor"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_42_start",
+      "branch_title": "更衣室秘事 - 汗水的酸臭与荷尔蒙",
+      "content": "散场后的篮球场更衣室，到处充斥着强烈的男性荷尔蒙。空气湿热，长椅上丢着几件汗湿的球衣。你走进最里面的隔间，听到外面传来队友们粗鲁的打闹声和淋浴间的流水声。\n\n你嗅到了空气中那种浓烈的汗酸味和橡胶球场特有的气味。你需要在队长推开更衣室大门的瞬间，完成那场关于“直男堕落”的秘密献祭。",
+      "options": [
+        {
+          "option_id": "opt_c42_t1",
+          "option_text": "在汗湿的球衣堆里开启“嗅觉臣服”",
+          "target_branch_id": "cat_42_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_42_task_1",
+      "branch_title": "更衣室汗味的嗅觉臣服",
+      "content": "湿热的更衣室内，水蒸气混合着浓烈的男性汗酸味，几乎要将你的理智彻底淹没。你跪在凌乱的长椅旁，怀里紧紧抱着一件刚从球场上脱下的、还带着体温的 13 号球衣。你贪婪地将脸埋入那被汗水浸透的纤维中，那种辛辣、微咸而又充满了原始雄性力量的气味，像是一把重锤，击碎了你所有的自尊。\n\n你听到了外面队友们粗声大气的谈笑和毛巾拍打皮肤的声音。那种在阳刚之气的中心、在随时可能被视为“变态”的边缘游走的极致羞耻，让你体内的欲望以前所未有的速度狂飙。你抓起一只丢在旁边的、发黄发硬的白袜，在那浓烈的足部气味中彻底迷失。在队长推门而入、大声呼唤你名字的瞬间，你在汗水的海洋中剧烈痉挛，喉咙里挤出一声变调的呜咽。在那一声被淋浴间流水声彻底掩盖的低吼中，你完成了这一场关于“雄性与服从”的极致祭礼。你现在是这片荷尔蒙森林里最肮脏的祭品，正随着汗水的节奏而沉沦。",
+      "options": [
+        {
+          "option_id": "opt_c42_t1_market",
+          "option_text": "【超市货架】前往镜头下进行挑逗挑战",
+          "target_branch_id": "cat_43_start",
+          "consequences": [
+            { "type": "update_status", "key": "shame", "value": 35 },
+            { "type": "show_message", "key": "locker_to_market", "value": "更衣室的洗礼已让你重塑，去往那众目睽睽的超市继续你的表演吧。" }
+          ]
+        },
+        {
+          "option_id": "opt_c42_t1_hub",
+          "option_text": "【阶段结束】返回户外分类菜单",
+          "target_branch_id": "hub_outdoor"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_43_start",
+      "branch_title": "超市货架 - 镜头下的挑逗",
+      "content": "凌晨三点的 24 小时超市，冷气开得很足。你推着手推车穿过空旷的货架。在避孕套和润滑液的区域，你停下了脚步。你注意到斜上方的监控摄像头正在缓缓转动，红色的指示灯像是一只贪婪的眼睛。\n\n你需要在店员理货经过的瞬间，完成那场关于“众目睽睽”下的欲望展示。你准备好在电子眼的注视下，彻底撕碎你的羞耻心吗？",
+      "options": [
+        {
+          "option_id": "opt_c43_t1",
+          "option_text": "在监控死角进行“极致扩张”",
+          "target_branch_id": "cat_43_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_43_task_1",
+      "branch_title": "监控下的欲望展示",
+      "content": "空旷的超市走廊，惨白的日光灯让你那张因为兴奋而潮红的脸显得格外淫靡。你站在那一排排花花绿绿的避孕套货架前，手指在不同材质的包装盒上游走。你抬头看着那个正对着你的摄像头，那种在千万里之外、在某个不知名的值班员眼中赤裸暴露的快感，让你体内的战栗感达到了巅峰。\n\n你缓缓解开了运动裤的抽绳，在理货员推着小车经过转角的瞬间，故意做出了一个极其大胆的展示。那种在秩序的中心、在冰冷的电子眼注视下进行的自我亵渎，让你感到了前所未有的疯狂。在那红色指示灯闪烁最剧烈的瞬间，你在货架间彻底崩塌，额头抵着冰冷的金属层架，发出一声细碎的呻吟。在那一声被超市背景音乐瞬间吞噬的低吼中，你完成了这一场关于“窥视与展示”的极致博弈。你现在是这片秩序世界里最淫靡的bug，正随着监控的转动而沉沦。",
+      "options": [
+        {
+          "option_id": "opt_c43_t1_library",
+          "option_text": "【图书馆禁区】前往墨香深处挑战",
+          "target_branch_id": "cat_44_start",
+          "consequences": [
+            { "type": "update_status", "key": "risk", "value": 30 },
+            { "type": "show_message", "key": "market_to_library", "value": "超市的刺激已是前戏，去往那更沉静、更禁欲的图书馆继续你的博弈。" }
+          ]
+        },
+        {
+          "option_id": "opt_c43_t1_hub",
+          "option_text": "【阶段结束】返回户外分类菜单",
+          "target_branch_id": "hub_outdoor"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_44_start",
+      "branch_title": "图书馆禁区 - 墨香中的呻吟",
+      "content": "图书馆最深处的古籍室，这里的空气干燥而沉静。高大的书架遮挡了所有的光线。你蹲在两排书架之间，手中翻阅着一本泛黄的宗教典籍。那种禁欲的气氛让你内心的野兽愈发焦躁。\n\n你听到了远处管理员沉重的脚步声。你需要在对方走入这条通道之前，完成那场关于“知识与淫靡”的深度碰撞。你准备好在圣洁的文字面前，展现你最肮脏的一面吗？",
+      "options": [
+        {
+          "option_id": "opt_c44_t1",
+          "option_text": "在书架阴影中开启“沉浸式阅读”",
+          "target_branch_id": "cat_44_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_44_task_1",
+      "branch_title": "古籍室墨香中的淫靡碰撞",
+      "content": "古籍室内，空气中弥漫着陈旧纸张特有的苦涩墨香。你跪在两排高耸入云的书架中间，手中是一本厚重的、记载着古老教条的典籍。你感受到那种圣洁而肃穆的气氛正与你体内那股肮脏的欲望进行着剧烈的厮杀。你听到了远处管理员皮鞋踏在地板上的回响，每一步都像是在审判你那颗已经腐朽的灵魂。\n\n你缓缓褪下了那双一直贴合在脚踝上的湿润白袜，指尖在古老的文字上划过，留下一道道欲望的印记。那种在智慧的圣殿、在所有文明成果的注视下进行的极致堕落，让你体内的快感以前所未有的速度炸裂。在管理员的手电筒光束即将照进这条死角的瞬间，你在阴影中彻底爆发，双手死死抓着书架边缘，让无数本典籍随之震颤。在那一声被厚重书籍吸收的沉闷低吟中，你完成了这一场关于“理性与兽性”的终极祭礼。你现在是这片文字海洋里最淫靡的注脚，正随着墨香的散发而沉沦。",
+      "options": [
+        {
+          "option_id": "opt_c44_t1_site",
+          "option_text": "【工地余晖】前往粗砺工地挑战",
+          "target_branch_id": "cat_45_start",
+          "consequences": [
+            { "type": "update_status", "key": "excitement", "value": 30 },
+            { "type": "show_message", "key": "library_to_site", "value": "知识的洗礼已让你重塑，去往那最原始、最粗犷的工地继续你的博弈。" }
+          ]
+        },
+        {
+          "option_id": "opt_c44_t1_hub",
+          "option_text": "【阶段结束】返回职场分类菜单",
+          "target_branch_id": "hub_office"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_45_start",
+      "branch_title": "工地余晖 - 粗砺的雄性力量",
+      "content": "黄昏时刻的建筑工地，钢筋混凝土散发着沉闷的热气。你穿着紧身的背心，肌肉线条在余晖下显得格外分明。你走进了还没完工的电梯井旁。这里到处是粗糙的砖石 and 飞扬的尘土。\n\n那种原始而粗犷的环境激起了你最深处的征服欲。你需要在工友们下班集结的口哨声中，完成那场关于“力量与服从”的极致较量。",
+      "options": [
+        {
+          "option_id": "opt_c45_t1",
+          "option_text": "在粗糙水泥墙前进行“深度打磨”",
+          "target_branch_id": "cat_45_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_45_task_1",
+      "branch_title": "工地水泥墙前的深度打磨",
+      "content": "黄昏的工地，残阳如血，将你那被汗水打湿、沾满灰尘的脊背映照出一种粗犷而野性的美。你靠在尚未粉刷、布满了砂砾的水泥墙上，皮肤被磨得生疼，却反而激起了你体内某种病态的快感。你听到了远处工友们收工时的口哨声和重型机械熄火前的轰鸣。\n\n你缓缓解开了沾满泥点子的工装裤，任由那双布满了老茧、粗糙而有力的手在你腰间肆意探索。那种在最原始、最肮脏的环境中，在代表着绝对力量的雄性群体包围下进行的彻底沉沦，让你感到了前所未有的战栗。在下班铃声响彻云霄的瞬间，你在水泥墙前彻底爆发，额头抵着粗糙的砖石，发出一声如困兽般的低吼。在那一声被工地喧嚣瞬间吞噬的呜咽中，你完成了这一场关于“力量与服从”的极致祭礼。你现在是这片废墟里最淫靡的风景，正随着尘土的飞扬而沉沦。",
+      "options": [
+        {
+          "option_id": "opt_c45_t1_pool",
+          "option_text": "【泳池暗流】前往深夜泳池挑战",
+          "target_branch_id": "cat_46_start",
+          "consequences": [
+            { "type": "update_status", "key": "excitement", "value": 35 },
+            { "type": "show_message", "key": "site_to_pool", "value": "工地的粗犷已让你沸腾，去往那冰冷而窒息的泳池继续你的沉沦。" }
+          ]
+        },
+        {
+          "option_id": "opt_c45_t1_hub",
+          "option_text": "【阶段结束】返回户外分类菜单",
+          "target_branch_id": "hub_outdoor"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_46_start",
+      "branch_title": "泳池暗流 - 窒息的快感",
+      "content": "深夜的私人泳池，水面平静得像是一面镜子。你赤裸着跃入水中，冰冷的池水瞬间包裹了你的全身。你在水底睁开眼，看着上方朦胧的灯光。那种窒息感让你的感官被无限放大。\n\n你游到了岸边，双手扣住冰冷的瓷砖。你需要在救生员巡视的瞬间，完成那场关于“水下禁区”的秘密仪式。你准备好在冰火交融中，彻底沉沦了吗？",
+      "options": [
+        {
+          "option_id": "opt_c46_t1",
+          "option_text": "在溢水口旁开启“深水模式”",
+          "target_branch_id": "cat_46_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_46_task_1",
+      "branch_title": "泳池暗流下的水下仪式",
+      "content": "深夜的私人泳池，碧蓝的水波在月光下轻轻荡漾。你赤裸着悬浮在冰冷的池水中，感官因为窒息而变得异常敏锐，每一寸皮肤都在渴望着更深层次的入侵。你听到了岸边救生员沉重的脚步声和对讲机发出的沙沙声，那种随时可能被从清澈的水中“钓”起的恐惧，让你体内的欲望以前所未有的速度滋生。\n\n你潜入深水区，背部抵着冰冷的瓷砖，任由那股名为“窒息”的快感在体内横冲直撞。你看着上方模糊的人影，幻想着自己正被某种不可名状的海妖拖向深渊。在救生员的手电筒光束划过水面的瞬间，你在水下彻底爆发，身体因为极度的痉挛而蜷缩，喉咙里挤出一串细小的气泡。在那一声被水波瞬间温柔化解的闷哼中，你完成了这一场关于“冰冷与窒息”的极致祭礼。你现在是这片碧蓝深渊里最淫靡的祭品，正随着水流的律动而沉沦。",
+      "options": [
+        {
+          "option_id": "opt_c46_t1_lab",
+          "option_text": "【实验室迷情】前往冰冷器械挑战",
+          "target_branch_id": "cat_47_start",
+          "consequences": [
+            { "type": "update_status", "key": "risk", "value": 30 },
+            { "type": "show_message", "key": "pool_to_lab", "value": "泳池的窒息已告一段落，去往那更冰冷、更精准的实验室继续你的实验。" }
+          ]
+        },
+        {
+          "option_id": "opt_c46_t1_hub",
+          "option_text": "【阶段结束】返回特殊分类菜单",
+          "target_branch_id": "hub_special"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_47_start",
+      "branch_title": "实验室迷情 - 冰冷的器械与狂热的肉体",
+      "content": "医学院的解剖实验室，空气中弥漫着淡淡的福尔马林味道。不锈钢手术台闪烁着寒光。你躺在冰冷的台面上，任由那种刺骨的凉意侵入骨髓。这种被当作“实验品”的感觉让你感到一阵战栗。\n\n你听到了走廊里传来的推车声。你需要在导师推门而入的瞬间，完成那场关于“解构与重组”的感官实验。你准备好在显微镜下，展示你最真实的欲望吗？",
+      "options": [
+        {
+          "option_id": "opt_c47_t1",
+          "option_text": "在手术台上开启“临床观察”",
+          "target_branch_id": "cat_47_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_47_task_1",
+      "branch_title": "手术台上的感官重组",
+      "content": "解剖实验室内，惨白的无影灯将你那赤裸而苍白的肉体照得无处遁形。你躺在冰冷、泛着金属冷光的不锈钢手术台上，那种被剥夺了一切防御、只能任人宰割的虚弱感，让你感到了前所未有的战栗。你听到了门外导师与学生的讨论声和手术器械碰撞的清响，每一步都像是在对你进行无声的解剖。\n\n你抓起一只冰冷的手术剪，任由那锋利的金属在自己胸膛上划过，激起阵阵病态的颤栗。那种在理性的巅峰、在所有医学真理的注视下进行的极致堕落，让你体内的快感达到了沸点。在导师推门进入、准备开始演示的瞬间，你在手术台上剧烈痉挛，双手死死扣住台面边缘，喉咙里挤出一声失神的呜咽。在那一声被排气扇轰鸣声瞬间掩盖的低吼中，你完成了这一场关于“精密与疯狂”的极致实验。你现在是这片白色地狱里最淫靡的标本，正随着福尔马林的律动而沉沦。",
+      "options": [
+        {
+          "option_id": "opt_c47_t1_barber",
+          "option_text": "【理发店交锋】前往镜中挑战",
+          "target_branch_id": "cat_48_start",
+          "consequences": [
+            { "type": "update_status", "key": "shame", "value": 35 },
+            { "type": "show_message", "key": "lab_to_barber", "value": "实验室的拆解已让你重生，去往那充满生活气息的理发店继续你的博弈。" }
+          ]
+        },
+        {
+          "option_id": "opt_c47_t1_hub",
+          "option_text": "【阶段结束】返回特殊分类菜单",
+          "target_branch_id": "hub_special"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_48_start",
+      "branch_title": "理发店交锋 - 镜中的羞耻",
+      "content": "理发店的转椅上，你身上围着洁白的围布。理发师修长的手指穿过你的发间，推子的嗡鸣声在耳边回响。围布下，你已经彻底失控。你看着镜子里那个眼神迷离的自己，那种被困在椅子上无法逃离的感觉让你倍感兴奋。\n\n理发师的身体不经意地擦过你的膝盖。你需要在对方弯腰为你修剪鬓角的瞬间，完成那场关于“镜面反射”下的极致博弈。",
+      "options": [
+        {
+          "option_id": "opt_c48_t1",
+          "option_text": "在围布掩盖下进行“盲目探索”",
+          "target_branch_id": "cat_48_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_48_task_1",
+      "branch_title": "理发围布下的镜面博弈",
+      "content": "嘈杂的理发店内，剪刀的咔嚓声与吹风机的轰鸣声交织成一段枯燥的背景音。你坐在宽大的皮质转椅上，洁白的围布从颈部一直垂落到脚踝，将你那已经彻底沦陷、正剧烈颤抖的肉体完美遮掩。你看着镜子里那个面色潮红、眼神几乎要滴出水来的自己，那种在众目睽睽之下、在方寸之间的隐秘亵渎，让你感到了前所未有的刺激。\n\n理发师那双修长而有力的手正穿梭在你的发间，他的身体有意无意地贴近你的膝盖，那种隔着布料传来的炽热体温，像是一道电流瞬间击穿了你的理智。你故意在对方弯腰修剪你鬓角的瞬间，在围布下做出一个极其大胆的动作。在那理发师的目光与你在镜中相撞的瞬间，你在椅子上剧烈痉挛，喉咙里挤出一声变调的轻吟。在那一声被推子嗡鸣声瞬间掩盖的低吼中，你完成了这一场关于“镜子与秘密”的极致博弈。你现在是这间理发店里最淫靡的客人，正随着镜中的倒影而沉沦。",
+      "options": [
+        {
+          "option_id": "opt_c48_t1_cinema",
+          "option_text": "【影院惊魂】前往荧幕暗角挑战",
+          "target_branch_id": "cat_31_start",
+          "consequences": [
+            { "type": "update_status", "key": "excitement", "value": 30 },
+            { "type": "show_message", "key": "barber_to_cinema", "value": "镜中的博弈已告一段落，去往那更阴暗、更隐秘的影院角落继续你的表演。" }
+          ]
+        },
+        {
+          "option_id": "opt_c48_t1_hub",
+          "option_text": "【阶段结束】返回职场分类菜单",
+          "target_branch_id": "hub_office"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_49_start",
+      "branch_title": "电影院暗角 - 荧幕后的沉沦",
+      "content": "最后一排的角落，电影正在放映到高潮。巨大的音效掩盖了所有的喘息。屏幕的光影打在你的脸上，忽明忽暗。你感受到身边那个陌生男人投来的贪婪目光，他在黑暗中大胆地握住了你的手。\n\n你需要在灯光亮起的瞬间，完成那场关于“光影博弈”的秘密献祭。你准备好在全场观众的背影之后，达到那个极致的巅峰吗？",
+      "options": [
+        {
+          "option_id": "opt_c49_t1",
+          "option_text": "在座椅震动中进行“全感官同步”",
+          "target_branch_id": "cat_49_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_49_task_1",
+      "branch_title": "荧幕暗角的影院惊魂",
+      "content": "昏暗的影院里，巨大的荧幕投射出诡谲的光影，在你的皮肤上流转。最后一排的角落，你深陷在柔软的皮质座椅中，周围是陌生人均匀的呼吸声。你感受到身边那个男人的手正顺着你的大腿内侧缓缓上移，那种粗糙而滚烫的触感，让你的神经瞬间紧绷到了极限。\n\n音响里正播放着激烈的打斗声，掩盖了你喉咙里那声几乎抑制不住的呜咽。你看着前排观众偶尔晃动的后脑勺，那种在几米之外就有无数双眼睛、却又处于绝对黑暗中的悖论，让你体内的血液彻底沸腾。你故意在那男人加重力道的瞬间，在那大屏幕的光芒扫过你面庞的刹那，在那全场爆发出一阵惊呼的背景音中，你在座椅上剧烈痉挛，双手死死抠进扶手的皮质缝隙里。在那一声被爆炸音效瞬间揉碎的娇喘中，你完成了这一场关于“光影与窥视”的极致献祭。你现在是这间影院里最淫靡的观众，正随着荧幕上的悲欢离合而彻底沉沦。",
+      "options": [
+        {
+          "option_id": "opt_c49_t1_gym",
+          "option_text": "【肌肉迷狂】前往健身房挑战",
+          "target_branch_id": "cat_50_start",
+          "consequences": [
+            { "type": "update_status", "key": "excitement", "value": 40 },
+            { "type": "show_message", "key": "cinema_to_gym", "value": "影院的惊魂已告一段落，去往那充满汗味与力量的健身房继续你的沉沦吧。" }
+          ]
+        },
+        {
+          "option_id": "opt_c49_t1_hub",
+          "option_text": "【阶段结束】返回户外分类菜单",
+          "target_branch_id": "hub_outdoor"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_50_start",
+      "branch_title": "健身房汗浴 - 力量的碰撞",
+      "content": "力量训练区的龙门架旁，汗水顺着你的鬓角流下。你正进行着大重量的卧推，胸肌因为充血而高高隆起。你感觉到身后那个作为“保护者”的男教练，他的双手正稳稳地托着杠铃，同时也紧紧贴着你的头顶。\n\n你嗅到了他身上浓烈的男性费洛蒙。你需要在力竭的那一刻，完成那场关于“力量臣服”的极致博弈。你准备好在重量的压迫下，彻底释放你的野兽吗？",
+      "options": [
+        {
+          "option_id": "opt_c50_t1",
+          "option_text": "在杠铃压迫下开启“力竭模式”",
+          "target_branch_id": "cat_50_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_50_task_1",
+      "branch_title": "健身房龙门架下的肌肉迷狂",
+      "content": "充满了橡胶味与雄性汗液的健身房里，动感单车的律动声像是某种原始的战鼓。你正躺在龙门架的卧推凳上，沉重的杠铃在你的胸口上方微微颤动，那是你体能极限的边缘。你感觉到身后教练那双充满了爆发力的大手，正稳稳地扣在横杆上，他的大腿正有意无意地抵住你的头顶，那种隔着单薄运动裤传来的、如岩浆般炽热的肌肉触感，让你的呼吸瞬间变得粗重而混乱。\n\n你看着天花板上晃动的白炽灯，视线因为生理性的汗水而变得模糊。你嗅到了他身上那股混杂着止汗剂与浓烈荷尔蒙的气味，那种如野兽般危险而迷人的气息，让你体内的某种禁忌渴望彻底决堤。你故意在最后一次推起的刹那，在对方发力助你一臂之力的瞬间，在那沉重的金属碰撞声中，你在卧推凳上剧烈痉挛，腰部不由自主地向上弓起一个淫靡的弧度。在那一声被嘈杂背景音瞬间吞没的低吼中，你完成了这一场关于“力量与臣服”的极致博弈。你现在是这间健身房里最淫荡的学徒，正随着那律动的肌肉而彻底堕落。",
+      "options": [
+        {
+          "option_id": "opt_c50_t1_fitting",
+          "option_text": "【试衣间禁忌】前往西装店挑战",
+          "target_branch_id": "cat_51_start",
+          "consequences": [
+            { "type": "update_status", "key": "shame", "value": 35 },
+            { "type": "show_message", "key": "gym_to_fitting", "value": "肌肉的迷狂已告一段落，去往那充满布料摩擦声的试衣间继续你的沉沦吧。" }
+          ]
+        },
+        {
+          "option_id": "opt_c50_t1_hub",
+          "option_text": "【阶段结束】返回职场分类菜单",
+          "target_branch_id": "hub_office"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_51_start",
+      "branch_title": "试衣间风云 - 窄小空间的挤压",
+      "content": "高档西装店的试衣间，三面镜子让你无处遁形。你正费力地扣着那件紧身衬衫的纽扣。帘子外传来店员询问的声音：“先生，需要帮忙吗？”还没等你回答，一个高大的身影已经闪身而入，拉紧了帘子。\n\n狭窄的空间里，你们的呼吸交织在一起。你需要在下一位客人敲响隔间门的瞬间，完成那场关于“布料摩擦”的极致较量。",
+      "options": [
+        {
+          "option_id": "opt_c51_t1",
+          "option_text": "在三面镜前开启“全方位展示”",
+          "target_branch_id": "cat_51_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_51_task_1",
+      "branch_title": "西装试衣间的窄小空间挤压",
+      "content": "狭窄的试衣间里，三面巨大的落地镜将你那赤裸而狼狈的姿态无限复制。空气中弥漫着昂贵面料的清香与淡淡的古龙水味，但此时却被一种令人窒息的暧昧气息所取代。你被那个高大的店员死死抵在镜面上，冰冷的玻璃贴着你滚烫的脊背，那种极端的温差让你的身体不由自主地轻颤。\n\n他那双带着白手套的手正缓慢而坚定地解开你衬衫的最后一颗纽扣，粗糙的布料擦过你敏感的皮肤，激起阵阵如电流般的战栗。你听到了帘外其他顾客挑选衣服的交谈声，那种仅隔着一层薄薄布料的危险感，让你的心跳快得几乎要撞破胸膛。你故意在对方俯身吻上你颈侧的刹那，在外面传来敲门声的瞬间，在三面镜中自己那双失神瞳孔的注视下，你在狭窄的空间里剧烈痉挛，脚趾死死扣住厚厚的地毯。在那一声被压抑在喉咙深处的闷哼中，你完成了这一场关于“禁锢与摩擦”的极致较量。你现在是这间西装店里最奢靡的玩物，正随着那华丽的布料而彻底沉沦。",
+      "options": [
+        {
+          "option_id": "opt_c51_t1_rooftop",
+          "option_text": "【高空惊魂】前往大厦天台挑战",
+          "target_branch_id": "cat_52_start",
+          "consequences": [
+            { "type": "update_status", "key": "risk", "value": 45 },
+            { "type": "show_message", "key": "fitting_to_rooftop", "value": "试衣间的挤压已告一段落，去往那风声猎猎的摩天大楼天台继续你的沉沦吧。" }
+          ]
+        },
+        {
+          "option_id": "opt_c51_t1_hub",
+          "option_text": "【阶段结束】返回职场分类菜单",
+          "target_branch_id": "hub_office"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_52_start",
+      "branch_title": "天台晚风 - 高空坠落的错觉",
+      "content": "摩天大楼的天台，狂风吹乱了你的发丝。你站在边缘，脚下是万家灯火。那种随时可能坠落的恐惧感转化成了最原始的冲动。你抓着冰冷的护栏，身体微微颤抖。\n\n你听到了安全门被推开的声音。你需要在对方发现你之前，完成那场关于“高度禁忌”的自我献祭。你准备好在城市之巅，迎接那个如坠深渊的高潮吗？",
+      "options": [
+        {
+          "option_id": "opt_c52_t1",
+          "option_text": "在护栏边缘开启“坠落模式”",
+          "target_branch_id": "cat_52_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_52_task_1",
+      "branch_title": "城市之巅的天台惊魂",
+      "content": "百米高空的天台上，冷冽的狂风如刀刃般刮过你赤裸的皮肤。你站在那道细窄的护栏边缘，脚下是如星河般璀璨却也如深渊般恐怖的万家灯火。那种极致的高度带来的眩晕感，与体内翻涌的欲望交织在一起，让你的灵魂都在战栗。\n\n你感觉到身后那个男人的手正紧紧扣住你的腰肢，他的呼吸在风中支离破碎，却带着不容置疑的霸道。那种随时可能坠落、随时可能被这无垠夜色吞噬的恐惧，化作了最狂野的催情剂，让你体内的每一根神经都叫嚣着堕落。你故意在对方将你推向边缘的瞬间，在那安全门被推开、脚步声由远及近的刹那，在那足以将一切声音掩盖的风啸声中，你在护栏边剧烈痉挛，双手死死抠进冰冷的金属栏杆。在那一声被狂风瞬间撕碎的嘶吼中，你完成了这一场关于“高度与毁灭”的极致祭礼。你现在是这座城市最高处的欲望之奴，正随着那坠落的错觉而彻底疯狂。",
+      "options": [
+        {
+          "option_id": "opt_c52_t1_church",
+          "option_text": "【终极告解】前往教堂进行最后洗礼",
+          "target_branch_id": "cat_53_start",
+          "consequences": [
+            { "type": "update_status", "key": "risk", "value": 50 },
+            { "type": "show_message", "key": "rooftop_to_church", "value": "高空的惊魂已告一段落，去往那庄严而淫靡的教堂，迎接你最后的告解。" }
+          ]
+        },
+        {
+          "option_id": "opt_c52_t1_hub",
+          "option_text": "【阶段结束】返回职场分类菜单",
+          "target_branch_id": "hub_office"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_53_start",
+      "branch_title": "欲望终点 - 最后的告解",
+      "content": "你回到了那个一切开始的地方。空旷的教堂，彩色玻璃在地面上投射出斑驳的光影。你跪在告解室的木质隔板前，对面是沉重的呼吸声。你所有的罪孽、所有的欲望、所有的堕落，都将在这里得到最后的清算。\n\n你需要在神像的注视下，完成这场关于“灵魂剥离”的终极仪式。这不仅是肉体的狂欢，更是你作为“欲望之奴”的最后洗礼。",
+      "options": [
+        {
+          "option_id": "opt_c53_t1",
+          "option_text": "在神龛之下进行“最后的献祭”",
+          "target_branch_id": "cat_53_task_1"
+        }
+      ]
+    },
+    {
+      "branch_id": "cat_53_task_1",
+      "branch_title": "庄严神龛下的终极告解",
+      "content": "静谧而肃穆的教堂里，空气中弥漫着陈旧木材与燃尽香火的气息。你跪在冰冷而坚硬的大理石地面上，彩色玻璃窗投射出的斑驳光影，在你那布满勒痕与汗水的肉体上交织出诡谲的纹路。你抬头望着那尊悲悯的神像，那种在至高无上的神圣面前、在绝对的罪恶与堕落中挣扎的悖论感，让你的灵魂感到了前所未有的战栗。\n\n你感觉到身后那个男人的手正缓慢而坚定地按在你的头顶，他的呼吸声在空旷的教堂里激起阵阵回响。那种被彻底剥离、被完全看穿的羞耻感，化作了最后的一场费洛蒙风暴，席卷了你仅存的理智。你故意在对方将你按入尘埃的刹那，在那远处传来圣歌吟唱的瞬间，在那一束阳光直射你失神双眼的时刻，你在神龛之下剧烈痉挛，双手死死抠进石砖的缝隙。在那一声被庄严钟声瞬间掩盖的变调低吼中，你完成了这一场关于“灵魂与毁灭”的终极仪式。你现在是这世间最卑微也最狂热的信徒，正随着那欲望的余韵而彻底涅槃。",
+      "options": [
+        {
+          "option_id": "opt_c53_t1_finish",
+          "option_text": "【因果轮回】回到最初的欲望之门",
+          "target_branch_id": "main_hub",
+          "consequences": [
+            { "type": "update_status", "key": "shame", "value": 50 },
+            { "type": "show_message", "key": "final_rebirth", "value": "所有的罪孽已得到清算，所有的欲望已燃成灰烬。你在欲望的尽头重生，准备好开始下一场轮回了吗？" }
+          ]
+        }
+      ]
+    }
+  ]
+}

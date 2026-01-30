@@ -51,6 +51,59 @@ export function FileUpload({
   const [imageLoadError, setImageLoadError] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const handleSelectedFile = useCallback(async (file: File) => {
+    setError('');
+    setUploadProgress(0);
+
+    if (!acceptedTypes.includes(file.type)) {
+      setError(`不支持的文件类型。支持的格式: ${acceptedTypes.map(t => t.split('/')[1].toUpperCase()).join(', ')}`);
+      return;
+    }
+
+    const fileSizeMB = file.size / (1024 * 1024);
+    if (fileSizeMB > maxSize) {
+      setError(`文件大小超过限制。最大支持 ${maxSize}MB`);
+      return;
+    }
+
+    setIsUploading(true);
+
+    try {
+      const imageHostingService = new ImageHostingService(undefined, {
+        provider: 'chevereto',
+        endpoint: 'https://www.picgo.net/api/1/upload',
+        apiKey: 'chv_SB3xd_77c449af9e93a0bd1db20a74b4ce825cbe1688cb747b34dd6ce2d5fa0164b1e9_2397459290fc8b2bc736ff2cd13a58bf93d4e31896b04fa5c461af8eb3b34b43'
+      });
+      const result = await imageHostingService.uploadImage(file, (progress) => {
+        setUploadProgress(progress.percentage);
+      });
+      
+      if (!result.success || !result.url) {
+        throw new Error(result.error || '上传失败');
+      }
+
+      if (onImageUploaded) {
+        onImageUploaded(result.url, result.url);
+      }
+      
+      setPreviewUrl(result.url);
+      setManualUrl(result.url);
+      setImageLoadError(false);
+      setError('');
+      
+      setTimeout(() => {
+        setIsUploading(false);
+        setUploadProgress(0);
+      }, 500);
+
+    } catch (error) {
+      console.error('上传失败:', error);
+      setError('上传失败，请重试');
+      setIsUploading(false);
+      setUploadProgress(0);
+    }
+  }, [acceptedTypes, maxSize, onImageUploaded]);
+
   // 处理URL输入变化
   const handleUrlChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const newUrl = e.target.value;
@@ -87,62 +140,8 @@ export function FileUpload({
     const file = event.target.files?.[0];
     if (!file) return;
 
-    // 重置状态
-    setError('');
-    setUploadProgress(0);
-
-    // 验证文件类型
-    if (!acceptedTypes.includes(file.type)) {
-      setError(`不支持的文件类型。支持的格式: ${acceptedTypes.map(t => t.split('/')[1].toUpperCase()).join(', ')}`);
-      return;
-    }
-
-    // 验证文件大小
-    const fileSizeMB = file.size / (1024 * 1024);
-    if (fileSizeMB > maxSize) {
-      setError(`文件大小超过限制。最大支持 ${maxSize}MB`);
-      return;
-    }
-
-    setIsUploading(true);
-
-    try {
-      // 上传到图床
-      const imageHostingService = new ImageHostingService(undefined, {
-        provider: 'chevereto',
-        endpoint: 'https://www.picgo.net/api/1/upload',
-        apiKey: 'chv_SB3xd_77c449af9e93a0bd1db20a74b4ce825cbe1688cb747b34dd6ce2d5fa0164b1e9_2397459290fc8b2bc736ff2cd13a58bf93d4e31896b04fa5c461af8eb3b34b43'
-      });
-      const result = await imageHostingService.uploadImage(file, (progress) => {
-        setUploadProgress(progress.percentage);
-      });
-      
-      if (!result.success || !result.url) {
-        throw new Error(result.error || '上传失败');
-      }
-
-      // 通知父组件（返回图床URL）
-      if (onImageUploaded) {
-        onImageUploaded(result.url, result.url);
-      }
-      
-      setPreviewUrl(result.url);
-      setManualUrl(result.url);
-      setImageLoadError(false);
-      setError('');
-      
-      setTimeout(() => {
-        setIsUploading(false);
-        setUploadProgress(0);
-      }, 500);
-
-    } catch (error) {
-      console.error('上传失败:', error);
-      setError('上传失败，请重试');
-      setIsUploading(false);
-      setUploadProgress(0);
-    }
-  }, [acceptedTypes, maxSize, onImageUploaded]);
+    await handleSelectedFile(file);
+  }, [handleSelectedFile]);
 
   // 处理文件移除
   const handleRemoveFile = useCallback(async () => {
@@ -181,12 +180,9 @@ export function FileUpload({
     const files = e.dataTransfer.files;
     if (files.length > 0) {
       const file = files[0];
-      const event = {
-        target: { files: [file] }
-      } as React.ChangeEvent<HTMLInputElement>;
-      handleFileSelect(event);
+      handleSelectedFile(file);
     }
-  }, [handleFileSelect]);
+  }, [handleSelectedFile]);
 
   // 触发文件选择
   const triggerFileSelect = useCallback(() => {

@@ -9,6 +9,7 @@ import { useExportNotifications } from '../components/export-notifications'
 import { GameLibraryWidget } from '../components/game-library-widget'
 import ResponsiveMainNav from '@/components/navigation/ResponsiveMainNav'
 import { gameStore, GameState, StatusChange } from '@/lib/game-store'
+import { normalizeGameData } from '@/lib/utils'
 import { toast } from 'sonner'
 
 const { IconTimeline, IconInventory, IconSettings, IconCompass, IconEye, IconSave, IconLoad, IconDelete, IconClose, IconSend, IconMove, IconInteract, IconUse, IconFeedback, IconHome, IconBox, IconHelp, IconScroll, IconFile } = Icons
@@ -87,6 +88,7 @@ export default function Home() {
     场景解锁数: 0
   })
   const [gameStartTime, setGameStartTime] = useState<number>(Date.now())
+  const [currentGameId, setCurrentGameId] = useState<string | null>(null)
   const outputRef = useRef<HTMLDivElement>(null)
 
   // 使用新的导航钩子
@@ -214,6 +216,7 @@ export default function Home() {
     if (typeof window !== 'undefined') {
       const gameData = sessionStorage.getItem('gameData')
       const gameProgress = sessionStorage.getItem('gameProgress')
+      const storedGameId = sessionStorage.getItem('currentGameId')
       
       if (gameData) {
         try {
@@ -229,6 +232,11 @@ export default function Home() {
             // 找到起始分支（第一个分支）
             const startBranch = data.branches[0]
             if (startBranch) {
+              if (storedGameId) {
+                setCurrentGameId(storedGameId)
+                localStorage.setItem('lastPlayedGameId', storedGameId)
+              }
+
               // 初始化游戏状态
               const initialGameState: GameState = {}
               
@@ -314,6 +322,8 @@ export default function Home() {
               
               // 保存游戏数据以便后续使用
               setStoryData({
+                game_title: data.game_title,
+                description: data.description || '',
                 start: startBranch.branch_id,
                 scenes: data.branches.reduce((acc: any, branch: any) => {
                   acc[branch.branch_id] = {
@@ -342,6 +352,128 @@ export default function Home() {
         }
       }
     }
+  }, [])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const gameData = sessionStorage.getItem('gameData')
+    if (gameData) return
+
+    const storedGameId = sessionStorage.getItem('currentGameId') || localStorage.getItem('lastPlayedGameId')
+    if (!storedGameId) return
+
+    ;(async () => {
+      try {
+        const result = await gameStore.getGame(storedGameId)
+        if (!result) return
+
+        const data = normalizeGameData(result.data.data)
+
+        setOutputHistory([])
+        setInventory([])
+        setChoices([])
+
+        const startBranch = data.branches?.[0]
+        if (!startBranch) return
+
+        setCurrentGameId(storedGameId)
+        sessionStorage.setItem('currentGameId', storedGameId)
+        localStorage.setItem('lastPlayedGameId', storedGameId)
+
+        const initialGameState: GameState = {}
+        if (data.game_states && Array.isArray(data.game_states)) {
+          data.game_states.forEach((stateConfig: any) => {
+            initialGameState[stateConfig.name] = stateConfig.initial_value
+          })
+          setGameStatesConfig(data.game_states)
+        }
+
+        const progress = await gameStore.getGameProgress(storedGameId)
+        if (progress) {
+          setGameState(progress.gameState || initialGameState)
+          setGameStartTime(Date.now() - (progress.playTime || 0) * 1000)
+
+          const savedBranch = data.branches.find((branch: any) => branch.branch_id === progress.currentSceneId)
+          const branchToLoad = savedBranch || startBranch
+
+          const newScene = {
+            id: branchToLoad.branch_id,
+            name: branchToLoad.branch_title || branchToLoad.branch_id,
+            desc: branchToLoad.content || '',
+            exits: branchToLoad.options?.map((option: any) => ({
+              text: option.option_text,
+              target_branch_id: option.target_branch_id,
+              effect: option.effect,
+              status_update: option.status_update,
+              status_changes: option.status_changes,
+              end_game: option.end_game
+            })) || []
+          }
+          setCurrentScene(newScene)
+          setChoices(newScene.exits)
+
+          setOutputHistory([
+            { type: 'room-name', content: data.game_title, className: 'room-name', fullContent: data.game_title },
+            { type: 'room-desc', content: data.description || '', fullContent: data.description || '' },
+            { type: 'room-name', content: branchToLoad.branch_title || branchToLoad.branch_id, className: 'room-name', fullContent: branchToLoad.branch_title || branchToLoad.branch_id },
+            { type: 'room-desc', content: branchToLoad.content || '', fullContent: branchToLoad.content || '' }
+          ])
+        } else {
+          setGameState(initialGameState)
+          setGameStartTime(Date.now())
+
+          const newScene = {
+            id: startBranch.branch_id,
+            name: startBranch.branch_title || startBranch.branch_id,
+            desc: startBranch.content || '',
+            exits: startBranch.options?.map((option: any) => ({
+              text: option.option_text,
+              target_branch_id: option.target_branch_id,
+              effect: option.effect,
+              status_update: option.status_update,
+              status_changes: option.status_changes,
+              end_game: option.end_game
+            })) || []
+          }
+          setCurrentScene(newScene)
+          setChoices(newScene.exits)
+
+          setOutputHistory([
+            { type: 'room-name', content: data.game_title, className: 'room-name', fullContent: data.game_title },
+            { type: 'room-desc', content: data.description || '', fullContent: data.description || '' },
+            { type: 'room-name', content: startBranch.branch_title || startBranch.branch_id, className: 'room-name', fullContent: startBranch.branch_title || startBranch.branch_id },
+            { type: 'room-desc', content: startBranch.content || '', fullContent: startBranch.content || '' }
+          ])
+        }
+
+        setStoryData({
+          game_title: data.game_title,
+          description: data.description || '',
+          start: startBranch.branch_id,
+          scenes: data.branches.reduce((acc: any, branch: any) => {
+            acc[branch.branch_id] = {
+              id: branch.branch_id,
+              name: branch.branch_title || branch.branch_id,
+              desc: branch.content || '',
+              exits: branch.options?.map((option: any) => ({
+                text: option.option_text,
+                target_branch_id: option.target_branch_id,
+                effect: option.effect,
+                status_update: option.status_update,
+                status_changes: option.status_changes,
+                end_game: option.end_game
+              })) || []
+            }
+            return acc
+          }, {})
+        })
+
+        setShowWelcome(false)
+      } catch (error) {
+        console.error('自动恢复游戏失败:', error)
+      }
+    })()
   }, [])
 
   // 当storyData更新时，自动开始游戏（如果有导入的数据）
@@ -1572,16 +1704,25 @@ export default function Home() {
               </button>
               <button onClick={async () => {
                 try {
-                  const gameData = JSON.parse(sessionStorage.getItem('gameData') || '{}');
-                  const gameId = gameData.game_title || 'unknown';
+                  const activeGameId =
+                    currentGameId ||
+                    sessionStorage.getItem('currentGameId') ||
+                    localStorage.getItem('lastPlayedGameId')
+
+                  if (!activeGameId) {
+                    toast.error('未找到当前游戏，无法保存进度')
+                    return
+                  }
                   
                   const progress = {
                     currentSceneId: currentScene?.id || '',
                     gameState: gameState,
+                    timestamp: new Date().toISOString(),
                     playTime: Math.floor((Date.now() - gameStartTime) / 1000)
                   };
                   
-                  await gameStore.saveProgress(gameId, progress);
+                  await gameStore.saveProgress(activeGameId, progress);
+                  localStorage.setItem('lastPlayedGameId', activeGameId)
                   toast.success('进度已保存！');
                 } catch (error) {
                   console.error('保存进度失败:', error);

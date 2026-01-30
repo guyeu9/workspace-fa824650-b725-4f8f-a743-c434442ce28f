@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
-import { UserRole } from '@prisma/client'
 
 export async function isAdmin(request: NextRequest) {
   const session = await getServerSession()

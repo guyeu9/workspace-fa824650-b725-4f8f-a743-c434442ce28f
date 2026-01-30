@@ -12,7 +12,7 @@ export default function MainNav() {
   
   const handleHomeClick = () => {
     sessionStorage.setItem('resetGame', 'true')
-    window.location.href = '/'
+    router.push('/')
   }
   
   return (

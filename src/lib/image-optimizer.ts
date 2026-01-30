@@ -2,7 +2,7 @@ import sharp from 'sharp';
 
 export interface OptimizationOptions {
   quality?: number;
-  format?: 'jpeg' | 'png' | 'webp' | 'avif';
+  format?: 'jpeg' | 'png' | 'webp' | 'avif' | 'auto';
   width?: number;
   height?: number;
   stripMetadata?: boolean;
@@ -74,7 +74,11 @@ export class ImageOptimizer {
     const optimizedSize = optimizedBuffer.length;
     const compressionRatio = ((originalSize - optimizedSize) / originalSize) * 100;
 
-    const optimizedFile = new File([optimizedBuffer], this.getOptimizedFileName(file.name, format), {
+    const optimizedArrayBuffer = (optimizedBuffer.buffer as ArrayBuffer).slice(
+      optimizedBuffer.byteOffset,
+      optimizedBuffer.byteOffset + optimizedBuffer.byteLength
+    );
+    const optimizedFile = new File([optimizedArrayBuffer], this.getOptimizedFileName(file.name, format), {
       type: `image/${format}`
     });
 
@@ -106,8 +110,12 @@ export class ImageOptimizer {
         .webp({ quality: 80 })
         .toBuffer();
 
+      const thumbnailArrayBuffer = (thumbnail.buffer as ArrayBuffer).slice(
+        thumbnail.byteOffset,
+        thumbnail.byteOffset + thumbnail.byteLength
+      );
       const thumbnailFile = new File(
-        [thumbnail],
+        [thumbnailArrayBuffer],
         this.getThumbnailFileName(file.name, size, format),
         { type: `image/${format}` }
       );
@@ -202,8 +210,12 @@ export class ImageOptimizer {
     }
 
     const convertedBuffer = await image.toBuffer();
+    const convertedArrayBuffer = (convertedBuffer.buffer as ArrayBuffer).slice(
+      convertedBuffer.byteOffset,
+      convertedBuffer.byteOffset + convertedBuffer.byteLength
+    );
     const convertedFile = new File(
-      [convertedBuffer],
+      [convertedArrayBuffer],
       this.getOptimizedFileName(file.name, targetFormat),
       { type: `image/${targetFormat}` }
     );

@@ -88,6 +88,11 @@ export function useMobileDevice(): MobileDeviceInfo {
   return deviceInfo
 }
 
+export function useIsMobile(): boolean {
+  const device = useMobileDevice()
+  return device.isMobile
+}
+
 /**
  * 触摸手势识别Hook
  */

@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
-import { gameStore, GameIndexItem } from '@/lib/game-store';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { gameStore, GameDataItem, GameIndexItem } from '@/lib/game-store';
+import { normalizeGameData } from '@/lib/utils';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -40,7 +41,7 @@ import CommentsSection from '@/components/community/CommentsSection';
 import { formatDistanceToNow } from 'date-fns';
 import { zhCN } from 'date-fns/locale';
 import { toast } from 'sonner';
-import { enhancedGameStore } from '@/lib/game-importer';
+import { GameDataValidator, enhancedGameStore } from '@/lib/game-importer';
 import { useApi } from '@/hooks/use-api';
 import { apiClient } from '@/lib/api-client';
 import { GameCardSkeleton } from '@/components/ui/skeletons';
@@ -60,10 +61,11 @@ import {
 
 export default function GameLibraryPage() {
   const router = useRouter();
-  const [games, setGames] = useState<GameIndexItem[]>([]);
+  const searchParams = useSearchParams();
+  const [allGames, setAllGames] = useState<GameIndexItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedGames, setSelectedGames] = useState<Set<string>>(new Set());
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || '');
   const [sortBy, setSortBy] = useState<'priority' | 'title' | 'updatedAt' | 'createdAt'>('priority');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   const [filterPriority, setFilterPriority] = useState<'all' | 'high' | 'medium' | 'low'>('all');
@@ -74,49 +76,16 @@ export default function GameLibraryPage() {
   const [showBatchDeleteDialog, setShowBatchDeleteDialog] = useState(false);
   const [gameProgresses, setGameProgresses] = useState<Record<string, boolean>>({});
 
-  // 加载游戏列表
+  // 加载原始游戏列表
   const loadGames = useCallback(async () => {
     try {
       setIsLoading(true);
       const gameList = await gameStore.listGames();
       
-      // 根据排序和筛选条件处理游戏列表
-      let filteredGames = gameList.filter(game => {
-        // 搜索筛选
-        if (searchTerm && !game.title.toLowerCase().includes(searchTerm.toLowerCase()) && 
-            !game.description?.toLowerCase().includes(searchTerm.toLowerCase())) {
-          return false;
-        }
-        
-        return true;
-      });
-      
-      // 排序
-      filteredGames.sort((a, b) => {
-        let comparison = 0;
-        
-        switch (sortBy) {
-          case 'priority':
-            comparison = b.priority - a.priority;
-            break;
-          case 'title':
-            comparison = a.title.localeCompare(b.title);
-            break;
-          case 'updatedAt':
-            comparison = new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
-            break;
-          case 'createdAt':
-            comparison = new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-            break;
-        }
-        
-        return sortOrder === 'asc' ? comparison : -comparison;
-      });
-      
       // 如果所有游戏的优先级都是0，则根据更新时间自动分配优先级
-      const allPriorityZero = filteredGames.every(game => game.priority === 0);
-      if (allPriorityZero && filteredGames.length > 0) {
-        const sortedByTime = [...filteredGames].sort((a, b) => 
+      const allPriorityZero = gameList.every(game => game.priority === 0);
+      if (allPriorityZero && gameList.length > 0) {
+        const sortedByTime = [...gameList].sort((a, b) => 
           new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
         );
         
@@ -124,22 +93,19 @@ export default function GameLibraryPage() {
           const game = sortedByTime[i];
           const newPriority = sortedByTime.length - 1 - i;
           await gameStore.updateGame(game.id, { priority: newPriority });
-          filteredGames.find(g => g.id === game.id)!.priority = newPriority;
+          const target = gameList.find(g => g.id === game.id);
+          if (target) target.priority = newPriority;
         }
-        
-        // 重新按优先级排序
-        filteredGames.sort((a, b) => b.priority - a.priority);
       }
       
-      setGames(filteredGames);
+      setAllGames(gameList);
       
-      // 检查每个游戏是否有存档
-      const progressChecks = await Promise.all(filteredGames.map(async (game) => {
+      // 检查进度
+      const progressChecks = await Promise.all(gameList.map(async (game) => {
         const progress = await gameStore.getGameProgress(game.id);
         return { gameId: game.id, hasProgress: progress !== null };
       }));
       
-      // 更新进度状态
       const progressMap: Record<string, boolean> = {};
       progressChecks.forEach(({ gameId, hasProgress }) => {
         progressMap[gameId] = hasProgress;
@@ -154,9 +120,60 @@ export default function GameLibraryPage() {
     }
   }, []);
 
+  // 响应式过滤与排序
+  const filteredGames = React.useMemo(() => {
+    let result = [...allGames];
+
+    // 1. 搜索筛选
+    if (searchTerm) {
+      const lowerSearch = searchTerm.toLowerCase();
+      result = result.filter(game => 
+        game.title.toLowerCase().includes(lowerSearch) || 
+        game.description?.toLowerCase().includes(lowerSearch)
+      );
+    }
+
+    // 2. 优先级筛选
+    if (filterPriority !== 'all') {
+      const priorityMap = { high: 2, medium: 1, low: 0 };
+      const targetPriority = priorityMap[filterPriority as keyof typeof priorityMap];
+      result = result.filter(game => game.priority === targetPriority);
+    }
+
+    // 3. 排序
+    result.sort((a, b) => {
+      let comparison = 0;
+      switch (sortBy) {
+        case 'priority':
+          comparison = b.priority - a.priority;
+          break;
+        case 'title':
+          comparison = a.title.localeCompare(b.title);
+          break;
+        case 'updatedAt':
+          comparison = new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+          break;
+        case 'createdAt':
+          comparison = new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+          break;
+      }
+      return sortOrder === 'asc' ? comparison : -comparison;
+    });
+
+    return result;
+  }, [allGames, searchTerm, sortBy, sortOrder, filterPriority]);
+
   useEffect(() => {
     loadGames();
   }, [loadGames]);
+
+  // 同步 URL 参数到搜索框
+  useEffect(() => {
+    const urlSearch = searchParams.get('search');
+    if (urlSearch !== null) {
+      setSearchTerm(urlSearch);
+    }
+  }, [searchParams]);
 
   // 处理游戏选择
   const handleGameSelect = (gameId: string) => {
@@ -174,7 +191,9 @@ export default function GameLibraryPage() {
     try {
       const result = await gameStore.getGame(game.id);
       if (result) {
-        sessionStorage.setItem('gameData', JSON.stringify(result.data.data));
+        sessionStorage.setItem('currentGameId', game.id);
+        localStorage.setItem('lastPlayedGameId', game.id);
+        sessionStorage.setItem('gameData', JSON.stringify(normalizeGameData(result.data.data)));
         router.push('/');
       } else {
         toast.error('无法加载游戏数据');
@@ -193,8 +212,10 @@ export default function GameLibraryPage() {
         const result = await gameStore.getGame(game.id);
         if (result) {
           // 保存进度数据到 sessionStorage
+          sessionStorage.setItem('currentGameId', game.id);
+          localStorage.setItem('lastPlayedGameId', game.id);
           sessionStorage.setItem('gameProgress', JSON.stringify(progress));
-          sessionStorage.setItem('gameData', JSON.stringify(result.data.data));
+          sessionStorage.setItem('gameData', JSON.stringify(normalizeGameData(result.data.data)));
           router.push('/');
         } else {
           toast.error('无法加载游戏数据');
@@ -220,10 +241,12 @@ export default function GameLibraryPage() {
         sessionStorage.removeItem('gameProgress');
         
         // 保存游戏数据到 sessionStorage
-        sessionStorage.setItem('gameData', JSON.stringify(result.data.data));
+        sessionStorage.setItem('currentGameId', game.id);
+        localStorage.setItem('lastPlayedGameId', game.id);
+        sessionStorage.setItem('gameData', JSON.stringify(normalizeGameData(result.data.data)));
         
         // 使用 router.push 而不是 window.location.href，避免请求被中止
-        router.push('/studio');
+        router.push('/');
       } else {
         toast.error('无法加载游戏数据');
       }
@@ -239,8 +262,8 @@ export default function GameLibraryPage() {
       const result = await gameStore.getGame(game.id);
       if (result && result.data && result.data.data) {
         console.log('加载游戏数据:', result.data.data);
-        sessionStorage.setItem('gameData', JSON.stringify(result.data.data));
-        window.location.href = '/studio';
+        sessionStorage.setItem('gameData', JSON.stringify(normalizeGameData(result.data.data)));
+        router.push('/studio');
       } else {
         toast.error('无法加载游戏数据');
       }
@@ -283,7 +306,7 @@ export default function GameLibraryPage() {
     }
 
     try {
-      const gamesToExport = [];
+      const gamesToExport: Array<{ index: GameIndexItem; data: GameDataItem }> = [];
       for (const gameId of selectedGames) {
         const result = await gameStore.getGame(gameId);
         if (result) {
@@ -295,16 +318,16 @@ export default function GameLibraryPage() {
         try {
           const game = gamesToExport[0];
           await PlatformFileDownloader.downloadJson(
-            `${game.data.metadata.title}.json`,
+            `${game.index.title || 'game'}.json`,
             game.data.data,
             {
-              onProgress: (progress) => {
+              onProgress: (progress: number) => {
                 console.log(`导出进度: ${progress}%`)
               },
               onSuccess: () => {
                 toast.success('游戏导出成功')
               },
-              onError: (error) => {
+              onError: (error: Error) => {
                 toast.error(`导出失败: ${error.message}`)
               }
             }
@@ -315,18 +338,18 @@ export default function GameLibraryPage() {
         }
       } else {
         try {
-          const zipBlob = await enhancedGameStore.createGamePack(gamesToExport);
+          const zipBlob = await enhancedGameStore.createGamePack(gamesToExport as any);
           await PlatformFileDownloader.downloadBlob(
             `games-export-${Date.now()}.zip`,
             zipBlob,
             {
-              onProgress: (progress) => {
+              onProgress: (progress: number) => {
                 console.log(`导出进度: ${progress}%`)
               },
               onSuccess: () => {
                 toast.success(`成功导出 ${gamesToExport.length} 个游戏`)
               },
-              onError: (error) => {
+              onError: (error: Error) => {
                 toast.error(`导出失败: ${error.message}`)
               }
             }
@@ -351,7 +374,7 @@ export default function GameLibraryPage() {
 
     try {
       for (const gameId of selectedGames) {
-        const game = games.find(g => g.id === gameId);
+        const game = allGames.find(g => g.id === gameId);
         if (game) {
           let newPriority: number;
           if (action === 'top') {
@@ -381,10 +404,10 @@ export default function GameLibraryPage() {
 
   // 全选/取消全选
   const handleSelectAll = () => {
-    if (selectedGames.size === games.length) {
+    if (selectedGames.size === filteredGames.length) {
       setSelectedGames(new Set());
     } else {
-      setSelectedGames(new Set(games.map(g => g.id)));
+      setSelectedGames(new Set(filteredGames.map(g => g.id)));
     }
   };
 
@@ -400,7 +423,7 @@ export default function GameLibraryPage() {
   const getPriorityLabel = (priority: number) => {
     const displayPriority = priority + 1;
     
-    const priorityConfig = {
+    const priorityConfig: Record<number, { label: string; color: string }> = {
       1: { label: '优先级 1', color: 'bg-blue-100 text-blue-800' },
       2: { label: '优先级 2', color: 'bg-green-100 text-green-800' },
       3: { label: '优先级 3', color: 'bg-yellow-100 text-yellow-800' },
@@ -408,7 +431,7 @@ export default function GameLibraryPage() {
       5: { label: '优先级 5', color: 'bg-red-100 text-red-800' },
     };
     
-    return priorityConfig[displayPriority as keyof typeof priorityConfig] || { 
+    return priorityConfig[displayPriority] || { 
       label: `优先级 ${displayPriority}`, 
       color: 'bg-gray-100 text-gray-800' 
     };
@@ -418,9 +441,9 @@ export default function GameLibraryPage() {
     try {
       setCommunityLoading(true);
       setCommunityError(null);
-      const result = await apiClient.get('/games');
+      const result = await apiClient.get<any[]>('/games');
       if (result.success) {
-        setCommunityGames(result.data);
+        setCommunityGames(result.data || []);
       } else {
         throw new Error(result.error?.message || '加载社区游戏失败');
       }
@@ -435,10 +458,13 @@ export default function GameLibraryPage() {
 
   const handleImportCommunityGame = async (gameId: string) => {
     try {
-      const result = await apiClient.get(`/games/${gameId}`);
+      const result = await apiClient.get<{ jsonData: any }>(`/games/${gameId}`);
       if (result.success) {
         const gameData = result.data;
-        const metadata = enhancedGameStore.extractMetadata(gameData.jsonData);
+        if (!gameData?.jsonData) {
+          throw new Error('社区游戏数据缺少 jsonData');
+        }
+        const metadata = GameDataValidator.extractMetadata(gameData.jsonData);
         await gameStore.createGame(metadata.title, gameData.jsonData, {
           description: metadata.description,
           author: metadata.author,
@@ -467,7 +493,7 @@ export default function GameLibraryPage() {
         return;
       }
       
-      const metadata = enhancedGameStore.extractMetadata(result.data.data);
+      const metadata = GameDataValidator.extractMetadata(result.data.data);
       const apiResult = await apiClient.post('/games', {
         title: metadata.title,
         description: metadata.description,
@@ -606,11 +632,11 @@ export default function GameLibraryPage() {
                   variant="default"
                   size="sm"
                   onClick={handleSelectAll}
-                  disabled={games.length === 0}
+                  disabled={filteredGames.length === 0}
                   className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white transition-all duration-300"
                 >
-                  {selectedGames.size === games.length ? <X className="h-4 w-4 mr-1" /> : <Check className="h-4 w-4 mr-1" />}
-                  {selectedGames.size === games.length ? '取消全选' : '全选'}
+                  {selectedGames.size === filteredGames.length && filteredGames.length > 0 ? <X className="h-4 w-4 mr-1" /> : <Check className="h-4 w-4 mr-1" />}
+                  {selectedGames.size === filteredGames.length && filteredGames.length > 0 ? '取消全选' : '全选'}
                 </Button>
                 
                 <Button
@@ -682,7 +708,7 @@ export default function GameLibraryPage() {
         </div>
 
         {/* 游戏列表 */}
-        {games.length === 0 ? (
+        {filteredGames.length === 0 ? (
           <div className="bg-white rounded-xl shadow-2xl p-12 text-center border-2 border-slate-300">
             <Database className="h-16 w-16 text-blue-500 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-slate-800 mb-2">还没有任何游戏</h3>
@@ -697,7 +723,7 @@ export default function GameLibraryPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {games.map((game) => {
+            {filteredGames.map((game) => {
               const priority = getPriorityLabel(game.priority);
               const isSelected = selectedGames.has(game.id);
               
@@ -820,7 +846,7 @@ export default function GameLibraryPage() {
         <div className="mt-8 bg-white rounded-xl shadow-2xl p-4 border-2 border-slate-300">
           <div className="flex items-center justify-between">
             <div className="text-sm text-gray-600">
-              共 {games.length} 个游戏，已选择 {selectedGames.size} 个
+              共 {allGames.length} 个游戏，已选择 {selectedGames.size} 个
             </div>
             
             <div className="flex gap-2">

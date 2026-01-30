@@ -1,7 +1,9 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
+import { useRouter } from 'next/navigation'
 import { IconFile, IconScroll, IconSave, IconLoad, IconDelete, IconClose, IconBox, IconHome } from './icons'
+import { normalizeGameData } from '@/lib/utils'
 
 interface ValidationError {
   type: 'error' | 'warning' | 'info'
@@ -24,6 +26,7 @@ interface ValidationResult {
 }
 
 export default function JsonValidator() {
+  const router = useRouter()
   const [jsonContent, setJsonContent] = useState('')
   const [validationResult, setValidationResult] = useState<ValidationResult | null>(null)
   const [showEditor, setShowEditor] = useState(false)
@@ -416,7 +419,7 @@ export default function JsonValidator() {
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
             <div className="flex items-center gap-3">
               <button
-                onClick={() => window.location.href = '/'}
+                onClick={() => router.push('/')}
                 className="p-2.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-300 min-w-[44px] min-h-[44px] flex items-center justify-center"
                 title="返回主菜单"
               >
@@ -493,14 +496,8 @@ export default function JsonValidator() {
                 <button
                   onClick={() => {
                     if (!parsedData || !validationResult?.isValid) return
-                    const gameData = {
-                      game_title: parsedData.game_title || '',
-                      description: parsedData.description || '',
-                      status: parsedData.status || {},
-                      branches: parsedData.branches || []
-                    }
-                    sessionStorage.setItem('gameData', JSON.stringify(gameData))
-                    window.location.href = '/'
+                    sessionStorage.setItem('gameData', JSON.stringify(normalizeGameData(parsedData)))
+                    router.push('/')
                   }}
                   disabled={!parsedData || !validationResult?.isValid}
                   className="px-3 sm:px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-all duration-300 disabled:bg-slate-300 disabled:cursor-not-allowed flex items-center gap-2 text-sm min-w-[44px] min-h-[44px] justify-center flex-1 sm:flex-shrink-0"

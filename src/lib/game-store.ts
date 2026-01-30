@@ -49,6 +49,9 @@ export interface GameDataItem {
   updatedAt: string;
 }
 
+// 兼容性类型定义
+export type GameData = any;
+
 // 资产数据接口
 export interface AssetItem {
   id: string;
@@ -627,7 +630,8 @@ export class GameStore {
 
   // 获取游戏进度
   async getGameProgress(gameId: string): Promise<GameProgress | null> {
-    return await db.game_progress.where('gameId').equals(gameId).first();
+    const result = await db.game_progress.where('gameId').equals(gameId).first();
+    return result || null;
   }
 
   // 删除游戏进度（新游戏时调用）

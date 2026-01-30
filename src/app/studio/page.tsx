@@ -37,37 +37,48 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { gameStore } from "@/lib/game-store"
+import { PlatformFileDownloader } from "@/lib/platform-file-download"
+import { normalizeGameData } from "@/lib/utils"
 import { toast } from "sonner"
 
 interface Choice {
+  id?: string
   option_id: string
+  choice?: string
   option_text: string
   target_branch_id: string
+  next_branch?: string
   effect?: string
   status_changes?: any[]
+  status_update?: string
   end_game?: boolean
 }
 
 interface Branch {
   branch_id: string
   branch_title: string
+  chapter?: string
   content: string
+  scene_detail?: string
   options: Choice[]
+  choices: Choice[]
   background_image?: string
   background_asset_id?: string
 }
 
 interface GameStateConfig {
-  state_id: string
+  state_id?: string
   name: string
   initial_value: number
   min?: number
   max?: number
   display_format?: 'integer' | 'percentage'
+  is_percentage?: boolean
 }
 
 interface GameData {
   title: string
+  game_title?: string
   description: string
   game_states?: GameStateConfig[]
   branches: Branch[]
@@ -75,58 +86,58 @@ interface GameData {
 
 const NO_JUMP_VALUE = "__NO_JUMP__"
 
-function normalizeGameData(raw: any): GameData {
-  const branches: Branch[] = Array.isArray(raw?.branches)
-    ? raw.branches.map((b: any, branchIndex: number) => {
-        const options: Choice[] = Array.isArray(b?.options)
-          ? b.options.map((c: any, choiceIndex: number) => ({
-              option_id:
-                c?.option_id ||
-                  `choice_${branchIndex}_${choiceIndex}_${Date.now()}`,
-              option_text: c?.option_text ?? "",
-              target_branch_id: c?.target_branch_id ?? "",
-              effect: c?.effect,
-              status_changes: c?.status_changes,
-              end_game: !!c?.end_game,
-            }))
-          : []
-        return {
-          branch_id: b?.branch_id ?? `branch_${branchIndex}`,
-          branch_title: b?.branch_title ?? "",
-          content: b?.content ?? "",
-          options,
-          background_image: b?.background_image,
-          background_asset_id: b?.background_asset_id,
-        }
-      })
-    : []
-  return {
-    title: raw?.title ?? raw?.game_title ?? "未命名游戏",
-    description: raw?.description ?? "",
-    branches,
-  }
-}
-
 const initialGameData: GameData = {
   title: "黑暗森林",
+  game_title: "黑暗森林",
   description: "在这片阴森的森林中，你的每一次选择都将改变命运。",
   branches: [
     {
       branch_id: "start",
       branch_title: "森林入口",
+      chapter: "森林入口",
       content: "你站在一片阴森的森林入口。空气中弥漫着潮湿泥土的气味，远处的树木在迷雾中若隐若现。",
+      scene_detail: "你站在一片阴森的森林入口。空气中弥漫着潮湿泥土的气味，远处的树木在迷雾中若隐若现。",
       options: [
         {
           option_id: "choice_1",
+          id: "choice_1",
           option_text: "走进森林",
+          choice: "走进森林",
           target_branch_id: "",
+          next_branch: "",
           effect: "",
           status_changes: [],
         },
         {
           option_id: "choice_2",
+          id: "choice_2",
           option_text: "转身离开",
+          choice: "转身离开",
           target_branch_id: "",
+          next_branch: "",
+          effect: "",
+          status_changes: [],
+          end_game: true,
+        },
+      ],
+      choices: [
+        {
+          option_id: "choice_1",
+          id: "choice_1",
+          option_text: "走进森林",
+          choice: "走进森林",
+          target_branch_id: "",
+          next_branch: "",
+          effect: "",
+          status_changes: [],
+        },
+        {
+          option_id: "choice_2",
+          id: "choice_2",
+          option_text: "转身离开",
+          choice: "转身离开",
+          target_branch_id: "",
+          next_branch: "",
           effect: "",
           status_changes: [],
           end_game: true,
@@ -139,8 +150,8 @@ const initialGameData: GameData = {
 function BranchIcon(props: { branch: Branch; index: number }) {
   const { branch, index } = props
   const isStart = index === 0
-  const hasChoices = branch.options && branch.options.length > 0
-  const isEnd = !hasChoices || branch.options.some((c) => c.end_game)
+  const hasChoices = (branch.options?.length ?? 0) > 0
+  const isEnd = !hasChoices || (branch.options?.some((c) => c.end_game) ?? false)
 
   if (isStart) {
     return <Star className="h-4 w-4 text-yellow-500" />
@@ -166,7 +177,7 @@ export default function TextEngineStudio() {
       const stored = window.sessionStorage.getItem("gameData")
       if (stored) {
         const raw = JSON.parse(stored)
-        if (raw.title && Array.isArray(raw.branches)) {
+        if ((raw.title || raw.game_title) && Array.isArray(raw.branches)) {
           const data = normalizeGameData(raw)
           setGameData(data)
           setSelectedBranchId(data.branches[0]?.branch_id ?? "")
@@ -192,10 +203,12 @@ export default function TextEngineStudio() {
 
   // 使用useCallback缓存函数，减少不必要的重渲染
   const handleUpdateGame = React.useCallback((updates: Partial<GameData>) => {
-    setGameData((prev) => ({
-      ...prev,
-      ...updates,
-    }))
+    setGameData((prev) => {
+      const newData = { ...prev, ...updates };
+      if (updates.title) newData.game_title = updates.title;
+      if (updates.game_title) newData.title = updates.game_title;
+      return newData;
+    })
   }, [])
 
   // 使用useCallback缓存函数，减少不必要的重渲染
@@ -203,8 +216,11 @@ export default function TextEngineStudio() {
     const id = `branch_${Date.now()}`
     const newBranch: Branch = {
       branch_id: id,
+      branch_title: "新场景",
       chapter: "新场景",
+      content: "",
       scene_detail: "",
+      options: [],
       choices: [],
     }
     setGameData((prev) => ({
@@ -232,24 +248,41 @@ export default function TextEngineStudio() {
   const handleUpdateBranch = React.useCallback((branchId: string, updates: Partial<Branch>) => {
     setGameData((prev) => ({
       ...prev,
-      branches: prev.branches.map((b) =>
-        b.branch_id === branchId ? { ...b, ...updates } : b,
-      ),
+      branches: prev.branches.map((b) => {
+        if (b.branch_id === branchId) {
+          const newBranch = { ...b, ...updates };
+          // 同步冗余字段
+          if (updates.branch_title) newBranch.chapter = updates.branch_title;
+          if (updates.chapter) newBranch.branch_title = updates.chapter;
+          if (updates.content) newBranch.scene_detail = updates.content;
+          if (updates.scene_detail) newBranch.content = updates.scene_detail;
+          return newBranch;
+        }
+        return b;
+      }),
     }))
   }, [])
 
   const handleAddChoice = React.useCallback((branchId: string) => {
+    const id = `choice_${Date.now()}`
     const newChoice: Choice = {
-      id: `choice_${Date.now()}`,
+      id: id,
+      option_id: id,
       choice: "新选项",
+      option_text: "新选项",
       next_branch: "",
+      target_branch_id: "",
       end_game: false,
     }
     setGameData((prev) => ({
       ...prev,
       branches: prev.branches.map((b) =>
         b.branch_id === branchId
-          ? { ...b, choices: [...b.options, newChoice] }
+          ? { 
+              ...b, 
+              options: [...(b.options || []), newChoice],
+              choices: [...(b.choices || []), newChoice]
+            }
           : b,
       ),
     }))
@@ -262,32 +295,51 @@ export default function TextEngineStudio() {
   ) => {
     setGameData((prev) => ({
       ...prev,
-      branches: prev.branches.map((b) =>
-        b.branch_id === branchId
-          ? {
-              ...b,
-              choices: b.choices.map((c) =>
-                c.id === choiceId ? { ...c, ...updates } : c,
-              ),
+      branches: prev.branches.map((b) => {
+        if (b.branch_id === branchId) {
+          const newChoices = (b.options || []).map((c) => {
+            if (c.id === choiceId || c.option_id === choiceId) {
+              const newC = { ...c, ...updates };
+              // 同步冗余字段
+              if (updates.choice) newC.option_text = updates.choice;
+              if (updates.option_text) newC.choice = updates.option_text;
+              if (updates.next_branch !== undefined) newC.target_branch_id = updates.next_branch;
+              if (updates.target_branch_id !== undefined) newC.next_branch = updates.target_branch_id;
+              return newC;
             }
-          : b,
-      ),
+            return c;
+          });
+          return {
+            ...b,
+            options: newChoices,
+            choices: newChoices,
+          };
+        }
+        return b;
+      }),
     }))
   }, [])
 
   const handleDeleteChoice = React.useCallback((branchId: string, choiceId: string) => {
     setGameData((prev) => ({
       ...prev,
-      branches: prev.branches.map((b) =>
-        b.branch_id === branchId
-          ? { ...b, choices: b.choices.filter((c) => c.id !== choiceId) }
-          : b,
-      ),
+      branches: prev.branches.map((b) => {
+        if (b.branch_id === branchId) {
+          const newChoices = (b.options || []).filter((c) => c.id !== choiceId && c.option_id !== choiceId);
+          return {
+            ...b,
+            options: newChoices,
+            choices: newChoices,
+          };
+        }
+        return b;
+      }),
     }))
   }, [])
 
   const handleSaveToLibrary = async () => {
-    if (!gameData.title.trim()) {
+    const title = gameData.title || gameData.game_title;
+    if (!title || !title.trim()) {
       toast.error("请先填写游戏标题")
       return
     }
@@ -297,7 +349,7 @@ export default function TextEngineStudio() {
     }
     try {
       await gameStore.createGame(
-        gameData.game_title,
+        title,
         gameData,
         {
           description: gameData.description,
@@ -312,17 +364,18 @@ export default function TextEngineStudio() {
 
   const handleExportJson = async () => {
     try {
+      const title = gameData.title || gameData.game_title || "game";
       await PlatformFileDownloader.downloadJson(
-        `${gameData.game_title || "game"}.json`,
+        `${title}.json`,
         gameData,
         {
-          onProgress: (progress) => {
+          onProgress: (progress: number) => {
             console.log(`导出进度: ${progress}%`)
           },
           onSuccess: () => {
             toast.success("游戏导出成功！")
           },
-          onError: (error) => {
+          onError: (error: Error) => {
             toast.error(`导出失败: ${error.message}`)
           }
         }
@@ -338,7 +391,7 @@ export default function TextEngineStudio() {
       const text = await file.text()
       const raw = JSON.parse(text)
       
-      if (raw.game_title && Array.isArray(raw.branches)) {
+      if ((raw.title || raw.game_title) && Array.isArray(raw.branches)) {
         const data = normalizeGameData(raw)
         setGameData(data)
         setSelectedBranchId(data.branches[0]?.branch_id ?? "")
@@ -578,15 +631,15 @@ export default function TextEngineStudio() {
                             {branch.branch_title || branch.branch_id}
                           </span>
                           <span className="text-[10px] text-slate-500 whitespace-nowrap">
-                            {branch.options.length} 选项
+                            {(branch.options?.length ?? 0)} 选项
                           </span>
                         </div>
                         <div className="mt-0.5 ml-6 w-[calc(100%-1.5rem)] text-[10px] text-slate-400 truncate">
                           ID: {branch.branch_id}
                         </div>
-                        {branch.choices.length > 0 && (
+                        {(branch.choices?.length ?? 0) > 0 && (
                           <div className="flex flex-col mt-1 ml-6 w-[calc(100%-1.5rem)] border-l-2 border-slate-200 pl-2 gap-1">
-                            {branch.choices.map((choice) => {
+                            {branch.choices?.map((choice) => {
                               const target = gameData.branches.find(
                                 (b) => b.branch_id === choice.target_branch_id,
                               )
@@ -742,7 +795,7 @@ export default function TextEngineStudio() {
                       <div className="space-y-3">
                         {selectedBranch.options.map((option, index) => (
                           <Card
-                          key={option.id}
+                          key={option.id || option.option_id}
                           className="relative group bg-gradient-to-br from-blue-50/50 to-indigo-50/50 border-blue-200 shadow-sm transition-all duration-200 hover:shadow-md hover:border-blue-300"
                         >
                             <Button
@@ -751,7 +804,7 @@ export default function TextEngineStudio() {
                               onClick={() =>
                                 handleDeleteChoice(
                                   selectedBranch.branch_id,
-                                  option.id,
+                                  option.id || option.option_id || "",
                                 )
                               }
                             >
@@ -763,12 +816,12 @@ export default function TextEngineStudio() {
                                 {index + 1}
                               </Badge>
                               <Input
-                                value={option.choice}
+                                value={option.choice || option.option_text || ""}
                                 className="bg-white border-blue-300 focus:border-blue-500 focus:ring-blue-500/20 text-slate-900 placeholder:text-slate-400 transition-all duration-200"
                                 onChange={(e) =>
                                   handleUpdateChoice(
                                     selectedBranch.branch_id,
-                                      option.id,
+                                      option.id || option.option_id || "",
                                       { choice: e.target.value },
                                     )
                                   }
@@ -783,14 +836,14 @@ export default function TextEngineStudio() {
                                 </Label>
                                 <Select
                                     value={
-                                      option.next_branch === ""
+                                      (option.next_branch || option.target_branch_id) === ""
                                         ? NO_JUMP_VALUE
-                                        : option.next_branch
+                                        : (option.next_branch || option.target_branch_id)
                                     }
                                     onValueChange={(val) =>
                                       handleUpdateChoice(
                                         selectedBranch.branch_id,
-                                        option.id,
+                                        option.id || option.option_id || "",
                                         {
                                           next_branch:
                                             val === NO_JUMP_VALUE ? "" : val,
@@ -825,7 +878,7 @@ export default function TextEngineStudio() {
                                     onValueChange={(val) =>
                                       handleUpdateChoice(
                                         selectedBranch.branch_id,
-                                        option.id,
+                                        option.id || option.option_id || "",
                                         { end_game: val === "yes" },
                                       )
                                     }
@@ -855,7 +908,7 @@ export default function TextEngineStudio() {
                                   onChange={(e) =>
                                     handleUpdateChoice(
                                       selectedBranch.branch_id,
-                                        option.id,
+                                        option.id || option.option_id || "",
                                         { status_update: e.target.value },
                                       )
                                     }
@@ -872,7 +925,7 @@ export default function TextEngineStudio() {
                                   onChange={(e) =>
                                     handleUpdateChoice(
                                       selectedBranch.branch_id,
-                                        option.id,
+                                        option.id || option.option_id || "",
                                         { effect: e.target.value },
                                       )
                                     }
@@ -884,7 +937,7 @@ export default function TextEngineStudio() {
                           </Card>
                         ))}
 
-                        {selectedBranch.choices.length === 0 && (
+                        {(selectedBranch.options?.length ?? 0) === 0 && (
                           <div className="text-center py-8 border-2 border-dashed rounded-lg text-slate-500 text-sm bg-slate-100">
                             此场景目前没有可选项，通常代表结局场景。
                           </div>
